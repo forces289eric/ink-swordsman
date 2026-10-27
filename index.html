@@ -2168,12 +2168,12 @@ const btn=$('button','','連');btn.id='lkb';btn.setAttribute('aria-label','手�
 const pan=$('div');pan.id='lkp';
 pan.innerHTML=`<div class="bx"><h3>手機連線　P2 無線手把</h3>
 <div class="tb"><button data-m="h" class="sel">我是主機<br><small style="font:11px sans-serif">顯示遊戲的裝置</small></button><button data-m="g">我是手機<br><small style="font:11px sans-serif">當 P2 手把</small></button></div>
-<div id="lkH"><div class="hint">① 按「產生邀請碼」，複製後傳給另一支手機（LINE／AirDrop 皆可）　② 手機回傳「回覆碼」，貼到下方　③ 按「連線」。兩台需在同一 Wi‑Fi（或皆可上網）。</div>
+<div id="lkH"><div class="row"><button class="pri" id="lkRm">🔢 建立房間號（最快）</button></div><div id="lkRn" style="display:none;text-align:center;font:700 44px/1.3 monospace;letter-spacing:6px"></div><div class="hint">① 按「產生邀請碼」，複製後傳給另一支手機（LINE／AirDrop 皆可）　② 手機回傳「回覆碼」，貼到下方　③ 按「連線」。兩台需在同一 Wi‑Fi（或皆可上網）。</div>
 <div class="row"><button class="pri" id="lkGen">產生邀請碼</button><button id="lkCp1">複製</button></div>
 <canvas id="lkQ" class="qr"></canvas><div class="hint" id="lkQh" style="display:none">用手機內建相機掃描上方 QR（需遊戲網頁為 http/https 網址）</div><textarea id="lkO" readonly placeholder="邀請碼（也可複製傳送）"></textarea>
 <div>手機的回覆碼：</div><textarea id="lkA" placeholder="貼上回覆碼"></textarea><div class="row"><button id="lkP1">📋 貼上</button><button id="lkS1">📷 掃手機的 QR</button></div>
 <div class="row"><button class="pri" id="lkGo">連線</button></div></div>
-<div id="lkG" style="display:none"><div class="hint">① 在這支手機開啟同一個遊戲頁面　② 貼上主機的邀請碼，按「產生回覆碼」　③ 複製回覆碼傳回主機，等待主機按「連線」。</div>
+<div id="lkG" style="display:none"><div class="row"><input id="lkRi" inputmode="numeric" maxlength="6" placeholder="輸入 6 位數房間號" style="flex:1;min-width:0;font:700 22px monospace;padding:8px;text-align:center"><button class="pri" id="lkRj">加入</button></div><div class="hint">① 在這支手機開啟同一個遊戲頁面　② 貼上主機的邀請碼，按「產生回覆碼」　③ 複製回覆碼傳回主機，等待主機按「連線」。</div>
 <div>主機的邀請碼：</div><textarea id="lkI" placeholder="貼上邀請碼"></textarea><div class="row"><button id="lkP2">📋 貼上</button><button id="lkS2">📷 掃主機的 QR</button></div>
 <div class="row"><button class="pri" id="lkMk">產生回覆碼</button><button id="lkCp2">複製</button></div>
 <canvas id="lkQ2" class="qr"></canvas><div class="hint" id="lkQ2h" style="display:none">請讓主機按「📷 掃手機的 QR」掃描上方 QR</div><textarea id="lkR" readonly placeholder="回覆碼"></textarea></div>
@@ -2233,6 +2233,29 @@ ctl.querySelectorAll('.k').forEach(b=>{const a=b.dataset.a;b.addEventListener('p
  ['pointerup','pointercancel','lostpointercapture'].forEach(t=>b.addEventListener(t,()=>{if(!b.classList.contains('on'))return;b.classList.remove('on');if(a!=='c')send({t:'k',a,v:0})}))});
 ctl.querySelector('.x').onclick=()=>{['l','r','j','a','s','d'].forEach(a=>send({t:'k',a,v:0}));reset();ctl.classList.remove('on');clearInterval(mt);try{wl&&wl.release()}catch(_){}};
 if(/^#j=/.test(location.hash)){const c=location.hash.slice(3);try{history.replaceState(null,'',location.pathname+location.search)}catch(_){}setTimeout(()=>{pan.classList.add('on');pan.querySelector('.tb button[data-m=g]').click();q('#lkI').value=c;q('#lkMk').click()},700)}
+
+/* ---- v80 房間號配對：走自己的 Cloudflare Worker（只交換邀請碼／回覆碼，遊戲資料仍走原本的點對點通道） ---- */
+const WK='https://odd-hill-2201.forces289.workers.dev/';
+let rpT=0;const stopRp=()=>{clearInterval(rpT);rpT=0};
+const wput=(k,v)=>fetch(WK+k,{method:'PUT',body:v}).then(r=>{if(!r.ok)throw new Error('配對服務錯誤 '+r.status)});
+const wget=k=>fetch(WK+k,{cache:'no-store'}).then(r=>r.ok?r.text():'');
+q('#lkRm').onclick=async()=>{stopRp();say('建立房間中…');try{await q('#lkGen').onclick();hideQR();const code=q('#lkO').value;if(!code)return;
+ let room='';for(let i=0;i<5;i++){const r=String(Math.floor(Math.random()*1e6)).padStart(6,'0');if(!(await wget(r+'/o'))){room=r;break}}
+ if(!room)return say('房間號重複，請再按一次',1);
+ await wput(room+'/o',code);
+ q('#lkRn').style.display='block';q('#lkRn').textContent=room;
+ if(/^https?:/.test(location.href))showQR(q('#lkQ'),location.href.split('#')[0]+'#r='+room,q('#lkQh'));
+ say('房間 '+room+'：請手機輸入房間號（或掃 QR），2 分鐘內有效');
+ let n=0,busy=0;rpT=setInterval(async()=>{if(busy)return;if(++n>60){stopRp();say('房間已過期，請重新建立',1);return}
+  busy=1;try{const a=await wget(room+'/a');if(a){stopRp();if(!confirm('有手機要加入當 P2，同意嗎？')){say('已拒絕',1);return}q('#lkA').value=a;say('已同意，連線中…');q('#lkGo').click()}}catch(_){}busy=0},2000)
+}catch(e){say(e.message||'失敗',1)}};
+q('#lkRj').onclick=async()=>{const room=q('#lkRi').value.replace(/\D/g,'');if(room.length!==6)return say('請輸入 6 位數房間號',1);stopRp();say('尋找房間…');
+ let n=0,busy=0;const tick=async()=>{if(busy)return;busy=1;
+  if(++n>12){stopRp();say('找不到這個房間號（或已過期）',1);busy=0;return}
+  try{const o=await wget(room+'/o');if(o){stopRp();q('#lkI').value=o;q('#lkR').value='';await q('#lkMk').onclick();const ans=q('#lkR').value;if(ans){await wput(room+'/a',ans);say('已回覆，等主機同意並連線…')}}}catch(e){stopRp();say(e.message||'配對服務連不上',1)}
+  busy=0};
+ tick();rpT=setInterval(tick,1500)};
+if(/^#r=\d{6}$/.test(location.hash)){const r=location.hash.slice(3);try{history.replaceState(null,'',location.pathname+location.search)}catch(_){}setTimeout(()=>{pan.classList.add('on');pan.querySelector('.tb button[data-m=g]').click();q('#lkRi').value=r;q('#lkRj').click()},700)}
 
 }
 </script></body></html>
