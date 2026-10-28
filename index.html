@@ -2719,4 +2719,26 @@ else if(k==='l'){
  seg(-10,-69,10,-69,C('#b3261e'),3.2);seg(-4,-70,-9,-85+sw*2,C('#e8dcc0'),2.6);seg(2,-70,0,-87+sw*2,C('#e8dcc0'),2.6);
  for(const d of[-1,1]){g.save();g.translate(9,-40+d*3);g.rotate(-.9+Math.abs(Math.sin(T*(st===1?24:8)+d))*1.3);seg(0,0,17,0,C('#e8dcc0'),2.6);g.restore()}}
 g.restore()}}
+
+/* ===== v102 鏡頭跟隨跑在最前面的玩家（含 P2） ===== */
+{const _u9=upd;upd=function(dt){_u9(dt);if(S==='play'&&P2on&&P2&&P2.down<=0&&!lock&&stop<=0){const lead=Math.min(P2.x,LEN-W*.8-1);cam=cl(Math.max(cam,cam+(lead-W*.4-cam)*Math.min(1,dt*6)),0,LEN-W)}}}
+
+/* ===== v103 商店：P2 也能操作與購買，補血／血量上限對雙方生效 ===== */
+{const _ss=shopStep;shopStep=function(dt){if(P2on){if(endT<.2)j2={};else{for(const k in j2)if(j2[k])jp[k]=1;j2={}}}_ss(dt)};
+const h0=SHOP[0],b0=h0.buy,f0=h0.full,h1=SHOP[1],b1=h1.buy;
+h0.full=()=>f0()&&(!P2on||!P2||P2.hp>=P2.mh);
+h0.buy=function(){b0();if(P2on&&P2){P2.hp=P2.mh;P2.down=0}};
+h1.buy=function(){b1();if(P2on&&P2){P2.mh+=15;P2.hp=Math.min(P2.mh,P2.hp+15)}}}
+
+/* ===== v104 P2 擁有獨立裝備（撿到誰身上就裝在誰身上） ===== */
+var EQ2={},EQB2={at:0,df:0,sp:0,hp:0,mp:0};
+function eqSwap(){const a=EQ,b=EQB;EQ=EQ2;EQB=EQB2;EQ2=a;EQB2=b}
+{const _pu=p2Upd;p2Upd=function(dt){eqSwap();try{_pu(dt)}finally{eqSwap()}}}
+{const _hp=hurtP;hurtP=function(dm,fx){if(P2on&&P2&&P===P2){eqSwap();try{return _hp.call(this,dm,fx)}finally{eqSwap()}}return _hp.call(this,dm,fx)}}
+{const _rs=reset;reset=function(){EQ2={};EQB2={at:0,df:0,sp:0,hp:0,mp:0};return _rs.apply(this,arguments)}}
+{const _ll=loadLevel;loadLevel=function(){if(!(P2on&&P2))return _ll.apply(this,arguments);eqSwap();try{return _ll.apply(this,arguments)}finally{eqSwap()}}}
+{const _d2=draw;draw=function(){_d2();if(P2on&&P2&&S==='play'){g.save();g.setTransform(K,0,0,K,0,0);const ks='wabp';for(let i=0;i<4;i++){const q=EQ2[ks[i]],x=22+i*27,y=H-70;g.fillStyle='rgba(239,231,210,.7)';g.fillRect(x,y,23,23);g.strokeStyle=q?RC[q.r]:'rgba(20,20,20,.3)';g.lineWidth=q?2.4:1.2;g.strokeRect(x,y,23,23);tx(GS[ks[i]].g,x+11.5,y+12,15,q?RC[q.r]:'rgba(20,20,20,.28)')}
+const a=[],B=EQB2;if(B.at)a.push('攻+'+Math.round(B.at*100)+'%');if(B.df)a.push('防'+Math.round(B.df*100)+'%');if(B.sp)a.push('速+'+Math.round(B.sp*100)+'%');if(B.hp)a.push('血+'+B.hp);
+if(a.length){g.font='bold 11px KaiTi,STKaiti,"Noto Serif TC",serif';g.textAlign='left';g.textBaseline='middle';g.lineWidth=2.5;g.strokeStyle='rgba(239,231,210,.9)';g.lineJoin='round';const t=a.join(' ');g.strokeText(t,22,H-76);g.fillStyle='#1c1c1c';g.fillText(t,22,H-76)}
+g.restore()}}}
 </script></body></html>
