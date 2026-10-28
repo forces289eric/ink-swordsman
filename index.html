@@ -1411,7 +1411,7 @@ const togM=()=>{mb.textContent=SFX.toggle()?'🔇':'🔊'};
 mb.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();togM()});
 addEventListener('keydown',e=>{if(e.code==='KeyM')togM()});
 /* ---------- 武俠配樂（五聲音階：古琴撥弦＋笛＋太鼓，隨戰況變化） ---------- */
-const BGM=(()=>{let bus=null,tm=null,step=0,nt=0,cur=-1;const SD=60/78/2,SC=[294,330,392,440,494,587,659,784],ORD=[0,1,0,2,1,3],
+const BGM=(()=>{let bus=null,tm=null,step=0,nt=0,cur=-1,tkey='',tb=null,cth=null,sd=60/78/2;const SD=60/78/2,SC=[294,330,392,440,494,587,659,784],ORD=[0,1,0,2,1,3],
 PH=[[3,-1,-1,4,-1,3,-1,1,2,-1,-1,-1,0,-1,-1,-1],[0,-1,2,-1,3,-1,-1,-1,4,-1,3,-1,2,-1,1,-1],[5,-1,-1,4,-1,3,-1,-1,4,-1,2,-1,3,-1,-1,-1],[3,-1,2,-1,0,-1,-1,-1,1,-1,0,-1,-1,-1,-1,-1]];
 const pl=(f,dl,v)=>{SFX.tone(f,.9,{ty:'triangle',v,bus,dl});SFX.tone(f*2,.3,{v:v*.35,bus,dl});SFX.noise(.03,{ft:'highpass',f0:3000,v:v*.3,bus,dl})};
 const tk=(dl,v)=>{SFX.tone(110,.4,{to:42,v,bus,dl});SFX.noise(.15,{ft:'lowpass',f0:600,f1:150,v:v*.7,bus,dl})};
@@ -1422,10 +1422,107 @@ function play(s,dl,lv){window.__BT={t:SFX.ac().currentTime+dl,s};const b=s%16,n=
  if(lv===2&&s%2===1)SFX.tone(SC[2+((s>>1)%5)],.14,{ty:'triangle',v:.05,bus,dl});
  if(s%32===16&&((s>>5)%2===0||lv===2))flute(SC[[3,4,5,2][(s>>5)%4]],SD*7,dl);
  if(lv>=1){if(b%8===0)tk(dl,lv===2?.38:.26);if(lv===1&&(b===6||b===14))SFX.tone(1200,.04,{ty:'square',v:.025,bus,dl});if(lv===2&&b%4===0&&b%8!==0)tk(dl,.22);if(lv===2&&b>13)tk(dl,.18)}}
-function sched(){const ac=SFX.ac();if(!ac||!bus)return;const ct=ac.currentTime;if(nt<ct-.3)nt=ct+.05;
- const lv=S==='menu'||S==='shop'?0:S==='play'?(boss&&!boss.dead?2:1):-1,tg=lv<0?0:lv===0?1.9:1.6;if(tg!==cur){cur=tg;bus.gain.setTargetAtTime(tg,ct,.5)}
- while(nt<ct+.4){if(lv>=0)play(step,Math.max(0,nt-ct),lv);nt+=SD;step++}}
-return{start(){const ac=SFX.ac();if(tm||!ac)return;bus=ac.createGain();bus.gain.value=0;bus.connect(SFX.mg());nt=ac.currentTime+.2;tm=setInterval(sched,120)}}})();
+const LVL_BGM=true; /* true=每關獨立配樂；false=關卡內沿用原本配樂 */
+const SCL={gong:[0,2,4,7,9],yu:[0,3,5,7,10],zhi:[0,2,5,7,9],dark:[0,2,3,5,7,8,10],phry:[0,1,3,5,7,8,10],hira:[0,2,3,7,8],whole:[0,2,4,6,8,10],blues:[0,3,5,6,7,10]};
+/* 每關一組：[根音Hz, 調式, BPM, 主奏音色, 鼓點, 低音, 氛圍墊音, 音符密度, 作曲種子]（同種子每次都是同一段旋律） */
+const LCFG=[
+[262,'gong',112,'pluck','big',1,0,.7,11],    /* 1 村口擂台 */
+[294,'zhi',118,'pluck','bounce',1,0,.6,23],    /* 2 長街鏢局（輕快・手寫旋律） */
+[330,'gong',128,'pluck','tavern',1,0,.55,37],     /* 3 醉月客棧（歡快酒館・手寫旋律） */
+[220,'yu',100,'pluck','oar',1,0,.5,41],    /* 4 江畔漁村（搖櫓船歌・手寫旋律） */
+[262,'phry',120,'pluck','big',1,0,.7,53],     /* 5 戲樓夜幕 */
+[233,'hira',78,'xun','muyu',1,1,.45,67],     /* 6 荒廟殘燈（木魚・幽咽・手寫旋律） */
+[294,'yu',76,'flute','light',0,0,.5,71],      /* 7 紅楓古道 */
+[147,'phry',96,'pluck','forge',1,0,.5,251],  /* 8 鑄劍山莊（旋律手寫，見 LT[7].mel） */
+[392,'gong',100,'xun','shaker',0,0,.6,97],    /* 9 竹林初行 */
+[262,'whole',62,'bell','none',1,1,.4,101],    /* 10 迷霧古渡 */
+[196,'yu',60,'flute','big',1,1,.45,113],      /* 11 劍塚 */
+[330,'whole',70,'xun','none',0,1,.45,127],    /* 12 海市蜃樓 */
+[220,'zhi',88,'bell','big',1,0,.6,139],       /* 13 荒廟險道 */
+[247,'yu',124,'pluck','big',1,0,.75,149],     /* 14 黑風寨 */
+[294,'hira',84,'bell','shaker',0,0,.45,157],  /* 15 雪嶺寒關 */
+[220,'dark',96,'pluck','big',1,0,.7,167],     /* 16 烈火禪院 */
+[220,'blues',116,'flute','big',1,0,.7,179],   /* 17 血月荒原 */
+[262,'dark',72,'xun','rain',0,1,.5,191],      /* 18 斷橋殘雨 */
+[185,'phry',80,'bell','none',1,1,.5,199],     /* 19 毒瘴幽谷 */
+[262,'yu',132,'pluck','big',1,0,.8,211],      /* 20 雷鳴天梯 */
+[165,'phry',68,'bell','light',1,1,.45,223],   /* 21 九幽冥府 */
+[294,'dark',118,'pluck','big',1,1,.7,239]     /* 22 魔宮絕巔 */
+];
+function mulb(a){return()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function genTheme(c){const[root,sk,bpm,lead,drum,bass,pad,dens,seed]=c,sc=SCL[sk],n=sc.length,top=n+2,r=mulb(seed);
+ const cd=d=>Math.max(0,Math.min(top-1,d)),last=a=>{let j=15;while(j>0&&a[j]<0)j--;return j};
+ const gen=cad=>{const a=new Array(16).fill(-1);let d=r()<.5?0:2;for(let i=0;i<16;i++){if(r()>dens)continue;const q=r();d=cd(d+(q<.4?1:q<.8?-1:q<.92?2:-2));a[i]=d}if(a.every(x=>x<0))a[0]=0;const j=last(a);if(cad==='half')a[j]=2;if(cad==='full')a[j]=0;return a};
+ const vary=p=>p.map(x=>x<0?-1:(r()<.3?cd(x+(r()<.5?1:-1)):x));
+ const P0=gen(''),P1=gen('half'),P2=vary(P0),P3=vary(P1);P3[last(P3)]=0;
+ return{root,sc,n,sd:60/bpm/2,q:60/bpm,lead,drum,bass:!!bass,pad:!!pad,mel:[...P0,...P1,...P2,...P3]}}
+const LT=LCFG.map(genTheme);
+/* 第二關：長街鏢局——D 徵調，切分跳躍；音級 0=D4 1=E4 2=G4 3=A4 4=B4 5=D5 6=E5 7=G5 */
+LT[1].mel=[
+ 2,-1,3,2, 5,-1,3,2, 1,2,3,-1, 2,-1,1,0,
+ 3,-1,5,3, 6,-1,5,3, 2,3,5,-1, 3,-1,2,-1,
+ 5,-1,6,5, 7,-1,6,5, 3,5,6,-1, 5,-1,3,-1,
+ 3,-1,2,3, 2,-1,1,2, 1,-1,0,1, 0,-1,-1,-1];
+/* 第三關：醉月客棧——E 宮調五聲，快步舞曲般的連跳；音級 0=E4 1=F#4 2=G#4 3=B4 4=C#5 5=E5 6=F#5 7=G#5 */
+LT[2].mel=[
+ 2,3,4,3, 2,-1,0,2, 3,4,5,4, 3,-1,2,-1,
+ 4,5,6,5, 4,-1,3,4, 2,3,4,3, 2,-1,3,-1,
+ 5,6,7,6, 5,-1,4,5, 6,5,4,3, 4,-1,5,-1,
+ 4,3,2,3, 4,-1,2,3, 2,-1,1,0, 0,-1,-1,-1];
+/* 第四關：江畔漁村——A 羽調五聲，搖櫓船歌；音級 0=A3 1=C4 2=D4 3=E4 4=G4 5=A4 6=C5 7=D5 8=E5 */
+LT[3].mel=[
+ 5,-1,5,6, 5,-1,3,-1, 4,-1,4,5, 4,-1,3,-1,
+ 3,-1,3,4, 3,-1,1,-1, 2,-1,3,4, 3,-1,2,-1,
+ 7,-1,7,8, 7,-1,5,-1, 6,-1,6,7, 6,-1,5,-1,
+ 5,-1,4,3, 4,-1,3,1, 2,-1,3,1, 0,-1,-1,-1];
+/* 第六關：荒廟殘燈——陰音階，稀疏幽咽的埙；音級 0=降B3 1=C4 2=降D4 3=F4 4=降G4 5=降B4 6=C5 7=降D5 */
+LT[5].mel=[
+ 5,-1,-1,-1, 4,-1,3,-1, -1,-1,2,-1, 3,-1,-1,-1,
+ 3,-1,-1,4, -1,-1,5,-1, 6,-1,-1,-1, 5,-1,-1,-1,
+ 7,-1,-1,6, -1,-1,5,-1, 4,-1,3,-1, 4,-1,-1,-1,
+ 3,-1,2,-1, 3,-1,-1,-1, 2,-1,1,-1, 0,-1,-1,-1];
+/* 第八關手寫旋律：音級以弗里吉亞音階計，4=A3 5=降B3 7=D4 …… 14=D5；-1=休止 */
+LT[7].mel=[
+ 7,-1,7,8, 7,-1,5,-1, 4,-1,5,7, 5,-1,4,-1,      /* 主題 */
+ 4,-1,5,-1, 7,8,-1,10, 9,-1,8,7, 8,-1,11,-1,    /* 問句（停在屬音 A） */
+ 10,-1,10,11, 10,-1,8,-1, 7,-1,8,10, 12,-1,11,-1, /* 高潮變奏 */
+ 11,-1,10,8, 7,-1,8,-1, 7,-1,5,4, 7,-1,-1,-1];   /* 收束回 D */
+const LEAD={pluck:(f,dl)=>pl(f,dl,.13),flute:(f,dl,d)=>flute(f,d,dl),
+ bell:(f,dl)=>{SFX.tone(f,1.1,{ty:'sine',v:.1,bus,dl});SFX.tone(f*2.76,.45,{ty:'sine',v:.03,bus,dl});SFX.tone(f*5.4,.18,{ty:'sine',v:.015,bus,dl})},
+ xun:(f,dl)=>{SFX.tone(f,.6,{ty:'sine',v:.12,at:.06,bus,dl});SFX.tone(f*2,.22,{ty:'sine',v:.03,at:.08,bus,dl})}};
+function playL(th,s,dl,lv){window.__BT={t:SFX.ac().currentTime+dl,s,q:th.q};
+ const b=s%16,ph=(s>>4)&3,n=th.mel[s%64],mul=[1,4/3,1,1.5][ph],dr=th.drum,f=n<0?0:th.root*Math.pow(2,Math.floor(n/th.n)+th.sc[n%th.n]/12);
+ if(th.bass){if(b===0)SFX.tone(th.root/2*mul,th.sd*8,{ty:'triangle',v:.11,bus,dl});if(b===8)SFX.tone(th.root/2*mul*2,th.sd*6,{ty:'triangle',v:.06,bus,dl})}
+ if(th.pad&&b===0&&ph%2===0)SFX.tone(th.root/4*mul,th.sd*24,{ty:'sine',v:.07,at:1.5,bus,dl});
+ if(f>0)LEAD[th.lead](f,dl,Math.max(.9,th.sd*3));
+ if(dr==='big'&&b%8===0)tk(dl,lv===2?.38:.26);
+ if(dr==='light'&&b===0)tk(dl,.16);
+ if(dr==='shaker'&&b%2===1)SFX.noise(.04,{ft:'highpass',f0:6000,v:.05,bus,dl});
+ if(dr==='anvil'&&(b===0||b===6||b===10)){SFX.tone(1300,.06,{ty:'square',v:.05,bus,dl});SFX.noise(.04,{ft:'highpass',f0:4000,v:.09,bus,dl})}
+ if(dr==='tavern'){if(b===0||b===8)tk(dl,lv===2?.3:.16);if(b===4||b===12){SFX.tone(1100,.05,{ty:'triangle',v:.055,bus,dl});SFX.noise(.06,{ft:'bandpass',f0:2500,q:2,v:.05,bus,dl})}
+  if(b%2===0)SFX.noise(.025,{ft:'highpass',f0:7500,v:.03,bus,dl});if(b%4===2)SFX.tone(th.root*2,.08,{ty:'triangle',v:.035,bus,dl})}
+ if(dr==='muyu'){if(b%4===0){const a=b%8===0;SFX.tone(a?640:520,.07,{ty:'triangle',v:a?.09:.05,bus,dl});SFX.noise(.025,{ft:'bandpass',f0:1800,q:3,v:.03,bus,dl})}
+  if(b===0&&ph===0){SFX.tone(th.root*2,2.4,{v:.06,bus,dl});SFX.tone(th.root*5.52,1,{v:.02,bus,dl})}
+  if(b===12&&ph===3)SFX.tone(2400,.14,{v:.02,bus,dl})}
+ if(dr==='oar'){if(b===0)tk(dl,.2);if(b===8)tk(dl,.12);if(b===4||b===12)SFX.noise(.28,{ft:'bandpass',f0:1000,f1:380,q:1.5,v:.05,bus,dl});if(b%4===2)SFX.tone(720,.04,{ty:'triangle',v:.03,bus,dl});if(b===0&&ph%2===0)SFX.noise(th.sd*12,{ft:'lowpass',f0:200,f1:600,v:.03,at:th.sd*8,bus,dl})}
+ if(dr==='bounce'){if(b===0||b===8)tk(dl,lv===2?.3:.17);if(b===4||b===12)SFX.tone(1000,.05,{ty:'triangle',v:.05,bus,dl});if(b%2===1)SFX.noise(.03,{ft:'highpass',f0:7000,v:.035,bus,dl});if(b===6||b===14)SFX.tone(1500,.04,{ty:'sine',v:.025,bus,dl})}
+ if(dr==='forge'){const cl=(f,v,d)=>{SFX.tone(f,d,{v,bus,dl});SFX.tone(f*2.41,d*.6,{v:v*.55,bus,dl});SFX.tone(f*3.9,d*.35,{v:v*.3,bus,dl});SFX.noise(.05,{ft:'highpass',f0:4500,v:v*1.6,bus,dl})};
+  if(b===0||b===8){tk(dl,lv===2?.4:.3);cl(1180,.07,.55)}
+  else if(b===4||b===12){cl(1560,.04,.28)}
+  else if(b===10||b===14){cl(2100,.028,.16)}
+  if(b===0&&ph%2===0)SFX.noise(th.sd*10,{ft:'lowpass',f0:250,f1:800,v:.045,at:th.sd*7,bus,dl})}
+ if(dr==='rain'&&b%4===2)SFX.noise(.12,{ft:'bandpass',f0:3000,f1:1800,q:2,v:.035,bus,dl});
+ if(lv===2){if(dr==='none'&&b%8===0)tk(dl,.3);if(b%4===2)tk(dl,.18);if(th.bass&&b%4===2)SFX.tone(th.root/2*mul,th.sd*2,{ty:'triangle',v:.05,bus,dl})}}
+function setTrack(k,ct,th){if(tb){const o=tb;o.gain.setTargetAtTime(0,ct,.35);setTimeout(()=>{try{o.disconnect()}catch(_){}},2600)}const ac=SFX.ac();tb=ac.createGain();tb.gain.value=0;tb.connect(SFX.mg());bus=tb;tkey=k;cth=th;sd=th?th.sd:SD;step=0;cur=-1;nt=ct+.05}
+function sched(){const ac=SFX.ac();if(!ac)return;const ct=ac.currentTime;if(nt<ct-.3)nt=ct+.05;
+ const lv=S==='menu'||S==='shop'?0:S==='play'?(boss&&!boss.dead?2:1):-1,tg=lv<0?0:lv===0?1.9:1.6;
+ if(lv>=0){const k=(lv===0||!LVL_BGM)?'O':'L'+LV;if(k!==tkey)setTrack(k,ct,k==='O'?null:LT[LV])}
+ if(!bus)return;
+ if(tg!==cur){cur=tg;bus.gain.setTargetAtTime(tg,ct,.5)}
+ if(lv<0)return;
+ while(nt<ct+.4){const dl=Math.max(0,nt-ct);if(cth)playL(cth,step,dl,lv);else play(step,dl,lv);nt+=sd;step++}}
+return{start(){const ac=SFX.ac();if(tm||!ac)return;nt=ac.currentTime+.2;tm=setInterval(sched,120)}}})();
+
 ['pointerdown','keydown','touchstart'].forEach(t=>addEventListener(t,BGM.start,{capture:true,passive:true}));
 {const _hP=hurtP;hurtP=function(dm,fx){const h=P.hp;_hP(dm,fx);if(P.hp<h){SFX.hurt();if(S==='lose')SFX.lose()}};
 const _hE=hurtE;hurtE=function(e,dm,kb,big){SFX.hit(!!big);_hE(e,dm,kb,big)};
@@ -2040,7 +2137,7 @@ function shBurst(p){const f=p.f,n=P.hz|0,z=shz();P.hz=0;
 /* ---------- v69 新角色：鼓手（合拍出擊・疊氣加傷・震地鼓・萬鼓齊鳴） ---------- */
 var TKW=[],TKQ=[],TKD=[],TKR=[];
 const TKBP=60/78;
-function tkT(){const B=window.__BT,a=SFX.ac&&SFX.ac();if(B&&a&&a.state==='running'&&a.currentTime-B.t<1.5)return(a.currentTime-(a.outputLatency||a.baseLatency||0)-B.t)/TKBP+B.s/2;return T/TKBP}
+function tkT(){const B=window.__BT,a=SFX.ac&&SFX.ac();if(B&&a&&a.state==='running'&&a.currentTime-B.t<1.5)return(a.currentTime-(a.outputLatency||a.baseLatency||0)-B.t)/(B.q||TKBP)+B.s/2;return T/TKBP}
 function tkOn(){const t=tkT(),n=Math.round(t);return{on:Math.abs(t-n)<.17,n}}
 function tkSoft(e){return e!==boss&&e.k!=='B'&&e.k!=='t'}
 function tkSnd(b){try{const a=SFX.ac&&SFX.ac();if(!a||a.state!=='running')return;
