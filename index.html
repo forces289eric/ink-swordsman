@@ -2634,7 +2634,7 @@ const st=$('style','',`
 #lkc.on{display:block}
 #lkc video{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:contain;background:var(--bg);pointer-events:none}
 #lkc .k{opacity:.55}#lkc .top{text-shadow:0 0 4px var(--bg);font-size:13px}
-@media(orientation:portrait){#lkc video{height:42%}#lkc .dp{top:50%!important}}
+@media(orientation:portrait){#lkc video{height:42%}}
 #lkc .top{position:absolute;top:max(8px,env(safe-area-inset-top));left:0;right:0;text-align:center;font-size:16px;pointer-events:none}
 #lkc .top b{color:var(--rd)}
 #lkc .x,#lkc .f{position:absolute;top:max(8px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right));width:38px;height:38px;border-radius:50%;border:2px solid var(--ink);background:var(--pn);color:var(--ink);font-size:16px;padding:0}
@@ -2646,7 +2646,7 @@ const st=$('style','',`
 #lkc .k{position:absolute;border-radius:50%;border:2.5px solid var(--ink);background:var(--pn);color:var(--ink);font:bold 18px KaiTi,STKaiti,serif;padding:0;touch-action:none}
 #lkc .dp .k{position:static;width:62px;height:62px;border-radius:20px;font-size:24px}
 #lkc .k.on{background:var(--rd);color:#fff}
-@media(orientation:portrait){#lkc .dp{left:50%;transform:translateX(-50%);bottom:auto;top:36%}#lkc .ac{right:50%;transform:translateX(50%);bottom:max(30px,env(safe-area-inset-bottom))}}
+@media(orientation:portrait){#lkc .dp{left:max(16px,env(safe-area-inset-left));bottom:max(12px,env(safe-area-inset-bottom))}#lkc .ac{right:max(16px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom))}#lkc .k{opacity:.85}}
 `);
 document.head.appendChild(st);
 
