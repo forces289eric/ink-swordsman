@@ -2633,18 +2633,18 @@ const st=$('style','',`
 #lkc{position:fixed;inset:0;z-index:80;background:var(--bg);color:var(--ink);display:none;touch-action:none;font-family:KaiTi,STKaiti,"Noto Serif TC",serif}
 #lkc.on{display:block}
 #lkc video{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:contain;background:var(--bg);pointer-events:none}
-#lkc .k{opacity:.72}#lkc .top{text-shadow:0 0 4px var(--bg);font-size:13px}
+#lkc .k{opacity:.55}#lkc .top{text-shadow:0 0 4px var(--bg);font-size:13px}
 @media(orientation:portrait){#lkc video{height:42%}#lkc .dp{top:50%!important}}
 #lkc .top{position:absolute;top:max(8px,env(safe-area-inset-top));left:0;right:0;text-align:center;font-size:16px;pointer-events:none}
 #lkc .top b{color:var(--rd)}
 #lkc .x,#lkc .f{position:absolute;top:max(8px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right));width:38px;height:38px;border-radius:50%;border:2px solid var(--ink);background:var(--pn);color:var(--ink);font-size:16px;padding:0}
-#lkc .dp{position:absolute;left:max(18px,env(safe-area-inset-left));bottom:max(22px,env(safe-area-inset-bottom));display:flex;gap:14px}
+#lkc .dp{position:absolute;left:max(18px,env(safe-area-inset-left));bottom:max(14px,env(safe-area-inset-bottom));display:flex;gap:10px}
 #lkc .f{right:calc(max(10px,env(safe-area-inset-right)) + 46px);font-size:18px}
-#lkc .ch{left:max(10px,env(safe-area-inset-left));top:max(8px,env(safe-area-inset-top));width:46px;height:46px;font-size:15px}
-#lkc .ac{position:absolute;right:max(18px,env(safe-area-inset-right));bottom:max(22px,env(safe-area-inset-bottom));width:230px;height:190px}
-@media(orientation:landscape) and (max-height:420px){#lkc .dp .k{width:84px;height:84px}#lkc .ac{transform:scale(.9);transform-origin:right bottom}}
-#lkc .k{position:absolute;border-radius:50%;border:2.5px solid var(--ink);background:var(--pn);color:var(--ink);font:bold 24px KaiTi,STKaiti,serif;padding:0;touch-action:none}
-#lkc .dp .k{position:static;width:96px;height:96px;border-radius:30px;font-size:34px}
+#lkc .ch{left:max(10px,env(safe-area-inset-left));top:max(8px,env(safe-area-inset-top));width:38px;height:38px;font-size:14px}
+#lkc .ac{position:absolute;right:max(18px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));width:170px;height:140px}
+@media(orientation:landscape) and (max-height:380px){#lkc .dp .k{width:54px;height:54px}#lkc .ac{transform:scale(.88);transform-origin:right bottom}}
+#lkc .k{position:absolute;border-radius:50%;border:2.5px solid var(--ink);background:var(--pn);color:var(--ink);font:bold 18px KaiTi,STKaiti,serif;padding:0;touch-action:none}
+#lkc .dp .k{position:static;width:62px;height:62px;border-radius:20px;font-size:24px}
 #lkc .k.on{background:var(--rd);color:#fff}
 @media(orientation:portrait){#lkc .dp{left:50%;transform:translateX(-50%);bottom:auto;top:36%}#lkc .ac{right:50%;transform:translateX(50%);bottom:max(30px,env(safe-area-inset-bottom))}}
 `);
@@ -2677,7 +2677,7 @@ pan.innerHTML=`<div class="bx"><h3>手機連線　P2 無線手把</h3>
 const ctl=$('div');ctl.id='lkc';
 ctl.innerHTML=`<video playsinline muted autoplay></video><div class="top"><b>P2</b> 無線手把　<span id="lkcs">連線中…</span></div><button class="x" aria-label="離開">✕</button><button class="f" aria-label="全螢幕">⛶</button><button class="k ch" data-a="c">換</button>
 <div class="dp"><button class="k" data-a="l">◀</button><button class="k" data-a="r">▶</button></div>
-<div class="ac"><button class="k" data-a="j" style="right:116px;bottom:0;width:70px;height:70px">跳</button><button class="k" data-a="d" style="right:104px;bottom:80px;width:70px;height:70px">衝</button><button class="k" data-a="s" style="right:10px;bottom:108px;width:70px;height:70px">氣</button><button class="k" data-a="a" style="right:0;bottom:0;width:104px;height:104px;font-size:34px;background:var(--rd);color:#fff">斬</button></div>`;
+<div class="ac"><button class="k" data-a="j" style="right:86px;bottom:0;width:52px;height:52px">跳</button><button class="k" data-a="d" style="right:78px;bottom:60px;width:52px;height:52px">衝</button><button class="k" data-a="s" style="right:8px;bottom:84px;width:52px;height:52px">氣</button><button class="k" data-a="a" style="right:0;bottom:0;width:76px;height:76px;font-size:26px;background:var(--rd);color:#fff">斬</button></div>`;
 document.body.append(btn,pan,ctl);
 const q=s=>pan.querySelector(s),stt=q('#lkS');
 const say=(t,bad)=>{stt.textContent=t;stt.style.color=bad?'var(--rd)':'inherit'};
