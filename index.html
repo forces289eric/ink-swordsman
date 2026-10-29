@@ -1447,7 +1447,7 @@ const LCFG=[
 [196,'dark',92,'flute','arp',1,1,.6,199],     /* 19 毒瘴幽谷 */
 [262,'yu',132,'pluck','big',1,0,.8,211],      /* 20 雷鳴天梯（手寫旋律，見 LT[19].mel） */
 [165,'phry',126,'epic','warcry',1,1,.9,223],   /* 21 九幽冥府（狂暴版・手寫旋律，見 LT[20].mel） */
-[294,'dark',144,'pipa','blaze',1,0,.85,239]     /* 22 魔宮絕巔（清快緊張版・手寫旋律，見 LT[21].mel） */
+[294,'dark',118,'pluck','big',1,1,.7,239]     /* 22 魔宮絕巔 */
 ];
 function mulb(a){return()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 function genTheme(c){const[root,sk,bpm,lead,drum,bass,pad,dens,seed]=c,sc=SCL[sk],n=sc.length,top=n+2,r=mulb(seed);
@@ -1507,11 +1507,6 @@ LT[20].mel=[7,8,7,8, 7,-1,11,10, 8,7,8,7, 5,-1,7,-1,
 10,11,10,11, 10,-1,14,13, 11,10,11,10, 8,-1,10,-1,
 12,13,14,13, 12,14,13,12, 14,-1,14,13, 12,11,12,14,
 14,13,12,11, 10,9,8,7, 8,7,5,7, 7,-1,-1,-1];
-/* 第二十二關：魔宮絕巔（清快緊張版）——D 自然小調；琵琶＋梆子鼓；低音 D｜G｜D｜A；音級 0=D4 1=E4 2=F4 3=G4 4=A4 5=Bb4 6=C5 7=D5 8=E5 9=F5 10=G5 11=A5 12=Bb5 */
-LT[21].mel=[4,4,4,-1, 4,5,4,2, 4,4,4,-1, 4,5,6,5,
-7,7,7,-1, 7,8,7,5, 7,7,7,-1, 7,8,9,8,
-7,8,9,10, 11,10,9,8, 7,8,9,10, 11,-1,12,-1,
-11,10,9,8, 7,6,5,4, 5,4,2,1, 0,-1,-1,-1];
 /* 第八關手寫旋律：E 小調（自然小調）；音級 0=E3 1=F#3 2=G3 3=A3 4=B3 5=C4 6=D4 7=E4 8=F#4 9=G4 10=A4 11=B4 12=C5；-1=休止 */
 LT[7].mel=[
  7,-1,7,9, 8,-1,7,-1, 5,-1,7,8, 7,-1,-1,-1,      /* 主題 */
@@ -2642,9 +2637,12 @@ const st=$('style','',`
 @media(orientation:portrait){#lkc video{height:42%}#lkc .dp{top:50%!important}}
 #lkc .top{position:absolute;top:max(8px,env(safe-area-inset-top));left:0;right:0;text-align:center;font-size:16px;pointer-events:none}
 #lkc .top b{color:var(--rd)}
-#lkc .x{position:absolute;top:max(8px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right));width:38px;height:38px;border-radius:50%;border:2px solid var(--ink);background:var(--pn);color:var(--ink);font-size:16px;padding:0}
+#lkc .x,#lkc .f{position:absolute;top:max(8px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right));width:38px;height:38px;border-radius:50%;border:2px solid var(--ink);background:var(--pn);color:var(--ink);font-size:16px;padding:0}
 #lkc .dp{position:absolute;left:max(18px,env(safe-area-inset-left));bottom:max(22px,env(safe-area-inset-bottom));display:flex;gap:14px}
-#lkc .ac{position:absolute;right:max(18px,env(safe-area-inset-right));bottom:max(22px,env(safe-area-inset-bottom));width:230px;height:200px}
+#lkc .f{right:calc(max(10px,env(safe-area-inset-right)) + 46px);font-size:18px}
+#lkc .ch{left:max(10px,env(safe-area-inset-left));top:max(8px,env(safe-area-inset-top));width:46px;height:46px;font-size:15px}
+#lkc .ac{position:absolute;right:max(18px,env(safe-area-inset-right));bottom:max(22px,env(safe-area-inset-bottom));width:230px;height:190px}
+@media(orientation:landscape) and (max-height:420px){#lkc .dp .k{width:84px;height:84px}#lkc .ac{transform:scale(.9);transform-origin:right bottom}}
 #lkc .k{position:absolute;border-radius:50%;border:2.5px solid var(--ink);background:var(--pn);color:var(--ink);font:bold 24px KaiTi,STKaiti,serif;padding:0;touch-action:none}
 #lkc .dp .k{position:static;width:96px;height:96px;border-radius:30px;font-size:34px}
 #lkc .k.on{background:var(--rd);color:#fff}
@@ -2677,9 +2675,9 @@ pan.innerHTML=`<div class="bx"><h3>手機連線　P2 無線手把</h3>
 <div class="stt" id="lkS"></div>
 <div class="row"><button id="lkX">關閉</button><button id="lkD" style="display:none">中斷連線</button></div></div>`;
 const ctl=$('div');ctl.id='lkc';
-ctl.innerHTML=`<video playsinline muted autoplay></video><div class="top"><b>P2</b> 無線手把　<span id="lkcs">連線中…</span></div><button class="x" aria-label="離開">✕</button>
+ctl.innerHTML=`<video playsinline muted autoplay></video><div class="top"><b>P2</b> 無線手把　<span id="lkcs">連線中…</span></div><button class="x" aria-label="離開">✕</button><button class="f" aria-label="全螢幕">⛶</button><button class="k ch" data-a="c">換</button>
 <div class="dp"><button class="k" data-a="l">◀</button><button class="k" data-a="r">▶</button></div>
-<div class="ac"><button class="k" data-a="j" style="left:0;bottom:6px;width:70px;height:70px">跳</button><button class="k" data-a="d" style="left:56px;bottom:84px;width:70px;height:70px">衝</button><button class="k" data-a="s" style="left:138px;bottom:112px;width:70px;height:70px">氣</button><button class="k" data-a="a" style="right:0;bottom:0;width:104px;height:104px;font-size:34px;background:var(--rd);color:#fff">斬</button><button class="k" data-a="c" style="right:6px;top:0;width:52px;height:52px;font-size:15px">換</button></div>`;
+<div class="ac"><button class="k" data-a="j" style="right:116px;bottom:0;width:70px;height:70px">跳</button><button class="k" data-a="d" style="right:104px;bottom:80px;width:70px;height:70px">衝</button><button class="k" data-a="s" style="right:10px;bottom:108px;width:70px;height:70px">氣</button><button class="k" data-a="a" style="right:0;bottom:0;width:104px;height:104px;font-size:34px;background:var(--rd);color:#fff">斬</button></div>`;
 document.body.append(btn,pan,ctl);
 const q=s=>pan.querySelector(s),stt=q('#lkS');
 const say=(t,bad)=>{stt.textContent=t;stt.style.color=bad?'var(--rd)':'inherit'};
@@ -2728,7 +2726,10 @@ function guestDC(d){d.onopen=()=>{pan.classList.remove('on');ctl.classList.add('
 const send=o=>{try{dc&&dc.readyState==='open'&&dc.send(JSON.stringify(o))}catch(_){}};
 ctl.querySelectorAll('.k').forEach(b=>{const a=b.dataset.a;b.addEventListener('pointerdown',e=>{e.preventDefault();try{b.setPointerCapture(e.pointerId)}catch(_){}b.classList.add('on');try{navigator.vibrate&&navigator.vibrate(8)}catch(_){}a==='c'?send({t:'c'}):send({t:'k',a,v:1})});
  ['pointerup','pointercancel','lostpointercapture'].forEach(t=>b.addEventListener(t,()=>{if(!b.classList.contains('on'))return;b.classList.remove('on');if(a!=='c')send({t:'k',a,v:0})}))});
-ctl.querySelector('.x').onclick=()=>{['l','r','j','a','s','d'].forEach(a=>send({t:'k',a,v:0}));reset();ctl.classList.remove('on');clearInterval(mt);try{wl&&wl.release()}catch(_){}};
+const fsEl2=()=>document.fullscreenElement||document.webkitFullscreenElement,fsB=ctl.querySelector('.f');
+if(!(document.documentElement.requestFullscreen||document.documentElement.webkitRequestFullscreen))fsB.style.display='none';
+fsB.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();try{if(fsEl2())(document.exitFullscreen||document.webkitExitFullscreen).call(document);else{const d=document.documentElement,r=d.requestFullscreen||d.webkitRequestFullscreen,pr=r.call(d),lk=()=>{try{screen.orientation&&screen.orientation.lock&&screen.orientation.lock('landscape').catch(()=>{})}catch(_){}};pr&&pr.then?pr.then(lk).catch(()=>{}):lk()}}catch(_){}});
+ctl.querySelector('.x').onclick=()=>{try{fsEl2()&&(document.exitFullscreen||document.webkitExitFullscreen).call(document)}catch(_){}['l','r','j','a','s','d'].forEach(a=>send({t:'k',a,v:0}));reset();ctl.classList.remove('on');clearInterval(mt);try{wl&&wl.release()}catch(_){}};
 if(/^#j=/.test(location.hash)){const c=location.hash.slice(3);try{history.replaceState(null,'',location.pathname+location.search)}catch(_){}setTimeout(()=>{pan.classList.add('on');pan.querySelector('.tb button[data-m=g]').click();q('#lkI').value=c;q('#lkMk').click()},700)}
 
 /* ---- v80 房間號配對：走自己的 Cloudflare Worker（只交換邀請碼／回覆碼，遊戲資料仍走原本的點對點通道） ---- */
