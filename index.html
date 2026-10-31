@@ -1088,6 +1088,15 @@ if(k0==='k'){
  g.fillStyle=fl?'#fff':'#9fd0ec';g.beginPath();g.moveTo(13,0);g.lineTo(BL+10,0);g.lineTo(BL-4,3);g.lineTo(13,3.4);g.closePath();g.fill();
  g.strokeStyle='#fff';g.lineWidth=1;g.beginPath();g.moveTo(16,-1.4);g.lineTo(BL+2,-.4);g.stroke();
  if(!fl){const sx=BL+10+Math.sin(T*8)*2;g.fillStyle='rgba(235,250,255,.95)';g.beginPath();g.moveTo(sx,-6);g.lineTo(sx+1.6,0);g.lineTo(sx,6);g.lineTo(sx-1.6,0);g.closePath();g.fill()}
+}else if(k0==='f'&&o.vis==='storm'){
+ /* 雨夜修羅：與墨影劍客同款的劍——黑邊銀刃、金色護手 */
+ const bl2=Math.max(L,40);
+ dFx(o.st,L,'255,250,235');
+ dGrip(-3,5,3,'#1c1c1c','#3a3a3a',fl);
+ g.strokeStyle=K;g.lineWidth=5.5;g.beginPath();g.moveTo(-4,0);g.lineTo(bl2+1,0);g.stroke();
+ g.strokeStyle=fl?'#fff':'#e8eef4';g.lineWidth=3;g.beginPath();g.moveTo(0,0);g.lineTo(bl2,0);g.stroke();
+ g.strokeStyle=fl?'#fff':'#c99a2e';g.lineWidth=3;g.beginPath();g.moveTo(1,-5);g.lineTo(1,5);g.stroke();
+ dGlint(fl,8,bl2,-1,.4);
 }else if(k0==='f'){
  /* 金瓜錘：木柄鐵箍，瓜形金錘頭帶縱棱，頂端錘尖 */
  const hx=L-6,ga=fl?'#fff':'#e0b040',gb=fl?'#fff':'#a87a1c';
@@ -1230,7 +1239,7 @@ function hero0(p,gh){const air=p.y<GY-2,dsh=p.dash>0,atk=p.at>0,hrt=p.hurt>0,run
  const fv=(p.fx<0?-1:1)*Math.max(.5,Math.abs(p.fx)),hy=(CH===13&&FSIT?-14:-20)+bob;if(CH===13){lean+=.3;if(FSIT){F=[1.5,1.45];B=[1.35,1.42];lean=.3+Math.sin(T*1.2)*.015}}
  if(!gh){g.save();g.translate(p.x,GY);const q=cl(1-(GY-p.y)/280,.3,1);g.fillStyle=`rgba(0,0,0,${.2*q})`;g.beginPath();g.ellipse(0,1,17*q,5*q,0,0,TAU);g.fill();g.restore()}
  g.save();g.translate(p.x+lx*p.f,p.y+hop);g.scale(fv*sx,sy);g.lineCap='round';g.lineJoin='round';if(CH===24&&!gh&&S!=='menu'){SPF={ox:p.x+lx*p.f,oy:p.y+hop,fv,sx,sy,hy,lean};spCapeD(p,hy,lean,atk?Math.sin(pr*Math.PI):0)}
- const leg=(a,b,c)=>{const kx=Math.sin(a[0])*12,ky=hy+Math.cos(a[0])*12,d=a[0]-a[1],fx=kx+Math.sin(d)*12,fy=Math.min(0,ky+Math.cos(d)*12);g.strokeStyle=CH===27?(c==='#3a3a3a'?'#14151a':'#16171c'):c;g.lineWidth=CH===27?9:6;g.beginPath();g.moveTo(0,hy);g.lineTo(kx,ky);g.lineTo(fx,fy);g.stroke();g.lineWidth=CH===27?7:5;g.beginPath();g.moveTo(fx,fy);g.lineTo(fx+6,fy);g.stroke()};
+ const leg=(a,b,c)=>{const kx=Math.sin(a[0])*12,ky=hy+Math.cos(a[0])*12,d=a[0]-a[1],fx=kx+Math.sin(d)*12,fy=Math.min(0,ky+Math.cos(d)*12);g.strokeStyle=CH===27?(c==='#3a3a3a'?'#14151a':'#16171c'):c;g.lineWidth=CH===27?6.4:6;g.beginPath();g.moveTo(0,hy);g.lineTo(kx,ky);g.lineTo(fx,fy);g.stroke();g.lineWidth=CH===27?5:5;g.beginPath();g.moveTo(fx,fy);g.lineTo(fx+6,fy);g.stroke()};
  if(CH===13&&FSIT)fishRockD();if(!FEMC.includes(CH))leg(B,0,'#3a3a3a');const shoeD=(a,c)=>{const kx=Math.sin(a[0])*12,ky=hy+Math.cos(a[0])*12,d=a[0]-a[1],fx=kx+Math.sin(d)*12,fy=Math.min(0,ky+Math.cos(d)*12);g.fillStyle=gh?'#1c1c1c':c;g.strokeStyle='#1c1c1c';g.lineWidth=1.4;g.beginPath();g.moveTo(fx-3,fy+1.5);g.lineTo(fx-2.5,fy-4.5);g.lineTo(fx+2,fy-4.5);g.quadraticCurveTo(fx+8,fy-3,fx+9.5,fy+1.5);g.closePath();g.fill();g.stroke();if(!gh){g.strokeStyle='rgba(255,255,255,.75)';g.lineWidth=1.1;g.beginPath();g.moveTo(fx+3,fy-2.6);g.lineTo(fx+7,fy-1.2);g.stroke()}};
  g.save();g.translate(0,hy);g.rotate(lean);
  const sw=-cl(lv*.05,-10,10),tipx=-40-lv*.12-(dsh?44:0),tipy=-22+Math.sin(T*9)*6+(air?p.vy*.02:0);
@@ -3325,10 +3334,10 @@ function ssDagIdle(hx,hy,ang){
 function headNinja(hx){
  const RD='#b3261e',DK='#1c1c1c',w=Math.sin(T*9);
  g.save();g.beginPath();g.rect(-40,-90,80,43.8);g.clip();
- const hp=[[-3,-50.5,15,14.8]];
+ const hp=[[-2,-47.8,11.8,10.6]];
  g.strokeStyle=DK;g.lineWidth=3.6;for(const[x,y,rx,ry]of hp){g.beginPath();g.ellipse(x,y,rx,ry,0,0,TAU);g.stroke()}
  g.fillStyle='#1a1b21';for(const[x,y,rx,ry]of hp){g.beginPath();g.ellipse(x,y,rx,ry,0,0,TAU);g.fill()}
- g.strokeStyle='#3a3c46';g.lineWidth=1.3;g.beginPath();g.arc(-3,-50.5,11.5,-2.4,-.8);g.stroke();
+ g.strokeStyle='#3a3c46';g.lineWidth=1.3;g.beginPath();g.arc(-2,-47.8,8.4,-2.4,-.8);g.stroke();
  g.restore();
  g.save();g.beginPath();g.arc(0,-43,10.8,0,TAU);g.clip();
  g.fillStyle='#15161b';g.fillRect(-14,-56,28,40);
@@ -3848,7 +3857,7 @@ var DLG=null,DLGSEEN={};
 /* 角色代換：選的不是墨影劍客時，名牌與旁白改用所選角色的名字，劍相關字眼改成通用說法 */
 const HN=['墨影劍客','素弦','丹青','鐵山','機關師','火藥師','幽簫','藥師','長槍筆客','鞭客','雷法道人','紙傘女俠','硯墨書生','蓑笠釣叟','墨獸使','飛羽射手','鑄劍師','棋聖','書聖','傀儡師','鼓手','撐篙船夫','紙鳶師','舞龍師','喚魂師','鐵炮手','太極宗師','影刺客'];
 const HNAME=()=>HN[CH]||HN[0];
-const HSUB=[['沒有門派的少年','沒有門派的江湖人'],['他把身上的長劍插進土裡留下','主角把隨身兵器留在土裡'],['向他揮手','向主角揮手'],['他停下腳步','主角停下腳步'],['他想起師父','主角想起師父'],['他走向另一座橋','主角走向另一座橋'],
+const HSUB=[['你的劍法，是你師父教的','你的招式，是你師父教的'],['師父教出來的劍','師父教出來的招式'],['沒有門派的少年','沒有門派的江湖人'],['他把身上的長劍插進土裡留下','主角把隨身兵器留在土裡'],['向他揮手','向主角揮手'],['他停下腳步','主角停下腳步'],['他想起師父','主角想起師父'],['他走向另一座橋','主角走向另一座橋'],
  ['背起墨色長劍','帶上隨身兵器'],['把劍收回鞘中','收起了兵器'],['把劍插回鞘中','收起了兵器'],['把身上的長劍插進土裡留下','把隨身兵器留在土裡'],
  ['握緊重鑄的長劍','握緊重鑄的兵器'],['握緊木劍','握緊那柄木劍'],['你認得我的劍法','你認得我的招式'],['你的劍，我替你重鑄吧','你的兵器，我替你重鑄吧'],
  ['原來最利的劍，是放得下的劍','原來最利的兵器，是放得下的兵器'],['一路拾得的劍','一路拾得的兵器'],['燈亮時出劍','燈亮時出手'],['再出劍','再出手'],['的位置出劍','的位置出手'],
