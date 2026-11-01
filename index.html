@@ -1531,6 +1531,10 @@ LT[4].mel=[
  4,-1,3,4, 5,-1,6,5, 3,-1,2,3, 4,-1,-1,-1,
  7,-1,8,7, 6,-1,5,6, 7,-1,8,9, 8,-1,7,-1,
  6,5,6,-1, 5,3,4,-1, 3,2,1,-1, 0,-1,-1,-1];
+/* 第五關：改用〈月下輕舞〉武俠巴薩諾瓦（見 bossaL），原戲樓鑼鼓旋律不再使用 */
+Object.assign(LT[4],{bossa:1,sd:60/122/4,q:60/122,drum:'none',bass:false,pad:false});
+/* 第十八關：改用〈故人歸〉武俠抒情搖滾（見 gurenL） */
+Object.assign(LT[17],{guren:1,sd:60/78/4,q:60/78,drum:'none',bass:false,pad:false});
 /* 第六關：荒廟殘燈——E 弗里幾亞（陰），古琴獨奏配寺鐘；音級 0=降A3 1=A3 2=B3 3=降D4 4=降E4 5=E4 6=降G4 7=降A4 8=A4 */
 LT[5].mel=[
  7,-1,-1,6, -1,4,-1,-1, 3,-1,4,-1, 1,-1,-1,-1,
@@ -1649,7 +1653,107 @@ function rockL(th,s,dl,lv){const ac=SFX.ac(),i=s%RK.L,bs=bus;window.__BT={t:ac.c
    o.type='sawtooth';o.frequency.setValueAtTime(pv,t);o.frequency.exponentialRampToValueAtTime(f,t+.05);l.frequency.value=6;lg.gain.value=f*.011;l.connect(lg);lg.connect(o.frequency);
    lp.type='lowpass';lp.frequency.value=3000;lp.Q.value=2;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.04);g.gain.setValueAtTime(v,t+d*.85);g.gain.linearRampToValueAtTime(0,t+d);
    o.connect(lp);lp.connect(g);g.connect(bs);o.start(t);l.start(t);o.stop(t+d+.05);l.stop(t+d+.05)}})}
-function playL(th,s,dl,lv){if(th.rock){rockL(th,s,dl,lv);return}if(th.ev){evL(th,s,dl,lv);return}window.__BT={t:SFX.ac().currentTime+dl,s,q:th.q};
+/* 第六關與第二十一關配樂互換 */
+[LT[5],LT[20]]=[LT[20],LT[5]];
+/* 第六關：〈斷劍〉武俠搖滾（取自 rock-wuxia.html）E 小調五聲 148BPM；一步=16分音符，4小節(64步)循環；失真吉他＋貝斯＋鼓組＋二胡 */
+const DJ={roots:[82.41,65.41,73.42,82.41],lead:[[0,6,493.88],[6,2,440],[8,4,392],[12,4,329.63],[16,6,392],[22,2,440],[24,4,493.88],[28,4,440],[32,6,587.33],[38,2,493.88],[40,4,440],[44,4,493.88],[48,8,659.25],[56,8,493.88]]};
+Object.assign(LT[5],{duan:1,sd:60/148/4,q:.4,drum:'none',bass:false,pad:false}); /* 第六關改用〈斷劍〉（見 DJ／duanL），原旋律不再使用 */
+/* 第六關與第十三關配樂互換：第六關＝原荒廟險道配樂，第十三關＝〈斷劍〉 */
+[LT[5],LT[12]]=[LT[12],LT[5]];
+/* 第八關：〈江湖 Flow〉武俠嘻哈 A 小調 90BPM；一步=16分音符，28小節(448步)循環；Boom Bap 鼓組＋808＋二胡 Sample（取自 hiphop.html） */
+const HP={root:{Am:33,F:41,G:43,Em:40},mel:{Am:[76,72,69,72],F:[77,72,69,72],G:[74,71,67,71],Em:[76,71,67,71]},bars:[]};
+{const L8=["Am","Am","F","F","G","G","Em","Am"],H4=["Am","F","G","Am"];[[["Am","Am"],0],[L8,1],[H4,2],[L8,1],[H4,2],[["Am","Am"],0]].forEach(x=>x[0].forEach(ch=>HP.bars.push({ch,lv:x[1]})))}
+HP.L=HP.bars.length*16;
+Object.assign(LT[7],{hip:1,sd:60/90/4,q:60/90,drum:'none',bass:false,pad:false}); /* 第八關改用〈江湖 Flow〉（見 HP／hiphopL），原旋律不再使用 */
+/* 第十九關：〈霓虹劍〉賽博電子武俠 C 小調 128BPM；一步=16分音符，22小節(352步)循環；電子脈衝＋鋸齒低音＋方波琶音＋鋸齒主奏（取自 nihongjian.html） */
+const NJ={root:{Cm:36,Ab:32,Eb:39,Bb:34},mel:{Cm:[79,75,79,82],Ab:[80,77,80,84],Eb:[79,75,82,79],Bb:[77,82,77,74]},bars:[]};
+{const V=["Cm","Ab","Eb","Bb"],C=["Ab","Eb","Bb","Cm"];[[["Cm","Cm"],0],[V,1],[C,2],[V,1],[C,2],[["Ab","Bb"],1],[["Cm","Cm"],0]].forEach(x=>x[0].forEach(ch=>NJ.bars.push({ch,lv:x[1]})))}
+NJ.L=NJ.bars.length*16;
+Object.assign(LT[18],{neon:1,sd:60/128/4,q:60/128,drum:'none',bass:false,pad:false}); /* 第十九關改用〈霓虹劍〉（見 NJ／neonL），原旋律不再使用 */
+function neonL(th,s,dl,lv){const ac=SFX.ac(),bs=bus,i=s%NJ.L,bi=i>>4,k=i&15,b=NJ.bars[bi],S=th.sd,t=ac.currentTime+dl,bm=lv===2?1.25:1,hz=m=>440*Math.pow(2,(m-69)/12),r=NJ.root[b.ch],ml=NJ.mel[b.ch];window.__BT={t,s:s/2,q:th.q};
+ const nz=(f,d,v)=>SFX.noise(d,{ft:'highpass',f0:f,v:v*bm,bus:bs,dl}),
+ syn=(m,len,ty,v,cut)=>{const x=ac.createOscillator(),f=ac.createBiquadFilter(),g=ac.createGain();x.type=ty;x.frequency.value=hz(m);f.type='lowpass';f.frequency.setValueAtTime(cut,t);f.frequency.exponentialRampToValueAtTime(Math.max(200,cut/4),t+len);g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+len);x.connect(f);f.connect(g);g.connect(bs);x.start(t);x.stop(t+len+.05)},
+ on=bi>0||k>=8;
+ if(on&&k%4===0)SFX.tone(150,.25,{to:40,v:.5*bm,bus:bs,dl});
+ if((k===4||k===12)&&bi>0)nz(1800,.15,.3);
+ if(k%4===2)nz(8000,.07,.15);else if(k%2===1)nz(9000,.025,.06);
+ if(on&&k%2===0)syn(k%8===6?r+12:r,S*1.8,'sawtooth',.3*bm,900);
+ syn(r+[24,31,36,31][k%4],S*1.5,'square',(b.lv===2?.1:.07)*bm,b.lv===0?1800:3500);
+ if(b.lv===1&&k%8===0)syn(ml[k/4],S*7,'sawtooth',.09,2600);
+ if(b.lv===2&&k%4===0){syn(ml[k/4],S*3.8,'sawtooth',.13,4500);syn(ml[k/4]+12,S*3.8,'square',.04,5000)}
+ if(bi===NJ.bars.length-1&&k===0)syn(r+36,S*15,'sawtooth',.12,3000)}
+function hiphopL(th,s,dl,lv){const ac=SFX.ac(),bs=bus,i=s%HP.L,bi=i>>4,k=i&15,b=HP.bars[bi],S=th.sd,t=ac.currentTime+dl,bm=lv===2?1.25:1,hz=m=>440*Math.pow(2,(m-69)/12),r=HP.root[b.ch]+12,ml=HP.mel[b.ch];window.__BT={t,s:s/2,q:th.q};
+ const kick=()=>SFX.tone(150,.25,{to:40,v:.5*bm,bus:bs,dl}),nz=(f,d,v)=>SFX.noise(d,{ft:'highpass',f0:f,v:v*bm,bus:bs,dl}),
+ sub=(m,len,v)=>SFX.tone(hz(m),len,{to:hz(m),v:v*bm,at:.01,bus:bs,dl}),
+ erhu=(m,len)=>{const x=ac.createOscillator(),l=ac.createOscillator(),lg=ac.createGain(),f=ac.createBiquadFilter(),g=ac.createGain();x.type='sawtooth';x.frequency.value=hz(m);l.frequency.value=5.5;lg.gain.value=6;l.connect(lg);lg.connect(x.detune);f.type='bandpass';f.frequency.value=1500;f.Q.value=1.2;
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.16,t+.06);g.gain.setValueAtTime(.16,t+len*.8);g.gain.linearRampToValueAtTime(0,t+len);x.connect(f);f.connect(g);g.connect(bs);x.start(t);l.start(t);x.stop(t+len+.05);l.stop(t+len+.05)};
+ if(bi>0){if(k===0||k===7||(k===10&&bi%2))kick();if(k===4||k===12){nz(1500,.16,.4);nz(300,.08,.18)}
+  if(k%2===0)nz(8500,.04,k%4===2?.15:.09);if(k===14&&bi%2)nz(7000,.12,.1);
+  if(k===0)sub(r,S*6,.35);if(k===10)sub(r,S*3,.3);if(k===7&&b.lv===2)sub(r+7,S*2,.28)}
+ if(b.lv===0&&bi<2&&(k===0||k===6||k===10))erhu(ml[k===0?0:k===6?1:2],S*3);
+ if(b.lv===1&&(k===0||k===3||k===6||k===10))erhu(ml[k===0?0:k===3?1:k===6?2:3],S*2.5);
+ if(b.lv===2&&k%8===0)erhu(ml[k/4]+12,S*7.5);
+ if(bi===HP.bars.length-1&&k===0)erhu(69,S*14)}
+function duanL(th,s,dl,lv){const ac=SFX.ac(),bs=bus,i=s%16,p=s%64,r=DJ.roots[(s>>4)&3],S=th.sd,t=ac.currentTime+dl,bm=lv===2?1.25:1;window.__BT={t,s:s/2,q:th.q};
+ if(th.gb!==bs){const ws=ac.createWaveShaper(),lp=ac.createBiquadFilter(),gg=ac.createGain(),c=new Float32Array(2048);for(let j=0;j<2048;j++)c[j]=Math.tanh((j*2/2048-1)*14);ws.curve=c;lp.type='lowpass';lp.frequency.value=2600;gg.gain.value=.085;ws.connect(lp);lp.connect(gg);gg.connect(bs);th.gb=bs;th.gin=ws}
+ if(i===0||i===6||i===8||i===10)SFX.tone(150,.25,{to:42,v:.5*bm,bus:bs,dl});
+ if(i===4||i===12){SFX.noise(.18,{ft:'bandpass',f0:1800,v:.4*bm,bus:bs,dl});SFX.tone(190,.1,{ty:'triangle',v:.25*bm,bus:bs,dl})}
+ if(i%2===0){SFX.noise(.05,{ft:'highpass',f0:7000,v:(i%4===0?.28:.17)*bm,bus:bs,dl});
+  const d=i%4===0?S*3:S*1.6,g=ac.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(1,t+.003);g.gain.exponentialRampToValueAtTime(.001,t+d);g.connect(th.gin);
+  [2,3,4].forEach(m=>{const o=ac.createOscillator();o.type='sawtooth';o.frequency.value=r*m;o.connect(g);o.start(t);o.stop(t+d+.05)});
+  SFX.tone(r,S*1.8,{ty:'triangle',v:.13,at:.005,bus:bs,dl})}
+ DJ.lead.forEach(n=>{if(n[0]!==p)return;const f=n[2],d=n[1]*S*.95,o=ac.createOscillator(),g=ac.createGain(),l=ac.createOscillator(),lg=ac.createGain(),bp=ac.createBiquadFilter();
+  o.type='sawtooth';o.frequency.setValueAtTime(f*.96,t);o.frequency.exponentialRampToValueAtTime(f,t+.08);l.frequency.value=5.5;lg.gain.value=f*.012;l.connect(lg);lg.connect(o.frequency);
+  bp.type='bandpass';bp.frequency.value=f*2;bp.Q.value=1.2;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.17,t+.06);g.gain.setValueAtTime(.17,t+Math.max(.07,d-.05));g.gain.linearRampToValueAtTime(0,t+d);
+  o.connect(bp);bp.connect(g);g.connect(bs);o.start(t);l.start(t);o.stop(t+d+.05);l.stop(t+d+.05)})}
+/* 第五關：〈月下輕舞〉武俠巴薩諾瓦 D 小調 122BPM；一步=16分音符，36小節循環；戰鬥時加厚 */
+const BS={CH:{Dm7:[38,[0,3,7,10]],G7:[43,[0,4,7,10]],Cmaj7:[36,[0,4,7,11]],Fmaj7:[41,[0,4,7,11]],Bm7b5:[35,[0,3,6,10]],E7:[40,[0,4,7,10]],Am7:[33,[0,3,7,10]]},
+MEL:{Dm7:[77,81,79,76],G7:[79,77,74,77],Cmaj7:[76,79,83,79],Fmaj7:[77,81,84,81],Bm7b5:[74,77,81,77],E7:[76,80,83,80],Am7:[72,76,79,76]},bars:[]};
+{const A8=["Dm7","G7","Cmaj7","Fmaj7","Bm7b5","E7","Am7","Am7"];
+[[["Dm7","G7"],0],[A8,1],[A8,2],[A8,1],[A8,2],[["Dm7","Cmaj7"],0]].forEach(x=>x[0].forEach(ch=>BS.bars.push({ch,lv:x[1]})))}
+BS.L=BS.bars.length*16;
+function bossaL(th,s,dl,lv){const ac=SFX.ac(),i=s%BS.L,bi=i>>4,k=i&15,b=BS.bars[bi],hz=m=>440*Math.pow(2,(m-69)/12),t=ac.currentTime+dl,S=th.sd,bt=lv===2;
+ window.__BT={t,s:s/2,q:th.q};
+ if(!bus.__o){const o=ac.createGain();o.gain.value=.42;o.connect(bus);const d=ac.createWaveShaper(),c=new Float32Array(2048);for(let j=0;j<2048;j++)c[j]=Math.tanh((j*2/2048-1)*6);d.curve=c;const lp=ac.createBiquadFilter();lp.type='lowpass';lp.frequency.value=3200;const g=ac.createGain();g.gain.value=.22;d.connect(lp);lp.connect(g);g.connect(o);bus.__o=o;bus.__d=d}
+ const out=bus.__o,dist=bus.__d,[r,iv]=BS.CH[b.ch];
+ const env=(g,a,d,v)=>{g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.005);g.gain.exponentialRampToValueAtTime(.001,t+d)};
+ const osc=(ty,f,dst)=>{const x=ac.createOscillator();x.type=ty;x.frequency.value=f;x.connect(dst);return x};
+ const nz=(fr,d,v)=>{SFX.noise(d,{ft:'highpass',f0:fr,v:v*.5,bus:out,dl})};
+ const bass=(m,len)=>{const g=ac.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.8,t+.01);g.gain.exponentialRampToValueAtTime(.001,t+len);g.connect(out);const x=osc('triangle',hz(m),g);x.start(t);x.stop(t+len+.05)};
+ const nylon=(m,v)=>{const f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=2400;const g=ac.createGain();g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+.45);f.connect(g);g.connect(out);const x=osc('triangle',hz(m),f);x.start(t);x.stop(t+.5)};
+ const kick=()=>{const g=ac.createGain(),x=ac.createOscillator();x.frequency.setValueAtTime(150,t);x.frequency.exponentialRampToValueAtTime(40,t+.12);env(g,0,.25,bt?1:.9);x.connect(g);g.connect(out);x.start(t);x.stop(t+.3)};
+ const gtr=(m,len,v)=>[0,7,12].forEach(o=>{const g=ac.createGain();env(g,0,len,v);g.connect(dist);const x=osc('sawtooth',hz(m+o),g);x.start(t);x.stop(t+len+.05)});
+ const vib=(x,rate,amt)=>{const l=ac.createOscillator();l.frequency.value=rate;const lg=ac.createGain();lg.gain.value=amt;l.connect(lg);lg.connect(x.detune);l.start(t);return l};
+ const erhu=(m,len)=>{const x=ac.createOscillator();x.type='sawtooth';x.frequency.value=hz(m);const l=vib(x,5.5,6),f=ac.createBiquadFilter();f.type='bandpass';f.frequency.value=1500;f.Q.value=1.2;const g=ac.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.16,t+.06);g.gain.setValueAtTime(.16,t+len*.8);g.gain.linearRampToValueAtTime(0,t+len);x.connect(f);f.connect(g);g.connect(out);x.start(t);x.stop(t+len+.05);l.stop(t+len+.05)};
+ const flute=(m,len)=>{const x=ac.createOscillator();x.type='sine';x.frequency.value=hz(m);const l=vib(x,5,5),g=ac.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.22,t+.08);g.gain.setValueAtTime(.22,t+len*.7);g.gain.linearRampToValueAtTime(0,t+len);x.connect(g);g.connect(out);x.start(t);x.stop(t+len+.05);l.stop(t+len+.05)};
+ const bp={0:0,6:7,8:0,14:7};if(k in bp)bass(r+bp[k],S*(k%8===0?5:3));
+ if([0,3,6,10,12].includes(k)){[iv[1],iv[2],iv[3]].forEach(o=>nylon(r+24+o,.07));if(bi>0)nz(3500,.04,.28);if(bt&&(k===0||k===6||k===12))gtr(r+12+iv[2],S*3,.05)}
+ if(bi>0){nz(9000,.03,k%4===0?.1:.06);if(k===0||k===8||(bt&&(k===4||k===12)))kick()}
+ const L=bt?Math.max(b.lv,2):b.lv,mel=BS.MEL[b.ch];
+ if(L===1&&k%8===0)erhu(mel[k/4],S*7.5);
+ if(L===2&&k%4===0)flute(mel[k/4],S*3.8);
+ if(L===2&&bt&&k%8===0)erhu(mel[k/4]-12,S*7.5)}
+/* 第十八關：〈故人歸〉武俠抒情搖滾 D 小調 78BPM；一步=16分音符，22小節循環；戰鬥時加厚 */
+const GR={root:{Dm:38,Bb:34,F:41,C:36},mel:{Dm:[77,74],Bb:[74,70],F:[72,77],C:[76,72]},bars:[]};
+[[["Dm","Dm"],0],[["Dm","Bb","F","C"],1],[["Bb","F","C","Dm"],2],[["Dm","Bb","F","C"],1],[["Bb","F","C","Dm"],2],[["Bb","C"],1],[["Dm","Dm"],0]].forEach(x=>x[0].forEach(ch=>GR.bars.push({ch,lv:x[1]})));
+GR.L=GR.bars.length*16;
+function gurenL(th,s,dl,lv){const ac=SFX.ac(),i=s%GR.L,bi=i>>4,k=i&15,b=GR.bars[bi],hz=m=>440*Math.pow(2,(m-69)/12),t=ac.currentTime+dl,S=th.sd,bt=lv===2;
+ window.__BT={t,s:s/2,q:th.q};
+ if(!bus.__o){const o=ac.createGain();o.gain.value=.42;o.connect(bus);const d=ac.createWaveShaper(),c=new Float32Array(2048);for(let j=0;j<2048;j++)c[j]=Math.tanh((j*2/2048-1)*6);d.curve=c;const lp=ac.createBiquadFilter();lp.type='lowpass';lp.frequency.value=3200;const g=ac.createGain();g.gain.value=.22;d.connect(lp);lp.connect(g);g.connect(o);bus.__o=o;bus.__d=d}
+ const out=bus.__o,dist=bus.__d,r=GR.root[b.ch],L=bt?(b.lv?2:1):b.lv;
+ const env=(g,d,v)=>{g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.005);g.gain.exponentialRampToValueAtTime(.001,t+d)};
+ const osc=(ty,f,dst)=>{const x=ac.createOscillator();x.type=ty;x.frequency.value=f;x.connect(dst);return x};
+ const nz=(fr,d,v)=>SFX.noise(d,{ft:'highpass',f0:fr,v:v*.5,bus:out,dl});
+ const kick=()=>{const g=ac.createGain(),x=ac.createOscillator();x.frequency.setValueAtTime(150,t);x.frequency.exponentialRampToValueAtTime(40,t+.12);env(g,.25,.9);x.connect(g);g.connect(out);x.start(t);x.stop(t+.3)};
+ const gtr=(m,len,v)=>[0,7,12].forEach(o=>{const g=ac.createGain();env(g,len,v);g.connect(dist);const x=osc('sawtooth',hz(m+o),g);x.start(t);x.stop(t+len+.05)});
+ const pluck=(m,v)=>{const f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=2200;const g=ac.createGain();env(g,1.1,v);f.connect(g);g.connect(out);const x=osc('triangle',hz(m),f);x.start(t);x.stop(t+1.2)};
+ const pad=(m,len)=>{const g=ac.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.07,t+.5);g.gain.linearRampToValueAtTime(0,t+len);g.connect(out);const x=osc('sine',hz(m),g);x.start(t);x.stop(t+len+.05)};
+ const erhu=(m,len)=>{const x=ac.createOscillator();x.type='sawtooth';x.frequency.value=hz(m);const l=ac.createOscillator();l.frequency.value=5.5;const lg=ac.createGain();lg.gain.value=6;l.connect(lg);lg.connect(x.detune);l.start(t);const f=ac.createBiquadFilter();f.type='bandpass';f.frequency.value=1500;f.Q.value=1.2;const g=ac.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.16,t+.06);g.gain.setValueAtTime(.16,t+len*.8);g.gain.linearRampToValueAtTime(0,t+len);x.connect(f);f.connect(g);g.connect(out);x.start(t);x.stop(t+len+.05);l.stop(t+len+.05)};
+ if(k===0){[12,19,24].forEach(o=>pad(r+o,S*16));if(L===2)gtr(r+12,1.4,.22)}
+ if(k%2===0)pluck(r+[12,19,24,19][(k/2)%4],L===2?.32:.26);
+ if(L>0){if(k===0||(L===2&&k===10))kick();if(k===8)nz(1500,.2,L===2?.35:.2);if(k%4===2)nz(8000,.04,.1);
+  if(k%8===0)erhu(GR.mel[b.ch][k/8],S*8*.97)}}
+function playL(th,s,dl,lv){if(th.guren){gurenL(th,s,dl,lv);return}if(th.bossa){bossaL(th,s,dl,lv);return}if(th.neon){neonL(th,s,dl,lv);return}if(th.hip){hiphopL(th,s,dl,lv);return}if(th.duan){duanL(th,s,dl,lv);return}if(th.rock){rockL(th,s,dl,lv);return}if(th.ev){evL(th,s,dl,lv);return}window.__BT={t:SFX.ac().currentTime+dl,s,q:th.q};
  const b=s%16,ph=(s>>4)&3,n=th.mel[s%th.mel.length],mul=[1,4/3,1,1.5][ph],dr=th.drum,f=n<0?0:th.root*Math.pow(2,Math.floor(n/th.n)+th.sc[n%th.n]/12);
  if(th.bd){const pi=(s>>3)%(th.mel.length>>3),b8=s%8;if(b8===0)SFX.tone(146.83,th.sd*4,{ty:'triangle',v:.12,bus,dl});if(b8===4)SFX.tone(110,th.sd*4,{ty:'triangle',v:.1,bus,dl});if(pi%2===1&&b8===2)SFX.tone(293.66,th.sd*2,{ty:'triangle',v:.04,bus,dl})}else if(th.bl){const pi=(s>>3)%th.bl.length,b8=s%8,r=th.bl[pi];if(b8===0)SFX.tone(r,.27,{ty:'triangle',v:.12,bus,dl});if(b8===2)SFX.tone(r*3,.15,{ty:'triangle',v:.04,bus,dl});if(b8===4)SFX.tone(r*1.5,.27,{ty:'triangle',v:.1,bus,dl});if(b8===6)SFX.tone(r*3,.15,{ty:'triangle',v:.04,bus,dl});if(pi>=4&&(b8&1))SFX.tone(1100,.06,{ty:'square',v:.035,bus,dl})}else if(th.bass){if(b===0)SFX.tone(th.root/2*mul,th.sd*8,{ty:'triangle',v:.11,bus,dl});if(b===8)SFX.tone(th.root/2*mul*2,th.sd*6,{ty:'triangle',v:.06,bus,dl})}
  if(th.pad&&b===0&&ph%2===0)SFX.tone(th.root/4*mul,th.sd*24,{ty:'sine',v:.07,at:1.5,bus,dl});
