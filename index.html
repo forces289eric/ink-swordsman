@@ -1454,7 +1454,7 @@ const LCFG=[
 [220,'blues',116,'flute','big',1,0,.7,179],   /* 17 血月荒原 */
 [262,'gong',104,'pluck','drizzle',1,0,.6,191],      /* 18 斷橋殘雨 */
 [196,'dark',92,'flute','arp',1,1,.6,199],     /* 19 毒瘴幽谷 */
-[262,'yu',132,'pluck','big',1,0,.8,211],      /* 20 雷鳴天梯（手寫旋律，見 LT[19].mel） */
+[262,'yu',132,'pluck','big',1,0,.8,211],      /* 20 雷鳴天梯（〈劍氣縱橫〉武俠搖滾，見 RK） */
 [165,'phry',126,'epic','warcry',1,1,.9,223],   /* 21 九幽冥府（狂暴版・手寫旋律，見 LT[20].mel） */
 [294,'dark',118,'pluck','big',1,1,.7,239]     /* 22 魔宮絕巔 */
 ];
@@ -1547,6 +1547,7 @@ LT[18].mel=[7,-1,9,-1,11,-1,9,-1,8,-1,9,-1,7,-1,-1,-1,
 10,-1,12,-1,10,-1,7,-1,8,-1,10,-1,9,-1,-1,-1,
 7,-1,9,-1,11,-1,12,-1,11,-1,9,-1,11,-1,-1,-1,
 8,-1,6,-1,4,-1,6,-1,8,-1,9,-1,8,-1,-1,-1];
+Object.assign(LT[19],{rock:1,sd:.1,q:.4,drum:'none',bass:false,pad:false}); /* 第二十關改用〈劍氣縱橫〉武俠搖滾（見 RK／rockL），下方舊旋律不再使用 */
 /* 第二十關：雷鳴天梯——C 羽調五聲（C Eb F G Bb）手寫旋律；低音 C｜F｜C｜G；音級 0=C4 1=Eb4 2=F4 3=G4 4=Bb4 5=C5 6=Eb5 7=F5 8=G5 9=Bb5 10=C6 */
 LT[19].mel=[5,-1,5,6, 8,-1,6,5, 3,-1,5,-1, 6,-1,-1,-1,
 7,-1,7,8, 7,-1,6,-1, 5,-1,6,7, 8,-1,-1,-1,
@@ -1608,7 +1609,47 @@ const LEAD={epic:(f,dl,d)=>{LEAD.erhu(f,dl);LEAD.horn(f,dl,d)},pipa:(f,dl)=>{SFX
  xun:(f,dl)=>{SFX.tone(f,.6,{ty:'sine',v:.12,at:.06,bus,dl});SFX.tone(f*2,.22,{ty:'sine',v:.03,at:.08,bus,dl})},
  horn:(f,dl,d)=>{const ac=SFX.ac(),t=ac.currentTime+dl,os=ac.createOscillator(),o2=ac.createOscillator(),lf=ac.createOscillator(),lg=ac.createGain(),fl=ac.createBiquadFilter(),gn=ac.createGain();os.type='sawtooth';o2.type='square';os.frequency.value=f;o2.frequency.value=f*1.004;lf.frequency.value=4.6;lg.gain.setValueAtTime(0,t);lg.gain.linearRampToValueAtTime(f*.008,t+.4);lf.connect(lg);lg.connect(os.frequency);lg.connect(o2.frequency);fl.type='lowpass';fl.frequency.setValueAtTime(f*1.5,t);fl.frequency.linearRampToValueAtTime(Math.min(2600,f*4),t+.12);fl.Q.value=.9;gn.gain.setValueAtTime(.0001,t);gn.gain.linearRampToValueAtTime(.06,t+.06);gn.gain.setValueAtTime(.05,t+d*.5);gn.gain.exponentialRampToValueAtTime(.0001,t+d);os.connect(fl);o2.connect(fl);fl.connect(gn);gn.connect(bus);os.start(t);o2.start(t);lf.start(t);os.stop(t+d+.05);o2.stop(t+d+.05);lf.stop(t+d+.05)},
  erhu:(f,dl)=>{const ac=SFX.ac(),t=ac.currentTime+dl,os=ac.createOscillator(),lf=ac.createOscillator(),lg=ac.createGain(),fl=ac.createBiquadFilter(),gn=ac.createGain();os.type='sawtooth';os.frequency.setValueAtTime(f*.96,t);os.frequency.exponentialRampToValueAtTime(f,t+.07);lf.frequency.value=5.8;lg.gain.setValueAtTime(0,t);lg.gain.linearRampToValueAtTime(f*.014,t+.3);lf.connect(lg);lg.connect(os.frequency);fl.type='lowpass';fl.frequency.value=Math.min(3200,f*5);fl.Q.value=1.2;gn.gain.setValueAtTime(.0001,t);gn.gain.linearRampToValueAtTime(.07,t+.04);gn.gain.exponentialRampToValueAtTime(.0001,t+.8);os.connect(fl);fl.connect(gn);gn.connect(bus);os.start(t);lf.start(t);os.stop(t+.85);lf.stop(t+.85)}};
-function playL(th,s,dl,lv){if(th.ev){evL(th,s,dl,lv);return}window.__BT={t:SFX.ac().currentTime+dl,s,q:th.q};
+/* ---------- 第二十關：劍氣縱橫——武俠搖滾（失真吉他＋鼓組＋貝斯＋二胡；E 小調五聲；150BPM，十六分音符一步 0.1 秒，共 19 小節循環） ---------- */
+const RK=(()=>{const N={E2:82.41,G2:98,A2:110,B2:123.47,D4:293.66,E4:329.63,G4:392,A4:440,B4:493.88,D5:587.33,E5:659.25,G5:783.99,A5:880,B5:987.77},
+V1=["E2","E2","E2","G2","E2","E2","A2","G2"],V2=["E2","E2","E2","G2","E2","E2","B2","A2"],CH=["E2","G2","A2","B2"],
+LC=["E5:1 G5:1 B5:2","A5:1 G5:1 E5:2","G5:1 A5:1 B5:2","A5:2 E5:2"],
+SOLO=["E5:.5 G5:.5 A5:.5 B5:.5 A5:.5 G5:.5 E5:.5 D5:.5","E5:.5 D5:.5 B4:.5 D5:.5 E5:.5 G5:.5 A5:.5 G5:.5","B5:1 A5:.5 G5:.5 A5:1 B5:1","G5:.5 E5:.5 D5:.5 B4:.5 E5:2"],
+L=304,ev=Array.from({length:L},()=>[]),add=(t,...a)=>{if(t<L)ev[t].push(a)};
+let st=0,prev=N.E5;
+const drums=(t,m)=>{for(let k=0;k<4;k++){const x=t+k*4;if(k%2===0){add(x,'k',.9);if(m>0&&k===2)add(x+2,'k',.6)}else add(x,'s',.7);add(x,'h',.15);add(x+2,'h',.1);if(m===2){add(x+1,'h',.06);add(x+3,'h',.06)}}},
+riff=(t,a)=>a.forEach((r,i)=>{const x=t+i*2;add(x,'g',N[r],.18,1.5,1);add(x,'b',N[r],.18)}),
+chord=(t,r)=>{const q=r==="B2"?1.335:1.5;add(t,'g',N[r],.8,q,0);add(t+8,'g',N[r],.8,q,0);add(t,'b',N[r],1.6)},
+lead=(t,str,v)=>{let u=t;str.split(" ").forEach(x=>{const[n,k]=x.split(":");add(Math.round(u),'e',N[n],prev,k*.4,v);prev=N[n];u+=k*4})},
+chorus=()=>{CH.forEach((r,i)=>{if(i===0)add(st,'c',.35);chord(st,r);drums(st,2);lead(st,LC[i],.25);st+=16})};
+add(0,'G',.4);add(2,'t',.6,140);add(4,'t',.6,120);add(6,'t',.6,100);for(let k=0;k<8;k++)add(8+k,'t',.35+k*.07,150-k*8);
+st=16;add(st,'c',.3);riff(st,V1);drums(st,1);st+=16;
+[V1,V2,V1,V2].forEach(v=>{riff(st,v);drums(st,1);st+=16});
+chorus();
+SOLO.forEach((p,i)=>{riff(st,i%2?V2:V1);drums(st,2);if(i===0)add(st,'c',.3);lead(st,p,.27);st+=16});
+chorus();
+add(st,'g',N.E2,1.6,1.5,0);add(st,'b',N.E2,1.6);add(st,'k',1);add(st,'c',.5);add(st,'G',.5);add(st,'s',.8);add(st,'e',N.E5,prev,1.6,.22);
+const curve=k=>{const n=2048,a=new Float32Array(n);for(let i=0;i<n;i++){const x=i*2/n-1;a[i]=(1+k)*x/(1+k*Math.abs(x))}return a};
+return{L,ev,curve}})();
+function rockL(th,s,dl,lv){const ac=SFX.ac(),i=s%RK.L,bs=bus;window.__BT={t:ac.currentTime+dl,s:i/2,q:th.q};
+ if(th.gb!==bs){const ws=ac.createWaveShaper(),lp=ac.createBiquadFilter(),gg=ac.createGain();ws.curve=RK.curve(40);ws.oversample='4x';lp.type='lowpass';lp.frequency.value=3200;gg.gain.value=.075;ws.connect(lp);lp.connect(gg);gg.connect(bs);th.gb=bs;th.gin=ws}
+ const bm=lv===2?1.25:1,t=ac.currentTime+dl;
+ RK.ev[i].forEach(e=>{const k=e[0];
+  if(k==='k')SFX.tone(150,.2,{to:42,v:.5*e[1]*bm,bus:bs,dl});
+  else if(k==='s'){SFX.noise(.18,{ft:'bandpass',f0:1800,v:.4*e[1]*bm,bus:bs,dl});SFX.tone(220,.12,{ty:'triangle',to:140,v:.3*e[1]*bm,bus:bs,dl})}
+  else if(k==='h')SFX.noise(.05,{ft:'highpass',f0:7000,v:.5*e[1],bus:bs,dl});
+  else if(k==='c')SFX.noise(1.2,{ft:'highpass',f0:5000,v:.35*e[1],bus:bs,dl});
+  else if(k==='t')SFX.tone(e[2],.3,{to:e[2]*.5,v:.45*e[1],bus:bs,dl});
+  else if(k==='G')[82,123,170].forEach(f=>SFX.tone(f,2.5,{v:.3*e[1],at:.005,bus:bs,dl}));
+  else if(k==='g'){const f=e[1],d=e[2],g=ac.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(1,t+.004);
+   if(e[4])g.gain.exponentialRampToValueAtTime(.001,t+d);else{g.gain.setValueAtTime(1,t+d*.8);g.gain.linearRampToValueAtTime(0,t+d)}
+   g.connect(th.gin);[1,e[3],2].forEach(m=>[-7,7].forEach(dt=>{const o=ac.createOscillator();o.type='sawtooth';o.frequency.value=f*2*m;o.detune.value=dt;o.connect(g);o.start(t);o.stop(t+d+.02)}))}
+  else if(k==='b'){const o=ac.createOscillator(),g=ac.createGain(),lp=ac.createBiquadFilter(),d=e[2];o.type='sawtooth';o.frequency.value=e[1];lp.type='lowpass';lp.frequency.value=420;
+   g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.14,t+.005);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(lp);lp.connect(g);g.connect(bs);o.start(t);o.stop(t+d+.02)}
+  else if(k==='e'){const f=e[1],pv=e[2],d=e[3],v=e[4]*.38,o=ac.createOscillator(),g=ac.createGain(),lp=ac.createBiquadFilter(),l=ac.createOscillator(),lg=ac.createGain();
+   o.type='sawtooth';o.frequency.setValueAtTime(pv,t);o.frequency.exponentialRampToValueAtTime(f,t+.05);l.frequency.value=6;lg.gain.value=f*.011;l.connect(lg);lg.connect(o.frequency);
+   lp.type='lowpass';lp.frequency.value=3000;lp.Q.value=2;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.04);g.gain.setValueAtTime(v,t+d*.85);g.gain.linearRampToValueAtTime(0,t+d);
+   o.connect(lp);lp.connect(g);g.connect(bs);o.start(t);l.start(t);o.stop(t+d+.05);l.stop(t+d+.05)}})}
+function playL(th,s,dl,lv){if(th.rock){rockL(th,s,dl,lv);return}if(th.ev){evL(th,s,dl,lv);return}window.__BT={t:SFX.ac().currentTime+dl,s,q:th.q};
  const b=s%16,ph=(s>>4)&3,n=th.mel[s%th.mel.length],mul=[1,4/3,1,1.5][ph],dr=th.drum,f=n<0?0:th.root*Math.pow(2,Math.floor(n/th.n)+th.sc[n%th.n]/12);
  if(th.bd){const pi=(s>>3)%(th.mel.length>>3),b8=s%8;if(b8===0)SFX.tone(146.83,th.sd*4,{ty:'triangle',v:.12,bus,dl});if(b8===4)SFX.tone(110,th.sd*4,{ty:'triangle',v:.1,bus,dl});if(pi%2===1&&b8===2)SFX.tone(293.66,th.sd*2,{ty:'triangle',v:.04,bus,dl})}else if(th.bl){const pi=(s>>3)%th.bl.length,b8=s%8,r=th.bl[pi];if(b8===0)SFX.tone(r,.27,{ty:'triangle',v:.12,bus,dl});if(b8===2)SFX.tone(r*3,.15,{ty:'triangle',v:.04,bus,dl});if(b8===4)SFX.tone(r*1.5,.27,{ty:'triangle',v:.1,bus,dl});if(b8===6)SFX.tone(r*3,.15,{ty:'triangle',v:.04,bus,dl});if(pi>=4&&(b8&1))SFX.tone(1100,.06,{ty:'square',v:.035,bus,dl})}else if(th.bass){if(b===0)SFX.tone(th.root/2*mul,th.sd*8,{ty:'triangle',v:.11,bus,dl});if(b===8)SFX.tone(th.root/2*mul*2,th.sd*6,{ty:'triangle',v:.06,bus,dl})}
  if(th.pad&&b===0&&ph%2===0)SFX.tone(th.root/4*mul,th.sd*24,{ty:'sine',v:.07,at:1.5,bus,dl});
