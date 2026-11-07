@@ -234,8 +234,8 @@ try{best=+localStorage.getItem('inkbest')||0}catch(_){}
 const LEVELS=[
 {name:'村口擂台',tag:'擂',rg:1,len:2000,tint:'#efdcb4',w:'spore',wc:'rgba(255,215,140,.55)',sc:15,oi:0,g0:230,g1:310,f:0,d:0,t:0,pair:0,boss:{k:'n',name:'虎面擂主',vis:'champ',hp:60,sc:1.3,dmx:.9,ab:['combo'],mn:['n'],sh:'上擂台！赤手空拳，摔你個四腳朝天！'}},
 {name:'長街鏢局',tag:'鏢',len:2100,tint:'#eed2ac',w:'spore',wc:'rgba(255,150,90,.6)',sc:17,oi:0,g0:270,g1:370,f:.06,d:0,t:0,pair:0,boss:{k:'n',name:'總鏢頭',vis:'escort',hp:80,sc:1.25,dmx:1,ab:['combo'],mn:['n'],sh:'鏢在人在，鏢亡人亡！'}},
-{name:'醉月客棧',tag:'棧',len:2300,tint:'#e6c9a0',w:'spore',wc:'rgba(255,200,120,.55)',sc:14,oi:0,g0:260,g1:360,f:.1,d:0,t:0,pair:0,boss:{k:'n',name:'醉拳酒仙',vis:'drunk',hp:95,sc:1.25,dmx:1.1,ab:['combo'],mn:['n'],sh:'酒來！陪你耍上兩招！'}},
-{name:'江畔漁村',tag:'村',len:2600,tint:'#c9d9d6',sc:15,oi:0,g0:250,g1:350,f:.14,d:0,t:0,pair:.05,boss:{k:'n',name:'鐵鉤漁霸',vis:'angler',hp:120,sc:1.3,dmx:1.3,ab:['combo'],mn:['n','f'],sh:'魚兒上鉤了！'}},
+{name:'醉月客棧',tag:'棧',len:2300,tint:'#e6c9a0',w:'spore',wc:'rgba(255,200,120,.55)',sc:14,oi:0,g0:260,g1:360,f:.1,d:0,t:0,pair:0,boss:{k:'n',name:'醉拳酒仙',vis:'drunk',hp:95,sc:1.25,dmx:1.1,ab:['combo','drunk'],mn:['n'],sh:'酒來！陪你耍上兩招！'}},
+{name:'江畔漁村',tag:'村',len:2600,tint:'#c9d9d6',sc:15,oi:0,g0:250,g1:350,f:.14,d:0,t:0,pair:.05,boss:{k:'n',name:'鐵鉤漁霸',vis:'angler',hp:120,sc:1.3,dmx:1.3,ab:['combo','hook'],mn:['n','f'],sh:'魚兒上鉤了！'}},
 {name:'戲樓夜幕',tag:'戲',len:2900,tint:'#e6b6a2',w:'spore',wc:'rgba(255,90,70,.5)',sc:16,oi:0,g0:240,g1:340,f:.18,d:.03,t:0,pair:.08,boss:{k:'n',name:'變臉戲霸',vis:'opera',hp:150,sc:1.35,dmx:1.5,ab:['combo','blink'],mn:['n','f'],sh:'鑼鼓一響，好戲開場！'}},
 {name:'荒廟殘燈',tag:'廟',len:2800,tint:'#e0cfae',w:'spore',wc:'rgba(255,196,110,.6)',sc:2,oi:0,g0:240,g1:340,f:.2,d:0,t:0,pair:.1,boss:{k:'n',name:'荒廟道人',vis:'priest',hp:140,sc:1.3,dmx:1.3,ab:['combo'],mn:['n'],sh:'燈滅人散，速速退去！'}},
 {name:'紅楓古道',tag:'楓',len:3000,tint:'#ecb89a',mp:1,sc:0,oi:0,g0:230,g1:330,f:.22,d:.05,t:0,pair:.15,boss:{k:'n',name:'楓林傘客',vis:'umbrella',hp:175,sc:1.3,dmx:1.5,ab:['combo','blink'],mn:['n','f'],sh:'落楓無聲，劍已出鞘！'}},
@@ -243,7 +243,7 @@ const LEVELS=[
 {name:'竹林初行',tag:'林',len:3200,tint:null,g0:230,g1:330,f:.25,d:0,t:0,pair:.15,boss:{k:'n',name:'刀疤頭目',vis:'scar',hp:170,sc:1.3,dmx:1.5,ab:['combo'],mn:['n','n'],sh:'給我上！'}},
 {name:'迷霧古渡',tag:'渡',wt:1,len:3800,tint:'#c4d3da',g0:210,g1:310,f:.3,d:.18,t:0,pair:.25,boss:{k:'f',name:'追風鬼影',vis:'ghost',hp:190,sc:1.25,dmx:1.7,ab:['blink','combo'],mn:['a'],sh:'鬼影重重！'}},
 {name:'劍塚',tag:'塚',len:4000,tint:'#cfd2cc',w:'spore',wc:'rgba(200,210,200,.55)',sc:12,oi:1,g0:205,g1:300,f:.28,d:.1,t:.05,pair:.3,boss:{k:'n',name:'守墓劍奴',vis:'grave',hp:240,sc:1.35,dmx:1.7,ab:['combo','fan'],mn:['k','r'],sh:'萬劍歸塚！'}},
-{name:'海市蜃樓',tag:'蜃',len:4200,tint:'#ecc98f',w:'spore',wc:'rgba(255,225,150,.6)',sc:13,oi:2,g0:200,g1:290,f:.3,d:.16,t:.1,pair:.3,boss:{k:'f',name:'蜃樓幻主',vis:'mirage',hp:270,sc:1.3,dmx:1.8,ab:['blink','fan'],mn:['a','a'],sh:'一切皆是幻影！'}},
+{name:'海市蜃樓',tag:'蜃',len:4200,tint:'#ecc98f',w:'spore',wc:'rgba(255,225,150,.6)',sc:13,oi:2,g0:200,g1:290,f:.3,d:.16,t:.1,pair:.3,boss:{k:'f',name:'蜃樓幻主',vis:'mirage',hp:270,sc:1.3,dmx:1.8,ab:['blink','clone'],mn:['a','a'],sh:'一切皆是幻影！'}},
 {name:'荒廟險道',tag:'廟',len:4400,tint:'#e8c796',g0:200,g1:300,f:.28,d:.18,t:.14,pair:.3,boss:{k:'t',name:'鐵佛尊者',vis:'monk',hp:340,sc:1.25,dmx:1.3,ab:['wave'],mn:['n','n'],sh:'金鐘罩！'}},
 {name:'黑風寨',tag:'寨',len:5000,tint:'#c2a4a0',g0:190,g1:280,f:.3,d:.2,t:.18,pair:.35,boss:{k:'B',name:'黑風寨主',hp:460,sc:1,dmx:1.1,ab:['fan'],mn:['k','n','h'],sh:'護法何在！'}},
 {name:'雪嶺寒關',tag:'雪',len:5200,tint:'#cfdce8',w:'snow',g0:185,g1:270,f:.32,d:.2,t:.16,pair:.4,boss:{k:'f',name:'霜刃劍姬',vis:'frost',hp:270,sc:1.3,dmx:1.9,ab:['blink','fan','combo'],mn:['a','a'],sh:'冰封千里！'}},
@@ -349,10 +349,67 @@ function bossAfter(e){if(e!==boss||e.chg||e.st!==2||!e.ab.includes('combo'))retu
 /* 小王（k==='B'）血越少出手越快：冷卻與前搖最多縮短到約 1/2.4，走路最多加快約 40% */
 function RGE(e){return e.k==='B'?1+Math.max(0,1-e.hp/e.mx)*1.4:1}
 function bossSkill(e,d,ad){const a=e.ab,dm=d.dm*(e.dmx||1);
- if(e.vis==='champ'&&ad<95&&P.y>GY-50&&Math.random()<(e.ph?.7:.5)){/* 擂主抱摔：近身抓住玩家重摔 */txt('抱摔！',e.x,e.y-130,24,'#b3261e');shake=Math.max(shake,.4);SFX.slam();dust(P.x,GY,12);FX.push({k:'x',x:P.x,y:GY-10,a:0,t:0,d:.3});hurtP(Math.round(dm*1.4),e.x);return true}
+ if(e.vis==='champ'&&!e.gb&&ad<95&&P.y>GY-50&&Math.random()<(e.ph?.7:.5)){/* 擂主抱摔：張臂撲抓，抓中可連按掙脫 */e.gb={ph:'reach',t:0,n:0};e.f=P.x>e.x?1:-1;txt('抓！',e.x,e.y-130,26,'#b3261e');return true}
+ if(a.includes('clone')&&!e.chg&&(e.cdc||0)<=0&&cloneCount()===0&&Math.random()<(e.ph?.7:.5)){/* 蜃樓幻主．分身術：分出一模一樣的幻影圍攻，真身混在其中 */
+  const n=e.ph?3:2,lo=cam+30,hi=lock?cam+W-30:LEN-30;
+  txt('分身術！',e.x,e.y-140,26,'#2a8a8a');shake=Math.max(shake,.2);SFX.dash();ink(e.x,e.y-40,26,'#e8c878');bloom([{x:e.x,y:e.y-40,r:50}],.7,'232,200,120',.4);
+  for(let i=0;i<n;i++){const c=spawn('f',cl(P.x+(i%2?1:-1)*(110+i*70),lo,hi));c.vis='mirage';c.cl=1;c.hp=c.mx=1;c.sc=e.sc;c.dmx=1.15;c.ab=[];c.mn=[];c.life=8;c.ap=.45;c.f=P.x>c.x?1:-1;c.cd=.5+i*.4;ink(c.x,c.y-40,16,'#e8c878')}
+  const cs=E.filter(o=>o.cl&&!o.dead);if(cs.length&&Math.random()<.7){const t=cs[Math.floor(Math.random()*cs.length)],ox=e.x;e.x=t.x;t.x=ox}
+  e.cdc=e.ph?7:9;return true}
+ if(a.includes('hook')&&!e.hk&&(e.cdh||0)<=0&&ad>130&&ad<420&&Math.random()<(e.ph?.7:.55)){/* 鐵鉤漁霸．甩鉤拉人 */
+  e.hk={x:e.x+e.f*18,dir:e.f,ph:'out',t:0};e.cdh=e.ph?4.5:6;txt('鐵鉤！',e.x,e.y-140,24,'#2a5a7a');SFX.estrike('w');return true}
+ if(a.includes('drunk')&&!e.chg&&ad>100&&Math.random()<(e.ph?.55:.4)){/* 醉拳酒仙．醉步：踉蹌突進，忽快忽慢 */
+  txt('醉步！',e.x,e.y-140,24,'#8a3a2a');e.chg=.55;e.cs=300;e.ds=0;e.zz=1;ink(e.x,e.y-40,10,'#8a3a2a');return true}
  if(a.includes('wave')&&Math.random()<(e.ph?.8:.62)){shake=Math.max(shake,.25);SFX.slam();for(const q of[-1,1])DT.push({x:e.x+q*30,y:GY-14,vx:q*300,vy:0,dm:Math.round(dm*.7),flat:1});FX.push({k:'x',x:e.x,y:GY-10,a:0,t:0,d:.3});dust(e.x,GY,10)}
  if(a.includes('fan')&&ad>130&&Math.random()<(e.ph?.75:.58)){SFX.estrike('w');const n=e.ph?7:5;for(let i=0;i<n;i++)DT.push({x:e.x+e.f*20,y:GY-60,vx:e.f*(230+i%2*40),vy:-90+i*(200/(n-1)),dm:Math.round(dm*.6),t:'knife'});return true}
  return false}
+/* v223 蜃樓幻主分身術：分身壽命、一擊即散、頭目倒下時一併消散 */
+function cloneCount(){let n=0;for(const o of E)if(o.cl&&!o.dead)n++;return n}
+{const _ue=upE;upE=function(e,dt){if(e.cl){e.life-=dt;if(e.life<=0||!boss||boss.dead){e.dead=1;ink(e.x,e.y-40,12,'#e8c878');return}}else if(e===boss&&e.cdc>0)e.cdc-=dt;return _ue(e,dt)};
+ const _kc=kill;kill=function(e){if(e.cl){e.dead=1;ink(e.x,e.y-40,16,'#e8c878');bloom([{x:e.x,y:e.y-40,r:34}],.6,'232,200,120',.3);txt('分身消散',e.x,e.y-100,16,'#3a7a7a');return}if(e===boss)for(const o of E)if(o.cl&&!o.dead){o.dead=1;ink(o.x,o.y-40,16,'#e8c878')}return _kc(e)}}
+/* v223 鐵鉤漁霸甩鉤拉人／醉拳酒仙醉步 */
+function drawHK(e){const h=e.hk,x0=e.x+e.f*16,y0=e.y-50*(e.sc||1);let x1=h.x,y1=y0;if(h.ph==='pull'){x1=P.x;y1=P.y-46}
+ g.save();g.lineCap='round';g.strokeStyle='#8a9098';g.lineWidth=3;g.setLineDash([5,3]);g.beginPath();g.moveTo(x0,y0);g.lineTo(x1,y1);g.stroke();g.setLineDash([]);
+ g.strokeStyle='#1c1c1c';g.lineWidth=1.3;g.beginPath();g.moveTo(x0,y0);g.lineTo(x1,y1);g.stroke();
+ g.translate(x1,y1);g.scale(h.dir,1);g.strokeStyle='#2a2e34';g.lineWidth=3.2;g.beginPath();g.moveTo(-6,0);g.lineTo(6,0);g.arc(6,6,6,-Math.PI/2,Math.PI*.9);g.stroke();g.restore()}
+{const _u2=upE;upE=function(e,dt){
+  if(e===boss){
+   if(e.cdh>0)e.cdh-=dt;
+   if(e.zz){if(e.chg>0)e.cs=280+240*Math.sin(T*16);else e.zz=0}
+   const h=e.hk;if(h){
+    if(e.dead||S!=='play')e.hk=null;
+    else if(h.ph==='out'){h.x+=h.dir*900*dt;
+     if(Math.abs(P.x-h.x)<26&&P.y>GY-60&&P.inv<=0&&P.dash<=0){h.ph='pull';h.t=0;txt('鉤中！',P.x,P.y-90,22,'#2a5a7a');shake=Math.max(shake,.25);ink(P.x,P.y-46,8,'#4a4f56')}
+     else if(Math.abs(h.x-e.x)>440||h.x<cam-20||h.x>cam+W+20)h.ph='back'}
+    else if(h.ph==='pull'){h.t+=dt;
+     if(P.dash>0){e.hk=null;txt('掙脫！',P.x,P.y-90,18,'#3a7a7a')}
+     else if(Math.abs(e.x-P.x)>64&&h.t<.8){P.x=cl(P.x+Math.sign(e.x-P.x)*640*dt,cam+16,lock?cam+W-16:LEN-16);P.vx=0}
+     else{e.hk=null;e.st=1;e.tm=.2;e.f=P.x>e.x?1:-1}}
+    else{h.x-=h.dir*1500*dt;if((h.x-e.x)*h.dir<=20)e.hk=null}}}
+  return _u2(e,dt)};
+ const _ba=bossAfter;bossAfter=function(e){_ba(e);if(e===boss&&e.vis==='drunk'&&e.st===1)e.tm=[.1,.55,.2,.7][Math.floor(Math.random()*4)];if(e===boss&&e.hk&&e.st===1){e.st=3;e.tm=.4}}}
+/* v223 虎面擂主抱摔：張臂撲抓→抓中舉起→連按掙脫，否則重摔 */
+function drawGB(e){const q=e.gb,f=e.f,sc=e.sc||1,x=e.x,y=e.y;g.save();g.lineCap='round';g.strokeStyle='rgba(179,38,30,.9)';g.lineWidth=4;
+ if(q.ph==='reach'){const a=.3+.3*Math.sin(T*30);for(const dy of[-86,-40]){g.beginPath();g.moveTo(x+f*8,y-62*sc);g.lineTo(x+f*(44+q.t*50)*sc,y+dy*sc*.9);g.stroke()}
+  g.fillStyle='rgba(179,38,30,'+a+')';g.beginPath();g.ellipse(x+f*64,y+2,74,12,0,0,TAU);g.fill()}
+ else{for(const dy of[-14,-4]){g.beginPath();g.moveTo(x+f*8,y-62*sc);g.lineTo(P.x,P.y+dy-40);g.stroke()}
+  bar(x-30,y-150*sc,60,6,Math.min(1,q.n/5),'#2a8a4a');bar(x-30,y-140*sc,60,4,Math.max(0,1-q.t/1.15),'#b3261e')}
+ g.restore()}
+{const _u3=upE;upE=function(e,dt){
+  if(e===boss&&e.gb){const q=e.gb;
+   if(e.dead||S!=='play')e.gb=null;
+   else{e.st=3;e.tm=Math.max(e.tm,.3);q.t+=dt;
+    if(q.ph==='reach'){
+     if(q.t<.3)e.x+=e.f*110*dt;
+     const dx=(P.x-e.x)*e.f;
+     if(dx>-14&&dx<96&&P.y>GY-46&&P.inv<=0&&P.dash<=0){q.ph='hold';q.t=0;q.n=0;txt('連按攻擊／跳躍／閃避掙脫！',P.x,P.y-110,16,'#2a8a4a');shake=Math.max(shake,.3);SFX.slam();ink(P.x,P.y-46,10,'#b3261e')}
+     else if(q.t>=.6){e.gb=null;e.st=3;e.tm=.8;txt('撲空！',e.x,e.y-130,20,'#3a7a7a')}}
+    else{
+     P.x=e.x+e.f*32;P.y=GY-72;P.vx=0;P.vy=0;P.at=0;P.dash=0;
+     if(jp.a||jp.j||jp.d)q.n++;
+     if(q.n>=5){e.gb=null;e.st=3;e.tm=.9;e.fl=.2;P.y=GY;P.vx=e.f*260;P.vy=-160;P.inv=.6;txt('掙脫！',P.x,P.y-90,22,'#2a8a4a');shake=Math.max(shake,.3)}
+     else if(q.t>=1.15){const d0=ED[e.k],dm0=d0.dm*(e.dmx||1);e.gb=null;e.st=3;e.tm=.7;P.y=GY;P.inv=0;P.dash=0;txt('摔！',e.x,e.y-130,26,'#b3261e');shake=Math.max(shake,.5);SFX.slam();dust(P.x,GY,12);FX.push({k:'x',x:P.x,y:GY-10,a:0,t:0,d:.3});hurtP(Math.round(dm0*1.6),e.x)}}}}
+  return _u3(e,dt)}}
 function closeHit(p,n0){const dm=[11,12,14][p.combo-1]||11;for(const e of E){if(e.dead||Math.abs(e.x-p.x)>26+16*ED[e.k].s||Math.abs(e.y-p.y)>64)continue;e.sw=p.sw;for(let i=n0;i<PJ.length;i++)PJ[i].h.add(e);hurtE(e,dm,p.f*140,p.combo===3)}}
 {const _sg=shootGear;shootGear=function(p){const n=PJ.length;_sg(p);closeHit(p,n)};const _nt=note;note=function(p){const n=PJ.length;_nt(p);closeHit(p,n)};const _pt=paint;paint=function(p){const n=PJ.length;_pt(p);closeHit(p,n)};const _tv=throwVial;throwVial=function(p){const n=PJ.length;_tv(p);closeHit(p,n)}}
 function pickNew(k,p){const EV=OI();if(k!=='n'&&k!=='f')return k;const q=Math.random();if(EV>=3&&p>.3&&Math.random()<.1)return'x';if(EV>=1&&p>.15&&Math.random()<.07)return'k';if(EV>=2&&p>.2&&Math.random()<.07)return's';if(EV>=3&&p>.25&&Math.random()<.07)return'v';if(EV>=1&&p>.15&&q<.12)return'a';if(EV>=2&&p>.2&&q<.25)return'w';if(EV>=3&&p>.25&&q<.38)return'h';if(EV>=1&&p>.15&&q>.9)return'r';if(EV>=2&&p>.2&&q>.8)return'm';if(EV>=2&&p>.3&&q>.74)return'q';if(EV>=1&&p>.1&&q>=.38&&q<.5)return'j';if(EV>=2&&p>.2&&q>=.5&&q<.6)return'e';if(EV>=2&&p>.25&&q>=.6&&q<.7)return'u';return k}
@@ -1101,9 +1158,9 @@ if(k0==='k'){
  dGlint(fl,17,BL,-2.4,.8);
 }else if(k0==='n'&&o.vis==='blood'){
  /* 血月刀魔．彎刀「染月」：新月形長刀、鋸齒刀背、血槽泛紅光、無鞘，紅綢纏柄 */
- const BL=Math.max(L,42),pu=.55+.45*Math.sin(T*4),P0=[11,-3.5],P1=[BL*.35,-17],P2=[BL+6,-15],P3=[BL+9,2];
+ const BL=Math.max(L,42),pu=.55+.45*Math.sin(T*4),P0=[11,3.5],P1=[BL*.35,17],P2=[BL+6,15],P3=[BL+9,-2];
  const bz=t=>{const u=1-t;return[u*u*u*P0[0]+3*u*u*t*P1[0]+3*u*t*t*P2[0]+t*t*t*P3[0],u*u*u*P0[1]+3*u*u*t*P1[1]+3*u*t*t*P2[1]+t*t*t*P3[1]]};
- const blade=()=>{g.beginPath();g.moveTo(P0[0],P0[1]);g.bezierCurveTo(P1[0],P1[1],P2[0],P2[1],P3[0],P3[1]);g.bezierCurveTo(BL+1,-6,BL*.45,-5,11,3.5);g.closePath()};
+ const blade=()=>{g.beginPath();g.moveTo(P0[0],P0[1]);g.bezierCurveTo(P1[0],P1[1],P2[0],P2[1],P3[0],P3[1]);g.bezierCurveTo(BL+1,6,BL*.45,5,11,-3.5);g.closePath()};
  dFx(o.st,L,'255,60,50');
  if(!fl){blade();g.strokeStyle='rgba(200,25,25,'+(.14+.16*pu)+')';g.lineWidth=8;g.stroke()}
  g.strokeStyle=K;g.lineWidth=3.4;g.beginPath();g.moveTo(-4,0);g.quadraticCurveTo(-12,6+Math.sin(T*5)*3,-20,3+Math.sin(T*5+1)*5);g.stroke();
@@ -1111,11 +1168,11 @@ if(k0==='k'){
  dGrip(-3,10,3.8,'#3a2a2a','#14080a',fl);
  dGuard(11,2.2,5.4,'#6a5a4a',fl);
  blade();g.fillStyle=dSteel(fl,-15,4,'#5a1216','#a82626','#ff7a62');g.fill();g.strokeStyle=K;g.lineWidth=1.7;g.stroke();
- if(!fl){for(const t of[.22,.38,.54,.7]){const a=bz(t),b=bz(t+.06),dx=b[0]-a[0],dy=b[1]-a[1],l=Math.hypot(dx,dy)||1,nx=dy/l,ny=-dx/l;g.beginPath();g.moveTo(a[0],a[1]);g.lineTo(a[0]+nx*3.4+dx*.5,a[1]+ny*3.4+dy*.5);g.lineTo(b[0],b[1]);g.closePath();g.fillStyle='#4a0f12';g.fill();g.strokeStyle=K;g.lineWidth=1.1;g.stroke()}
-  g.strokeStyle='rgba(255,70,55,'+(.55+.35*pu)+')';g.lineWidth=1.4;g.beginPath();g.moveTo(18,-1.5);g.bezierCurveTo(BL*.38,-12,BL+3,-10.5,BL+7,-.5);g.stroke();
-  g.strokeStyle='rgba(255,255,255,.75)';g.lineWidth=1;g.beginPath();g.moveTo(BL+6,.5);g.bezierCurveTo(BL,-5.2,BL*.46,-4.4,17,3);g.stroke();
-  g.fillStyle='rgba(190,20,25,.8)';g.beginPath();g.arc(BL*.5,-3+((T*3)%1)*8,1.4,0,TAU);g.fill()}
- dGlint(fl,18,BL+4,-9,.3);
+ if(!fl){const cz=t=>{const u=1-t,A=[BL+9,-2],B=[BL+1,6],C=[BL*.45,5],D=[11,-3.5];return[u*u*u*A[0]+3*u*u*t*B[0]+3*u*t*t*C[0]+t*t*t*D[0],u*u*u*A[1]+3*u*u*t*B[1]+3*u*t*t*C[1]+t*t*t*D[1]]};for(const t of[.2,.36,.52,.68]){const a=cz(t),b=cz(t+.06),dx=b[0]-a[0],dy=b[1]-a[1],l=Math.hypot(dx,dy)||1,nx=-dy/l,ny=dx/l;g.beginPath();g.moveTo(a[0],a[1]);g.lineTo(a[0]+nx*3.4+dx*.5,a[1]+ny*3.4+dy*.5);g.lineTo(b[0],b[1]);g.closePath();g.fillStyle='#4a0f12';g.fill();g.strokeStyle=K;g.lineWidth=1.1;g.stroke()}
+  g.strokeStyle='rgba(255,70,55,'+(.55+.35*pu)+')';g.lineWidth=1.4;g.beginPath();g.moveTo(18,1.5);g.bezierCurveTo(BL*.38,12,BL+3,10.5,BL+7,.5);g.stroke();
+  g.strokeStyle='rgba(255,255,255,.75)';g.lineWidth=1;g.beginPath();g.moveTo(BL+6,-.5);g.bezierCurveTo(BL,5.2,BL*.46,4.4,17,-3);g.stroke();
+  g.fillStyle='rgba(190,20,25,.8)';g.beginPath();g.arc(BL*.5,3-((T*3)%1)*8,1.4,0,TAU);g.fill()}
+ dGlint(fl,18,BL+4,9,.3);
 }else if(k0==='n'&&o.sw1){
  /* 青衣女子：一般直劍（以手為原點，劍沿 +x） */
  const sg=o.sg||0;
@@ -1137,9 +1194,9 @@ if(k0==='k'){
  g.strokeStyle=col('#b3261e');g.lineWidth=1.6;g.beginPath();g.moveTo(-15,1.5);g.quadraticCurveTo(-18,6,-16,12);g.stroke();
  g.fillStyle=col('#c99a2e');g.strokeStyle=K;g.lineWidth=1.2;g.beginPath();g.ellipse(1,0,2.2,5.4,0,0,TAU);g.fill();g.stroke();
  g.fillStyle=col('#c99a2e');g.fillRect(3,-3.2,3.2,6.4);g.strokeRect(3,-3.2,3.2,6.4);
- g.fillStyle=col('#e4e9f0');g.strokeStyle=K;g.lineWidth=1.3;g.beginPath();g.moveTo(6,-2.4);g.quadraticCurveTo(36,-5.4,66,-3);g.lineTo(70,.2);g.quadraticCurveTo(36,3,6,2.4);g.closePath();g.fill();g.stroke();
- g.strokeStyle=col('rgba(120,130,150,.8)');g.lineWidth=.8;g.beginPath();g.moveTo(8,.4);g.quadraticCurveTo(36,-1.6,64,-.8);g.stroke();
- g.strokeStyle=col('rgba(255,255,255,.9)');g.lineWidth=.7;g.beginPath();g.moveTo(8,-1.4);g.quadraticCurveTo(36,-3.6,64,-2.2);g.stroke();
+ g.fillStyle=col('#e4e9f0');g.strokeStyle=K;g.lineWidth=1.3;g.beginPath();g.moveTo(6,-2.4);g.quadraticCurveTo(36,1.6,66,-8.4);g.lineTo(71,-5.4);g.quadraticCurveTo(36,8.6,6,2.4);g.closePath();g.fill();g.stroke();
+ g.strokeStyle=col('rgba(120,130,150,.8)');g.lineWidth=.8;g.beginPath();g.moveTo(8,.4);g.quadraticCurveTo(36,4.6,64,-5.8);g.stroke();
+ g.strokeStyle=col('rgba(255,255,255,.9)');g.lineWidth=.7;g.beginPath();g.moveTo(8,-1.4);g.quadraticCurveTo(36,2.6,64,-7.6);g.stroke();
 }else if(k0==='n'){
  /* 霸環大刀：厚背鬼頭刀，環首、護手、掛銅環；血月刀魔刃帶血光 */
  const bl=o.vis==='blood';
@@ -1510,7 +1567,7 @@ function draw(){g.setTransform(K,0,0,K,0,0);if(BR.drunk>=LV&&S==='play'){g.trans
  par(SC.a,.2);par(SC.b,.45);if(SC!==SCN[0]&&!SC.mp){g.fillStyle='rgba(239,231,210,.2)';for(let i=0;i<4;i++){const wx=((i*260+T*(7+i*3))%(W+360))-180;g.beginPath();g.ellipse(wx,170+i*34,110+i*14,7,0,0,TAU);g.fill();g.beginPath();g.ellipse(wx+20,176+i*34,70,5,0,0,TAU);g.fill()}}par(SC.c,.6);par(SC.d,.75);if(SC.leaf){const MP=SC.mp,N=MP?18:7;for(let i=0;i<N;i++){const lx=W+40-((T*(MP?30:26)*(.7+i%3*.3)+i*131)%(W+80)),ly=(T*(MP?30:34)*(.8+i%2*.4)+i*61)%(GY-20);g.save();g.translate(lx+Math.sin(T+i)*18,ly);g.rotate(T*1.5+i);if(MP){g.fillStyle=MPC[i%4];g.strokeStyle='rgba(40,20,16,.5)';g.lineWidth=.8;g.beginPath();for(let j=0;j<5;j++){const b=j*1.2566-1.5708;g.lineTo(Math.cos(b)*7,Math.sin(b)*7);const d=b+.6283;g.lineTo(Math.cos(d)*3,Math.sin(d)*3)}g.closePath();g.fill();g.stroke()}else{g.fillStyle=SC.lc||'rgba(30,70,45,.55)';g.beginPath();g.moveTo(-7,0);g.quadraticCurveTo(0,-3,7,0);g.quadraticCurveTo(0,2,-7,0);g.fill()}g.restore()}}{const L0=LEVELS[LV],wt=L0.w;if(wt==='rain'||wt==='storm'){const st=wt==='storm',n=st?90:60,M=W+80;g.strokeStyle=st?'rgba(60,70,100,.5)':'rgba(70,90,100,.42)';g.lineWidth=1.1;g.beginPath();for(let i=0;i<n;i++){const x=(((i*83-T*(st?160:90))%M)+M)%M,y=(T*(st?900:620)+i*61)%(GY+20);g.moveTo(x,y);g.lineTo(x+(st?9:5),y+(st?20:14))}g.stroke();if(st){const fl=Math.max(0,Math.sin(T*1.1)*Math.sin(T*2.9)-.82)*5;if(fl>0){g.fillStyle='rgba(255,255,255,'+Math.min(.45,fl)+')';g.fillRect(0,0,W,H)}}}else if(wt==='spore'){g.fillStyle=L0.wc||'rgba(110,200,70,.6)';for(let i=0;i<36;i++){const x=(i*113+T*(6+i%3*4)+Math.sin(T*.9+i)*30)%(W+40),y=GY-(T*(14+i%4*8)+i*67)%GY;g.beginPath();g.arc(x,y,1.4+i%3*.8,0,TAU);g.fill()}}else if(wt){const sn=wt==='snow';g.fillStyle=sn?'rgba(120,140,160,.6)':'rgba(205,70,30,.65)';for(let i=0;i<44;i++){const x=(i*97+T*(sn?14+i%5*5:8+i%4*4)+Math.sin(T*1.3+i)*22)%(W+40),y=sn?(T*(38+i%4*14)+i*53)%GY:GY-(T*(26+i%4*18)+i*53)%GY;g.beginPath();g.arc(x,y,sn?1.6+i%3*.6:1.2+i%2,0,TAU);g.fill()}}}
  for(let x=-(cam%720);x<W;x+=720)g.drawImage(SC.gl,x,0);g.translate(-cam,0);drawRing();drawStains();drawMist();
  for(const k of PK){const b=Math.sin(T*6+k.x)*2;if(k.k==='e'){pkGearD(k);continue}if(k.k==='c'){g.fillStyle='#c99a2e';g.strokeStyle='#1c1c1c';g.lineWidth=1.5;g.beginPath();g.arc(k.x,k.y+b,7,0,TAU);g.fill();g.stroke();g.fillStyle='#efe7d2';g.fillRect(k.x-2,k.y+b-2,4,4)}else{g.fillStyle='#b3261e';g.strokeStyle='#1c1c1c';g.lineWidth=1.5;g.beginPath();g.arc(k.x,k.y+b,7,0,TAU);g.fill();g.stroke();g.fillStyle='#efe7d2';g.fillRect(k.x-1.5,k.y+b-4,3,8);g.fillRect(k.x-4,k.y+b-1.5,8,3)}}
- drawCorpses();for(const e of E){const d=ED[e.k];if(e===boss&&!e.dead)bossFeetGlow(e,d.s*(e.sc||1));eDraw(e);if(e!==boss&&e.hp<e.mx)bar(e.x-16,e.y-d.s*(e.sc||1)*92,32,4,e.hp/e.mx,'#b3261e');if(e.st===1)tx('!',e.x,e.y-d.s*(e.sc||1)*96-(e.k==='B'?10:0),22,'#b3261e')}
+ drawCorpses();for(const e of E){const d=ED[e.k];if(e===boss&&!e.dead)bossFeetGlow(e,d.s*(e.sc||1));eDraw(e);if(e===boss&&e.hk)drawHK(e);if(e===boss&&e.gb)drawGB(e);if(e!==boss&&e.hp<e.mx)bar(e.x-16,e.y-d.s*(e.sc||1)*92,32,4,e.hp/e.mx,'#b3261e');if(e.st===1)tx('!',e.x,e.y-d.s*(e.sc||1)*96-(e.k==='B'?10:0),22,'#b3261e')}
  for(const b of BB)b.cn?cnD(b):bombD(b.x,b.y,b.big?1.5:1.1,b.rot||0,b.fu);for(const v of VL)vialD(v.x,v.y,v.big?1.4:1,v.rot);for(const u of PU)if(!u.dead){puD(u);if(u.born<=0){bar(u.x-14,u.y-98-(u.k2==='t'?44:0),28,3,u.hp/u.mx,'#b3261e');bar(u.x-14,u.y-90-(u.k2==='t'?44:0),28,3,u.t/u.mt,'#c99a2e')}}if(P.inv<=0||Math.floor(T*14)%2)hero(P);drawTrail();
  for(const d of DT){g.save();g.translate(d.x,d.y);if(d.flat){g.scale(Math.sign(d.vx),1);g.fillStyle='rgba(28,28,28,.85)';g.beginPath();g.moveTo(14,0);g.quadraticCurveTo(-4,-22,-10,-4);g.quadraticCurveTo(0,-8,14,0);g.fill();g.strokeStyle='rgba(179,38,30,.6)';g.lineWidth=2;g.stroke();g.restore();continue}drawDT(d);g.restore()}
  for(const z of ZF)zD(z);for(const j of PJ){if(j.n){j.n===10?inkWaveD(j):j.n>1?pD(j):nD(j);continue}for(let i=2;i>=0;i--){g.save();g.translate(j.x-j.f*i*16,j.y);g.scale(j.f,1);g.fillStyle=i?`rgba(20,20,20,${.25-i*.07})`:'rgba(20,20,20,.9)';tArc(g,34,-1,2,i?14:16);g.restore()}}
@@ -1531,7 +1588,7 @@ function draw(){g.setTransform(K,0,0,K,0,0);if(BR.drunk>=LV&&S==='play'){g.trans
   if(lvT>0&&S==='play'){const a=cl(lvT,0,1);tx('第'+CN[LV]+'關',W/2,100,44,'#b3261e',a);tx(LEVELS[LV].name,W/2,146,24,'#1c1c1c',a)}
   if(boss&&!boss.dead){tx(LEVELS[LV].boss.name,W/2,26,18,'#7a1c14');bar(W/2-130,40,260,10,boss.hp/boss.mx,'#b3261e')}}
  if(S!=='play'){g.fillStyle='rgba(239,231,210,.72)';g.fillRect(0,0,W,H);
-  if(S==='shop')drawShop();else if(S==='menu'){tx('墨影劍客',W/2,130,72,'#1c1c1c');tx('江湖行 ‧ 一人一劍殺出重圍',W/2,196,22,'#7a1c14');tx('點擊畫面或按 J 開始',W/2,260,24,'#1c1c1c',.6+.4*Math.sin(T*4));tx('最高分 '+best,W/2,310,16,'#1c1c1c');['墨影劍客','素弦','丹青','鐵山','機關師','火藥師','幽簫','藥師','長槍筆客','鞭客','雷法道人','紙傘女俠','硯墨書生','蓑笠釣叟','墨獸使','飛羽射手','鑄劍師','棋聖','書聖','傀儡師','鼓手','撐篙船夫','紙鳶師','舞龍師','喚魂師','鐵炮手','太極宗師','影刺客'].forEach((n,i)=>tx(CH===i?'【'+n+'】':n,W/16+(i%8)*(W/8),326+Math.floor(i/8)*16,14,['#b3261e','#2f7f6e','#34465c','#5b636b','#7a4fa0','#d4572a','#5a6a9a','#3f8f4a','#c0392b','#a8325e','#3d5fa8','#4a6a7a','#3d3d46','#3f7a78','#b8793a','#6b7f3a','#c2441e','#3a3a4a','#3b4a7a','#9a2f3a','#c99a2e','#2f6f8a','#c8553d','#d4352a','#3f9a78','#b5651d','#4a6a7a','#7a1c2a'][i],CH===i?1:.4));tx('←→ 或點名字選角　'+['近身三連斬 ‧ 劍氣 ‧ 閃避','撥弦遠攻 ‧ 飛符爆破 ‧ 滑翔','揮毫畫鳥竹山 ‧ 書「斬」字訣','烈焰重刀 ‧ 震地 ‧ 鐵肩衝撞 ‧ 皮厚','機關弩連射 ‧ 召喚機關人 ‧ 限時自爆','火藥炸彈 ‧ 連環爆 ‧ 閃避留地雷','簫聲穿透 ‧ 鎮魂曲震退眾敵 ‧ 身影飄忽','拋藥瓶化毒霧 ‧ 回春霧療傷 ‧ 被動緩慢回血','長槍巨筆突刺穿透 ‧ 旋風長槍筆陣震退四方 ‧ 攻擊距離長','長鞭貫穿一排 ‧ 第三鞭拉近敵人 ‧ 纏鞭拽回並擊暈全場','引雷符落雷範圍轟擊(先現預警圈) ‧ 天雷陣連環劈落四方','紙傘旋斬 ‧ 墨蝶雨 ‧ 傘面擋下暗器 ‧ 閃避化墨點','巨硯重擊 ‧ 末擊震地放墨浪 ‧ 潑墨噴墨浪 ‧ 靜立研墨回氣 ‧ 閃避穿身','竿抽三連 ‧ 第三式甩鉤拉近定身 ‧ 寒江獨釣冰封墨魚 ‧ 靜立回氣 ‧ 蓑衣減傷','墨狐墨雀雙寵自動撲咬 ‧ 輕擊並號令寵物出擊 ‧ 墨潤靈寵為寵物補血復甦 ‧ 墨雀自動追敵','連珠箭三式 ‧ 按住攻擊蓄力穿雲箭貫穿一排 ‧ 箭雨覆蓋前方 ‧ 空中蓄力緩降','重錘三連 ‧ 火星四濺 ‧ 神兵熔鑄震出烈焰衝擊波(裝備越多越痛) ‧ 皮粗肉厚','黑白落子遠攻 ‧ 棋子落地成陣 ‧ 連線圍殺全場(越多子越痛)','飛頁竹簡遠攻 ‧ 命中集字(每關換一句詩) ‧ 展卷重擊 ‧ 揮毫放出集字追殺(集滿五字詩成加倍)','牽絲連擊拉近敵人 ‧ 第三式絲網全場 ‧ 木偶登台助戰 ‧ 引爆傀儡連環爆','鼓點合拍加傷疊氣 ‧ 第三式震地鼓 ‧ 萬鼓齊鳴四拍震波(合拍越準越痛)','長篙點掃 ‧ 撐篙躍落水波 ‧ 揮篙撥回飛刀 ‧ 渡江破浪 ‧ 水關殘血落水即斃 ‧ 穩舟減傷','紙鳶斜掠 ‧ 第二式拉回敵人 ‧ 第三式迴旋鳶舞 ‧ 風起萬鳶俯衝落地 ‧ 空中按住跳躍乘風滑翔 ‧ 紙鳶擋暗器','龍首前撲 ‧ 第二式龍尾橫掃前後 ‧ 第三式盤龍繞身震暈 ‧ 金龍狂舞貫穿全場 ‧ 龍身護體擋暗器','魂火連射 ‧ 第三式召骷髏兵(最多四名) ‧ 喚出亡靈巨像並使全軍狂化 ‧ 亡靈消散時爆發','火炮轟擊(範圍爆炸) ‧ 第三發重炮 ‧ 萬炮齊發天降炮彈 ‧ 後座力強行動較慢','太極掌三式 ‧ 受傷自動反震四周敵人並回血 ‧ 第三式推掌回血 ‧ 太極護體(吸收所有傷害・加倍反震)','匕首快斬(背後加傷) ‧ 第三式影襲瞬移敵背 ‧ 閃避留殘影(到期自爆) ‧ 影分身自動追擊敵人(最多兩個，到期自爆) ‧ 速度快血量薄'][CH],W/2,394,13,'#1c1c1c',.7)}
+  if(S==='shop')drawShop();else if(S==='menu'){tx('墨影劍客',W/2,130,72,'#1c1c1c');tx('江湖行 ‧ 一人一劍殺出重圍',W/2,196,22,'#7a1c14');tx('點擊畫面或按 J 開始',W/2,260,24,'#1c1c1c',.6+.4*Math.sin(T*4));tx('最高分 '+best,W/2,310,16,'#1c1c1c');['墨影劍客','素弦','丹青','鐵山','機關師','火藥師','幽簫','藥師','長槍筆客','鞭客','雷法道人','紙傘女俠','硯墨書生','蓑笠釣叟','墨獸使','飛羽射手','鑄劍師','棋聖','書聖','傀儡師','鼓手','撐篙船夫','紙鳶師','舞龍師','喚魂師','鐵炮手','太極宗師','影刺客'].forEach((n,i)=>tx(CH===i?'【'+n+'】':n,W/16+(i%8)*(W/8),326+Math.floor(i/8)*16,14,['#b3261e','#2f7f6e','#34465c','#5b636b','#7a4fa0','#d4572a','#5a6a9a','#3f8f4a','#c0392b','#a8325e','#3d5fa8','#4a6a7a','#3d3d46','#3f7a78','#b8793a','#6b7f3a','#c2441e','#3a3a4a','#3b4a7a','#9a2f3a','#c99a2e','#2f6f8a','#c8553d','#d4352a','#3f9a78','#b5651d','#4a6a7a','#7a1c2a'][i],CH===i?1:.4));tx('←→ 或點名字選角　'+['近身三連斬 ‧ 劍氣 ‧ 閃避','撥弦遠攻 ‧ 飛符爆破 ‧ 滑翔','揮毫畫鳥竹山 ‧ 書「斬」字訣','烈焰重刀 ‧ 震地 ‧ 鐵肩衝撞 ‧ 皮厚','機關弩連射 ‧ 召喚機關人 ‧ 限時自爆','火藥炸彈 ‧ 連環爆 ‧ 閃避留地雷','簫聲穿透 ‧ 鎮魂曲震退眾敵 ‧ 身影飄忽','拋藥瓶化毒霧 ‧ 回春霧療傷 ‧ 被動緩慢回血','長槍巨筆突刺穿透 ‧ 旋風長槍筆陣震退四方 ‧ 攻擊距離長','長鞭貫穿一排 ‧ 第三鞭拉近敵人 ‧ 纏鞭拽回並擊暈全場','引雷符落雷範圍轟擊(先現預警圈) ‧ 天雷陣連環劈落四方','紙傘旋斬 ‧ 墨蝶雨 ‧ 傘面擋下暗器 ‧ 閃避化墨點','巨硯重擊 ‧ 末擊震地放墨浪 ‧ 潑墨噴墨浪 ‧ 靜立研墨回氣 ‧ 閃避穿身','竿抽三連 ‧ 第三式甩鉤拉近定身 ‧ 寒江獨釣冰封墨魚 ‧ 靜立回氣 ‧ 蓑衣減傷','墨狐墨雀雙寵自動撲咬 ‧ 輕擊並號令寵物出擊 ‧ 墨潤靈寵為寵物補血復甦 ‧ 墨雀自動追敵','連珠箭三式 ‧ 按住攻擊蓄力穿雲箭貫穿一排 ‧ 箭雨覆蓋前方 ‧ 空中蓄力緩降','重錘三連 ‧ 火星四濺 ‧ 神兵熔鑄震出烈焰衝擊波(裝備越多越痛) ‧ 皮粗肉厚','黑白落子遠攻 ‧ 棋子落地成陣 ‧ 連線圍殺全場(越多子越痛)','飛頁竹簡遠攻 ‧ 命中集字(每關換一句詩) ‧ 展卷重擊 ‧ 揮毫放出集字追殺(集滿五字詩成加倍)','牽絲連擊拉近敵人 ‧ 第三式絲網全場 ‧ 木偶登台助戰 ‧ 引爆傀儡連環爆','鼓點合拍加傷疊氣 ‧ 第三式震地鼓 ‧ 萬鼓齊鳴四拍震波(合拍越準越痛)','長篙點掃 ‧ 撐篙躍落水波 ‧ 揮篙撥回飛刀 ‧ 渡江破浪 ‧ 水關殘血落水即斃 ‧ 穩舟減傷','紙鳶斜掠 ‧ 第二式拉回敵人 ‧ 第三式迴旋鳶舞 ‧ 風起萬鳶俯衝落地 ‧ 空中按住跳躍乘風滑翔 ‧ 紙鳶擋暗器','龍首前撲 ‧ 第二式龍尾橫掃前後 ‧ 第三式盤龍繞身震暈 ‧ 金龍狂舞貫穿全場 ‧ 龍身護體擋暗器','魂火連射 ‧ 第三式召骷髏兵(最多四名) ‧ 喚出亡靈巨像並使全軍狂化 ‧ 亡靈消散時爆發','火炮轟擊(範圍爆炸) ‧ 第三發重炮 ‧ 萬炮齊發天降炮彈 ‧ 後座力強行動較慢','太極掌三式 ‧ 受傷自動反震四周敵人並回血 ‧ 第三式推掌回血 ‧ 太極護體(吸收所有傷害・加倍反震)','匕首快斬(背後加傷) ‧ 第三式影襲瞬移敵背 ‧ 閃避留殘影(到期自爆) ‧ 影分身自動追擊敵人(最多兩個，到期自爆) ‧ 速度快血量薄'][CH],W/2,394,13,'#1c1c1c',.7);if(CH&&HPN[CH])tx('〈'+['墨影劍客','素弦','丹青','鐵山','機關師','火藥師','幽簫','藥師','長槍筆客','鞭客','雷法道人','紙傘女俠','硯墨書生','蓑笠釣叟','墨獸使','飛羽射手','鑄劍師','棋聖','書聖','傀儡師','鼓手','撐篙船夫','紙鳶師','舞龍師','喚魂師','鐵炮手','太極宗師','影刺客'][CH]+'〉 '+HPN[CH],W/2,374,16,'#7a1c14')}
   else{tx(S==='win'?ENDT():'英雄末路',W/2,120,64,S==='win'?'#b3261e':'#1c1c1c');tx('銀兩 '+coin+'　得分 '+score+'　最高 '+best,W/2,190,22,'#1c1c1c');if(S==='win'){tx(CH?'二十二關過盡，'+HNAME()+'仍穩穩站在絕巔。':'二十二關過盡，墨影劍客的劍仍在鞘中。',W/2,232,20,'#3a342a');tx(winLine(),W/2,260,20,'#3a342a');tx(winCnt(),W/2,288,16,'#7a1c14');tx(ENDL(),W/2,314,16,'#3a342a')}if(endT>.6)tx(S==='lose'?'點擊畫面或按 J 重打第'+CN[LV]+'關':'點擊畫面或按 J 再戰',W/2,S==='win'?356:260,24,'#7a1c14',.6+.4*Math.sin(T*4))}}}
 cv.addEventListener('pointerdown',e=>{if(S==='shop'){if(endT>.6)shopTap(e.offsetX/cv.clientWidth*W,e.offsetY/cv.clientHeight*H);return}if(S==='menu'){const x=e.offsetX/cv.clientWidth*W,y=e.offsetY/cv.clientHeight*H;if(y>318){if(y<384)CH=Math.max(0,Math.min(27,Math.min(3,Math.floor((y-318)/16))*8+Math.floor(x/(W/8))));return}}if(S==='menu'||(S!=='play'&&endT>.6))reset()});
 reset();S='menu';TX=[];
@@ -2532,7 +2589,7 @@ function eDraw(e,cp){
  if(!cp&&e.hs>0){const h=e.hs/.3*(hvy?.35:1);tilt-=h*.2;ox-=h*5}
  if(rope)tilt*=.4;
  const X=cp?cp.x:e.x,Y=cp?cp.y:e.y,F=(rope||cp||e.fv==null)?e.f:(Math.abs(e.fv)<.06?(e.fv<0?-.06:.06):e.fv),
-  al=!cp&&e.ap>0?1-.75*Math.min(1,e.ap/.3):1;
+  al=(!cp&&e.ap>0?1-.75*Math.min(1,e.ap/.3):1)*(e.cl&&!cp?.7:1);
  if(al<1){g.save();g.globalAlpha=g.globalAlpha*al}
  man({x:X+e.f*ox,y:Y,f:F,s:d.s*(e.sc||1),k:e.k,rb:d.rb,ac:d.ac,mv:cp?0:e.mv,fl:cp?cp.fl:e.fl>0,ang:a,hr,gd,sl,vis:e.vis,st,en:e,fem:d.fem,fk:d.fk,fp:d.fp,fq:d.fq,fb:d.fb,tilt,ms:cp?0:e.ms,wp:e.wp});
  if(al<1)g.restore()
@@ -3697,7 +3754,7 @@ var DLGDATA={
  0:{
   intro:[
    ['旁白','墨影劍客是個沒有門派的少年，在山中劍廬長大。'],
-   ['旁白','師父在一個雨夜失蹤了，只在案上留下一句話：「江湖上有人在替魔宮收劍，你去看看。」'],
+   ['旁白','師父在一個雨夜失蹤了，只在案上留下一句話：「江湖上有人在替魔宮收羅劍客，你去看看。」'],
    ['旁白','少年只記得，那一夜有人上過山。師父出了門，就再沒有回來。少年找遍了整座山，不知道師父去了哪裡，現場只遺留下一塊刻著陌生印記的黑色令牌。'],
    ['旁白','少年背起墨色長劍，從山腳的村口出發。才剛下山，就撞上一座擂台。'],
    ['旁白','紅綢從台頂垂到地面，風一吹，像一道流不完的血。台柱上貼著一張布告：「凡勝擂主者，村中一切欠款一筆勾銷。」落款的印，是魔宮。'],
@@ -3713,7 +3770,7 @@ var DLGDATA={
    ['虎面擂主','上擂台！赤手空拳，摔你個四腳朝天！'],
    ['墨影劍客','請賜教。'],
    ['虎面擂主','十七場，沒人能站著下台。你也一樣。'],
-   ['旁白','擂主擅長近身抱摔，被他抓住之前，記得閃避！']
+   ['旁白','擂主會張開雙臂撲上來抱摔！看到他張臂，立刻跳起或翻滾閃開。要是被抓住，連按攻擊、跳躍或閃避鍵掙脫，否則會被重重摔在地上！']
   ],
   end:[
    ['旁白','擂主轟然倒地，全場鴉雀無聲。'],
@@ -3747,7 +3804,7 @@ var DLGDATA={
    ['總鏢頭','鏢在人在，鏢亡人亡！'],
    ['墨影劍客','我無意劫鏢，請讓路。'],
    ['總鏢頭','那就先過我這一關！'],
-   ['旁白','總鏢頭拳腳扎實、招式連貫。沉住氣，等他出完招再反擊。']
+   ['旁白','總鏢頭拳腳扎實，還會喊「鏢車過境」：地面出現紅色預警，一瞬後鏢車橫衝而過。跳開！若讓總鏢頭站在你和鏢車之間，他會被自家鏢車撞暈。']
   ],
   end:[
    ['旁白','總鏢頭倒在鏢車旁，鏢囊裡的飛鏢散落一地。'],
@@ -3773,7 +3830,7 @@ var DLGDATA={
   boss:[
    ['醉拳酒仙','酒來！陪你耍上兩招！'],
    ['墨影劍客','奉陪。'],
-   ['旁白','醉拳步伐飄忽，出拳忽快忽慢。看準他搖晃之後的破綻再出手。']
+   ['旁白','酒仙會踉蹌著醉步突進，速度忽快忽慢；連拳的節奏也亂七八糟。別被他的節奏帶著走，看準他晃完之後的破綻再出手。']
   ],
   end:[
    ['旁白','酒仙一屁股坐倒在地，哈哈大笑。'],
@@ -3805,7 +3862,7 @@ var DLGDATA={
   boss:[
    ['鐵鉤漁霸','過江稅，一文都不能少！不交，就拿你的命來抵！'],
    ['墨影劍客','我沒有船，也不付稅。請賜教。'],
-   ['旁白','漁霸拳腳兇狠，還會招來疾行的盜賊從旁偷襲。別被前後夾擊，先解決盜賊！']
+   ['旁白','漁霸會甩出鐵鉤，鉤中就把你硬拉到他面前，接著一拳砸下！看到鉤子甩出，立刻跳起或翻滾閃開。他還會招來疾行的盜賊偷襲，先解決盜賊！']
   ],
   end:[['旁白','鐵鉤砸進泥裡，漁霸跪倒在岸邊，卻仰頭笑了。'],
    ['鐵鉤漁霸','別拿那副可憐相看我。沒人逼我，我就是愛看人交錢時那張臉。'],
@@ -3916,7 +3973,7 @@ var DLGDATA={
   boss:[
    ['鑄劍老匠','看錘！'],
    ['墨影劍客','得罪了。'],
-   ['旁白','老匠的錘擊會從兩側震出衝擊波。看到他舉錘，立刻躍起！']
+   ['旁白','老匠的錘擊會從兩側震出衝擊波，看到他舉錘就躍起！他還會潑出鐵水：地面先出現橘紅預警，一瞬後燃起熱區，站在裡面會持續受傷，別久留。']
   ],
   end:[
    ['旁白','老匠將最後一錘打在未完成的劍上，劍身應聲而斷，斷口平整。火星四散，斷劍映出少年的臉。'],
@@ -3940,7 +3997,7 @@ var DLGDATA={
   ],
   boss:[
    ['刀疤頭目','兄弟們，圍死他！'],
-   ['旁白','山賊從四面八方衝來，刀疤頭目雙刀連斬。先解決雜兵，再專心對付他！']
+   ['旁白','山賊從兩側衝來，其中舉紅旗的是頭目的命脈：旗在，頭目受傷減輕，增援不斷；旗倒，嘍囉全數僵直。先砍倒旗手！']
   ],
   end:[
    ['旁白','刀疤頭目倒下，懷中掉出一塊黑風寨的令牌。'],
@@ -3957,24 +4014,39 @@ var DLGDATA={
  },
  9:{
   intro:[
-   ['旁白','濃霧籠罩江面，渡口只剩半截斷木，水聲嗚咽。'],
-   ['旁白','霧中傳來船槳的聲響，卻不見船影。有人喊道：「要過江，先過我。」'],
+   ['旁白','濃霧鎖江，渡口只剩半截斷木。木頭上依稀刻著兩個字，被三十年的江水磨得幾乎看不清。'],
+   ['旁白','水面無風，卻有槳聲。一下，又一下，由遠而近——霧裡明明沒有船。'],
+   ['旁白','霧深處有一點微光，忽明忽滅，轉眼又熄了。'],
+   ['旁白','有人在霧中喊道：「要過江，先過我。」'],
    ['追風鬼影','鬼影重重！'],
-   ['墨影劍客','你是誰？'],
-   ['追風鬼影','三十年前，我是這渡口的船夫。魔宮的人要我替他們運人過江，我不肯，他們便鑿沉了我的船。'],
-   ['追風鬼影','我死在這裡，就一直在渡口等船。']
+   ['墨影劍客','我只想過江。'],
+   ['追風鬼影','三十年來，走到這裡的人，不是要我替他們運人，就是要我的命。'],
+   ['追風鬼影','你腰間那塊令牌，我認得。當年他們就是亮著它，逼我把活人運進礦坑。'],
+   ['墨影劍客','這令牌的主人，也想回頭。'],
+   ['追風鬼影','回頭？……三十年前，我若也能回頭就好了。'],
+   ['追風鬼影','我本是這渡口的船夫。窮人過江，我從不收錢，只在船頭刻了兩個字：渡你。'],
+   ['追風鬼影','後來魔宮要我把抓來的人運過江。我不肯，他們便鑿沉了我的船，折斷了我的槳。'],
+   ['追風鬼影','最後一夜，有個孩子拉著我的衣角，問：「船夫伯伯，明天你還渡我嗎？」我說，渡。'],
+   ['追風鬼影','他說，霧大，他會在岸邊掛一盞小燈，我就不會迷路。'],
+   ['追風鬼影','天亮前，魔宮的人來了。從那以後，我再沒看見那盞燈。'],
+   ['追風鬼影','三十年，我在霧裡一遍遍地找。所以每個闖進來的人，我都要試上一試。']
   ],
   boss:[
    ['追風鬼影','霧起，影現。你找得到我嗎？'],
-   ['旁白','鬼影會突然閃到你背後突襲。留意他消失的位置，轉身迎擊！']
+   ['追風鬼影','找得到我的人，或許，也找得到那盞燈。'],
+   ['旁白','鬼影會突然閃到你背後突襲。他消失的地方會留下殘影，片刻後爆開，看到殘影擴圈就離開或跳開，再轉身迎擊！']
   ],
   end:[
-   ['旁白','鬼影的面具碎裂，露出一張飽經風霜的臉。'],
-   ['追風鬼影','三十年了……終於有人肯陪我打完這一場。'],
-   ['旁白','他把最後一支船槳交到少年手中。'],
-   ['追風鬼影','這槳是我的，你替我划過去吧。'],
-   ['旁白','霧散了，江面浮出一條小船，船頭刻著兩個字：渡你。'],
-   ['旁白','少年登船渡江，對岸的荒山坡上，無數斷劍插在土裡。']
+   ['旁白','面具碎裂，露出的不是猙獰鬼臉，而是一張被江風刻滿皺紋的、疲憊的臉。'],
+   ['追風鬼影','你……真的找到我了。三十年了，終於有人肯陪我打完這一場，還肯聽我說完這些話。'],
+   ['旁白','他把最後一支船槳交到少年手中，掌心的繭，被江水泡得發白。'],
+   ['追風鬼影','這槳是我的，你替我划過去吧。要是遇見一個提著小燈的孩子，替我說一聲：船夫伯伯，來晚了。'],
+   ['墨影劍客','好。這一趟，我來渡。'],
+   ['旁白','霧，慢慢散了。江面浮出一條小船，船頭刻著兩個字：渡你。'],
+   ['旁白','船舷上掛著一盞小小的燈。沒人去點，它卻自己亮了。'],
+   ['追風鬼影','……原來，你一直亮著。'],
+   ['旁白','少年登船渡江。回頭望去，霧中的船夫朝他揮了揮手，像三十年前每一次送客那樣。'],
+   ['旁白','對岸的荒山坡上，無數斷劍插在土裡。']
   ]
  },
  10:{
@@ -4014,7 +4086,7 @@ var DLGDATA={
   ],
   boss:[
    ['蜃樓幻主','來吧，看看哪一個才是我！'],
-   ['旁白','幻主會瞬移並射出扇形飛刃，身旁的幻影只是障眼法。盯緊真身！']
+   ['旁白','幻主會施展分身術，分出幾個一模一樣的幻影圍攻你。幻影身形略顯透明，一擊即散，傷不到真身。盯緊那個不透明的真身！']
   ],
   end:[['旁白','幻影一層層褪去，城池化為沙丘。幻主跪在沙中，沒有逃。'],
    ['蜃樓幻主','你以為我是被魔宮逼的？不，是我自己選的。'],
@@ -4029,22 +4101,30 @@ var DLGDATA={
  },
  12:{
   intro:[
-   ['旁白','山路狹窄，石階陡峭，廟宇懸在崖壁上，鐘聲一下一下地敲著。'],
-   ['旁白','石階盡頭，一位金身僧人盤坐在大鐘前，身上籠罩著淡淡金光。'],
+   ['旁白','山路狹窄，石階陡峭，廟宇懸在崖壁上。山中靜得出奇，連風都繞著那口大鐘走。'],
+   ['旁白','石階盡頭，一位金身僧人盤坐在鐘下，身上籠罩著淡淡金光。鐘舌被一條鐵鏈牢牢鎖住。'],
    ['鐵佛尊者','金鐘罩！'],
    ['墨影劍客','大師為何擋在此處？'],
-   ['鐵佛尊者','寺中的僧人被魔宮抓去礦坑挖玄鐵，挖出來的鐵，一車一車往北運。山下每敲一次鐘，魔宮就點一次名。'],
-   ['鐵佛尊者','鐘響一次，點到的人就再也沒回來。我守著這座鐘，鐘不響，就沒人會被點走。']
+   ['鐵佛尊者','寺中的僧人被魔宮抓去礦坑挖玄鐵，挖出來的鐵，一車一車往北運。'],
+   ['鐵佛尊者','魔宮逼我敲鐘點名。鐘響一次，點到的人就再也沒回來。'],
+   ['鐵佛尊者','三十六位師兄弟，是我一下一下，親手敲走的。'],
+   ['鐵佛尊者','所以我鎖了鐘舌，守在這裡。鐘不響，就沒人會被點走。']
   ],
   boss:[
    ['鐵佛尊者','金身不破，施主請回！'],
    ['墨影劍客','我只求過路，得罪了。'],
+   ['鐵佛尊者','這身金光，是我替他們贖罪的殼。想過去，先打碎它！'],
    ['旁白','尊者身披金鐘罩，大部分傷害都會被彈開。持續攻擊讓罩子出現裂痕，碎裂後他會僵直，趁機猛攻！罩子過一陣子會重新凝聚。']
   ],
   end:[
-   ['旁白','尊者撞響最後一次鐘，鐘聲響徹山谷。'],
+   ['旁白','金罩寸寸碎裂，尊者盤膝坐倒，望著鎖住鐘舌的那條鐵鏈，久久不語。'],
+   ['墨影劍客','這口鐘，從前只用來點名嗎？'],
+   ['鐵佛尊者','……不。從前它五更敲醒山門，黃昏敲歇晚課。三十六位師兄弟，都是被這聲音叫醒的。'],
+   ['墨影劍客','那就讓它，叫回該叫的人。'],
+   ['旁白','尊者握住鐵鏈，金光一閃，鎖鏈斷成兩截。他撞響了鐘，鐘聲響徹山谷。'],
    ['旁白','遠方礦坑傳來回應的鐘聲，一聲、兩聲，是被帶走的僧人在報平安。'],
-   ['鐵佛尊者','你替我打開了鐘聲。接下來的路我不能陪你，但這條石階，我替你守住。'],
+   ['鐵佛尊者','我敲走了三十六個人，今天，總算敲回了第一聲回音。'],
+   ['鐵佛尊者','接下來的路我不能陪你，但這條石階，我替你守住。'],
    ['墨影劍客','多謝大師。'],
    ['旁白','少年向北而行，前方的黑風寨，旌旗獵獵。']
   ]
@@ -4059,7 +4139,7 @@ var DLGDATA={
   ],
   boss:[
    ['黑風寨主','留下名字，或者留下命！'],
-   ['旁白','寨主的刀橫掃扇形範圍，護法嘍囉會從左右包抄。在刀風掃過時跳到他身後，攻擊刀招出手後的空檔！']
+   ['旁白','寨主的刀橫掃扇形範圍。兩名金邊護法在場時，寨主受傷大減；先打倒護法，寨主會破防僵直，趁機猛攻！']
   ],
   end:[
    ['旁白','寨主倒下，寨旗一面面落下。'],
@@ -4079,18 +4159,25 @@ var DLGDATA={
    ['旁白','雪地上留著一行細長的劍痕，直通關樓。樓上有人彈指，一道冰刃從風雪中劈下。'],
    ['霜刃劍姬','冰封千里！'],
    ['墨影劍客','你是黑風寨主的妹妹？'],
-   ['霜刃劍姬','哥哥說，過得了雪嶺，他就放我下山。可是魔宮說，只有殺了你，他才能活命。']
+   ['霜刃劍姬','我在這座關樓守了七年。哥哥每年冬天都託人送來一件棉衣，信裡只有一句：再等等。'],
+   ['霜刃劍姬','魔宮說，我替他們攔住雪嶺，哥哥就能活。如今他們又說，只要殺了你，我們兄妹就能一起下山。'],
+   ['墨影劍客','魔宮的承諾，從來不算數。'],
+   ['霜刃劍姬','我知道。可「再等等」這三個字，我聽了七年，我只剩這一句可以信了。']
   ],
   boss:[
    ['霜刃劍姬','對不起……我沒有選擇。'],
+   ['霜刃劍姬','我練了七年的劍，只為等他說一句：可以下山了。'],
    ['旁白','劍姬閃身之處，地面會裂出冰紋，一瞬後凍結，站在上面會被凍住。看到冰紋立刻跳起！她還會射出扇形冰刃。']
   ],
   end:[
    ['旁白','霜華劍斷在雪中，劍姬跪坐在雪地上。'],
-   ['霜刃劍姬','我不想殺任何人……'],
-   ['旁白','少年解下披風，蓋在她身上。'],
-   ['墨影劍客','那就不殺。你我一起，把雪嶺的路走通，讓魔宮自己來找我們。'],
-   ['旁白','風雪漸歇。山下，一座禪院燃起了熊熊烈火。']
+   ['霜刃劍姬','七年了……我連他現在長什麼樣子，都記不清了。'],
+   ['墨影劍客','你哥哥讓我帶句話。他說，這一次，不用再等了。'],
+   ['旁白','劍姬怔了很久，睫毛上凝著的霜，終於化成了水。'],
+   ['霜刃劍姬','原來……七年的冬天，是可以過完的。'],
+   ['旁白','少年解下披風，蓋在她肩上。她攥緊披風，像攥著那件每年冬天都會寄來的棉衣。'],
+   ['霜刃劍姬','下山的路，我陪哥哥走。你往南去，山腳那座禪院，火已經燒了三天，煙裡有鐵的味道。'],
+   ['旁白','風雪漸歇。少年向山下望去，禪院的方向，燃起了熊熊烈火。']
   ]
  },
  15:{
@@ -4103,7 +4190,7 @@ var DLGDATA={
   ],
   boss:[
    ['羅漢金身','阿彌陀佛，施主，得罪了！'],
-   ['旁白','羅漢以重拳向左右震出衝擊波，還會打出扇形飛刃。看到他舉拳，立刻跳起！']
+   ['旁白','羅漢平時金身減傷。他怒目發光、定身不動時，受傷加倍，是破防的機會；但收功會連震兩道衝擊波，打完立刻跳起！']
   ],
   end:[
    ['旁白','金身碎裂，火焰熄滅，露出一座空蕩蕩的大殿。'],
@@ -4120,10 +4207,11 @@ var DLGDATA={
  16:{
   intro:[
    ['旁白','荒原一望無際，夜空中掛著一輪血色的月亮，風中帶著鐵鏽味。'],
-   ['旁白','少年走過荒原，刀痕遍地，每一道都泛著暗紅色的光。遠處，一個人影佇立在血月下，手中的刀吸收著月光。'],
+   ['旁白','少年走過荒原，刀痕遍地，每一道都泛著暗紅色的光。遠處，一個人影佇立在血月下，手中的刀吸收著月光，刀背上密密刻著五個名字。'],
    ['血月刀魔','血月當空！'],
    ['墨影劍客','你的刀，吸的是誰的血？'],
-   ['血月刀魔','魔宮把這一式教給六派，說練成了，一刀可斬斷天下。我是六派裡，最後一個肯練的人。']
+   ['血月刀魔','魔宮把這一式教給六派，說練成了，一刀可斬斷天下。六派先後派了五個人去練，五個，都死在自己的刀下。'],
+   ['血月刀魔','我是六派裡，最後一個肯練的人。刀背上，是他們的名字。']
   ],
   boss:[
    ['血月刀魔','練成了……可是停不下來！誰來讓我停下來！'],
@@ -4133,6 +4221,8 @@ var DLGDATA={
    ['旁白','刀魔的刀脫手，插進紅土裡。他沒有去撿。'],
    ['血月刀魔','停下來了……原來是這種感覺。'],
    ['血月刀魔','魔宮教六派這一式，只教出鞘，不教入鞘。刀一出，不飲血就停不下來，他們要的，就是六派弟子彼此殺到只剩一人。'],
+   ['血月刀魔','我撐了十年，就為了不讓這一刀砍向自己人。今夜，我差點砍向了你。'],
+   ['血月刀魔','聽說，劍廬的劍，是會停的。'],
    ['墨影劍客','真的沒有辦法，讓它停下來？'],
    ['血月刀魔','有。你替我收刀。']
   ]
@@ -4140,14 +4230,16 @@ var DLGDATA={
  17:{
   intro:[
    ['旁白','大雨傾盆，橋面斷了一半，河水暴漲。'],
-   ['旁白','少年站在斷橋前，橋的另一端有一個人披著蓑衣，靜靜地等著。雨聲很大，他的聲音卻字字清楚。'],
+   ['旁白','少年站在斷橋前，橋的另一端有一個人披著蓑衣，靜靜地等著。那蓑衣很舊，補了又補。雨聲很大，他的聲音卻字字清楚。'],
    ['雨夜修羅','雨落無聲！'],
    ['墨影劍客','你認得我的劍法？'],
-   ['雨夜修羅','你的劍法，是你師父教的。我也在劍廬長大。他說他不收徒，所以從沒認過我。十年前，他說我的劍太快，不懂停，把我趕下了山。']
+   ['雨夜修羅','你的劍法，是你師父教的。我也在劍廬長大。他說他不收徒，所以從沒認過我，可每個雨夜，他都替我留一盞燈。'],
+   ['雨夜修羅','十年前，他說我的劍太快，不懂停，把我趕下了山。走的那天雨很大，他只丟給我這件蓑衣，說：「別淋壞了。」'],
+   ['雨夜修羅','我穿了十年，補了十年，沒敢脫過。']
   ],
   boss:[
    ['雨夜修羅','讓我看看，師父教出來的劍，停不停得住！'],
-   ['旁白','修羅身法飄忽，連擊之後會瞬移。聽準他出手的節奏，在他落地的瞬間反擊！']
+   ['旁白','雨幕驟濃時視野會縮小，修羅會在雨最濃時瞬移到你背後。看到頭上的「！」立刻閃避，再反擊！']
   ],
   end:[
    ['旁白','修羅的劍脫手，落在斷橋上。他摘下斗笠，露出與少年相似的眉眼，兩人竟是師兄弟。'],
@@ -4158,6 +4250,9 @@ var DLGDATA={
    ['雨夜修羅','我不是。我只是……有一塊。'],
    ['墨影劍客','劍廬出事那一夜，師父再沒回來。你知道什麼？'],
    ['雨夜修羅','……我說不出口。等你走到最上面，會有人告訴你。'],
+   ['旁白','他彎腰撿起劍，拇指在護手上摩了很久，像在撫一道舊傷。'],
+   ['雨夜修羅','我下山十年，每逢雨夜，都會回頭望一眼山的方向。那盞燈，我再也沒見亮過。'],
+   ['雨夜修羅','師父叫我別淋壞了……我連他這一句話，都沒能守住。'],
    ['雨夜修羅','師父說，劍是用來停的。我沒有學會，你學會了嗎？']
   ]
  },
@@ -4239,7 +4334,7 @@ var DLGDATA={
    ['旁白','絕頂之上，宮殿懸於雲端，金色的日光與血色的雲交錯，腳下是萬山。'],
    ['旁白','少年一步步走上魔宮的臺階，每一階都刻著一位豪傑的名字。他停下腳步，回頭看見整條下山的路。'],
    ['魔宮至尊','魔威蓋世！'],
-   ['墨影劍客','你就是那個替魔宮收劍的人？'],
+   ['墨影劍客','你就是那個替魔宮收羅劍客的人？'],
    ['魔宮至尊','我收的，從來不是劍，是人心。'],
    ['墨影劍客','要人心做什麼？這麼多鐵，這麼多劍，又是為了什麼？'],
    ['魔宮至尊','為了推翻朝廷。宦官把持朝政，苛捐雜稅一年重過一年，百姓賣兒賣女，民不聊生。'],
@@ -4268,7 +4363,9 @@ var DLG=null,DLGSEEN={},DLGALT={};
 
 /* 角色代換：選的不是墨影劍客時，名牌與旁白改用所選角色的名字，劍相關字眼改成通用說法 */
 const HN=['墨影劍客','素弦','丹青','鐵山','機關師','火藥師','幽簫','藥師','長槍筆客','鞭客','雷法道人','紙傘女俠','硯墨書生','蓑笠釣叟','墨獸使','飛羽射手','鑄劍師','棋聖','書聖','傀儡師','鼓手','撐篙船夫','紙鳶師','舞龍師','喚魂師','鐵炮手','太極宗師','影刺客'];
-const HNAME=()=>HN[CH]||HN[0];
+/* 角色人名：空字串代表原名本身就是人名（墨影劍客、素弦、丹青、鐵山、幽簫），其餘依職業取名 */
+const HPN=['', '', '', '', '魯守拙', '焦無煙', '', '白芷', '楊守墨', '燕破雲', '雲霆子', '蘇映雨', '顧墨痕', '姜寒江', '阮靈犀', '羿青羽', '歐冶承', '弈無悔', '蕭澹然', '偃無傷', '洪鼓聲', '方渡生', '蕭風鳶', '應龍吟', '祁夜歸', '郭天炮', '陳守柔', '司空影'];
+const HNAME=()=>HPN[CH]||HN[CH]||HN[0];
 const HSUB=[['你的劍法，是你師父教的','你的招式，是你師父教的'],['師父教出來的劍','師父教出來的招式'],['沒有門派的少年','沒有門派的江湖人'],['他把身上的長劍插進土裡留下','主角把隨身兵器留在土裡'],['向他揮手','向主角揮手'],['他停下腳步','主角停下腳步'],['他想起師父','主角想起師父'],['他走向另一座橋','主角走向另一座橋'],
  ['背起墨色長劍','帶上隨身兵器'],['把劍收回鞘中','收起了兵器'],['把劍插回鞘中','收起了兵器'],['把身上的長劍插進土裡留下','把隨身兵器留在土裡'],
  ['握緊重鑄的長劍','握緊重鑄的兵器'],['握緊木劍','握緊那柄木劍'],['握緊手中的劍','握緊手中的兵器'],['手按自己的劍','手按隨身兵器'],['你認得我的劍法','你認得我的招式'],['你的劍，我替你重鑄吧','你的兵器，我替你重鑄吧'],
@@ -4276,7 +4373,7 @@ const HSUB=[['你的劍法，是你師父教的','你的招式，是你師父教
  ['一瞬間出劍','一瞬間出手'],['側出劍','側出手']];
 /* 女角代換：素弦(1)、紙傘女俠(11) 為女性，旁白中指主角的「他」、稱呼與師門關係一併改掉 */
 const HFEM=[1,7,11];
-const FSUB=[['寫著他自己的名字','寫著她自己的名字'],['在他眼中','在她眼中'],['他把那一頁','她把那一頁'],['沒有一個人迎他','沒有一個人迎她'],['學他揮劍','學她揮劍'],['他把燈點上','她把燈點上'],['他在背面','她在背面'],['他只帶著','她只帶著'],['一路跟著他','一路跟著她'],['有人敬他，有人怕他','有人敬她，有人怕她'],['沒有人真心跟著他','沒有人真心跟著她'],['他下了第一道令','她下了第一道令'],['他熔了魔宮','她熔了魔宮'],['他領了最後一道令','她領了最後一道令'],['他沒有動刀','她沒有動刀'],['他進了京','她進了京'],['他也成了他最想推翻的人','她也成了她最想推翻的人'],['兩人竟是師兄弟','兩人竟是師兄妹'],['少俠','女俠'],['小子，','丫頭，']];
+const FSUB=[['寫著他自己的名字','寫著她自己的名字'],['在他眼中','在她眼中'],['他把那一頁','她把那一頁'],['沒有一個人迎他','沒有一個人迎她'],['學他揮劍','學她揮劍'],['他把燈點上','她把燈點上'],['他在背面','她在背面'],['他只帶著','她只帶著'],['一路跟著他','一路跟著她'],['有人敬他，有人怕他','有人敬她，有人怕她'],['沒有人真心跟著他','沒有人真心跟著她'],['他下了第一道令','她下了第一道令'],['他熔了魔宮','她熔了魔宮'],['他領了最後一道令','她領了最後一道令'],['他沒有動刀','她沒有動刀'],['他進了京','她進了京'],['他也成了他最想推翻的人','她也成了她最想推翻的人'],['兩人竟是師兄弟','兩人竟是師兄妹'],['怕驚動他','怕驚動她'],['少俠','女俠'],['小子，','丫頭，']];
 function heroT(t){if(!CH)return t;for(const[a,b]of HSUB)t=t.split(a).join(b);if(HFEM.includes(CH))for(const[a,b]of FSUB)t=t.split(a).join(b);return t.split('墨影劍客').join(HNAME()).split('主角').join(HNAME()).split('少年').join(HNAME())}
 const DLGCOL={'墨影劍客':'#1c1c1c','虎面擂主':'#b3261e','村長':'#7a5a2a','總鏢頭':'#a8741a','醉拳酒仙':'#8a3a2a','村民甲':'#5a6a5a','鐵鉤漁霸':'#2a5a7a','變臉戲霸':'#9a2a4a','荒廟道人':'#4a4a6a','楓林傘客':'#a8323a','鑄劍老匠':'#8a4a1a','刀疤頭目':'#6a3a2a','追風鬼影':'#3a4a7a','守墓劍奴':'#5a3a6a','蜃樓幻主':'#3a7a7a','六派老者':'#6a6a4a','鐵佛尊者':'#b08a1a','黑風寨主':'#2a2a2a','霜刃劍姬':'#4a8ab0','羅漢金身':'#c0841a','血月刀魔':'#8a1a1a','雨夜修羅':'#3a5a6a','萬毒尊者':'#4a7a2a','雷霆戰神':'#b09a1a','幽冥判官':'#4a3a6a','魔宮至尊':'#7a1a2a'};
 function dlgStart(kind){const s=DLGDATA[LV];if(!s||!s[kind]||DLGSEEN[LV+kind])return;DLGSEEN[LV+kind]=1;DLG={l:((DLGALT[LV+kind]&&DLGALT[LV+kind]())||s[kind]).map(x=>[x[0],heroT(x[1])]),i:0,c:0,t0:T,kind};for(const k in jp)jp[k]=0}
@@ -4409,7 +4506,7 @@ var SPARED=[],CHO=null,ALYT=9,ALYV=[];
 const ALLY=[
  {n:'虎面擂主',t:'strike',m:'摔角'},{n:'總鏢頭',t:'shield',m:'鏢旗護身'},{n:'醉拳酒仙',t:'strike',m:'醉拳'},{n:'鐵鉤漁霸',t:'wave',m:'飛鉤'},
  {n:'變臉戲霸',t:'shield',m:'變臉'},{n:'荒廟道人',t:'heal',m:'安魂符'},{n:'楓林傘客',t:'shield',m:'紅傘擋'},{n:'鑄劍老匠',t:'strike',m:'重錘'},
- {n:'刀疤頭目',t:'strike',m:'雙刀'},{n:'追風鬼影',t:'wave',m:'鬼影斬'},{n:'守墓劍奴',t:'wave',m:'萬劍歸塚'},{n:'蜃樓幻主',t:'shield',m:'幻影'},
+ {n:'刀疤頭目',t:'strike',m:'雙刀'},{n:'追風鬼影',t:'wave',m:'鬼影斬'},{n:'守墓劍奴',t:'wave',m:'萬劍歸塚'},{n:'蜃樓幻主',t:'shield',m:'分身術'},
  {n:'鐵佛尊者',t:'heal',m:'鐘聲'},{n:'黑風寨主',t:'strike',m:'鬼頭刀'},{n:'霜刃劍姬',t:'wave',m:'冰刃'},{n:'羅漢金身',t:'shield',m:'金身護體'},
  {n:'血月刀魔',t:'strike',m:'血月斬'},{n:'雨夜修羅',t:'wave',m:'驟雨斬'},{n:'萬毒尊者',t:'wave',m:'毒針'},{n:'雷霆戰神',t:'strike',m:'天雷'},
  {n:'幽冥判官',t:'heal',m:'生死簿'}];
@@ -4420,9 +4517,9 @@ const CHB=[{x:140,y:170,w:210,h:96},{x:370,y:170,w:210,h:96}];
 function startChoice(){if(LV===21){CHO={sel:0,t0:T,g:1,G:GCH[21](),n:'',m:'',t:''};return}const d=ALLY[LV];if(!d)return;if(LV===10){CHO={sel:0,t0:T,sw:1,n:d.n,m:d.m,t:d.t};return}if(GCH[LV]){CHO={sel:0,t0:T,g:1,G:GCH[LV](),n:d.n,m:d.m,t:d.t};SPARED[LV]=1;return}if(LV===17&&SW.id===4){CHO={sel:0,t0:T,q:1,o:[0,1,2].sort(()=>Math.random()-.5),n:d.n,m:d.m,t:d.t};return}CHO={sel:0,t0:T,n:d.n,coin:100+LV*12,m:d.m,t:d.t}}
 function doChoice(k){if(!CHO)return;if(CHO.sw)return swChoose(k);if(CHO.q)return qChoose(k);if(CHO.g)return gChoose(k);const d=ALLY[LV],bx=boss?boss.x:P.x,by=boss?boss.y:P.y;
  if(k===0){SPARED[LV]=1;score+=200;P.hp=Math.min(P.mh,P.hp+12);txt('放過',bx,by-130,26,'#2f7f6e');
-  DLG={l:[[d.n,FW[LV]||'你放過我，這條命，我記下了。後會有期。']],i:0,c:0,t0:T,kind:'farewell'}}
+  DLG={l:[[d.n,FW[LV]||'你放過我，這條命，我記下了。後會有期。']].map(x=>[x[0],heroT(x[1])]),i:0,c:0,t0:T,kind:'farewell'}}
  else{SPARED[LV]=2;coin+=CHO.coin;txt('斬殺　銀兩 +'+CHO.coin,bx,by-130,22,'#b3261e');
-  DLG={l:KL[LV]||[['旁白','刀光一閃。'+d.n+'倒在原地，再也沒有起身。']],i:0,c:0,t0:T,kind:'farewell'}}
+  DLG={l:(KL[LV]||[['旁白','刀光一閃。'+d.n+'倒在原地，再也沒有起身。']]).map(x=>[x[0],heroT(x[1])]),i:0,c:0,t0:T,kind:'farewell'}}
  CHO=null;for(const q in jp)jp[q]=0}
 function chPick(e){const r=cv.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*W,y=(e.clientY-r.top)/r.height*H;
  const BB=CHO&&CHO.sw?SWB:CHO&&CHO.q?QB:CHO&&CHO.g?QB.slice(0,CHO.G.o.length):CHB;for(let i=0;i<BB.length;i++){const b=BB[i];if(x>=b.x&&x<=b.x+b.w&&y>=b.y&&y<=b.y+b.h)return i}return -1}
@@ -4503,10 +4600,10 @@ function qChoose(k){if(k!==CHO.sel){CHO.sel=k;return}
  const a=CHO.o[k],bx=boss?boss.x:P.x,by=boss?boss.y:P.y;SPARED[LV]=1;score+=200;let l;
  const tail=['旁白','少年把劍插回鞘中。他走向另一座橋。橋的盡頭，谷底瘴氣瀰漫，綠色的霧貼著地面流動。'];
  if(a===1){SW.q=1;eqCalc();txt('悟　放下，才是停',bx,by-130,24,'#2f7f6e');txt('攻擊傷害 再 +30%',bx,by-160,20,'#2f7f6e');
-  l=[['雨夜修羅','……放下。原來師父要我學的，是這個。']];
+  l=[['雨夜修羅','……放下。原來師父要我學的，是這個。十年了，我終於可以不用再趕路了。']];
   l.push(['旁白',SW.id===4?'少年想起劍塚碑前的那一拜：劍在手，亦在心。':SW.id>=0?'少年想起劍塚碑前取劍的那一刻，終於懂了前輩為何一換再換。':'少年想起劍塚碑前的風，終於懂了前輩為何放下。']);}
- else if(a===0)l=[['雨夜修羅','快，我也快過。可快到最後，只是停不下來。']];
- else l=[['雨夜修羅','停不下來……原來你我，終究是一路人。']];
+ else if(a===0)l=[['雨夜修羅','快，我也快過。可快到最後，身邊的人，都被我甩在後頭了。']];
+ else l=[['雨夜修羅','停不下來……原來你我，終究是一路人。師父留的那盞燈，我們誰也沒走回去。']];
  DLG={l:l.concat([tail]).map(x=>[x[0],heroT(x[1])]),i:0,c:0,t0:T,kind:'farewell'};
  CHO=null;for(const q in jp)jp[q]=0}
 function qDraw(){const F='KaiTi,STKaiti,"Noto Serif TC",serif',bx=60,by=50,bw=600,bh=300;
@@ -4584,12 +4681,12 @@ const GB=()=>BR.book==='read'?[['墨影劍客','師父，我走到了。']]:BR.b
 const SPK=i=>SPARED[i]===1||SPARED[i]===3;
 const RETX=k=>k===14&&!SPK(13)?'霜刃劍姬獨自走下雪嶺，在山腳為哥哥立了一塊小小的碑':RETN[k];
 const FOLLOWL=()=>{const a=['酒仙守在隊尾','老匠扛著鐵錘'];if(SPK(6))a.push('傘客縫了一面白旗');if(SPK(12)||SPK(15))a.push('僧人在後頭敲著一口小鐘');return a.join('，')};
-const RETN={0:'虎面擂主在擂台上，教村裡的孩子摔跤',1:'總鏢頭抱著失散的兒子，遠遠朝少年抱拳',2:'醉拳酒仙坐在客棧門口，葫蘆又滿了',3:'鐵鉤漁霸改行打魚，過江不再收一文稅',4:'變臉戲霸的戲班，排了一齣新戲',5:'荒廟道人日日點著那盞燈',6:'古道楓林下，兩把紅傘並排，一大一小',7:'鑄劍老匠的爐，只打鋤頭和鐵鍋',8:'刀疤頭目回了黑風寨，一個一個找他的兄弟',9:'追風鬼影終於劃起了那條「渡你」的船',10:'守墓劍奴在碑前，把那柄木劍擦了又擦',11:'六派弟子在沙丘上，一起重蓋了一座真的城',12:'鐵佛尊者的鐘，每天準時敲響',13:'黑風寨主把那本名冊燒了',14:'霜刃劍姬陪著哥哥，走下了雪嶺',15:'羅漢金身的爐，也只打鋤頭',16:'血月刀魔收了刀，學著當一個普通人',17:'雨夜修羅在斷橋邊，修起了一座新橋',18:'毒谷的綠霧散了，藥農們一個個從山洞裡走出來，萬毒尊者朝少年深深一揖',19:'雷霆戰神放下金錘，在天梯下開了一間武館',20:'幽冥判官的簿子上，多了許多新生的名字'};
+const RETN={0:'虎面擂主在擂台上，教村裡的孩子摔跤',1:'總鏢頭抱著失散的兒子，遠遠朝少年抱拳',2:'醉拳酒仙坐在客棧門口，葫蘆又滿了',3:'鐵鉤漁霸改行打魚，過江不再收一文稅',4:'變臉戲霸的戲班，排了一齣新戲',5:'荒廟道人日日點著那盞燈',6:'古道楓林下，兩把紅傘並排，一大一小',7:'鑄劍老匠的爐，只打鋤頭和鐵鍋',8:'刀疤頭目回了黑風寨，一個一個找他的兄弟',9:'追風鬼影終於劃起了那條「渡你」的船，船頭的小燈，夜夜不滅',10:'守墓劍奴在碑前，把那柄木劍擦了又擦',11:'六派弟子在沙丘上，一起重蓋了一座真的城',12:'鐵佛尊者的鐘，每天五更準時敲響，山下的人說，那是在叫人回家',13:'黑風寨主把那本名冊燒了',14:'霜刃劍姬陪著哥哥，走下了雪嶺，七年的冬天，終於過完了',15:'羅漢金身的爐，也只打鋤頭',16:'血月刀魔收了刀，在荒原上替五位同門立了五塊碑',17:'雨夜修羅在斷橋邊，修起了一座新橋',18:'毒谷的綠霧散了，藥農們一個個從山洞裡走出來，萬毒尊者朝少年深深一揖',19:'雷霆戰神放下金錘，在天梯下開了一間武館',20:'幽冥判官的簿子上，多了許多新生的名字'};
 const NMN={0:'虎面擂主',1:'總鏢頭',2:'醉拳酒仙',3:'鐵鉤漁霸',4:'變臉戲霸',5:'荒廟道人',6:'楓林傘客',7:'鑄劍老匠',8:'刀疤頭目',9:'追風鬼影',10:'守墓劍奴',11:'蜃樓幻主',12:'鐵佛尊者',13:'黑風寨主',14:'霜刃劍姬',15:'羅漢金身',16:'血月刀魔',17:'雨夜修羅',18:'萬毒尊者',19:'雷霆戰神',20:'幽冥判官'};
 /* 愛情結局：依放過人數與魔宮去留決定。2＝同行、1＝留鈴、0＝鈴斷（旗標 BR.love） */
 const LOVET=()=>{const n=SPN();let t=n>=14?2:n>=7?1:0;if(BR.end==='Cb')t=0;else if(BR.end==='Cg')t=Math.max(t,1);BR.love=t;return t};
-const LOVEL=()=>{const t=LOVET();return t===2?[['旁白','門外傳來一聲極輕的銅鈴響，是那串斷了繩、又被人重新縫起來的銅鈴。'],['青衣女子','名冊最後一行，我不想再替你寫了。'],['墨影劍客','那妳來，陪我寫。'],['旁白','她在門檻上站了很久，終於跨了進來，把那本冊子輕輕放在案上，翻到空白的新一頁。'],['青衣女子','這一頁，不記帳。我們一起，慢慢寫。']]:t===1?[['旁白','門環上繫著一串銅鈴，風一吹，輕輕地響。鈴下壓著一張字條：「帳已清。人，待你想清楚再來問。」'],['墨影劍客','……我會去的。']]:[['旁白','門環上掛著一串斷了繩的銅鈴，沒有人再來取。'],['旁白','少年把鈴握在手心，很久沒有鬆開。'],['墨影劍客','她大概，是不會再回來了。']]};
-const LOVES=()=>BR.love===2?'落款處，並排寫著兩個名字。':BR.love===1?'落款處沒有名字，只有一個小小的銅鈴印。':'落款處空著，只有一道被雨水暈開的墨痕。';
+const LOVEL=()=>{const t=LOVET();return t===2?[['旁白','門外傳來一聲極輕的銅鈴響，是那串斷了繩、又被人重新縫起來的銅鈴。'],['青衣女子','名冊最後一行，我不想再替你寫了。'],['墨影劍客','那妳來，陪我寫。'],['旁白','她在門檻上站了很久，終於跨了進來，把那本冊子輕輕放在案上，翻到空白的新一頁。'],['青衣女子','這一頁，不記帳。我們一起，慢慢寫。']]:t===1?[['旁白','門環上繫著一串銅鈴，風一吹，輕輕地響。鈴下壓著一張字條：「帳已清。人，待你想清楚再來問。——青兒」'],['墨影劍客','……我會去的。']]:[['旁白','門環上掛著一串斷了繩的銅鈴，沒有人再來取。'],['旁白','少年把鈴握在手心，很久沒有鬆開。'],['墨影劍客','她大概，是不會再回來了。']]};
+const LOVES=()=>BR.love===2?'落款處，並排寫著兩個名字：'+(CH?HNAME():'墨影')+'，與青兒。':BR.love===1?'落款處沒有名字，只有一個小小的銅鈴印。':'落款處空著，只有一道被雨水暈開的墨痕。';
 const EPI=()=>{
  const ret=[],kil=[];for(let i=0;i<21;i++){const v=SPARED[i];if(v===1||v===3)ret.push(i);else if(v===2)kil.push(i)}
  const L=[['旁白','事了之後，少年獨自走回山中。']];
@@ -4604,7 +4701,7 @@ GCH[21]=()=>({t:'魔宮的去留',a:'魔宮至尊已倒。魔宮的兵、鐵，�
  {t:'遣散魔宮的兵，把兵器熔掉',f:()=>{BR.end='A';return{tx:'兵器入爐',l:[['旁白','少年下令，魔宮的兵一隊一隊放下兵器。礦坑裡的僧人與農戶，被一個個接出地面。'],['旁白','玄鐵運來的車，轉頭往南，不再往北。爐火裡，刀劍熔成了鋤頭、鐵鍋和釘。'],SPN()>=14?['旁白','被放過的人一個接一個登上山來。僧人、船夫、戲班、鏢師……有人搬鐵，有人添火。']:['旁白','山下無人上來。少年一個人，守著爐火，熔了三天三夜。'],['旁白','百姓有了鋤頭，可京城裡的宦官還在，稅，還是一年重過一年。'],['墨影劍客','我拆得了魔宮，拆不了這個世道。']].concat(EPI())}}},
  {t:'拿走最後一塊令牌，獨自進京',f:()=>{BR.end='B';return{tx:'孤身入京',l:[['旁白','至尊的案上，還剩一塊黑玉令牌，背面一個字也沒有。'],['旁白','令牌，從來都是派給殺手的。這一次，少年自己領了命。'],['旁白','他在背面，刻下京城裡那個人的名字，那個讓天下人餓著肚子的人。'],['墨影劍客','魔宮收人心，我不收。我只取一個人的命。'],['旁白','數月之後，京城傳來消息：宦官暴斃，朝廷換了人。至於新來的人是好是壞，少年沒有等。']].concat(EPI())}}},
  {t:'接手魔宮的兵，進京推翻宦官　（結局視放過人數而定）',f:()=>{const n=SPN();BR.end=n>=14?'Cg':n>=7?'Cm':'Cb';
-  const L=n>=14?[['旁白','少年沒有領兵。他只帶著被放過的人，和那本藏在冊子夾層裡的帳，走進了京城。'],['旁白','被放過的人一路跟著他：'+FOLLOWL()+'。'],['旁白','城門前，守衛攔下了他們。一個青衣女子，從人群裡走出來。她腰間的銅鈴，已經不響了。'],['青衣女子','我原是宮裡的帳房。這一本，記著那位大人的每一筆稅，每一條人命。'],['旁白','她當著滿城百姓，一頁一頁，把帳念了出來。念了一整天。宦官的衛兵，一個個放下了刀。'],['墨影劍客','刀能收，帳收不了。'],['旁白','魔宮的黑旗落下，換上一面白底的旗，旗上只有一個字：「放」。']]:
+  const L=n>=14?[['旁白','少年沒有領兵。他只帶著被放過的人，和那本藏在冊子夾層裡的帳，走進了京城。'],['旁白','被放過的人一路跟著他：'+FOLLOWL()+'。'],['旁白','城門前，守衛攔下了他們。一個青衣女子，從人群裡走出來。她腰間的銅鈴，已經不響了。'],['青衣女子','我是青兒，原是宮裡的帳房。這一本，記著那位大人的每一筆稅，每一條人命。'],['旁白','她當著滿城百姓，一頁一頁，把帳念了出來。念了一整天。宦官的衛兵，一個個放下了刀。'],['墨影劍客','刀能收，帳收不了。'],['旁白','魔宮的黑旗落下，換上一面白底的旗，旗上只有一個字：「放」。']]:
    n>=7?[['旁白','少年接下魔宮的兵符，領著黑旗進了京。有人敬他，有人怕他，也有人在城外遠遠望著，不肯入城。'],['旁白','京城一夜大亂。宦官倒了，可倒下的不止他一個。'],['墨影劍客','我不知道這條路對不對。但至少，這份名冊，由我來寫。'],['旁白','黑旗仍在，只是旗角被風吹得微微發白。']]:
    [['旁白','少年接下魔宮的兵符，可一路刀光太重，沒有人真心跟著他。'],['旁白','他下了第一道令，沒人應；下到第二道，才有人跪下。'],['旁白','大軍入京，血流成河。宦官死了，可新坐上去的人，下令的方式，和宦官一模一樣。'],['魔宮至尊','……你看，你也成了我。'],['旁白','黑旗插上了皇城，在風中獵獵作響。']];
   return{tx:ENDN[BR.end][0],l:L.concat(EPI())}}}]});
@@ -4688,6 +4785,7 @@ const AMBTX={
  e:[
  ['旁白','最後一名黑衣人倒下。青衣女子低頭，在冊子上添了一筆。'],
  ['青衣女子','第一陣，記你贏。往後的帳，還長著。'],
+  ['旁白','她低頭記帳，筆尖在紙上停了一拍，耳根微微泛紅。'],
  ['旁白','她轉身走入殘煙，只留下一片被劍氣削斷的紙，上面只剩半個「收」字。']]},
 7:{a:[
  ['旁白','爐火映紅了山莊的夜。銅鈴聲從爐後傳來，爐裡的劍，一柄一柄都在輕輕顫抖。'],
@@ -4696,6 +4794,7 @@ const AMBTX={
  ['青衣女子','我只記帳。劍陣替我答你。']],
  e:[
  ['青衣女子','折了這麼多人，這筆帳，記在你名下。'],
+  ['旁白','她說得很兇，闔上冊子的動作，卻輕得像怕驚動他。'],
  ['旁白','她翻開冊子，其中一頁被墨筆圈了兩圈。少年瞥見頁首寫著兩個字：劍廬。'],
  ['墨影劍客','那是我師父的……'],
  ['旁白','冊子啪地合上，銅鈴聲遠了。']]},
@@ -4713,6 +4812,7 @@ const AMBTX={
  ['墨影劍客','救不救得了，你說了不算。']],
  e:[
  ['青衣女子','孫三那一行，我替你留著。你若能活著走到魔宮，我便不劃。'],
+  ['青衣女子','……所以，你得活著。'],
  ['旁白','她說得很輕，像是在說給自己聽。']]},
 13:{a:[
  ['旁白','黑風寨的寨門半開。風裡夾著銅鈴聲，比之前更近了。'],
@@ -4724,7 +4824,7 @@ const AMBTX={
  ['青衣女子','我替你記過的每一筆，都對得上。只有你，對不上。'],
 ['墨影劍客','是我的錯，還是妳的帳錯了？'],
 ['青衣女子','……我不知道。'],
-['旁白','她低頭翻頁，眉間第一次蹙了一下，像是帳怎麼也對不上。']]},
+['旁白','她低頭翻頁，眉間第一次蹙了一下，像是帳怎麼也對不上。耳邊的碎髮，被她別了又別。']]},
 15:{a:[
  ['旁白','烈火之中，禪院的鐘聲忽然被一陣銅鈴蓋了過去。'],
  ['青衣女子','禪院的住持，名字也在冊上。頁底有一行批註：已收。'],
@@ -4732,7 +4832,8 @@ const AMBTX={
  ['青衣女子','都收。']],
  e:[
  ['青衣女子','你快走到頭了。再往前，不是我記你，是別人記你。'],
- ['旁白','她闔上冊子，銅鈴的繩子，不知何時斷了一半。']]},
+  ['青衣女子','小心些。別讓我，真的把你的名字寫上去。'],
+ ['旁白','她闔上冊子，銅鈴的繩子，不知何時斷了一半。冊子裡夾著的紙頁，邊角沾著一點新墨，像是剛塗掉了什麼。']]},
 17:{a:[
  ['旁白','雨打斷橋。黑衣人從橋的兩端同時落下，連雨點都被劍氣切成兩半。'],
  ['青衣女子','再往前，就是魔宮的地界了。'],
@@ -4742,6 +4843,7 @@ const AMBTX={
  ['墨影劍客','留給誰的？'],
  ['青衣女子','你自己去看。'],
  ['青衣女子','寫上去，就不能改了。這一行，我想留給你自己來寫。'],
+  ['青衣女子','寫好看一點。我想……看你寫完。'],
 ['旁白','她的身影被雨水沖淡，像一滴落進水裡的墨。']]},
 19:{a:[
  ['旁白','雷聲壓過了鈴聲，但黑衣人的腳步，比雷更快。'],
@@ -4750,9 +4852,19 @@ const AMBTX={
  ['青衣女子','上去了，你自會知道。']],
  e:[
  ['旁白','最後一名黑衣人倒下。青衣女子握著斷了繩的銅鈴，沒有再搖。'],
- ['青衣女子','我原是宮裡的帳房。那位大人的帳，一筆一筆，我都記在冊子的夾層裡。魔宮要刀，我要的，是這本帳見光。'],
- ['青衣女子','名冊最後一行，我已經替你寫好了。'],
- ['青衣女子','魔宮至尊，在上面等你。'],
+  ['墨影劍客','這十幾個人，沒有一個是魔宮的精銳。你一路的每一陣，都留了餘地。'],
+  ['青衣女子','你看出來了。每一陣，我都算準人數與時辰，只想讓上頭看見：我在盡力。我若不出手，他們會換更狠的人來。'],
+  ['墨影劍客','妳到底是誰？'],
+  ['青衣女子','我叫青兒，原是宮裡的帳房。這串鈴，是我父親給的。他也是帳房，一輩子沒寫過一筆假帳。'],
+  ['青衣女子','那位大人要他把稅銀的缺口，改成「天災」。他不肯。三天後，他的名字，被人用朱筆圈了。'],
+  ['青衣女子','魔宮的人來找我：「你不改，就換別人改。缺口還是缺口，只是沒人記得真數字。」'],
+  ['青衣女子','我留了下來，對自己說：我只記帳，不動手。真帳，藏在冊子的夾層裡，總有一天要見光。'],
+  ['青衣女子','可名冊上被圈的人，一個個都沒了。我才明白，我的「只記帳」，就是在替他們遞刀。'],
+  ['青衣女子','後來你一路放人。你每放過一個，我就趁夜把名冊上那個朱圈，用墨塗掉一個。孫三那一行，是第一個。'],
+  ['青衣女子','鈴繩，是禪院那夜我自己剪斷的。替魔宮記帳的人，不配有聲音。'],
+  ['青衣女子','我從擂台就一直跟著你。起先是奉命，後來，是我自己想看看，你的劍會停在哪裡。'],
+  ['青衣女子','那位大人的真帳，一筆一筆都在夾層裡。魔宮要刀，我要的，是這本帳見光。'],
+  ['青衣女子','名冊最後一行，我已經替你寫好了。魔宮至尊，在上面等你。'],
  ['旁白','她把冊子放在石階上，轉身走進雷雨。少年低頭，那一行字墨跡未乾，寫的正是他自己的名字，後面空著，沒有結局。']]}
 };
 DLGCOL['青衣女子']='#2f6a6a';DLGCOL['魔宮黑衣人']='#2a2a3a';
@@ -4770,7 +4882,8 @@ DLGALT['9ambEnd']=function(){
  let sp=0,kl=0;for(let i=0;i<LV;i++){const v=SPARED[i];if(v===1||v===3)sp++;else if(v===2)kl++}
  return [['青衣女子','一路上，你放過了 '+sp+' 人，斬了 '+kl+' 人。兩邊，我都記著。'],
   ['青衣女子',sp>kl?'心軟的人，名冊上另有一頁。':kl>sp?'下手狠的人，名冊上也另有一頁。':'不偏不倚的人，最難記。'],
-  ['旁白','霧漸漸散了，渡口只剩潮聲。她不知何時已經不在了。']]};
+  ['青衣女子','別誤會，我只是記帳，不是特意看你。'],
+   ['旁白','霧漸漸散了，渡口只剩潮聲。她不知何時已經不在了。']]};
 
 let AM=null;const AMCLR={};
 const cfgOf=lv=>{const i=AMBLV.indexOf(lv);return i<0?null:{idx:i,n:3+(i>>1),waves:i<4?2:3}};
@@ -5221,6 +5334,129 @@ const ambGirl=()=>{
   if(n==='霜刃劍姬'&&XS.fz>0){g.fillStyle='rgba(180,225,245,.5)';g.strokeStyle='rgba(143,211,232,.95)';g.lineWidth=2.5;g.beginPath();g.moveTo(P.x-22,P.y);g.lineTo(P.x-18,P.y-70);g.lineTo(P.x,P.y-80);g.lineTo(P.x+18,P.y-70);g.lineTo(P.x+22,P.y);g.closePath();g.fill();g.stroke();g.strokeStyle='rgba(255,255,255,.8)';g.lineWidth=1.5;g.beginPath();g.moveTo(P.x-10,P.y-60);g.lineTo(P.x-4,P.y-30);g.moveTo(P.x+8,P.y-64);g.lineTo(P.x+12,P.y-40);g.stroke()}
   g.restore()}}
  window.MECH2={zones:()=>ZS,st:()=>XS};
+}
+
+/* ===== v223 總鏢頭：鏢車過境（預警→衝撞；把鏢頭引到鏢車前，讓他自己吃一記） ===== */
+{
+ const isEsc=()=>{const b=LEVELS[LV]&&LEVELS[LV].boss;return !!b&&b.name==='總鏢頭'};
+ let CT=[],ES={};
+ const rsE=()=>{CT=[];ES={}};
+ {const _ll=loadLevel;loadLevel=function(){rsE();return _ll.apply(this,arguments)}}
+ {const _r0=reset;reset=function(){rsE();return _r0.apply(this,arguments)}}
+ const cartHurt=(dm)=>{const vx=P.vx,vy=P.vy,sk=shake;hurtP(dm,P.x);if(P.hp>0){P.vx=vx;P.vy=vy}shake=Math.max(sk,.3);stop=0};
+ const launch=(dir)=>{CT.push({dir,w:1.0,t:0,x:dir>0?cam-70:cam+W+70,go:0,hit:0,dead:0})};
+ function upE(dt){
+  const low=boss.hp<boss.mx*.5;
+  if(ES.t===undefined)ES.t=3.5;
+  ES.t-=dt;
+  if(ES.t<=0){ES.t=low?5.5:7.5;
+   if(low){launch(1);launch(-1)}else launch(Math.random()<.5?1:-1);
+   txt('鏢車過境！',boss.x,boss.y-150,24,'#b3261e');shake=Math.max(shake,.15)}
+  const base=ED[boss.k].dm*(boss.dmx||1);
+  for(const c of CT){c.t+=dt;
+   if(!c.go){if(c.t>=c.w){c.go=1;SFX.slam()}continue}
+   c.x+=c.dir*560*dt;
+   if(!c.hit&&Math.abs(c.x-boss.x)<46*(boss.sc||1)&&boss.hp>0){
+    c.hit=1;c.dead=1;shake=Math.max(shake,.4);stop=.08;ink(boss.x,boss.y-40,22,'#b8793a');dust(boss.x,GY,10);
+    hurtE(boss,Math.max(8,Math.round(boss.mx*.12)),c.dir*200,true);
+    txt('撞上自家鏢車！',boss.x,boss.y-150,22,'#c99a2e');
+    if(!boss.chg){boss.st=3;boss.tm=1.2}
+    continue}
+   if(!c.hit2&&Math.abs(c.x-P.x)<40&&P.y>=GY-38){c.hit2=1;cartHurt(Math.max(4,Math.round(base*.7)));txt('鏢車！',P.x,P.y-95,20,'#b3261e')}
+   for(const d of DT)if(Math.abs(d.x-c.x)<30&&d.y>GY-80)d.x=-999;
+   if(c.x<cam-140||c.x>cam+W+140)c.dead=1}
+  CT=CT.filter(c=>!c.dead)}
+ {const _u=upd;upd=function(dt){_u(dt);if(S!=='play'||!P)return;if(!isEsc()||!boss||boss.dead||!lock){if(CT.length)CT=[];ES={};return}if(DLG||CHO||stop>0)return;upE(dt)}}
+ {const _dt=drawTrail;drawTrail=function(){_dt.apply(this,arguments);if(S!=='play'||!isEsc()||!boss||boss.dead||!lock||!CT.length)return;
+  g.save();g.lineCap='round';g.lineJoin='round';
+  for(const c of CT){
+   if(!c.go){const a=.5+.5*Math.sin(T*18),ex=c.dir>0?cam+36:cam+W-36;
+    g.fillStyle='rgba(179,38,30,'+(.14+.1*a)+')';g.fillRect(cam,GY-44,W,40);
+    g.fillStyle='rgba(179,38,30,'+(.6+.4*a)+')';g.beginPath();g.moveTo(ex+c.dir*22,GY-24);g.lineTo(ex-c.dir*10,GY-44);g.lineTo(ex-c.dir*10,GY-4);g.closePath();g.fill();
+    continue}
+   const x=c.x,y=GY,f=c.dir,sp=c.x*.06;
+   g.strokeStyle='#1c1c1c';g.lineWidth=2.2;
+   g.fillStyle='#8a5a2a';g.fillRect(x-32,y-40,64,24);g.strokeRect(x-32,y-40,64,24);
+   g.fillStyle='#c99a2e';g.fillRect(x-32,y-40,64,5);
+   g.beginPath();g.moveTo(x-32,y-28);g.lineTo(x+32,y-28);g.stroke();
+   g.fillStyle='#b3261e';g.beginPath();g.moveTo(x-f*10,y-40);g.lineTo(x-f*10,y-72);g.lineTo(x-f*10-f*30,y-66-Math.sin(T*14)*3);g.lineTo(x-f*10,y-56);g.closePath();g.fill();g.stroke();
+   for(const wx of[-18,18]){g.fillStyle='#d8c8a0';g.beginPath();g.arc(x+wx,y-10,11,0,TAU);g.fill();g.stroke();for(let i=0;i<4;i++){const an=sp+i*Math.PI/2;g.beginPath();g.moveTo(x+wx,y-10);g.lineTo(x+wx+Math.cos(an)*11,y-10+Math.sin(an)*11);g.stroke()}}}
+  g.restore()}}
+ window.MECHE={carts:()=>CT,st:()=>ES};
+}
+
+/* ===== v224 六位關主專屬機制：鑄劍老匠熔鑄熱區／刀疤頭目劫道旗／黑風寨主護法／羅漢金身怒目／雨夜修羅雨幕／追風鬼影殘影 ===== */
+{
+ const nmB=()=>{const b=LEVELS[LV]&&LEVELS[LV].boss;return b?b.name:''};
+ let Q={},ZQ=[];
+ const rsQ=()=>{Q={};ZQ=[]};
+ {const _ll=loadLevel;loadLevel=function(){rsQ();return _ll.apply(this,arguments)}}
+ {const _r0=reset;reset=function(){rsQ();return _r0.apply(this,arguments)}}
+ const bdm=()=>ED[boss.k].dm*(boss.dmx||1);
+ const pHurtQ=(dm)=>{const vx=P.vx,vy=P.vy,sk=shake;hurtP(dm,P.x);if(P.hp>0){P.vx=vx;P.vy=vy}if(P.inv>.45)P.inv=.45;shake=Math.max(sk,.25);stop=0};
+ const gAliveQ=()=>(Q.g||[]).filter(o=>!o.dead).length;
+ const rwave=(m)=>{for(const q of[-1,1])DT.push({x:boss.x+q*30,y:GY-14,vx:q*300*m,vy:0,dm:Math.round(bdm()*.8),flat:1});SFX.slam();dust(boss.x,GY,10);FX.push({k:'x',x:boss.x,y:GY-10,a:0,t:0,d:.3})};
+ {const _he=hurtE;hurtE=function(e,dm,kb,big){
+   if(e===boss&&!e.dead&&lock){const n=nmB();
+    if(n==='刀疤頭目'){if(Q.fl&&!Q.fl.dead){dm*=.7;if(Math.random()<.2)txt('旗在護體',e.x,e.y-130,16,'#b3261e')}}
+    else if(n==='黑風寨主'){if(gAliveQ()>0){dm*=.55;if(Math.random()<.25)txt('護法護體',e.x,e.y-130,16,'#c99a2e')}else if(Q.vul>0)dm*=1.5}
+    else if(n==='羅漢金身'){if(Q.rg>0){dm*=2.2;if(Math.random()<.3)txt('破防',e.x,e.y-130,18,'#c99a2e')}else dm*=.75}
+   }
+   return _he.call(this,e,dm,kb,big)}}
+ function upQ(dt){
+  const n=nmB(),low=boss.hp<boss.mx*.5;
+  if(n==='鑄劍老匠'){
+   if(Q.ft===undefined)Q.ft=3.5;
+   Q.ft-=dt;
+   if(Q.ft<=0){Q.ft=low?4:5.5;ZQ.push({k:'heat',x:cl(P.x+R(-70,70),cam+50,cam+W-50),t:0,w:.8,l:5.5,acc:0,r:62});txt('熔鑄！',boss.x,boss.y-150,24,'#d4572a');shake=Math.max(shake,.15);const hs=ZQ.filter(z=>z.k==='heat');if(hs.length>3)hs[0].dead=1}
+  }
+  if(n==='刀疤頭目'){
+   if(Q.ct===undefined)Q.ct=3;
+   if(!Q.fl&&!Q.fd){Q.ct-=dt;if(Q.ct<=0){const sd=Math.random()<.5,f=spawn('n',sd?cam+20:cam+W+30);f.hp=f.mx=40;Q.fl=f;spawn('n',sd?cam+W+30:cam+20);Q.ct=8;txt('劫道號令！',boss.x,boss.y-150,24,'#b3261e');shake=Math.max(shake,.2)}}
+   else if(Q.fl&&!Q.fl.dead){Q.ct-=dt;if(Q.ct<=0){Q.ct=low?6:8;if(E.filter(o=>!o.dead&&o!==boss).length<5){spawn('n',cam+20);spawn('n',cam+W+30);txt('增援！',boss.x,boss.y-150,22,'#b3261e')}}}
+   else if(Q.fl&&Q.fl.dead&&!Q.fd){Q.fd=1;txt('旗倒！劫道散！',boss.x,boss.y-150,26,'#c99a2e');shake=Math.max(shake,.3);for(const o of E)if(!o.dead&&o!==boss){o.st=3;o.tm=1.5;o.cd=Math.max(o.cd,1.8);o.chg=0}if(!boss.chg){boss.st=3;boss.tm=1}}
+  }
+  if(n==='黑風寨主'){
+   if(!Q.g){Q.g=[];for(const x of[cam+20,cam+W+30]){const o=spawn('n',x);o.hp=o.mx=55;Q.g.push(o)}txt('護法在，寨主不倒！',boss.x,boss.y-150,24,'#c99a2e')}
+   else if(!Q.gb&&gAliveQ()===0){Q.gb=1;Q.vul=3;txt('護法盡滅！寨主破防！',boss.x,boss.y-150,26,'#b3261e');shake=Math.max(shake,.35);if(!boss.chg){boss.st=3;boss.tm=1}}
+   if(Q.vul>0)Q.vul-=dt;
+  }
+  if(n==='羅漢金身'){
+   if(Q.rt===undefined)Q.rt=5;
+   if(Q.rg>0){Q.rg-=dt;boss.st=3;boss.tm=Math.max(boss.tm,.25);boss.cd=Math.max(boss.cd,1.2);boss.pend=0;if(Q.rg<=0){Q.rg=0;rwave(1);Q.w2=.35;shake=Math.max(shake,.35)}}
+   else{Q.rt-=dt;if(Q.rt<=0){Q.rt=low?6:8;Q.rg=1.3;txt('怒目！',boss.x,boss.y-160,28,'#c99a2e');ink(boss.x,boss.y-60,24,'#c99a2e')}}
+   if(Q.w2>0){Q.w2-=dt;if(Q.w2<=0)rwave(1.15)}
+  }
+  if(n==='雨夜修羅'){
+   if(Q.vt===undefined)Q.vt=5;
+   if(!(Q.vz>0)){Q.vt-=dt;if(Q.vt<=0){Q.vz=2.4;Q.vt=low?6.5:8.5;Q.bl=0;txt('雨幕驟濃…',boss.x,boss.y-150,22,'#5a7a8a')}}
+   else{Q.vz-=dt;if(Q.vz<=.5&&!Q.bl){Q.bl=1;if(!boss.chg){const ox=boss.x;ink(ox,boss.y-40,14);boss.x=cl(P.x-P.f*46,cam+20,cam+W-20);boss.f=P.x>boss.x?1:-1;ink(boss.x,boss.y-40,14);boss.st=1;boss.tm=.4;boss.ap=.3;SFX.dash()}}}
+  }
+  if(n==='追風鬼影'){
+   if(Q.px!==undefined&&Math.abs(boss.x-Q.px)>100){ZQ.push({k:'aft',x:cl(Q.px,cam+30,cam+W-30),t:0,w:1.1,r:52,done:0});txt('殘影',Q.px,GY-90,18,'#8b94a6');const as=ZQ.filter(z=>z.k==='aft');if(as.length>2)as[0].dead=1}
+   Q.px=boss.x;
+  }
+  for(const z of ZQ){z.t+=dt;
+   if(z.k==='heat'){if(z.t>z.w){z.acc+=dt;if(Math.abs(P.x-z.x)<z.r&&P.y>=GY-50&&z.acc>=.6){z.acc=0;pHurtQ(Math.max(2,Math.round(bdm()*.1)));txt('燙！',P.x,P.y-90,16,'#d4572a')}}if(z.t>z.w+z.l)z.dead=1}
+   else if(z.k==='aft'){if(!z.done&&z.t>=z.w){z.done=1;shake=Math.max(shake,.25);ink(z.x,GY-40,18,'#8b94a6');if(Math.abs(P.x-z.x)<z.r&&P.y>=GY-60){pHurtQ(Math.max(3,Math.round(bdm()*.4)));txt('影爆！',P.x,P.y-90,20,'#5a6a8a')}}if(z.t>z.w+.4)z.dead=1}
+  }
+  ZQ=ZQ.filter(z=>!z.dead);
+ }
+ {const _u=upd;upd=function(dt){_u(dt);if(S!=='play'||!P)return;if(!boss||boss.dead||!lock){if(ZQ.length)ZQ=[];Q={};return}if(DLG||CHO||stop>0)return;upQ(dt)}}
+ {const _dt=drawTrail;drawTrail=function(){_dt.apply(this,arguments);if(S!=='play'||!boss||boss.dead||!lock)return;const n=nmB();
+  g.save();g.lineCap='round';g.lineJoin='round';
+  for(const z of ZQ){
+   if(z.k==='heat'){const hot=z.t>=z.w,a=z.t<z.w?z.t/z.w:1,p=.5+.5*Math.sin(T*9);
+    g.fillStyle='rgba(212,87,42,'+(hot?.3+.12*p:.1+.15*a)+')';g.strokeStyle='rgba(255,170,70,'+(hot?.75:.45)+')';g.lineWidth=2;g.beginPath();g.ellipse(z.x,GY-2,z.r,z.r*.24,0,0,TAU);g.fill();g.stroke();
+    if(hot){g.fillStyle='rgba(255,200,90,'+(.5+.3*p)+')';for(let i=-2;i<=2;i++){const hh=14+Math.abs(Math.sin(T*8+i*1.7))*16,hx=z.x+i*z.r/2.6;g.beginPath();g.moveTo(hx-5,GY);g.lineTo(hx,GY-hh);g.lineTo(hx+5,GY);g.fill()}}}
+   else if(z.k==='aft'){const a=Math.min(1,z.t/z.w);g.fillStyle='rgba(139,148,166,'+(.15+.3*a)+')';g.strokeStyle='rgba(60,75,100,'+(.35+.5*a)+')';g.lineWidth=2;g.beginPath();g.ellipse(z.x,GY-40,18,42,0,0,TAU);g.fill();g.stroke();g.beginPath();g.arc(z.x,GY-92,11,0,TAU);g.fill();g.stroke();if(!z.done){g.beginPath();g.ellipse(z.x,GY-2,z.r*a,z.r*a*.24,0,0,TAU);g.stroke()}}
+  }
+  if(n==='刀疤頭目'&&Q.fl&&!Q.fl.dead){const f=Q.fl,fx=f.x,fy=f.y-108,w=Math.sin(T*10)*3;g.strokeStyle='#3a2a1a';g.lineWidth=2.4;g.beginPath();g.moveTo(fx,f.y-30);g.lineTo(fx,fy-16);g.stroke();g.fillStyle='#b3261e';g.beginPath();g.moveTo(fx,fy-16);g.lineTo(fx+f.f*-26,fy-10+w);g.lineTo(fx,fy+4);g.closePath();g.fill();g.stroke()}
+  if(n==='黑風寨主'&&Q.g){g.setLineDash([5,6]);for(const o of Q.g){if(o.dead)continue;g.strokeStyle='rgba(201,154,46,.55)';g.lineWidth=1.6;g.beginPath();g.moveTo(boss.x,boss.y-60);g.lineTo(o.x,o.y-60);g.stroke()}g.setLineDash([]);for(const o of Q.g){if(o.dead)continue;g.strokeStyle='rgba(201,154,46,'+(.6+.3*Math.sin(T*5))+')';g.lineWidth=2.2;g.beginPath();g.ellipse(o.x,o.y-46,22,48,0,0,TAU);g.stroke()}}
+  if(n==='羅漢金身'&&Q.rg>0){const sc=boss.sc||1,p=.5+.5*Math.sin(T*16),gr=g.createRadialGradient(boss.x,boss.y-60*sc,6,boss.x,boss.y-60*sc,90*sc);gr.addColorStop(0,'rgba(255,225,120,'+(.55+.2*p)+')');gr.addColorStop(1,'rgba(255,200,80,0)');g.fillStyle=gr;g.beginPath();g.arc(boss.x,boss.y-60*sc,90*sc,0,TAU);g.fill()}
+  if(n==='雨夜修羅'&&Q.vz>0){const a=Math.min(1,(2.4-Q.vz)/.35,Q.vz/.35),gr=g.createRadialGradient(P.x,P.y-40,55,P.x,P.y-40,200);gr.addColorStop(0,'rgba(10,22,30,0)');gr.addColorStop(1,'rgba(10,22,30,'+(.8*a)+')');g.fillStyle=gr;g.fillRect(cam-20,-60,W+40,H+120)}
+  g.restore()}}
+ window.MECHQ={zones:()=>ZQ,st:()=>Q};
 }
 
 /* ===== v207 守墓劍奴：四劍式（木劍・鐵劍・重劍・隕鐵劍） ===== */
