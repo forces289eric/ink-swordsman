@@ -8809,7 +8809,7 @@ window.MECHCG={st:()=>CQ};
  window.__mkProp=(dy,w,h,fn)=>occlude(mkLayer(w,h,fn),SC&&SC.sky,dy);
  const _sc2=scene;
  scene=function(){const r=_sc2.apply(this,arguments);
-  if(r&&!r._occ&&r.b&&r.c&&r.d){r._occ=1;for(const k of['b','c','d'])r[k]=occlude(r[k],r.sky)}
+  if(r&&!r._occ&&r.b&&r.c&&r.d){r._occ=1;/* 第一章的前排遠山是半透明水墨，墊不透明紙色底襯會在山體上留下白色色塊，所以第一章只對 c、d 近景圖層做遮擋 */for(const k of(typeof PART!=='undefined'&&PART===1?(r.mp?['d']:['c','d']):['b','c','d']))/* v282：紅楓古道後排楓樹（c 層）是半透明遠景，墊不透明底襯會在樹幹下半段留下白色色塊，所以只遮擋前排 d 層 */r[k]=occlude(r[k],r.sky)}
   return r};
 }
 </script></body></html>
