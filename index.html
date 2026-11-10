@@ -261,19 +261,19 @@ let UP={h:0,a:0,d:0,m:0},SHs=0,SHm={s:'',t:0};
 var SW={id:-1,at:0,sp:0,df:0},BR={}; /* BR：劇情分支旗標（sword 老匠／hu 酒仙／drunk 微醺至第幾關／book 生死簿），重新開局清除 */ /* 第十一關選劍試煉的永久加成（攻／速／防），併入 EQB */
 /* ---------- 裝備掉落 ---------- */
 const DROP=.07; /* 基礎掉落率；實際 = DROP + 敵人賞金*.006，頭目必掉 2 件 */
-const RAR=['凡','良','精','絕'],RC=['#8a8a82','#3f8f6b','#2f5f94','#c2761a'];
+const RAR=['凡','良','精','絕','神','聖'],RC=['#8a8a82','#3f8f6b','#2f5f94','#c2761a','#8a3fb0','#c4282d'];
 const GS={
- w:{g:'劍',v:[5,9,14,21],n:[['鏽鐵劍','銅環刀'],['青鋼劍','柳葉刀'],['寒霜劍','斬馬刀'],['赤霄劍','龍泉劍']]},
- a:{g:'甲',v:[4,7,11,16],n:[['粗布衣','麻衣'],['皮甲','藤甲'],['鎖子甲','銅鎧'],['玄鐵甲','金絲甲']]},
- b:{g:'靴',v:[4,7,10,14],n:[['草鞋','麻履'],['布靴','牛皮靴'],['雲紋履','踏雪靴'],['追風靴','凌波履']]},
- p:{g:'佩',v:[8,15,24,36],m:[.3,.6,1,1.5],n:[['木珠','骨墜'],['銅佩','玉環'],['青玉佩','墨玉墜'],['龍紋佩','太極玉']]}};
+ w:{g:'劍',v:[5,9,14,21,30,42],n:[['鏽鐵劍','銅環刀'],['青鋼劍','柳葉刀'],['寒霜劍','斬馬刀'],['赤霄劍','龍泉劍'],['軒轅劍','湛盧劍'],['太阿劍','純鈞劍']]},
+ a:{g:'甲',v:[4,7,11,16,22,28],n:[['粗布衣','麻衣'],['皮甲','藤甲'],['鎖子甲','銅鎧'],['玄鐵甲','金絲甲'],['龍鱗甲','天蠶甲'],['鳳羽甲','無縫天衣']]},
+ b:{g:'靴',v:[4,7,10,14,19,24],n:[['草鞋','麻履'],['布靴','牛皮靴'],['雲紋履','踏雪靴'],['追風靴','凌波履'],['御風靴','踏雲靴'],['縮地靴','飛仙履']]},
+ p:{g:'佩',v:[8,15,24,36,52,72],m:[.3,.6,1,1.5,2.2,3],n:[['木珠','骨墜'],['銅佩','玉環'],['青玉佩','墨玉墜'],['龍紋佩','太極玉'],['乾坤佩','青龍佩'],['混元珠','天機玉']]}};
 var EQ={},EQB={at:0,df:0,sp:0,hp:0,mp:0};
 function eqCalc(){const o=EQB.hp;EQB={at:0,df:0,sp:0,hp:0,mp:0};for(const k in EQ){const q=EQ[k];if(!q)continue;if(k==='w')EQB.at+=q.v/100;else if(k==='a')EQB.df+=q.v/100;else if(k==='b')EQB.sp+=q.v/100;else{EQB.hp+=q.v;EQB.mp+=q.m}}EQB.at+=SW.at+(SW.q?.3:0)+(BR.sword==='forge'?.1:0);EQB.sp+=SW.sp+(BR.book==='skip'?.05:0);EQB.df+=SW.df+(BR.sword==='armor'?.08:0)+(BR.book==='read'?.05:0);EQB.df=Math.min(.5,EQB.df);return o}
 function gearVal(q){return q?q.r*1000+q.v:-1}
 function gearTxt(q){return q.s==='w'?'傷害 +'+q.v+'%':q.s==='a'?'減傷 '+q.v+'%':q.s==='b'?'移速 +'+q.v+'%':'血上限 +'+q.v+'　氣回復 +'+q.m}
 function dropGear(e){const d=ED[e.k],bs=e===boss;if(!bs&&Math.random()>DROP+d.g*.006)return;
  for(let n=bs?2:1,i=0;i<n;i++){const s='wabp'[Math.random()*4|0],G=GS[s],q=Math.random()+Math.max(0,LV-NF)*.05+(d.g>10?.08:0);
-  let r=bs?(Math.random()<.4?3:2):q>1?3:q>.82?2:q>.52?1:0;
+  let r;if(bs){const x=Math.random()-Math.max(0,LV-NF)*.008;r=x<.03?5:x<.13?4:x<.5?3:2}else r=q>1.5?5:q>1.25?4:q>1?3:q>.82?2:q>.52?1:0;
   const it={s,r,g:G.g,n:G.n[r][Math.random()*2|0],v:Math.max(1,Math.round(G.v[r]*(1+Math.max(0,LV-NF)*.1)*R(.88,1.12))),m:G.m?+(G.m[r]*(1+Math.max(0,LV-NF)*.08)*R(.9,1.1)).toFixed(1):0};
   PK.push({x:e.x+i*8,y:GY-30,vx:R(-70,70),vy:R(-330,-250),k:'e',it})}}
 function getGear(it,x,y){const cur=EQ[it.s],c=RC[it.r];
@@ -5702,19 +5702,46 @@ window.toPart2=function(){try{localStorage.setItem('inkP1',JSON.stringify({sp:SP
  if(!setPart(2)){window.__p2go=0;return}window.__carry={UP:UP,EQ:EQ,SW:SW,c:coin};reset();window.__p2go=0;txt('第二章　入朝篇',W/2,150,48,'#b3261e')};
 /* ===== 第一部選擇延續到入朝篇：結局時存檔（localStorage），進第二部時改寫對白、關主與援軍 ===== */
 {
- var SAVED1=0,B9=0,P2HELP=0;
+ var SAVED1=0,B9=0,P2HELP=0,P2IDS=[];
  window.carry2=c=>{let p1=null;try{p1=JSON.parse(localStorage.getItem('inkP1')||'null')}catch(e){}
   if(!c.base)c.base=JSON.parse(JSON.stringify({d:c.dlg,l:c.levels}));
-  const b=JSON.parse(JSON.stringify(c.base)),sp=(p1&&p1.sp)||[],N=sp.filter(v=>v===1||v===3).length,nm=[];
-  for(let i=0;i<22&&nm.length<3;i++)if((sp[i]===1||sp[i]===3)&&i!==17&&CHAPTERS[1].ally[i])nm.push(CHAPTERS[1].ally[i].n);
-  P2HELP=p1?Math.min(.4,N*.04):0;
+  const b=JSON.parse(JSON.stringify(c.base)),sp=(p1&&p1.sp)||[],N=sp.filter(v=>v===1||v===3).length,nm=[],ids=[];
+  for(let i=0;i<22&&nm.length<3;i++)if((sp[i]===1||sp[i]===3)&&i!==17&&CHAPTERS[1].ally[i])(nm.push(CHAPTERS[1].ally[i].n),ids.push(i));
+  P2IDS=ids;P2HELP=p1?Math.min(.4,N*.04):0;
   if(p1)b.d[0].intro.splice(1,0,['青衣女子',N>=14?'一路上你放過的人，都在替你傳話。京城百姓已經在說，墨影劍客只斬惡人。':N>=7?'你一路放過了不少人，他們沒有忘記你。':'你一路殺得太多。京城裡傳的，是個煞星的名字。進了城，別指望有人替我們說話。']);
   if(p1&&nm.length)b.d[8].intro.push(['旁白','忽然，園外傳來喊聲：'+nm.join('、')+'……那些被你放過的人，趕來牽制禁軍了。']);
   if(p1&&sp[17]===2){b.l[7].boss.name='蓑衣刀客';b.d[7]={intro:[['旁白','暗渠水聲潺潺，一個披蓑衣的刀客，立在斷水閘前。'],['蓑衣刀客','我是修羅的同門。他死前託我，若你走到這裡，替他把這條路清乾淨。'],['墨影劍客','他是我師兄……我很抱歉。'],['蓑衣刀客','不必道歉。他最後的話是：師父沒有白死。證明給我看。']],boss:[['蓑衣刀客','來！']],end:[['旁白','刀客收刀入鞘，轉身扳動閘門，渠水轟然退去，露出一條通往宮牆的暗道。'],['蓑衣刀客','東廠的人快追來了。這條路，我替你守。'],['旁白','少年想再開口，刀客已把閘門在身後關上。']]}}
   c.dlg=b.d;c.levels=b.l};
  {const _u=upd;upd=function(dt){_u(dt);
   if(PART===1){if(BR.end&&!SAVED1){SAVED1=1;try{localStorage.setItem('inkP1',JSON.stringify({sp:SPARED.slice(),end:BR.end}))}catch(e){}}else if(!BR.end)SAVED1=0}
-  if(PART===2&&LV===8&&boss&&lock&&!boss.dead&&!B9&&P2HELP>0){B9=1;boss.hp=Math.max(1,Math.round(boss.hp*(1-P2HELP)));txt('援軍牽制！',boss.x,boss.y-170,22,'#c99a2e')}}}
+  if(PART===2&&LV===8&&boss&&lock&&!boss.dead&&!B9){B9=1;p2Guards();if(P2HELP>0){if(P2IDS.length)p2Help();else boss.hp=Math.max(1,Math.round(boss.hp*(1-P2HELP)))}}}}
+  /* 第 9 關：禁軍統領帶 5 名文官長矛護衛；被放過的人（最多 3 位）衝入戰場只打護衛，護衛清完就離開 */
+var P2G=[];
+function p2Guards(){P2G=[];for(let j=0;j<5;j++){const g=spawn('S',cam+W-120-j*90);P2G.push(g)}txt('長矛護衛隊！',cam+W-200,GY-190,22,'#b3261e')}
+function p2Help(){const h=P2IDS.length;
+ txt('援軍來了！',cam+W/2,GY-210,22,'#c99a2e');
+ P2IDS.forEach((id,i)=>{const bc=CHAPTERS[1].levels[id].boss,d=CHAPTERS[1].ally[id];
+  const e={k:bc.k,x:0,y:GY,vx:0,f:1,hp:100,mx:100,st:0,tm:0,cd:0,fl:0,sw:-1,mv:0,chg:0,cs:0,ds:0,ph:0,dead:0,wp:0,ms:0,hs:0,ap:0,sn:Math.random()*6.28,vis:bc.vis,sc:bc.sc||1};
+  const x1=Math.max(cam+60,cam+W-200-i*70),fx=cam-70;e.x=fx;e.f=1;
+  ALYV.push({id,d:{t:'p2',n:d.n,m:d.m},e,ph:'in',t:0,x0:fx,x1,f:1,hi:0,hits:Math.ceil(10/h),sub:0,fired:0,ex:fx});
+  txt('舊友助戰・'+d.n,x1,GY-150-i*24,18,DLGCOL[d.n]||'#3a3a3a')})}
+{const _ah=allyHit;allyHit=function(a){if(a.d.t!=='p2')return _ah(a);const e=a.e,t=P2G.filter(g=>!g.dead&&g.hp>0).sort((u,v)=>Math.abs(u.x-e.x)-Math.abs(v.x-e.x))[0];if(!t){a.hits=0;return}
+ e.f=a.f=t.x>=e.x?1:-1;e.x=t.x-e.f*52;const dm=Math.ceil(t.mx/2);t.hp-=dm;t.fl=.12;t.hs=.3;t.vx+=e.f*170;ink(t.x,t.y-40,8);FX.push({k:'x',x:t.x,y:t.y-40,a:R(0,3),t:0,d:.3});txt('-'+dm,t.x,t.y-100,18,'#c99a2e');if(t.hp<=0)kill(t)}}
+ /* 通關裝備記憶：通關（或第一章結局進第二章）時存下四格裝備，之後新開一局自動帶入 */
+var GSV=0;
+function gearSave(){try{localStorage.setItem('inkGear',JSON.stringify(EQ))}catch(e){}}
+function gearLoad(){try{const o=JSON.parse(localStorage.getItem('inkGear')||'null');if(!o)return null;const r={};for(const k of['w','a','b','p']){const it=o[k];if(it&&GS[k]&&typeof it.r==='number'&&typeof it.v==='number'&&it.r>=0&&it.r<RAR.length)r[k]=it}return Object.keys(r).length?r:null}catch(e){return null}}
+{const _tp=window.toPart2;if(_tp)window.toPart2=function(){gearSave();return _tp.apply(this,arguments)}}
+{const _ug=upd;upd=function(dt){_ug(dt);if(S==='win'){if(!GSV){GSV=1;gearSave()}}else GSV=0}}
+{const _rg=reset;reset=function(){let got=0;if(S!=='lose'&&!window.__carry){const e=gearLoad();if(e){window.__carry={UP:{h:0,a:0,d:0,m:0},EQ:e,SW:{id:-1,at:0,sp:0,df:0},c:0};got=1}}const r=_rg.apply(this,arguments);if(got)txt('承接上次通關的裝備',W/2,150,26,'#c99a2e');return r}}
+ /* 點裝備欄（左上四格）顯示該件裝備的品質、名稱與效果；再點同一格、點別處或 4 秒後收起 */
+var EQTIP=null;
+cv.addEventListener('pointerdown',e=>{if(S!=='play'||DLG||CHO)return;const x=e.offsetX/cv.clientWidth*W,y=e.offsetY/cv.clientHeight*H;let hit=-1;for(let i=0;i<4;i++)if(x>=22+i*27-3&&x<=22+i*27+26&&y>=51&&y<=80)hit=i;EQTIP=hit>=0&&!(EQTIP&&EQTIP.i===hit)?{i:hit,t:T}:null});
+{const _dq=draw;draw=function(){_dq();if(!EQTIP)return;if(S!=='play'||T-EQTIP.t>4){EQTIP=null;return}
+ const k='wabp'[EQTIP.i],q=EQ[k],G=GS[k],nm=['劍','甲','靴','佩'][EQTIP.i],c=q?RC[q.r]:'#7a7a72',px=22,py=82,pw=196,ph=q?50:34;
+ g.save();g.fillStyle='rgba(239,231,210,.96)';g.fillRect(px,py,pw,ph);g.strokeStyle=c;g.lineWidth=2;g.strokeRect(px,py,pw,ph);
+ if(q){tx(RAR[q.r]+'·'+q.n,px+pw/2,py+15,18,c);tx(gearTxt(q),px+pw/2,py+37,14,'#1c1c1c')}else tx(nm+'欄　尚未裝備',px+pw/2,py+18,15,'#5a5a52');
+ g.restore()}}
  {const _ll=loadLevel;loadLevel=function(){B9=0;return _ll.apply(this,arguments)}}
 }
 
