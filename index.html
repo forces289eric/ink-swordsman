@@ -261,20 +261,20 @@ let UP={h:0,a:0,d:0,m:0},SHs=0,SHm={s:'',t:0};
 var SW={id:-1,at:0,sp:0,df:0},BR={}; /* BR：劇情分支旗標（sword 老匠／hu 酒仙／drunk 微醺至第幾關／book 生死簿），重新開局清除 */ /* 第十一關選劍試煉的永久加成（攻／速／防），併入 EQB */
 /* ---------- 裝備掉落 ---------- */
 const DROP=.07; /* 基礎掉落率；實際 = DROP + 敵人賞金*.006，頭目必掉 2 件 */
-const RAR=['凡','良','精','絕','神','聖'],RC=['#8a8a82','#3f8f6b','#2f5f94','#c2761a','#8a3fb0','#c4282d'];
+const RAR=['凡','良','精','絕','神','聖','至聖'],RC=['#8a8a82','#3f8f6b','#2f5f94','#c2761a','#8a3fb0','#c4282d','#d9a400'];
 const GS={
- w:{g:'劍',v:[5,9,14,21,30,42],n:[['鏽鐵劍','銅環刀'],['青鋼劍','柳葉刀'],['寒霜劍','斬馬刀'],['赤霄劍','龍泉劍'],['軒轅劍','湛盧劍'],['太阿劍','純鈞劍']]},
- a:{g:'甲',v:[4,7,11,16,22,28],n:[['粗布衣','麻衣'],['皮甲','藤甲'],['鎖子甲','銅鎧'],['玄鐵甲','金絲甲'],['龍鱗甲','天蠶甲'],['鳳羽甲','無縫天衣']]},
- b:{g:'靴',v:[4,7,10,14,19,24],n:[['草鞋','麻履'],['布靴','牛皮靴'],['雲紋履','踏雪靴'],['追風靴','凌波履'],['御風靴','踏雲靴'],['縮地靴','飛仙履']]},
- p:{g:'佩',v:[8,15,24,36,52,72],m:[.3,.6,1,1.5,2.2,3],n:[['木珠','骨墜'],['銅佩','玉環'],['青玉佩','墨玉墜'],['龍紋佩','太極玉'],['乾坤佩','青龍佩'],['混元珠','天機玉']]}};
+ w:{g:'劍',v:[5,9,14,21,30,42,60],n:[['鏽鐵劍','銅環刀'],['青鋼劍','柳葉刀'],['寒霜劍','斬馬刀'],['赤霄劍','龍泉劍'],['軒轅劍','湛盧劍'],['太阿劍','純鈞劍'],['誅仙劍','斬龍劍','天問劍']]},
+ a:{g:'甲',v:[4,7,11,16,22,28,40],n:[['粗布衣','麻衣'],['皮甲','藤甲'],['鎖子甲','銅鎧'],['玄鐵甲','金絲甲'],['龍鱗甲','天蠶甲'],['鳳羽甲','無縫天衣'],['不周山甲','九天玄女衣','太初神鎧']]},
+ b:{g:'靴',v:[4,7,10,14,19,24,34],n:[['草鞋','麻履'],['布靴','牛皮靴'],['雲紋履','踏雪靴'],['追風靴','凌波履'],['御風靴','踏雲靴'],['縮地靴','飛仙履'],['凌霄履','踏月無痕靴','逐日靴']]},
+ p:{g:'佩',v:[8,15,24,36,52,72,100],m:[.3,.6,1,1.5,2.2,3,4.5],n:[['木珠','骨墜'],['銅佩','玉環'],['青玉佩','墨玉墜'],['龍紋佩','太極玉'],['乾坤佩','青龍佩'],['混元珠','天機玉'],['鴻蒙珠','河圖洛書','盤古斧心']]}};
 var EQ={},EQB={at:0,df:0,sp:0,hp:0,mp:0};
 function eqCalc(){const o=EQB.hp;EQB={at:0,df:0,sp:0,hp:0,mp:0};for(const k in EQ){const q=EQ[k];if(!q)continue;if(k==='w')EQB.at+=q.v/100;else if(k==='a')EQB.df+=q.v/100;else if(k==='b')EQB.sp+=q.v/100;else{EQB.hp+=q.v;EQB.mp+=q.m}}EQB.at+=SW.at+(SW.q?.3:0)+(BR.sword==='forge'?.1:0);EQB.sp+=SW.sp+(BR.book==='skip'?.05:0);EQB.df+=SW.df+(BR.sword==='armor'?.08:0)+(BR.book==='read'?.05:0);EQB.df=Math.min(.5,EQB.df);return o}
 function gearVal(q){return q?q.r*1000+q.v:-1}
 function gearTxt(q){return q.s==='w'?'傷害 +'+q.v+'%':q.s==='a'?'減傷 '+q.v+'%':q.s==='b'?'移速 +'+q.v+'%':'血上限 +'+q.v+'　氣回復 +'+q.m}
 function dropGear(e){const d=ED[e.k],bs=e===boss;if(!bs&&Math.random()>DROP+d.g*.006)return;
  for(let n=bs?2:1,i=0;i<n;i++){const s='wabp'[Math.random()*4|0],G=GS[s],q=Math.random()+Math.max(0,LV-NF)*.05+(d.g>10?.08:0);
-  let r;if(bs){const x=Math.random()-Math.max(0,LV-NF)*.008;r=x<.03?5:x<.13?4:x<.5?3:2}else r=q>1.5?5:q>1.25?4:q>1?3:q>.82?2:q>.52?1:0;
-  const it={s,r,g:G.g,n:G.n[r][Math.random()*2|0],v:Math.max(1,Math.round(G.v[r]*(1+Math.max(0,LV-NF)*.1)*R(.88,1.12))),m:G.m?+(G.m[r]*(1+Math.max(0,LV-NF)*.08)*R(.9,1.1)).toFixed(1):0};
+  let r;if(bs){const x=Math.random()-Math.max(0,LV-NF)*.008;r=x<.03?5:x<.13?4:x<.5?3:2}else r=q>1.5?5:q>1.25?4:q>1?3:q>.82?2:q>.52?1:0;if(r===5&&Math.random()<(bs?.2:.04))r=6;
+  const it={s,r,g:G.g,n:G.n[r][Math.random()*G.n[r].length|0],v:Math.max(1,Math.round(G.v[r]*(1+Math.max(0,LV-NF)*.1)*R(.88,1.12))),m:G.m?+(G.m[r]*(1+Math.max(0,LV-NF)*.08)*R(.9,1.1)).toFixed(1):0};
   PK.push({x:e.x+i*8,y:GY-30,vx:R(-70,70),vy:R(-330,-250),k:'e',it})}}
 function getGear(it,x,y){const cur=EQ[it.s],c=RC[it.r];
  if(gearVal(it)>gearVal(cur)){if(cur)coin+=3+cur.r*5;const oh=EQB.hp;EQ[it.s]=it;eqCalc();const dh=EQB.hp-oh;P.mh+=dh;if(dh>0)P.hp+=dh;P.hp=Math.min(P.hp,P.mh);
