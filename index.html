@@ -2095,7 +2095,7 @@ function playL(th,s,dl,lv){if(th.guren){gurenL(th,s,dl,lv);return}if(th.bossa){b
 function setTrack(k,ct,th){if(tb){const o=tb;o.gain.setTargetAtTime(0,ct,.35);setTimeout(()=>{try{o.disconnect()}catch(_){}},2600)}const ac=SFX.ac();tb=ac.createGain();tb.gain.value=0;tb.connect(SFX.mg());bus=tb;tkey=k;cth=th;sd=th?th.sd:SD;step=0;cur=-1;nt=ct+.05}
 function sched(){const ac=SFX.ac();if(!ac)return;const ct=ac.currentTime;if(nt<ct-.3)nt=ct+.05;
  const lv=S==='menu'||S==='shop'?0:S==='play'?(boss&&!boss.dead?2:1):-1,tg=lv<0?0:lv===0?1.9:1.6;
- if(lv>=0){const k=(lv===0||!LVL_BGM)?'O':'L'+LV;if(k!==tkey)setTrack(k,ct,k==='O'?null:LT[LV])}
+ if(lv>=0){const mi=(PART===2&&LV===11)?21:LV; /* 第二章第12關沿用第一章第22關配樂 */ const k=(lv===0||!LVL_BGM)?'O':'L'+mi;if(k!==tkey)setTrack(k,ct,k==='O'?null:LT[mi])}
  if(!bus)return;
  if(tg!==cur){cur=tg;bus.gain.setTargetAtTime(tg,ct,.5)}
  if(lv<0)return;
