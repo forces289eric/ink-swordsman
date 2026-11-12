@@ -32,6 +32,32 @@ small{position:fixed;top:4px;left:0;right:0;text-align:center;opacity:.55;font-s
 @media(orientation:landscape) and (max-height:380px){#pad{width:150px;height:66px}#act{transform:scale(.88);transform-origin:right bottom}}
 #mute{position:fixed;top:max(6px,env(safe-area-inset-top));right:max(8px,env(safe-area-inset-right));z-index:5;width:36px;height:36px;border-radius:50%;border:2px solid var(--ink);background:var(--pn);color:var(--ink);font-size:17px;padding:0;opacity:.6;touch-action:none}
 #fs{position:fixed;top:max(6px,env(safe-area-inset-top));right:calc(max(8px,env(safe-area-inset-right)) + 44px);z-index:5;width:36px;height:36px;border-radius:50%;border:2px solid var(--ink);background:var(--pn);color:var(--ink);font-size:18px;padding:0;opacity:.6;touch-action:none}
+</style><style id="q3css">
+#q3ov{animation:q3f .5s ease both;background:radial-gradient(ellipse at 50% 35%,rgba(70,56,46,.82),rgba(10,8,7,.95))}
+@keyframes q3f{from{opacity:0}to{opacity:1}}
+@keyframes q3r{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.q3p>*{animation:q3r .55s ease both}
+.q3p>:nth-child(2){animation-delay:.1s}.q3p>:nth-child(3){animation-delay:.2s}.q3p>:nth-child(4){animation-delay:.3s}.q3p>:nth-child(5){animation-delay:.4s}.q3p>:nth-child(n+6){animation-delay:.5s}
+#q3ov:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 20% 85%,rgba(255,255,255,.07),transparent 55%),radial-gradient(ellipse at 85% 15%,rgba(232,184,74,.06),transparent 50%);animation:q3m 14s ease-in-out infinite alternate}
+@keyframes q3m{from{transform:translateX(-5%)}to{transform:translateX(5%)}}
+.q3p::-webkit-scrollbar{width:6px}.q3p::-webkit-scrollbar-thumb{background:#7a1c14;border-radius:3px}
+.q3mist{animation:q3d 9s ease-in-out infinite alternate}@keyframes q3d{from{transform:translateX(-16px)}to{transform:translateX(16px)}}
+.q3lt{animation:q3l 2.4s ease-in-out infinite}@keyframes q3l{0%,100%{opacity:1}50%{opacity:.4}}
+.q3pulse{animation:q3u 2s ease-in-out infinite}@keyframes q3u{0%,100%{opacity:1}50%{opacity:.62}}
+g[data-i]:hover{filter:drop-shadow(0 0 4px #b3261e)}
+.q3b:before{content:"◆";color:#b3261e;margin-right:10px;font-size:11px}.q3b:after{content:"◆";color:#b3261e;margin-left:10px;font-size:11px}
+.q3b:hover:before,.q3b:hover:after,.q3b:active:before,.q3b:active:after{color:#e8b84a}
+@keyframes q3s{0%{opacity:0;transform:scale(1.8) rotate(-12deg)}60%{opacity:1;transform:scale(.95) rotate(-4deg)}100%{transform:scale(1) rotate(-4deg)}}
+.q3p{position:relative;max-width:560px;width:100%;max-height:94vh;overflow:auto;padding:24px 20px;color:#2a2420;text-align:center;
+ background:radial-gradient(circle at 20% 15%,rgba(255,255,255,.55),transparent 55%),radial-gradient(circle at 85% 90%,rgba(150,110,60,.18),transparent 50%),#f1e8d0;
+ border:2px solid #2a2420;box-shadow:inset 0 0 0 7px #f1e8d0,inset 0 0 0 8px rgba(179,38,30,.55),0 0 0 6px #f1e8d0,0 0 0 8px #2a2420,0 20px 60px rgba(0,0,0,.65);animation:q3r .5s ease both}
+.q3b{display:block;width:100%;margin:9px 0;padding:12px 14px;border:1.5px solid #2a2420;background:linear-gradient(#f8f1de,#eadfc2);font:bold 17px KaiTi,STKaiti,'Noto Serif TC',serif;color:#2a2420;cursor:pointer;transition:.15s;box-shadow:2px 3px 0 rgba(42,36,32,.35)}
+.q3b:hover,.q3b:active{background:#2a2420;color:#f1e8d0;transform:translate(1px,1px);box-shadow:1px 2px 0 rgba(42,36,32,.35)}
+.q3k{display:block;width:100%;margin:10px 0;padding:12px 14px 12px;border:1.5px solid #2a2420;border-top:6px solid #7a1c14;border-bottom:6px solid #7a1c14;background:#f8f0d8;text-align:left;font:16px/1.8 KaiTi,STKaiti,'Noto Serif TC',serif;color:#2a2420;cursor:pointer;box-shadow:2px 3px 0 rgba(42,36,32,.3);transition:.15s}
+.q3k:hover,.q3k:active{background:#efe2bd;transform:translateY(-2px)}
+.q3q{border-left:4px solid #b3261e;background:rgba(42,36,32,.05);padding:10px 14px;text-align:left;line-height:1.9;font-size:17px;margin:0 0 12px}
+.q3seal{display:inline-block;background:#b3261e;color:#f1e8d0;padding:2px 9px;font-size:14px;letter-spacing:.15em;border-radius:2px;transform:rotate(-4deg);animation:q3s .45s ease both}
+.q3big{font-size:56px;font-weight:bold;letter-spacing:.2em;margin:6px 0 10px;animation:q3s .6s ease both}
 </style></head><body>
 <canvas id="c" width="720" height="400"></canvas>
 <button id="mute" aria-label="音效">🔊</button><button id="fs" aria-label="全螢幕">⛶</button>
@@ -468,7 +494,7 @@ function upd(dt){const p=P;if(CH===12&&!p.mv&&p.at<=0&&p.dash<=0&&p.y>=GY-1&&Mat
  DT=DT.filter(d=>d.x>cam-50&&d.x<cam+W+50);
  for(const k of PK){k.vy+=900*dt;k.x+=k.vx*dt;k.y+=k.vy*dt;if(k.y>GY-12){k.y=GY-12;k.vy=0;k.vx*=.8}const dx=P.x-k.x;if(boss&&boss.dead&&winT<1.2){const q=Math.min(1,dt*6);k.x+=dx*q;k.y+=(P.y-34-k.y)*q;k.vy=0;k.vx=0}else if(Math.abs(dx)<70&&Math.abs(P.y-34-k.y)<80)k.x+=Math.sign(dx)*220*dt;if(Math.abs(dx)<22&&Math.abs(P.y-34-k.y)<60){k.got=1;if(k.k==='c'){coin+=3;score+=10;txt('+10',k.x,k.y-20,14,'#c99a2e')}else if(k.k==='e')getGear(k.it,k.x,k.y);else{P.hp=Math.min(P.mh,P.hp+25);txt('療傷 +25',k.x,k.y-24,16,'#3f8f6b')}}}
  PK=PK.filter(k=>!k.got);
- if(boss&&boss.dead){winT-=dt;if(winT<=0&&(!PK.length||winT<-4)&&LV<LEVELS.length-1){LV++;P.hp=Math.min(P.mh,P.hp+35);P.mp=100;S='shop';SHs=0;SHm={s:'',t:0};endT=0;for(const k in hold)hold[k]=0}else if(winT<=0&&(!PK.length||winT<-4)){if(PART===1&&BR.end&&BR.end!=='A'&&window.toPart2){if(!window.__p2go){window.__p2go=1;setTimeout(window.toPart2,0)}return}S='win';endT=0;score+=Math.round(P.hp)*5;try{if(score>best){best=score;localStorage.setItem('inkbest',best)}}catch(_){}}}
+ if(boss&&boss.dead){winT-=dt;if(winT<=0&&(!PK.length||winT<-4)&&LV<LEVELS.length-1){LV++;P.hp=Math.min(P.mh,P.hp+35);P.mp=100;S='shop';SHs=0;SHm={s:'',t:0};endT=0;for(const k in hold)hold[k]=0}else if(winT<=0&&(!PK.length||winT<-4)){if(PART===2&&LV===11&&BR.end==='D1'&&window.__q3&&window.__q3BR!==BR){if(!window.__q3run)window.__q3();return}if(PART===1&&BR.end&&BR.end!=='A'&&window.toPart2){if(!window.__p2go){window.__p2go=1;setTimeout(window.toPart2,0)}return}S='win';endT=0;score+=Math.round(P.hp)*5;try{if(score>best){best=score;localStorage.setItem('inkbest',best)}}catch(_){}}}
  for(const k in jp)jp[k]=0}
 function upFx(dt){for(const a of PA){a.vy+=(a.g||600)*dt;a.x+=a.vx*dt;a.y+=a.vy*dt;a.l-=dt}PA=PA.filter(a=>a.l>0);for(const f of FX)f.t+=dt;for(const t of ST)t.t+=dt;ST=ST.filter(t=>t.t<8);FX=FX.filter(f=>f.t<f.d);for(const t of TX){t.t+=dt;t.y-=22*dt}TX=TX.filter(t=>t.t<1.1)}
 /* ---------- 機關師：機關人 ---------- */
@@ -1632,9 +1658,9 @@ g.scale(Math.sign(d.vx),1);g.fillStyle='rgba(28,28,28,.85)';g.beginPath();g.move
   if(lvT>0&&S==='play'){const a=cl(lvT,0,1);tx('第'+CN[LV]+'關',W/2,100,44,'#b3261e',a);tx(LEVELS[LV].name,W/2,146,24,'#1c1c1c',a)}
   if(boss&&!boss.dead){tx(LEVELS[LV].boss.name,W/2,26,18,'#7a1c14');bar(W/2-130,40,260,10,boss.hp/boss.mx,'#b3261e')}}
  if(S!=='play'){g.fillStyle='rgba(239,231,210,.72)';g.fillRect(0,0,W,H);
-  if(S==='shop')drawShop();else if(S==='menu'){tx('墨影劍客',W/2,130,72,'#1c1c1c');tx(PART===1?'江湖行 ‧ 一人一劍殺出重圍':'入朝篇 ‧ 帳本見光',W/2,196,22,'#7a1c14');tx('點擊畫面或按 J 開始',W/2,260,24,'#1c1c1c',.6+.4*Math.sin(T*4));tx('最高分 '+best,W/2,310,16,'#1c1c1c');if(CHAPTERS[2]){tx('第'+(PART===1?'一':'二')+'部　點此切換',W-86,296,14,'#7a1c14')}['墨影劍客','素弦','丹青','鐵山','機關師','火藥師','幽簫','藥師','長槍筆客','鞭客','雷法道人','紙傘女俠','硯墨書生','蓑笠釣叟','墨獸使','飛羽射手','鑄劍師','棋聖','書聖','傀儡師','鼓手','撐篙船夫','紙鳶師','舞龍師','喚魂師','鐵炮手','太極宗師','影刺客'].forEach((n,i)=>tx(CH===i?'【'+n+'】':n,W/16+(i%8)*(W/8),326+Math.floor(i/8)*16,14,['#b3261e','#2f7f6e','#34465c','#5b636b','#7a4fa0','#d4572a','#5a6a9a','#3f8f4a','#c0392b','#a8325e','#3d5fa8','#4a6a7a','#3d3d46','#3f7a78','#b8793a','#6b7f3a','#c2441e','#3a3a4a','#3b4a7a','#9a2f3a','#c99a2e','#2f6f8a','#c8553d','#d4352a','#3f9a78','#b5651d','#4a6a7a','#7a1c2a'][i],CH===i?1:.4));tx('←→ 或點名字選角　'+['近身三連斬 ‧ 劍氣 ‧ 閃避','撥弦遠攻 ‧ 絕招〈一曲肝腸斷〉原地坐下撫琴・全場連環音波 ‧ 滑翔','揮毫畫鳥竹山 ‧ 書「斬」字訣','烈焰重刀 ‧ 震地 ‧ 鐵肩衝撞 ‧ 皮厚','機關弩連射 ‧ 召喚機關人 ‧ 限時自爆','火藥炸彈 ‧ 連環爆 ‧ 閃避留地雷','簫聲穿透 ‧ 鎮魂曲震退眾敵 ‧ 身影飄忽','拋藥瓶化毒霧 ‧ 回春霧療傷 ‧ 被動緩慢回血','長槍巨筆突刺穿透 ‧ 旋風長槍筆陣震退四方 ‧ 攻擊距離長','長鞭貫穿一排 ‧ 第三鞭拉近敵人 ‧ 纏鞭拽回並擊暈全場','引雷符落雷範圍轟擊(先現預警圈) ‧ 天雷陣連環劈落四方','紙傘旋斬 ‧ 墨蝶雨 ‧ 傘面擋下暗器 ‧ 閃避化墨點','巨硯重擊 ‧ 末擊震地放墨浪 ‧ 潑墨噴墨浪 ‧ 靜立研墨回氣 ‧ 閃避穿身','竿抽三連 ‧ 第三式甩鉤拉近定身 ‧ 寒江獨釣冰封墨魚 ‧ 靜立回氣 ‧ 蓑衣減傷','墨狐墨雀雙寵自動撲咬 ‧ 輕擊並號令寵物出擊 ‧ 墨潤靈寵為寵物補血復甦 ‧ 墨雀自動追敵','連珠箭三式 ‧ 按住攻擊蓄力穿雲箭貫穿一排 ‧ 箭雨覆蓋前方 ‧ 空中蓄力緩降','重錘三連 ‧ 火星四濺 ‧ 神兵熔鑄震出烈焰衝擊波(裝備越多越痛) ‧ 皮粗肉厚','黑白落子遠攻 ‧ 棋子落地成陣 ‧ 連線圍殺全場(越多子越痛)','飛頁竹簡遠攻 ‧ 命中集字(每關換一句詩) ‧ 展卷重擊 ‧ 揮毫放出集字追殺(集滿五字詩成加倍)','牽絲連擊拉近敵人 ‧ 第三式絲網全場 ‧ 木偶登台助戰 ‧ 引爆傀儡連環爆','鼓點合拍加傷疊氣 ‧ 第三式震地鼓 ‧ 萬鼓齊鳴四拍震波(合拍越準越痛)','長篙點掃 ‧ 撐篙躍落水波 ‧ 揮篙撥回飛刀 ‧ 渡江破浪 ‧ 水關殘血落水即斃 ‧ 穩舟減傷','紙鳶斜掠 ‧ 第二式拉回敵人 ‧ 第三式迴旋鳶舞 ‧ 風起萬鳶俯衝落地 ‧ 空中按住跳躍乘風滑翔 ‧ 紙鳶擋暗器','龍首前撲 ‧ 第二式龍尾橫掃前後 ‧ 第三式盤龍繞身震暈 ‧ 金龍狂舞貫穿全場 ‧ 龍身護體擋暗器','魂火連射 ‧ 第三式召骷髏兵(最多四名) ‧ 喚出亡靈巨像並使全軍狂化 ‧ 亡靈消散時爆發','火炮轟擊(範圍爆炸) ‧ 第三發重炮 ‧ 萬炮齊發天降炮彈 ‧ 後座力強行動較慢','太極掌三式 ‧ 受傷自動反震四周敵人並回血 ‧ 第三式推掌回血 ‧ 太極護體(吸收所有傷害・加倍反震)','匕首快斬(背後加傷) ‧ 第三式影襲瞬移敵背 ‧ 閃避留殘影(到期自爆) ‧ 影分身自動追擊敵人(最多兩個，到期自爆) ‧ 速度快血量薄'][CH],W/2,394,13,'#1c1c1c',.7);if(CH&&HPN[CH])tx('〈'+['墨影劍客','素弦','丹青','鐵山','機關師','火藥師','幽簫','藥師','長槍筆客','鞭客','雷法道人','紙傘女俠','硯墨書生','蓑笠釣叟','墨獸使','飛羽射手','鑄劍師','棋聖','書聖','傀儡師','鼓手','撐篙船夫','紙鳶師','舞龍師','喚魂師','鐵炮手','太極宗師','影刺客'][CH]+'〉 '+HPN[CH],W/2,374,16,'#7a1c14')}
+  if(S==='shop')drawShop();else if(S==='menu'){tx('墨影劍客',W/2,130,72,'#1c1c1c');tx(window.__p3sel?'尋龍篇 ‧ 推理解謎':PART===1?'江湖行 ‧ 一人一劍殺出重圍':'入朝篇 ‧ 帳本見光',W/2,196,22,'#7a1c14');tx('點擊畫面或按 J 開始',W/2,260,24,'#1c1c1c',.6+.4*Math.sin(T*4));tx('最高分 '+best,W/2,310,16,'#1c1c1c');if(CHAPTERS[2]){tx('第'+(window.__p3sel?'三':PART===1?'一':'二')+'部　點此切換',W-86,296,14,'#7a1c14')}['墨影劍客','素弦','丹青','鐵山','機關師','火藥師','幽簫','藥師','長槍筆客','鞭客','雷法道人','紙傘女俠','硯墨書生','蓑笠釣叟','墨獸使','飛羽射手','鑄劍師','棋聖','書聖','傀儡師','鼓手','撐篙船夫','紙鳶師','舞龍師','喚魂師','鐵炮手','太極宗師','影刺客'].forEach((n,i)=>tx(CH===i?'【'+n+'】':n,W/16+(i%8)*(W/8),326+Math.floor(i/8)*16,14,['#b3261e','#2f7f6e','#34465c','#5b636b','#7a4fa0','#d4572a','#5a6a9a','#3f8f4a','#c0392b','#a8325e','#3d5fa8','#4a6a7a','#3d3d46','#3f7a78','#b8793a','#6b7f3a','#c2441e','#3a3a4a','#3b4a7a','#9a2f3a','#c99a2e','#2f6f8a','#c8553d','#d4352a','#3f9a78','#b5651d','#4a6a7a','#7a1c2a'][i],CH===i?1:.4));tx('←→ 或點名字選角　'+['近身三連斬 ‧ 劍氣 ‧ 閃避','撥弦遠攻 ‧ 絕招〈一曲肝腸斷〉原地坐下撫琴・全場連環音波 ‧ 滑翔','揮毫畫鳥竹山 ‧ 書「斬」字訣','烈焰重刀 ‧ 震地 ‧ 鐵肩衝撞 ‧ 皮厚','機關弩連射 ‧ 召喚機關人 ‧ 限時自爆','火藥炸彈 ‧ 連環爆 ‧ 閃避留地雷','簫聲穿透 ‧ 鎮魂曲震退眾敵 ‧ 身影飄忽','拋藥瓶化毒霧 ‧ 回春霧療傷 ‧ 被動緩慢回血','長槍巨筆突刺穿透 ‧ 旋風長槍筆陣震退四方 ‧ 攻擊距離長','長鞭貫穿一排 ‧ 第三鞭拉近敵人 ‧ 纏鞭拽回並擊暈全場','引雷符落雷範圍轟擊(先現預警圈) ‧ 天雷陣連環劈落四方','紙傘旋斬 ‧ 墨蝶雨 ‧ 傘面擋下暗器 ‧ 閃避化墨點','巨硯重擊 ‧ 末擊震地放墨浪 ‧ 潑墨噴墨浪 ‧ 靜立研墨回氣 ‧ 閃避穿身','竿抽三連 ‧ 第三式甩鉤拉近定身 ‧ 寒江獨釣冰封墨魚 ‧ 靜立回氣 ‧ 蓑衣減傷','墨狐墨雀雙寵自動撲咬 ‧ 輕擊並號令寵物出擊 ‧ 墨潤靈寵為寵物補血復甦 ‧ 墨雀自動追敵','連珠箭三式 ‧ 按住攻擊蓄力穿雲箭貫穿一排 ‧ 箭雨覆蓋前方 ‧ 空中蓄力緩降','重錘三連 ‧ 火星四濺 ‧ 神兵熔鑄震出烈焰衝擊波(裝備越多越痛) ‧ 皮粗肉厚','黑白落子遠攻 ‧ 棋子落地成陣 ‧ 連線圍殺全場(越多子越痛)','飛頁竹簡遠攻 ‧ 命中集字(每關換一句詩) ‧ 展卷重擊 ‧ 揮毫放出集字追殺(集滿五字詩成加倍)','牽絲連擊拉近敵人 ‧ 第三式絲網全場 ‧ 木偶登台助戰 ‧ 引爆傀儡連環爆','鼓點合拍加傷疊氣 ‧ 第三式震地鼓 ‧ 萬鼓齊鳴四拍震波(合拍越準越痛)','長篙點掃 ‧ 撐篙躍落水波 ‧ 揮篙撥回飛刀 ‧ 渡江破浪 ‧ 水關殘血落水即斃 ‧ 穩舟減傷','紙鳶斜掠 ‧ 第二式拉回敵人 ‧ 第三式迴旋鳶舞 ‧ 風起萬鳶俯衝落地 ‧ 空中按住跳躍乘風滑翔 ‧ 紙鳶擋暗器','龍首前撲 ‧ 第二式龍尾橫掃前後 ‧ 第三式盤龍繞身震暈 ‧ 金龍狂舞貫穿全場 ‧ 龍身護體擋暗器','魂火連射 ‧ 第三式召骷髏兵(最多四名) ‧ 喚出亡靈巨像並使全軍狂化 ‧ 亡靈消散時爆發','火炮轟擊(範圍爆炸) ‧ 第三發重炮 ‧ 萬炮齊發天降炮彈 ‧ 後座力強行動較慢','太極掌三式 ‧ 受傷自動反震四周敵人並回血 ‧ 第三式推掌回血 ‧ 太極護體(吸收所有傷害・加倍反震)','匕首快斬(背後加傷) ‧ 第三式影襲瞬移敵背 ‧ 閃避留殘影(到期自爆) ‧ 影分身自動追擊敵人(最多兩個，到期自爆) ‧ 速度快血量薄'][CH],W/2,394,13,'#1c1c1c',.7);if(CH&&HPN[CH])tx('〈'+['墨影劍客','素弦','丹青','鐵山','機關師','火藥師','幽簫','藥師','長槍筆客','鞭客','雷法道人','紙傘女俠','硯墨書生','蓑笠釣叟','墨獸使','飛羽射手','鑄劍師','棋聖','書聖','傀儡師','鼓手','撐篙船夫','紙鳶師','舞龍師','喚魂師','鐵炮手','太極宗師','影刺客'][CH]+'〉 '+HPN[CH],W/2,374,16,'#7a1c14')}
   else{tx(S==='win'?ENDT():'英雄末路',W/2,120,64,S==='win'?'#b3261e':'#1c1c1c');tx('銀兩 '+coin+'　得分 '+score+'　最高 '+best,W/2,190,22,'#1c1c1c');if(S==='win'){tx(PART===2?P2WIN1():BR.end==='D1'?'真相與帳本一同成灰，'+(CH?HNAME():'墨影劍客')+'倒在午門。':CH?'二十二關過盡，'+HNAME()+'仍穩穩站在絕巔。':'二十二關過盡，墨影劍客的劍仍在鞘中。',W/2,232,20,'#3a342a');tx(PART===2?P2WIN2():winLine(),W/2,260,20,'#3a342a');tx(winCnt(),W/2,288,16,'#7a1c14');tx(ENDL(),W/2,314,16,'#3a342a')}if(endT>.6)tx(S==='lose'?'點擊畫面或按 J 重打第'+CN[LV]+'關':'點擊畫面或按 J 再戰',W/2,S==='win'?356:260,24,'#7a1c14',.6+.4*Math.sin(T*4))}}}
-cv.addEventListener('pointerdown',e=>{if(S==='shop'){if(endT>.6)shopTap(e.offsetX/cv.clientWidth*W,e.offsetY/cv.clientHeight*H);return}if(S==='menu'){const x=e.offsetX/cv.clientWidth*W,y=e.offsetY/cv.clientHeight*H;if(CHAPTERS[2]&&y>282&&y<=318&&x>W-170){setPart(PART===1?2:1);return}if(y>318){if(y<384)CH=Math.max(0,Math.min(27,Math.min(3,Math.floor((y-318)/16))*8+Math.floor(x/(W/8))));return}}if(S==='menu'||(S!=='play'&&endT>.6))reset()});
+cv.addEventListener('pointerdown',e=>{if(S==='shop'){if(endT>.6)shopTap(e.offsetX/cv.clientWidth*W,e.offsetY/cv.clientHeight*H);return}if(S==='menu'){const x=e.offsetX/cv.clientWidth*W,y=e.offsetY/cv.clientHeight*H;if(CHAPTERS[2]&&y>282&&y<=318&&x>W-170){if(window.__p3sel){window.__p3sel=0;setPart(1)}else if(PART===1)setPart(2);else window.__p3sel=1;return}if(y>318){if(y<384)CH=Math.max(0,Math.min(27,Math.min(3,Math.floor((y-318)/16))*8+Math.floor(x/(W/8))));return}}if(S==='menu'||(S!=='play'&&endT>.6))reset()});
 reset();S='menu';TX=[];
 let last=performance.now();
 let fn=0,ft=0,fl=0;
@@ -4753,9 +4779,9 @@ function gDraw(){const F='KaiTi,STKaiti,"Noto Serif TC",serif',G=CHO.G,n=G.o.len
 
 /* ===== 第22關結局分支：魔宮的去留（見 GCH[21]）=====
    A 毀去魔宮「宮毀人歸」／B 留下空宮、把人心還回去「江湖太平」／C 坐上宮主之位：依放過人數分成 好「放字旗」(≥14)、中「孤峰之主」(7–13)、壞「魔宮易主」(<7)。 */
-function P2WIN1(){const n=CH?HNAME():'墨影劍客',e=BR.end;return e==='D1'?'真相與帳本一同成灰，'+n+'倒在午門。':e==='D2'?'十二關過盡，'+n+'自刑場上被人拖了下來。':e==='D3'?'十二關過盡，'+n+'活著出了京城，身後是一紙通緝。':e==='D4'?'十二關過盡，'+n+'換了名姓，藏進南方小鎮。':'十二關過盡，'+n+'殺進了皇城深處。'}
-function P2WIN2(){const e=BR.end;return e==='D1'?'朝堂依舊，說真話的人，一個也沒留下。':e==='D2'?'被放過的人沒有忘記，白旗又亮在京城。':e==='D3'?'帳本成灰，兩條人命，記在他的名下。':e==='D4'?'人還活著，江湖上卻再沒有那個名字。':'京城的帳，才剛翻開第一頁。'}
-const ENDN={A:['兵器入爐','魔宮的鐵，重新鑄成了鋤頭。'],B:['孤身入京','最後一塊令牌，領命的是少年自己。'],Cg:['放字旗','白旗入京，一本帳，勝過萬把刀。'],Cm:['孤峰之主','兵入京城，有人敬，有人怕，名冊仍待書寫。'],Cb:['魔宮易主','黑旗入了京，握著它的，換成了另一個人。'],D1:['午門問斬','一場假罪，換走了所有說真話的人。'],D2:['劫法場','白旗在刑場亮起，被放過的人，把三條命從刀下搶了回來。'],D3:['亡命天涯','帳本燒了，少年活著，卻背上了通緝。'],D4:['隱姓埋名','人還活著，名字，已經埋了。']};
+function P2WIN1(){const n=CH?HNAME():'墨影劍客',e=BR.end;return e==='D1'?'十二關過盡，'+n+'在午門刀下撿回一條命。':e==='D2'?'十二關過盡，'+n+'自刑場上被人拖了下來。':e==='D3'?'十二關過盡，'+n+'活著出了京城，身後是一紙通緝。':e==='D4'?'十二關過盡，'+n+'換了名姓，藏進南方小鎮。':'十二關過盡，'+n+'殺進了皇城深處。'}
+function P2WIN2(){const e=BR.end;return e==='D1'?'帳本成灰，可國舅留下了一個不該留的活口。':e==='D2'?'被放過的人沒有忘記，白旗又亮在京城。':e==='D3'?'帳本成灰，兩條人命，記在他的名下。':e==='D4'?'人還活著，江湖上卻再沒有那個名字。':'京城的帳，才剛翻開第一頁。'}
+const ENDN={A:['兵器入爐','魔宮的鐵，重新鑄成了鋤頭。'],B:['孤身入京','最後一塊令牌，領命的是少年自己。'],Cg:['放字旗','白旗入京，一本帳，勝過萬把刀。'],Cm:['孤峰之主','兵入京城，有人敬，有人怕，名冊仍待書寫。'],Cb:['魔宮易主','黑旗入了京，握著它的，換成了另一個人。'],D1:['刀下留人','一場假罪，沒能換走最後一個說真話的人。'],D2:['劫法場','白旗在刑場亮起，被放過的人，把三條命從刀下搶了回來。'],D3:['亡命天涯','帳本燒了，少年活著，卻背上了通緝。'],D4:['隱姓埋名','人還活著，名字，已經埋了。']};
 function ENDT(){return(ENDN[BR.end]||ENDN.B)[0]}
 function ENDL(){return(ENDN[BR.end]||ENDN.B)[1]}
 const GB=()=>BR.book==='read'?[['墨影劍客','師父，我走到了。']]:BR.book==='skip'?[['墨影劍客','師父那一頁，我不看了。你在這裡，就夠了。']]:[];
@@ -5727,7 +5753,7 @@ registerPart(2,{name:'入朝篇',levels:[{name:'京郊驛道',tag:'驛',yd:1,len
 10:{intro:[['旁白','金鑾殿前，四名黑衣高手肅立如鐵。護衛長手按劍柄，目光如冰。'],['廠公護衛長','廠公在殿內等你。勝過我們四人，才有資格見他。'],['墨影劍客','一個一個，還是一起上？'],['廠公護衛長','一起。']],boss:[['廠公護衛長','四人合擊！']],end:[['旁白','四名高手相繼倒下，殿門在風中緩緩洞開。'],['青衣女子','帳本在我這裡。無論結局如何，我陪你進去。']]},
 11:{intro:[['旁白','司禮監深處，燈火通明。廠公端坐簾後，把玩著一枚玉扳指。'],['廠公','來了。咱家等你們很久了。'],['青衣女子','我父親的名字，在你的朱筆下。'],['廠公','哦？你是那個帳房的女兒。咱家記得他，寫得一手好字，可惜不肯改帳。'],['墨影劍客','你的帳，今日清算。'],['廠公','憑你？咱家執掌天下三十年，豈會敗給一個江湖人？']],boss:[['廠公','來人！']],end:[['旁白','廠公倒在朱筆與帳冊之間，玉扳指滾落階前，碎成兩半。'],['廠公','咱家……不過是……這朝廷養出來的一條狗……'],['墨影劍客','誰養的？說！'],['廠公','咱家……不會說……說了……你們，活不過今夜……'],['旁白','帳冊最末一頁，蓋著半枚被朱筆塗去的印。少年當它是廠公的私印，沒有多想。'],['旁白','廠公閉上眼的那一刻，簾外傳來腳步聲，清流領袖與禁軍統領，帶著百官趕到。'],['旁白','禁軍統領的目光，在帳冊與屍身之間停了一瞬。那目光裡，沒有半分驚訝。少年心頭一沉，卻抓不住是哪裡不對。']]}
 });{const d=c.dlg[11],raw=JSON.stringify(d.end);window.NM8=()=>'禁軍副統領';const _ll=loadLevel;loadLevel=function(){if(PART===2)d.end=JSON.parse(raw.split('禁軍統領').join(NM8()));return _ll.apply(this,arguments)}}c.gch[11]=()=>({t:'宦官的下場',a:'廠公臨終不吐一字。罪證在手，百官在側，朝廷該如何收場？',o:[
- {t:'把罪證交給朝廷，依法審判',f:()=>{let p1=null;try{p1=JSON.parse(localStorage.getItem('inkP1')||'null')}catch(e){}const sp1=(p1&&p1.sp)||[],N1=sp1.filter(v=>v===1||v===3).length,fn=[];for(let i=0;i<22&&fn.length<4;i++)if((sp1[i]===1||sp1[i]===3)&&i!==17&&CHAPTERS[1].ally[i])fn.push(CHAPTERS[1].ally[i].n);const ok=N1+SPN()>=14;BR.end=ok?'D2':'D1';const A=[['旁白','少年把帳本與名單'+(SPARED[9]===1?'、大內總管獻上的宮中名冊':'')+'呈上，青兒親手翻開父親那一頁。清流領袖以三十年清名擔保，三司會審，一個不漏。'],[NM8(),'帳本事關重大，今夜由末將率禁軍看守，送刑部封存。'],['旁白','少年握著帳本，想起那一瞬毫無驚訝的目光，遲遲沒有鬆手。'],['清流領袖','你若連朝廷法度都不信，這案子，就只剩刀能審了。老夫以三十年清名擔保。'],['旁白','少年終於鬆手。他解下劍，交到'+NM8()+'手中：「廠公是我殺的，這罪我認。帳，請諸位審。」'],['旁白','當夜，禁軍看守封存的刑部走了水。帳本、名單、口供，燒得只剩一地灰。'],['旁白','罪名早已擬好，只等廠公一死。天亮時，一道懿旨自慈寧宮傳出：墨影劍客勾結魔宮餘孽，弒殺朝廷重臣，謀逆作亂；青衣女子為其同黨；清流領袖結黨包庇，一併收押。'],['青衣女子','真的那本……被人燒了。他們早就等在這裡。'],['清流領袖','老夫查了三十年的案，到頭來，審的是自己。'],['旁白','三日後，午門。監斬的是當朝國舅，太后的親兄。帳冊上被朱筆塗去的那半枚印，正是他府上的。外戚諸府的老爺們，在棚下看熱鬧。']];const B=ok?[['旁白','鼓聲未落，人群裡忽然揚起一面白旗。被放過的人，一個接一個從人群裡走了出來：'+(fn.length?fn.join('、')+'……':'酒仙、老匠……')+'。'],['旁白','刑場大亂。刀落下前一瞬，少年、青兒、清流領袖，被人從斷頭台上拖了下來。'],['清流領袖','老夫斷了三十年的案，今日才知道，天下還有人，肯為「公道」二字拔刀。'],['青衣女子','走！人還在，帳，就還有人記得！'],['旁白','一行人在被放過的人護送下，連夜出了京。懸賞告示貼滿了城門，可京城裡，國舅的臉色，一夜比一夜難看。'],['墨影劍客','廠公只是條狗。牽繩的人，總有一天要露面。']]:[['墨影劍客','廠公說得對……他只是條狗。'],['旁白','鼓聲三響，刀光落下。一場假罪，換走了所有說真話的人。'],['旁白','後來的人說，那年秋天，京城的稅，反倒又加了一成。']];return{tx:ok?'劫法場':'午門問斬',l:A.concat(B)}}},
+ {t:'把罪證交給朝廷，依法審判',f:()=>{let p1=null;try{p1=JSON.parse(localStorage.getItem('inkP1')||'null')}catch(e){}const sp1=(p1&&p1.sp)||[],N1=sp1.filter(v=>v===1||v===3).length,fn=[];for(let i=0;i<22&&fn.length<4;i++)if((sp1[i]===1||sp1[i]===3)&&i!==17&&CHAPTERS[1].ally[i])fn.push(CHAPTERS[1].ally[i].n);const ok=N1+SPN()>=14;BR.end=ok?'D2':'D1';const A=[['旁白','少年把帳本與名單'+(SPARED[9]===1?'、大內總管獻上的宮中名冊':'')+'呈上，青兒親手翻開父親那一頁。清流領袖以三十年清名擔保，三司會審，一個不漏。'],[NM8(),'帳本事關重大，今夜由末將率禁軍看守，送刑部封存。'],['旁白','少年握著帳本，想起那一瞬毫無驚訝的目光，遲遲沒有鬆手。'],['清流領袖','你若連朝廷法度都不信，這案子，就只剩刀能審了。老夫以三十年清名擔保。'],['旁白','少年終於鬆手。他解下劍，交到'+NM8()+'手中：「廠公是我殺的，這罪我認。帳，請諸位審。」'],['旁白','當夜，禁軍看守封存的刑部走了水。帳本、名單、口供，燒得只剩一地灰。'],['旁白','罪名早已擬好，只等廠公一死。天亮時，一道懿旨自慈寧宮傳出：墨影劍客勾結魔宮餘孽，弒殺朝廷重臣，謀逆作亂；青衣女子為其同黨；清流領袖結黨包庇，一併收押。'],['青衣女子','真的那本……被人燒了。他們早就等在這裡。'],['清流領袖','老夫查了三十年的案，到頭來，審的是自己。'],['旁白','三日後，午門。監斬的是當朝國舅，太后的親兄。帳冊上被朱筆塗去的那半枚印，正是他府上的。外戚諸府的老爺們，在棚下看熱鬧。']];const B=ok?[['旁白','鼓聲未落，人群裡忽然揚起一面白旗。被放過的人，一個接一個從人群裡走了出來：'+(fn.length?fn.join('、')+'……':'酒仙、老匠……')+'。'],['旁白','刑場大亂。刀落下前一瞬，少年、青兒、清流領袖，被人從斷頭台上拖了下來。'],['清流領袖','老夫斷了三十年的案，今日才知道，天下還有人，肯為「公道」二字拔刀。'],['青衣女子','走！人還在，帳，就還有人記得！'],['旁白','一行人在被放過的人護送下，連夜出了京。懸賞告示貼滿了城門，可京城裡，國舅的臉色，一夜比一夜難看。'],['墨影劍客','廠公只是條狗。牽繩的人，總有一天要露面。']]:[['墨影劍客','廠公說得對……他只是條狗。'],['旁白','鼓聲三響，劊子手高舉鬼頭刀。台下沒有白旗，沒有一個人出聲。'],['旁白','刀懸在半空。監斬台上，國舅緩緩抬起了手。']];return{tx:ok?'劫法場':'午門問斬',l:A.concat(B)}}},
  {t:'帶青兒連夜出京，隱姓埋名',f:()=>{BR.end='D4';return{tx:'隱姓埋名',l:[['旁白','百官散去後，少年在殿中站了很久。廠公臨終那句「活不過今夜」，一直在耳邊轉。'],['旁白','少年想起'+NM8()+'那一瞬毫無驚訝的目光：狗死了，牽繩的人，卻一點也不意外。'],['旁白','少年先去找清流領袖，勸他帶著帳本，連夜一同出京。'],['清流領袖','老夫查了三十年，三十年清名，不信這朝廷敢動。帳本是證物，離了朝堂，就成了贓物，只能留在老夫手裡。'],['墨影劍客','廠公說，活不過今夜。那不是氣話。'],['清流領袖','老夫若走，這案子就沒人審了。你帶青兒走，不必管老夫。'],['旁白','少年勸不動，只得把帳本留下。他回頭對青兒說：「人，跟我走，今夜就走。」'],['青衣女子','可是清流大人他們……'],['墨影劍客','他不肯走，我們不能陪他賭。我信不過這座宮。'],['旁白','二人換上粗布衣裳，混在出城的流民裡，連夜出了京。'],['旁白','三日後，身後傳來消息：刑部失火，帳本無存。又過數日，城門貼出告示，清流領袖及其同黨，問斬午門；墨影劍客與青衣女子，畫影圖形，通緝天下。'],['青衣女子','要是我們留下……'],['墨影劍客','留下，這張告示上，就是三個人的名字，而且，都在刑場上。'],['旁白','南方一座小鎮，多了一對教書與打鐵的外鄉人。沒有人知道，那位沉默的鐵匠，曾是名動江湖的墨影劍客。'],['旁白','兵器埋在後院的桂花樹下。有人問起來歷，只說是路過的逃難人。江湖再無那個名字，可京城裡，有人夜夜睡不安穩。']]}}},
  {t:'交出證據，轉身離去',f:()=>{BR.end='D3';return{tx:'亡命天涯',l:[['旁白','少年把帳本交給青兒與清流領袖。他想起'+NM8()+'那一瞬毫無驚訝的目光，始終放不下心。'],['墨影劍客','這座宮不對勁。帳本別留在宮裡，跟我走。'],['清流領袖','老夫一走，這案子就成了畏罪潛逃。查了三十年，老夫要親眼看它過堂。'],['青衣女子','我爹的帳，我得看它審完。你先走，我隨後就到。'],['旁白','少年勸了兩次，兩人都不肯動。他終究沒有硬拉她，一個人走出了宮門。'],['旁白','少年連夜出了京。三日後，身後傳來消息：刑部失火，帳本無存。'],['旁白','又過數日，城門貼出告示：墨影劍客勾結魔宮餘孽，弒殺重臣，謀逆作亂；青衣女子、清流領袖同黨，已於午門問斬。'],['墨影劍客','……我該把她扛在肩上帶走的。'],['旁白','少年活了下來，背上多了一道通緝，與兩條無法歸還的人命。城外的大道上，風很冷。']]}}}
 ]})}
@@ -8873,4 +8899,123 @@ window.MECHCG={st:()=>CQ};
   if(r&&!r._occ&&r.b&&r.c&&r.d){r._occ=1;/* 第一章的前排遠山是半透明水墨，墊不透明紙色底襯會在山體上留下白色色塊，所以第一章只對 c、d 近景圖層做遮擋 */for(const k of(typeof PART!=='undefined'&&PART===1?(r.mp?['d']:['c','d']):['b','c','d']))/* v282：紅楓古道後排楓樹（c 層）是半透明遠景，墊不透明底襯會在樹幹下半段留下白色色塊，所以只遮擋前排 d 層 */r[k]=occlude(r[k],r.sky)}
   return r};
 }
-</script></body></html>
+</script>
+<script>
+/* ===== 第二章→第三章：生死問答。全對才能活；答錯即死（回到第 12 關重來）。劫法場結局(D2)有白旗護佑，容錯一次 ===== */
+(function(){
+const nm=()=>window.NM8?window.NM8():'禁軍統領';
+const BANK=[
+{q:'廠公死前，帳冊最末一頁上蓋著什麼？',a:'半枚被朱筆塗去的印',w:['廠公的親筆簽名','皇上的玉璽','一個血手印']},
+{q:'廠公臨終前，說自己不過是朝廷養出來的什麼？',a:'一條狗',w:['一把刀','一枚棋子','一個替死鬼']},
+{q:'廠公氣絕的那一瞬，誰的目光裡沒有半分驚訝？',a:()=>nm(),w:['清流領袖','青衣女子','廠公護衛長']},
+{q:'廠公說，青衣女子的父親寫得一手好字，可惜什麼？',a:'不肯改帳',w:['不肯認罪','不肯入朝','不肯逃走']}];
+const INTRO={
+D1:'午門。刀懸在半空，國舅緩步走下監斬台。「刀先別落。這本帳，你看懂了幾分？答對了，本公留你一命；答錯，刀就落下。」',
+D2:'連夜出京的官道上，追兵攔在前頭，為首的是國舅的心腹。白旗下的人們擋在你身前：「別怕，我們替你擋一次。」當朝國舅，太后的親兄，聲音從轎中傳來：「三題。答對，放你；答錯……」',
+D3:'城外大道，一頂轎子橫在路中央。當朝國舅，太后的親兄，掀開了簾子：「你一個人逃出來，倒讓本公好奇，你看懂了什麼？答對，留你；答錯，就地斬。」',
+D4:'南方小鎮的夜裡，有人叩門。門外是當朝國舅，太后的親兄，親自來了。「躲了這麼久，本公只想問你幾句。答對，你繼續打你的鐵；答錯，桂花樹下的兵器，就是你的棺材釘。」'};
+const PASS='國舅沉默良久。「看得懂這局的人，不多。皇上失蹤三個月，本公翻遍了皇宮，也沒找著。你替本公找，找到了，你的命，就還你。」　　——第三章　尋龍篇';
+const DEAD={D1:'刀光落下。午門的鼓聲三響，說真話的人，又少了一個。後來的人說，那年秋天，京城的稅，反倒又加了一成。',D2:'白旗倒下的時候，你才明白，這局不是靠人多就能贏。',D3:'一聲令下，大道上只剩風。通緝告示又添了一行：已伏誅。',D4:'桂花樹下的兵器，再沒人挖出來過。小鎮的人說，那對外鄉人，一夜之間不見了。'};
+function shuf(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function ov(){let o=document.getElementById('q3ov');if(o)o.remove();o=document.createElement('div');o.id='q3ov';
+ o.style.cssText='position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:max(14px,env(safe-area-inset-top)) 14px max(14px,env(safe-area-inset-bottom));font-family:KaiTi,STKaiti,"Noto Serif TC",serif';
+ const p=document.createElement('div');p.className='q3p';o.appendChild(p);document.body.appendChild(o);return p}
+function el(p,t,css,tag){const e=document.createElement(tag||'div');e.textContent=t;e.style.cssText=css||'';p.appendChild(e);return e}
+function btn(p,t,fn){const b=document.createElement('button');b.className='q3b';b.textContent=t;b.onclick=fn;p.appendChild(b);return b}
+function card(p,lines,fn){const b=document.createElement('button');b.className='q3k';b.innerHTML=lines;b.onclick=fn;p.appendChild(b);return b}
+let _sid=0;
+const MOON='<circle cx="262" cy="30" r="15" fill="#f7efd6" opacity=".88"/>',
+D='#1c1814',
+HALL='<g fill="'+D+'"><rect x="112" y="70" width="96" height="36"/><path d="M92 74 Q160 36 228 74 L216 80 Q160 52 104 80Z"/><rect x="104" y="106" width="112" height="6"/><rect x="40" y="84" width="30" height="24"/><path d="M32 86 Q55 68 78 86Z"/><rect x="258" y="86" width="28" height="22"/><path d="M250 88 Q272 70 294 88Z"/></g><g fill="#e8b84a" opacity=".9"><rect x="128" y="80" width="8" height="12"/><rect x="156" y="80" width="8" height="12"/><rect x="184" y="80" width="8" height="12"/></g><circle class="q3lt" cx="108" cy="92" r="3.5" fill="#b3261e"/><circle class="q3lt" cx="212" cy="92" r="3.5" fill="#b3261e"/>',
+FG={
+hall:MOON+HALL,
+gate:MOON+'<g fill="'+D+'"><rect x="60" y="62" width="200" height="46"/><path d="M42 66 Q160 20 278 66 L264 74 Q160 38 56 74Z"/><rect x="46" y="108" width="228" height="6"/><rect x="96" y="40" width="10" height="22"/><rect x="214" y="40" width="10" height="22"/></g><path d="M128 108 V84 Q160 60 192 84 V108Z" fill="#7a1c14"/><circle cx="148" cy="96" r="2.5" fill="#e8b84a"/><circle cx="172" cy="96" r="2.5" fill="#e8b84a"/><path d="M24 104 L38 52 L43 54 L31 106Z" fill="#dfe2e6" stroke="'+D+'" stroke-width="1.5"/><rect x="18" y="102" width="20" height="6" fill="'+D+'"/><g fill="'+D+'"><circle cx="292" cy="92" r="5"/><rect x="287" y="97" width="10" height="14"/></g>',
+road:MOON+'<path d="M146 120 L174 120 L192 80 L162 80Z" fill="#2a2420" opacity=".4"/><g fill="'+D+'"><rect x="38" y="64" width="5" height="46"/><ellipse cx="40" cy="58" rx="22" ry="17"/><rect x="262" y="70" width="5" height="40"/><ellipse cx="264" cy="64" rx="18" ry="14"/><rect x="140" y="62" width="40" height="18"/><path d="M130 64 Q160 44 190 64 L182 68 Q160 54 138 68Z"/></g><rect x="150" y="68" width="6" height="8" fill="#e8b84a"/><rect x="164" y="68" width="6" height="8" fill="#e8b84a"/>',
+cold:MOON+'<g fill="'+D+'"><rect x="0" y="50" width="96" height="60"/><rect x="224" y="50" width="96" height="60"/><path d="M-6 52 H102 L96 44 H0Z"/><path d="M218 52 H326 L320 44 H224Z"/><rect x="110" y="72" width="100" height="36"/><path d="M96 76 Q160 44 224 76 L212 82 Q160 58 108 82Z"/><rect x="126" y="86" width="5" height="22"/><rect x="189" y="86" width="5" height="22"/><circle cx="128" cy="82" r="4"/><circle cx="192" cy="82" r="4"/></g><path d="M140 108 V88 Q160 74 180 88 V108Z" fill="#3a322c"/><rect x="152" y="94" width="16" height="4" fill="#e8b84a" opacity=".8"/><circle class="q3lt" cx="104" cy="70" r="4" fill="#b3261e"/><circle class="q3lt" cx="216" cy="70" r="4" fill="#b3261e"/>',
+throne:'<g fill="'+D+'"><rect x="64" y="14" width="14" height="94"/><rect x="242" y="14" width="14" height="94"/><rect x="58" y="12" width="26" height="6"/><rect x="236" y="12" width="26" height="6"/></g><path d="M150 108 L170 108 L190 62 L130 62Z" fill="#7a1c14"/><rect x="128" y="90" width="64" height="9" fill="'+D+'"/><rect x="138" y="81" width="44" height="9" fill="'+D+'"/><g fill="#d4a73a"><rect x="148" y="44" width="24" height="28"/><rect x="143" y="38" width="34" height="7"/><circle cx="160" cy="58" r="5" fill="#b3261e"/></g><g fill="#e8b84a" opacity=".85"><circle cx="100" cy="40" r="3.5"/><circle cx="220" cy="40" r="3.5"/></g>',
+sword:'<circle cx="160" cy="54" r="28" fill="#b3261e" opacity=".88"/><path d="M52 104 L252 20 L258 29 L60 112Z" fill="#e6e8ea" stroke="'+D+'" stroke-width="2"/><g fill="'+D+'" transform="rotate(-23 56 108)"><rect x="40" y="102" width="26" height="9"/><rect x="26" y="104" width="16" height="5"/></g><rect x="0" y="108" width="320" height="12" fill="'+D+'" opacity=".6"/>',
+light:'<circle cx="160" cy="86" r="32" fill="#f2c264" opacity=".92"/><g stroke="#f2c264" stroke-width="3" opacity=".6"><path d="M160 36 V22 M116 50 L106 40 M204 50 L214 40 M96 86 H80 M224 86 H240"/></g><path d="M0 92 Q60 70 120 90 T240 86 T320 92 V120 H0Z" fill="'+D+'" opacity=".55"/><g fill="'+D+'"><rect x="134" y="84" width="52" height="24"/><path d="M122 88 Q160 62 198 88 L190 92 Q160 74 130 92Z"/></g>'};
+function scene(p,c1,c2,glyph,kind){const id='q3g'+(++_sid),d=document.createElement('div');d.style.cssText='margin:0 0 14px;border:1.5px solid #2a2420;overflow:hidden;line-height:0;position:relative';
+ d.innerHTML='<svg viewBox="0 0 320 120" width="100%"><defs><linearGradient id="'+id+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+c1+'"/><stop offset="1" stop-color="'+c2+'"/></linearGradient></defs><rect width="320" height="120" fill="url(#'+id+')"/><path d="M0 88 Q50 56 100 84 T200 80 T320 86 V120 H0Z" fill="'+D+'" opacity=".16"/><path d="M0 100 Q80 78 160 98 T320 94 V120 H0Z" fill="'+D+'" opacity=".28"/>'+(FG[kind||'hall'])+'<ellipse class="q3mist" cx="80" cy="106" rx="70" ry="6" fill="#fff" opacity=".26"/><ellipse class="q3mist" cx="250" cy="112" rx="80" ry="6" fill="#fff" opacity=".2"/></svg><span class="q3seal" style="position:absolute;right:10px;bottom:8px;line-height:1.4">'+glyph+'</span>';p.appendChild(d)}
+function stop(){window.__q3run=0;const o=document.getElementById('q3ov');if(o)o.remove()}
+
+const PL=[
+{n:'慈寧宮',l:'東路',t:'老太監躬身道：「皇上龍體違和，正在養心殿靜養，誰也不見。」他的袖口，沾著一片青苔。',c:'慈寧宮太監說皇上在養心殿靜養；他袖口卻沾著背陰處才長的青苔。'},
+{n:'養心殿',l:'中軸',t:'掃地的宮女低聲說：「殿門鎖了三個月，榻上沒人睡過，案上的硃砂早乾成了塊。」',c:'養心殿鎖了三個月，榻冷、硃砂乾，皇上不在這裡。'},
+{n:'御藥房',l:'南面',t:'藥吏翻著簿子：「每日卯時一帖安神湯，慈寧宮的人來取，說是送去『聽不見晨鐘的院子』。三個月，沒斷過一天。」',c:'慈寧宮每日取一帖安神湯，送往「聽不見晨鐘的院子」。'},
+{n:'欽天監',l:'東北',t:'監正拈鬚道：「晨鐘自東華門鐘樓敲響，傳遍全宮。唯獨西北角那座院子，三面高牆，鐘聲進不去。」',c:'全宮聽得見晨鐘，只有西北角三面高牆的院子聽不見。'},
+{n:'冷宮',l:'西北角',t:'守衛橫刀喝道：「荒了十年的地方，沒人！滾！」你卻注意到，荒院門口，站著兩班慈寧宮的護衛。',c:'冷宮號稱荒了十年，門口卻站著兩班慈寧宮的護衛。'}];
+function ch3(){c1()}
+function c2(bonus){let left=4+bonus+(luck()?1:0),left0=left;const got=[],seen={},T1=TA,T2=TB;
+ const intro=()=>{const p=ov();scene(p,'#c9bda4','#6d6256','皇城','hall');el(p,'第三章　尋龍',T1);el(p,'皇上失蹤三個月，朝中只剩一道道假聖旨。太后封了消息，凡是她的人把守的院子，國舅的人都搜不進去。他只給你四個時辰：替他查出皇上被藏在哪座院子。指認錯了，你就是欺君的刺客，立斬。'+(luck()?'被你放過的人替你探路，多給了一個時辰。':''),T2);btn(p,'　入　宮　',map)};
+ const POS=[[246,172,'慈寧宮','東路'],[160,128,'養心殿','中軸'],[160,222,'御藥房','南面'],[246,64,'欽天監','東北'],[74,64,'冷宮','西北角']];
+ const map=()=>{const p=ov();el(p,'皇　城',TA);
+  let sv='<svg viewBox="0 0 320 300" width="100%" style="display:block;margin-bottom:6px"><rect x="6" y="6" width="308" height="288" rx="6" fill="#e9dcb8" stroke="#2a2420" stroke-width="2.5"/><rect x="14" y="14" width="292" height="272" rx="4" fill="none" stroke="#2a2420" stroke-width=".8" stroke-dasharray="3 3"/><path d="M160 20 V280 M20 150 H300" stroke="#2a2420" stroke-width="1" opacity=".25" stroke-dasharray="5 4"/><path d="M160 150 Q200 160 246 172 M160 128 L246 64 M160 128 L74 64 M160 150 V222" stroke="#a08a62" stroke-width="3" fill="none" opacity=".55" stroke-linecap="round"/><g fill="#6f8a5a" opacity=".5"><ellipse cx="40" cy="200" rx="16" ry="12"/><ellipse cx="62" cy="214" rx="12" ry="9"/><ellipse cx="282" cy="236" rx="16" ry="12"/><ellipse cx="260" cy="250" rx="11" ry="8"/><ellipse cx="40" cy="120" rx="12" ry="9"/></g><text x="160" y="31" text-anchor="middle" font-size="12" fill="#7a1c14">北</text><text x="160" y="289" text-anchor="middle" font-size="12" fill="#7a1c14">南</text><text x="16" y="154" font-size="12" fill="#7a1c14">西</text><text x="298" y="154" font-size="12" fill="#7a1c14" text-anchor="end">東</text>';
+  PL.forEach((x,i)=>{const [cx,cy,n,l]=POS[i],v=seen[i],on=left>0;sv+='<g data-i="'+i+'" style="cursor:'+(on?'pointer':'default')+'"><rect x="'+(cx-38)+'" y="'+(cy-30)+'" width="76" height="62" fill="transparent"/><path d="M'+(cx-30)+' '+(cy-6)+' Q'+cx+' '+(cy-30)+' '+(cx+30)+' '+(cy-6)+' L'+(cx+24)+' '+(cy-2)+' Q'+cx+' '+(cy-18)+' '+(cx-24)+' '+(cy-2)+'Z" class="'+(v?'':'q3pulse')+'" fill="'+(v?'#7a7168':'#2a2420')+'"/><rect x="'+(cx-22)+'" y="'+(cy-2)+'" width="44" height="22" fill="'+(v?'#9a9186':'#3a322c')+'"/><rect x="'+(cx-4)+'" y="'+(cy+6)+'" width="8" height="14" fill="#e8b84a"/><text x="'+cx+'" y="'+(cy+36)+'" text-anchor="middle" font-size="14" font-weight="bold" fill="#2a2420">'+n+'</text><text x="'+cx+'" y="'+(cy+49)+'" text-anchor="middle" font-size="10" fill="#7a1c14">'+l+'</text>'+(v?'<rect x="'+(cx+14)+'" y="'+(cy-30)+'" width="20" height="20" fill="#b3261e" transform="rotate(8 '+(cx+24)+' '+(cy-20)+')"/><text x="'+(cx+24)+'" y="'+(cy-15)+'" text-anchor="middle" font-size="13" fill="#f1e8d0" transform="rotate(8 '+(cx+24)+' '+(cy-20)+')">查</text>':'')+'</g>'});
+  sv+='</svg>';const d=document.createElement('div');d.innerHTML=sv;d.style.cssText='border:1.5px solid #2a2420;margin-bottom:10px;line-height:0';p.appendChild(d);
+  d.querySelectorAll('g[data-i]').forEach(g=>g.onclick=()=>{if(left>0)visit(+g.dataset.i)});
+  let dots='';for(let k=0;k<left0;k++)dots+='<span style="display:inline-block;width:14px;height:14px;border-radius:50%;margin:0 4px;border:2px solid #7a1c14;background:'+(k<left?'#e8b84a':'transparent')+'"></span>';
+  const tm=document.createElement('div');tm.innerHTML='<span style="font-size:14px;color:#7a1c14;letter-spacing:.2em">時辰</span> '+dots;tm.style.cssText='margin-bottom:8px';p.appendChild(tm);
+  if(left<=0)el(p,'時辰已盡，只能指認了。',TB);else el(p,'點選宮殿前往查訪。','font-size:14px;color:#6a5f52;margin-bottom:6px');
+  if(got.length){const b=document.createElement('div');b.style.cssText='text-align:left;border:1.5px dashed #7a1c14;padding:8px 12px;margin:8px 0;background:rgba(255,255,255,.35)';b.innerHTML='<div style="font-weight:bold;color:#7a1c14;letter-spacing:.3em;margin-bottom:4px">線索簿</div>'+got.map(t=>'<div style="font-size:14px;line-height:1.7"><span style="color:#b3261e">◆</span> '+t+'</div>').join('');p.appendChild(b)}
+  btn(p,'　指認皇帝所在　',accuse)};
+ const visit=i=>{if(!seen[i]){seen[i]=1;left--;got.push(PL[i].c)}const p=ov(),cs=[['#cdbfa3','#7a6c58'],['#e4d3a3','#9a7e48'],['#c9d6c2','#6a806c'],['#b9c3d6','#5f6e8a'],['#b8b0b8','#4a4650']][i];scene(p,cs[0],cs[1],PL[i].n,['hall','throne','hall','road','cold'][i]);el(p,PL[i].n+'　·　'+PL[i].l,TA);el(p,PL[i].t,'').className='q3q';
+  el(p,'◆ 線索已記入簿中','font-size:14px;color:#7a1c14;margin-bottom:8px;text-align:left');btn(p,'　返　回　',map)};
+ const accuse=()=>{const p=ov();el(p,'皇上在哪？',TA);el(p,'一旦指認，不能反悔。',TB);PL.forEach((x,i)=>btn(p,x.n+'（'+x.l+'）',()=>i===4?win():die()));btn(p,'　再想想　',map)};
+ const win=()=>{const p=ov();scene(p,'#b8b0b8','#4a4650','冷宮','cold');el(p,'找　到　了',"font-size:34px;font-weight:bold;color:#2f7f6e;margin-bottom:10px");el(p,'冷宮最深處，一個面色蒼白的年輕人抬起頭，手裡還捏著半碗涼透的安神湯。「朕……等你很久了。」',T2);btn(p,'　繼　續　',()=>c3())};
+ const die=()=>{const p=ov();scene(p,'#8a6a60','#3c2a28','死','sword');el(p,'死',"font-size:48px;font-weight:bold;color:#b3261e;margin-bottom:10px");el(p,'你指錯了地方。國舅撫掌而笑：「欺君之罪，拖下去。」',T2);btn(p,'　重　來　',()=>c2(bonus))};
+ intro()}
+
+const TA="font-size:26px;font-weight:bold;letter-spacing:.2em;color:#7a1c14;margin-bottom:14px;padding-bottom:8px;border-bottom:3px double #2a2420",TB='font-size:17px;line-height:1.8;margin-bottom:12px;text-align:left';
+function luck(){try{return BR.end==='D2'||SPN()>=14}catch(e){return false}}
+function dieP(msg,again){const p=ov();p.style.background='radial-gradient(circle at 50% 30%,rgba(179,38,30,.18),transparent 60%),#ecd9cc';scene(p,'#8a6a60','#3c2a28','死','sword');el(p,'死','color:#b3261e;','div').className='q3big';el(p,msg,TB);btn(p,'　重　來　',again)}
+function c1(){const p=ov();scene(p,'#d9c9a6','#8a7a64','案一');el(p,'第三章　案一：真旨',TA);
+ el(p,'國舅的人給你換上侍衛的衣裳，連夜把你帶到宮門前。可守衛只認真聖旨。你亮出國舅給的令牌，上頭刻著「承恩」二字，守衛看都不看。轎中的聲音提點了一句：「皇上批摺，從來只用硃筆。」而皇上，已失蹤三個月。三道聖旨攤在你面前，只有一道是真的：',TB);
+ shuf([['三個月零五日前所下','硃筆御批','蓋全印',1],['上月所下','墨筆書寫','蓋全印',0],['昨日所下','硃筆書寫','蓋全印，印泥猶新',0]]).forEach(x=>card(p,'<b style="color:#7a1c14;letter-spacing:.3em">聖　旨</b><br>時間：'+x[0]+'<br>筆跡：'+x[1]+'<br>印鑑：'+x[2],()=>{
+  if(x[3]){const q=ov();scene(q,'#d6e0cf','#6f8a76','真旨');el(q,'真旨驗過',TA);el(q,'守衛驗過硃批，躬身放行，還給了你一個多出來的時辰。',TB);btn(q,'　入　宮　',()=>c2(1))}else dieP('你遞上的是假旨。守衛當場拿下：「矯詔，立斬！」',c1)}))}
+function c3(){const p=ov();scene(p,'#b8b0b8','#4a4650','冷宮','cold');el(p,'案三：牽繩的人',TA);
+ el(p,'皇上在冷宮裡低聲說：「母后把朕藏在這兒，是怕有人對朕下手。再過三個月，朕就滿十八歲，要親政了。那一夜來了一隊禁軍，領頭的人蒙著臉，只留下一句：『帳冊上的事，不能讓皇上看。』母后擋在殿前，才把朕帶走。那帖安神湯，也是母后讓人送的。」皇上從袖中取出半枚玉印，邊緣刻著「承恩」二字：「這是那人遺落的，與帳冊上被塗去的那半枚，正是一對。」皇上沒有說出那個人是誰。你低頭看了看腰間的令牌，上頭也刻著這兩個字。想起廠公臨終那句「只是條狗」，想起廠公死時，誰的目光毫無驚訝。牽繩的人，是誰？',TB);
+ shuf([['太后',0],['國舅',1],['清流領袖',0],[nm(),0]]).forEach(x=>btn(p,x[0],()=>{
+  if(x[1]){const q=ov();scene(q,'#e4d3a3','#9a7e48','真相','throne');el(q,'牽繩的人',TA);el(q,'半枚承恩玉印屬於國舅，帳冊是他的，替他看門的是禁軍。皇上再過三個月就要親政，一翻舊帳，外戚滿門難逃，所以他非要皇上活不到那一天。太后藏起皇上，是為了護著親兒子。國舅留你一命，只為借你的眼睛找皇上。牽繩的人，終於露出了臉。',TB);btn(q,'　繼　續　',c4)}else dieP('你指錯了人。真正牽繩的人，在簾後輕輕笑了一聲。',c3)}))}
+{const _u=upd;upd=function(dt){if(window.__q3run)return;return _u.apply(this,arguments)}}
+{const _r=reset;reset=function(){if(window.__p3sel&&S==='menu'&&!window.__q3run){window.__ch3start();return}return _r.apply(this,arguments)}}
+window.__ch3start=function(){window.__ch3direct=1;window.__q3run=1;ch3()};
+
+function c4(){let i=0;const R=[
+{n:'「找到了，辦得好。皇上累了，你也累了。來人，這個挾持皇上的刺客，拿下！」',a:'皇上藏了三個月，是你限我四個時辰替你找。',w:['我是奉太后的口諭，進宮來探望皇上。','帳冊是我一人所偷，與皇上全然無關。','這一切都是誤會，還請國舅多多明察。']},
+{n:'「就算如此，禁軍把皇上關進冷宮，與本公何干？」',a:'蒙面人遺落的半枚承恩玉印，與帳冊上那半枚成對，承恩侯正是國舅。',w:['領頭的是禁軍副統領，國舅不過是被他連累，與此事無關。','那半枚印是廠公的私印，廠公已死，與國舅向來毫無往來。','關押皇上的人是太后，國舅只是替母后傳話的人而已。']},
+{n:'「一枚塗去的印，一個蒙面人，皇上憑什麼信你？」',a:'你若真的無罪，何必翻遍皇宮三個月，急著要皇上的下落？',w:['我自幼苦練劍術，一身武藝，足以讓皇上相信我的話。','太后親口說過，她從來沒有懷疑過我今日所說的每一句。','清流領袖願意以三十年清名，替我擔保今天所說的一切。']}
+];
+ const rd=()=>{const r=R[i],p=ov();scene(p,'#e4d3a3','#9a7e48','對質','throne');el(p,'對質　'+(i+1)+' / '+R.length,TA);el(p,'國舅負手而立，眼裡沒有笑意。',TB);el(p,r.n,'font-size:19px;font-weight:bold;line-height:1.7;margin-bottom:12px');
+  shuf([[r.a,1]].concat(r.w.map(t=>[t,0]))).forEach(x=>btn(p,x[0],()=>{if(x[1]){i++;if(i>=R.length)fin();else rd()}else dieP('國舅冷笑一聲：「皇上，這人胡言亂語，拖下去。」你沒能說服任何人。',c4)}))};
+ const fin=()=>{const p=ov();scene(p,'#f0dcae','#b98a5a','尋龍篇終','light');el(p,'牽繩的人',TA);
+  el(p,'三輪問下來，國舅終於撕下了面具。「他一坐上龍椅，頭一件事就是翻舊帳。帳一翻，咱們整個外戚，一個也活不了！」',TB);el(p,'冷宮裡一片死寂。皇上緩緩站起，把那半碗涼透的安神湯放下。「禁軍聽令，拿下國舅。」禁軍副統領的刀停在半空，最終，慢慢鬆開了手。',TB);
+  el(p,'國舅被押走時，沒有回頭。簾後，太后輕聲說：「哀家只想護著你。」皇上沒有答話。',TB);
+  el(p,'皇上問你想要什麼賞賜。你說，帳冊上被改過的每一筆稅，請還給百姓。',TB);
+  el(p,'——第三章　尋龍篇　完','font-size:15px;color:#7a1c14;margin:6px 0 10px');
+  btn(p,'　尾　聲　',ep)};
+ const EP={D1:'午門的鼓聲再響起時，落下的已是別人的頭。你走出午門，沒有回頭。那一年秋天，京城的稅，減了一成。',D2:'白旗下的人們在城門口等你。他們沒有多問，只遞給你一碗熱酒。那一年，帳上被改過的每一筆稅，都一一還給了百姓。',D3:'通緝告示一張張被揭下。你走在城外的大道上，行囊裡多了一道皇上親筆的赦令。往後的路，再沒有人攔你。',D4:'你回到南方的小鎮，繼續打鐵。桂花樹下的兵器，再也不用挖出來了。偶爾有人問起京城的事，你只笑笑，把鐵錘高高舉起。',D0:'你收劍入鞘，走出皇城。帳上的每一筆，終於有人去還。'};
+ const ep=()=>{const p=ov();scene(p,'#f0dcae','#b98a5a','尾聲','light');el(p,'尾　聲',TA);el(p,EP[(window.BR&&BR.end)]||EP.D0,TB);
+  el(p,'結局　牽繩之人','color:#b3261e;').className='q3big';p.lastChild.style.fontSize='34px';
+  el(p,'尋龍篇　終','font-size:15px;color:#7a1c14;letter-spacing:.4em;margin-bottom:10px');
+  btn(p,window.__ch3direct?'　回到標題　':'　繼　續　',()=>{window.__q3BR=BR;stop();if(window.__ch3direct){window.__ch3direct=0;S='menu'}else{S='win';endT=0;score+=Math.round(P.hp)*5}})};
+ rd()}
+window.__q3=function(){
+ window.__q3run=1;const E=(window.BR&&BR.end)||'D3',lives0=E==='D2'?2:1;let lives=lives0,i=0;const qs=shuf(BANK);
+ const intro=()=>{const p=ov();scene(p,E==='D1'?'#d2c1a6':'#b4bccb',E==='D1'?'#6d5a4a':'#566070',{D1:'午門',D2:'官道',D3:'大道',D4:'小鎮'}[E]||'大道',E==='D1'?'gate':'road');el(p,'生　死　問',"font-size:28px;font-weight:bold;margin-bottom:12px;color:#7a1c14");el(p,INTRO[E]||INTRO.D3,'font-size:17px;line-height:1.7;margin-bottom:10px');
+  el(p,lives0>1?'共 '+qs.length+' 題，白旗護佑：可答錯 1 題。':'共 '+qs.length+' 題，全部答對才能活。答錯，即死。','font-size:14px;color:#7a1c14;margin-bottom:10px');btn(p,'　應　戰　',ask)};
+ const ask=()=>{const q=qs[i],right=typeof q.a==='function'?q.a():q.a,p=ov();
+  el(p,'第 '+(i+1)+' / '+qs.length+' 題'+(lives0>1?'　　白旗 '+(lives-1>0?'尚在':'已盡'):''),'font-size:14px;color:#7a1c14;margin-bottom:8px');
+  el(p,q.q,'font-size:20px;font-weight:bold;line-height:1.6;margin-bottom:12px');
+  shuf([right].concat(q.w)).forEach(t=>btn(p,t,()=>{if(t===right)good();else bad()}))};
+ const good=()=>{i++;if(i>=qs.length)pass();else ask()};
+ const bad=()=>{lives--;if(lives>0){const p=ov();el(p,'答錯了……',"font-size:24px;font-weight:bold;color:#b3261e;margin-bottom:10px");el(p,'白旗下的人替你擋下了這一刀。下一次，沒有了。','font-size:17px;line-height:1.7;margin-bottom:10px');btn(p,'　繼　續　',()=>{i++;if(i>=qs.length)pass();else ask()})}else die()};
+ const pass=()=>{const p=ov();scene(p,'#f0dcae','#b98a5a','刀下留人','light');el(p,'活',"font-size:44px;font-weight:bold;color:#2f7f6e;margin-bottom:10px");el(p,PASS,'font-size:17px;line-height:1.8;margin-bottom:10px');
+  btn(p,'　進入第三章　',()=>ch3())};
+ const die=()=>{const p=ov();scene(p,'#8a6a60','#3c2a28','死','sword');el(p,'死',"font-size:48px;font-weight:bold;color:#b3261e;margin-bottom:10px");el(p,DEAD[E]||DEAD.D3,'font-size:17px;line-height:1.8;margin-bottom:10px');
+  btn(p,'　重　來　',()=>{stop();BR.end=null;try{P.hp=0}catch(_){}S='lose';endT=0})};
+ intro()};
+})();
+</script>
+
+</body></html>
