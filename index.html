@@ -3727,9 +3727,10 @@ function tjBurst(p){
  p.tjS=3.2;p.inv=Math.max(p.inv,.3);tjHeal(p,p.mh*.22);
  for(const e of E)if(!e.dead&&Math.abs(e.x-p.x)<150&&Math.abs(e.y-p.y)<100)hurtE(e,10,(e.x>p.x?1:-1)*260,true);
  FX.push({k:'ci',x:p.x,y:GY+2,r:110,t:0,d:.7});ink(p.x,p.y-40,12,'#8a9aa6');dust(p.x,GY,6);
+ for(let i=0;i<16;i++){const an=i*TAU/16;PA.push({x:p.x,y:p.y-42,vx:Math.cos(an)*220,vy:Math.sin(an)*220,l:.5,m:.5,g:0,r:3,c:i%2?'rgba(240,240,232,.9)':'rgba(40,44,52,.75)'})}
  txt('太極護體',p.x,p.y-104,20,'#4a6a7a');shake=Math.max(shake,.15)}
 {const _hp=hurtP;hurtP=function(dm,fx){
- if(CH===26&&S==='play'&&P&&P.tjS>0&&P.inv<=0&&P.dash<=0){P.inv=.4;tjRef(P,dm,fx,1);return}
+ if(CH===26&&S==='play'&&P&&P.tjS>0&&P.inv<=0&&P.dash<=0){P.inv=.4;P.tjRipT=T;ink(P.x,P.y-42,6,'#8a9aa6');tjRef(P,dm,fx,1);return}
  const h=P.hp;_hp.apply(this,arguments);
  if(CH===26&&S==='play'&&P.hp<h&&P.hp>0)tjRef(P,h-P.hp,fx,0)}}
 {const _ub=upBB;upBB=function(dt){_ub(dt);for(const q of[P,P2])if(q&&q.tjS>0){q.tjS-=dt;if(q.tjS<=0){q.tjS=0;txt('護體散',q.x,q.y-100,16,'#4a6a7a')}}}}
@@ -3748,11 +3749,20 @@ function taijiD(x,y,r,rot){g.save();g.translate(x,y);g.rotate(rot);
  taijiD(-f*30,-10+Math.sin(T*2.2)*3,10,T*(sh?4:1));
  if(at){const q=Math.sin(pr*Math.PI);g.strokeStyle='rgba(240,240,232,'+(.85*q)+')';g.lineWidth=5;g.lineCap='round';g.beginPath();g.arc(f*(22+pr*30),-4,18+q*10,f>0?-1.1:Math.PI-.9,f>0?1.1:Math.PI+1.1,f<0);g.stroke();
   g.strokeStyle='rgba(30,33,40,'+(.7*q)+')';g.lineWidth=2.5;g.beginPath();g.arc(f*(22+pr*30),-4,23+q*10,f>0?-1.0:Math.PI-1,f>0?1.0:Math.PI+1,f<0);g.stroke()}
- if(sh){const a=Math.min(1,p.tjS*2),r=58+Math.sin(T*8)*2;g.globalAlpha=.85*a;
-  g.fillStyle='rgba(180,205,215,.16)';g.beginPath();g.arc(0,0,r,0,TAU);g.fill();
+ if(sh){/* 太極護體：展開動畫→漸層氣罩→陰陽旋流→八卦環→吸收漣漪→將散閃爍 */
+  const age=3.2-p.tjS,gr=Math.min(1,age/.28),eo=1-Math.pow(1-gr,3),warn=p.tjS<.9&&Math.sin(T*28)>0,al=Math.min(1,p.tjS*2)*(warn?.45:1),r=(58+Math.sin(T*8)*2)*(.55+.45*eo);
+  g.save();g.globalAlpha=.92*al;
+  const gd=g.createRadialGradient(0,0,r*.2,0,0,r);gd.addColorStop(0,'rgba(200,222,232,.04)');gd.addColorStop(.75,'rgba(180,205,215,.16)');gd.addColorStop(1,'rgba(225,238,244,.38)');
+  g.fillStyle=gd;g.beginPath();g.arc(0,0,r,0,TAU);g.fill();
+  g.lineCap='round';for(let i=0;i<2;i++){g.strokeStyle=i?'rgba(240,244,240,.55)':'rgba(30,33,40,.5)';g.lineWidth=5;g.beginPath();g.arc(0,0,r*.62,T*1.6+i*Math.PI,T*1.6+i*Math.PI+Math.PI*.62);g.stroke()}
   g.strokeStyle='rgba(74,106,122,.95)';g.lineWidth=3;g.beginPath();g.arc(0,0,r,0,TAU);g.stroke();
   g.strokeStyle='rgba(30,33,40,.8)';g.lineWidth=2.5;g.setLineDash([14,10]);g.lineDashOffset=-T*60;g.beginPath();g.arc(0,0,r-6,0,TAU);g.stroke();g.setLineDash([]);
-  taijiD(0,-r-2,8,-T*5);taijiD(0,r+2,8,T*5);g.globalAlpha=1}
+  for(let i=0;i<8;i++){g.save();g.rotate(T*.5+i*TAU/8);g.translate(r+9,0);g.rotate(Math.PI/2);g.strokeStyle='rgba(40,48,58,.85)';g.lineWidth=1.8;
+   for(let k=0;k<3;k++){const yy=-4+k*4;g.beginPath();if((i>>k)&1){g.moveTo(-5,yy);g.lineTo(-1.2,yy);g.moveTo(1.2,yy);g.lineTo(5,yy)}else{g.moveTo(-5,yy);g.lineTo(5,yy)}g.stroke()}g.restore()}
+  for(let i=0;i<6;i++){const an=T*2+i*TAU/6,rr=r*(.8+.08*Math.sin(T*3+i));g.fillStyle=i%2?'rgba(245,246,240,.9)':'rgba(34,37,43,.8)';g.beginPath();g.arc(Math.cos(an)*rr,Math.sin(an)*rr,2.2,0,TAU);g.fill()}
+  for(const sg of[1,-1]){const an=T*1.2+(sg>0?0:Math.PI);taijiD(Math.cos(an)*(r+2),Math.sin(an)*(r+2),8,-sg*T*5)}
+  const ru=(T-(p.tjRipT||-9))/.4;if(ru>=0&&ru<1){g.globalAlpha=(1-ru)*.9;g.strokeStyle='rgba(250,252,248,.95)';g.lineWidth=4*(1-ru)+1;g.beginPath();g.arc(0,0,r*(1+ru*.5),0,TAU);g.stroke();g.fillStyle='rgba(255,255,255,.3)';g.globalAlpha=(1-ru)*.5;g.beginPath();g.arc(0,0,r,0,TAU);g.fill()}
+  g.restore()}
  g.restore()}}
 {const _ll=loadLevel;loadLevel=function(){const r=_ll.apply(this,arguments);if(CH===26&&P)txt('受傷反震・太極掌回血・太極護體',P.x,P.y-120,18,'#4a6a7a');return r}}
 
