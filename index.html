@@ -5221,7 +5221,7 @@ function chDraw(){if(CHO.sw)return swDraw();if(CHO.q)return qDraw();if(CHO.g)ret
  const tt=[['放過',''],['斬殺','']];
  for(let i=0;i<2;i++){const b=CHB[i],on=CHO.sel===i;
   g.fillStyle=on?'#b3261e':'rgba(244,237,217,1)';g.fillRect(b.x,b.y,b.w,b.h);g.strokeStyle='#1c1c1c';g.lineWidth=on?4:2;g.strokeRect(b.x,b.y,b.w,b.h);
-  g.fillStyle=on?'#efe7d2':'#1c1c1c';g.font='bold 34px '+F;g.fillText(tt[i][0],b.x+b.w/2,b.y+36);
+  g.fillStyle=on?'#efe7d2':'#1c1c1c';g.font='bold 34px '+F;g.fillText(tt[i][0],b.x+b.w/2,b.y+b.h/2);
   g.font='15px '+F;g.fillText(tt[i][1],b.x+b.w/2,b.y+72)}
  g.font='14px '+F;g.fillStyle='#3a342a';g.fillText('← → 選擇　J／點擊 確認　　已放過 '+SPN()+' 人',W/2,by+bh-22);
  g.restore()}
