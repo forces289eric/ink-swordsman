@@ -684,8 +684,8 @@ function bladeFire(){const t=T*14;
  g.fillStyle='rgba(235,100,30,.88)';g.beginPath();g.moveTo(96,-7);g.quadraticCurveTo(116+f*8,-14-f*6,130+f*10,-2+f3);g.quadraticCurveTo(116,7,96,8);g.closePath();g.fill();
  g.fillStyle='rgba(255,215,80,.95)';g.beginPath();g.moveTo(98,-4);g.quadraticCurveTo(112+f*5,-8,122+f*6,-1+f3*.6);g.quadraticCurveTo(110,4,98,5);g.closePath();g.fill()}
 /* ---------- 繪製 ---------- */
-const VIS={official:{rb:'#2a2e38',ac:'#b3261e',sash:'#b3261e',ns:0},scar:{rb:'#5a3a26',ac:'#c99a2e'},ghost:{rb:'#8b94a6',ac:'#d8e6f2'},frost:{rb:'#f6f8fb',ac:'#a9c6dc',fem:1,sk:'#eef0f6',fk:'#ffffff',fb:'#14202e'},monk:{rb:'#7a7f86',ac:'#3a3e44',sash:'#8a5a2a',nh:1},gold:{rb:'#e0b44a',ac:'#7a4a10',sash:'#b3261e',sk:'#e8c46a',nh:1},blood:{rb:'#5c1018',ac:'#c9a24a',eye:'#ff3a2a',ns:1},emperor:{rb:'#1f1a2e',ac:'#c99a2e',cape:'#3a1a4a',eye:'#ffd24a',glow:'140,70,200'},storm:{rb:'#4a5a52',ac:'#e8d84a',cape:'#2a3350',eye:'#fff6a0',glow:'120,160,255'},thunder:{rb:'#33406a',ac:'#e8d84a',cape:'#1f2748',eye:'#fff6a0',glow:'120,170,255'},venom:{rb:'#2c4a2a',ac:'#8fe060',eye:'#b8ff70',glow:'110,200,70'},hades:{rb:'#2a2238',ac:'#7a5ac0',cape:'#14101e',eye:'#c8a0ff',glow:'150,100,220'},smith:{rb:'#4a3a32',ac:'#e0803a',ns:1,nh:1,glow:'255,150,60'},umbrella:{rb:'#7a2a2a',ac:'#e0b44a',ns:1,glow:'220,90,60',fem:1,fk:'#b3382a',fp:'#e0b44a',fq:'#ff9a4a',fb:'#3a1a1a',fd:'rgba(255,196,110,.95)'},priest:{rb:'#2f4a6e',ac:'#d8b84a',ns:1,glow:'255,200,110',sk:'#fbecd8'},grave:{rb:'#58544a',ac:'#a8afb6',eye:'#9ff0c8',glow:'150,210,190'},mirage:{rb:'#dcb868',ac:'#4fc8d4',eye:'#7ff0ff',glow:'245,200,110'},drunk:{rb:'#6f9186',ac:'#a8322a',ns:1,glow:'230,170,70'},angler:{rb:'#3a5a6a',ac:'#cfd8dc',ns:1,glow:'110,170,200'},opera:{rb:'#b3261e',ac:'#e0b44a',ns:1,glow:'230,60,80'},escort:{rb:'#c98a22',ac:'#8a1c14',ns:1,glow:'255,175,70'},champ:{rb:'#d9a273',ac:'#e0b44a',ns:1,glow:'255,140,60'}};
-function visBack(o){const v=o.vis;if(!v)return;visBack2(o);if(v==='thunder')thBack(o);if(v==='emperor')empBack(o);if(v==='gold'){g.strokeStyle='rgba(255,226,130,.95)';g.lineWidth=2.4;g.beginPath();g.arc(0,-66,16,0,TAU);g.stroke();g.lineWidth=1;g.strokeStyle='rgba(255,246,200,.8)';g.beginPath();g.arc(0,-66,19.5,0,TAU);g.stroke()}
+const VIS={official:{rb:'#2a2e38',ac:'#b3261e',sash:'#b3261e',ns:0},scar:{rb:'#5a3a26',ac:'#c99a2e'},ghost:{rb:'#8b94a6',ac:'#d8e6f2'},frost:{rb:'#f6f8fb',ac:'#a9c6dc',fem:1,sk:'#eef0f6',fk:'#ffffff',fb:'#14202e'},monk:{rb:'#7a7f86',ac:'#3a3e44',sash:'#8a5a2a',nh:1},gold:{rb:'#e0b44a',ac:'#7a4a10',sash:'#b3261e',sk:'#e8c46a',nh:1},blood:{rb:'#5c1018',ac:'#c9a24a',eye:'#ff3a2a',ns:1},emperor:{rb:'#1f1a2e',ac:'#c99a2e',cape:'#3a1a4a',eye:'#ffd24a',glow:'140,70,200'},storm:{rb:'#4a5a52',ac:'#e8d84a',cape:'#2a3350',eye:'#fff6a0',glow:'120,160,255'},thunder:{rb:'#33406a',ac:'#e8d84a',cape:'#1f2748',eye:'#fff6a0',glow:'120,170,255'},venom:{rb:'#2c4a2a',ac:'#8fe060',eye:'#b8ff70',glow:'110,200,70'},hades:{rb:'#5a5a62',ac:'#b3261e',cape:'#1a1a20',eye:'#b3261e',glow:'200,200,210',sk:'#ece6d6',ns:1},smith:{rb:'#4a3a32',ac:'#e0803a',ns:1,nh:1,glow:'255,150,60'},umbrella:{rb:'#7a2a2a',ac:'#e0b44a',ns:1,glow:'220,90,60',fem:1,fk:'#b3382a',fp:'#e0b44a',fq:'#ff9a4a',fb:'#3a1a1a',fd:'rgba(255,196,110,.95)'},priest:{rb:'#2f4a6e',ac:'#d8b84a',ns:1,glow:'255,200,110',sk:'#fbecd8'},grave:{rb:'#58544a',ac:'#a8afb6',eye:'#9ff0c8',glow:'150,210,190'},mirage:{rb:'#dcb868',ac:'#4fc8d4',eye:'#7ff0ff',glow:'245,200,110'},drunk:{rb:'#6f9186',ac:'#a8322a',ns:1,glow:'230,170,70'},angler:{rb:'#3a5a6a',ac:'#cfd8dc',ns:1,glow:'110,170,200'},opera:{rb:'#b3261e',ac:'#e0b44a',ns:1,glow:'230,60,80'},escort:{rb:'#c98a22',ac:'#8a1c14',ns:1,glow:'255,175,70'},champ:{rb:'#d9a273',ac:'#e0b44a',ns:1,glow:'255,140,60'}};
+function visBack(o){const v=o.vis;if(!v)return;visBack2(o);if(v==='hades')hadesBack(o);if(v==='thunder')thBack(o);if(v==='emperor')empBack(o);if(v==='gold'){g.strokeStyle='rgba(255,226,130,.95)';g.lineWidth=2.4;g.beginPath();g.arc(0,-66,16,0,TAU);g.stroke();g.lineWidth=1;g.strokeStyle='rgba(255,246,200,.8)';g.beginPath();g.arc(0,-66,19.5,0,TAU);g.stroke()}
  if(v==='ghost'){for(let i=0;i<3;i++){g.fillStyle=`rgba(60,64,78,${.22-i*.06})`;g.beginPath();g.ellipse(-18-i*8,-44+i*6,12-i*2,7,0,0,TAU);g.fill()}}
  else if(v==='frost'||v==='gold'){const fr=v==='frost';const a=fr?.3+.1*Math.sin(T*4):.5+.1*Math.sin(T*2),c=fr?'180,230,255':'255,220,120';const gr=g.createRadialGradient(0,-63,3,0,-63,fr?26:32);gr.addColorStop(0,`rgba(${c},${a})`);gr.addColorStop(1,`rgba(${c},0)`);g.fillStyle=gr;g.fillRect(-34,-96,68,68);if(fr){for(const[w,cl]of[[7,'#1c1c1c'],[5,'#7f9fbe']]){g.strokeStyle=cl;g.lineWidth=w;g.lineCap='round';g.beginPath();g.moveTo(-9,-66);g.quadraticCurveTo(-30+Math.sin(T*2)*3,-48,-24+Math.sin(T*2.4)*5,-14);g.stroke()}}if(fr)for(let q=0;q<2;q++){const e=-40+q*14+Math.sin(T*3+q+1)*7,m=-50+q*10+Math.sin(T*3+q)*5;for(const[w,cl]of[[5.4,'#1c1c1c'],[3.4,q?'#8fd0f0':'#cfeeff']]){g.strokeStyle=cl;g.lineWidth=w;g.lineCap='round';g.beginPath();g.moveTo(-6,-52);g.quadraticCurveTo(-26,m,-42,e);g.stroke()}}}
  else if(v==='blood'){g.fillStyle=`rgba(179,38,30,${.35+.12*Math.sin(T*3)})`;g.beginPath();g.arc(0,-64,30,0,TAU);g.fill();g.strokeStyle='rgba(179,38,30,.6)';g.lineWidth=1.5;g.beginPath();g.arc(0,-64,34,0,TAU);g.stroke()}}
@@ -1090,7 +1090,7 @@ function thBack(o){/* 雷霆戰神：身後雷鼓弧陣、腰間旋轉雷環、�
  g.strokeStyle='rgba(120,170,255,.75)';g.lineWidth=1.8;g.setLineDash([5,4]);g.lineDashOffset=-T*26;g.beginPath();g.ellipse(0,-30,27,7,0,0,TAU);g.stroke();g.setLineDash([]);
  g.strokeStyle='rgba(255,246,170,.9)';g.lineWidth=1.6;for(let i=0;i<4;i++){const a=T*2.4+i*1.57,x=Math.cos(a)*27,y=-30+Math.sin(a)*7;g.beginPath();g.moveTo(x,y);g.lineTo(x+4,y-5);g.lineTo(x+1,y-6);g.lineTo(x+6,y-12);g.stroke()}
  g.restore()}
-function visFront(o){const v=o.vis;if(!v)return;visFront2(o);const ln=(a,b,c,d,cl,w)=>{g.strokeStyle=cl;g.lineWidth=w;g.lineCap='round';g.beginPath();g.moveTo(a,b);g.lineTo(c,d);g.stroke()};
+function visFront(o){const v=o.vis;if(!v)return;visFront2(o);if(v==='hades')hadesFront(o);const ln=(a,b,c,d,cl,w)=>{g.strokeStyle=cl;g.lineWidth=w;g.lineCap='round';g.beginPath();g.moveTo(a,b);g.lineTo(c,d);g.stroke()};
  if(v==='monk'||v==='gold'){const gd2=v==='gold';g.fillStyle=o.sk||'#f0dcc0';g.strokeStyle='#1c1c1c';g.lineWidth=1.3;g.beginPath();g.ellipse(-9.6,-62,2.1,3.2,0,0,TAU);g.fill();g.stroke();g.fillStyle='rgba(70,95,130,.2)';g.beginPath();g.arc(0,-63,9.6,Math.PI*1.08,Math.PI*1.92);g.closePath();g.fill();g.fillStyle='#7a3a2a';for(const q of[-3.5,0,3.5]){g.beginPath();g.arc(q,-70.2+Math.abs(q)*.25,1.2,0,TAU);g.fill()}
  if(!gd2){g.fillStyle='#1c1c1c';g.fillRect(3.2,-63.6,3.2,2.2);ln(2,-67.5,8.5,-65.8,'#1c1c1c',2.2);ln(2,-56.5,7,-56.8,'#1c1c1c',1.5)}
  else{g.strokeStyle='#1c1c1c';g.lineWidth=1.4;g.lineCap='round';g.beginPath();g.moveTo(2.8,-62.8);g.quadraticCurveTo(5,-65,7.2,-62.8);g.stroke();ln(3,-66.8,8.6,-64.2,'#1c1c1c',3);ln(3,-66.8,8.6,-64.2,'#f6f2e6',1.7);ln(8.4,-64.4,10,-61.6,'#1c1c1c',2.6);ln(8.4,-64.4,10,-61.6,'#f6f2e6',1.4);g.strokeStyle='#1c1c1c';g.lineWidth=1.3;g.beginPath();g.moveTo(1,-57);g.quadraticCurveTo(4.5,-53.5,8,-57);g.stroke()}
@@ -1200,7 +1200,7 @@ function man(o){if(o.vis&&VIS[o.vis])o=Object.assign({},o,VIS[o.vis]);const{x,y,
   limb(-3,-52,-7,-42+fa*.4,2.9*fw,2.5*fw,col(o.rb),1);limb(-7,-42+fa*.4,-8+fa*.5,-35+fa*.3,2.5*fw,2.1*fw,col(o.rb),1);
   g.fillStyle=col('#e0cfae');g.beginPath();g.arc(-8.4+fa*.5,-34+fa*.3,2.9*fw,0,TAU);g.fill();g.strokeStyle=K;g.lineWidth=1.3;g.stroke()}
  /* 身體 */
- if(k==='n'&&!o.fem){pl([[-10,-54],[10,-54],[13,-18],[-13,-18]],col(o.rb));pl([[-4,-54],[4,-54],[0,-38]],col('#e8d5b0'),1.5);g.fillStyle=col(o.ac);g.fillRect(-12,-36,24,5);pl([[5,-33],[11,-33],[10,-20],[5,-23]],col(o.ac),1.5);if(o.vis==='smith')smithBody(o,col,pl,ln,sw);if(o.vis==='scar')scarBody(o,col,pl,ln,sw)}
+ if(k==='n'&&!o.fem){pl([[-10,-54],[10,-54],[13,-18],[-13,-18]],col(o.rb));pl([[-4,-54],[4,-54],[0,-38]],col('#e8d5b0'),1.5);g.fillStyle=col(o.ac);g.fillRect(-12,-36,24,5);pl([[5,-33],[11,-33],[10,-20],[5,-23]],col(o.ac),1.5);if(o.vis==='smith')smithBody(o,col,pl,ln,sw);if(o.vis==='hades')hadesBody(o,col,pl,ln,sw);if(o.vis==='scar')scarBody(o,col,pl,ln,sw)}
  else if(o.fem){pl([[-6.5,-54],[6.5,-54],[5,-38],[-5,-38]],col(o.rb));pl([[-5.5,-39],[5.5,-39],[13.5,-12],[-13.5,-12]],col(o.fk||'#dff0fa'));ln(-6,-54,3,-42,col('#ffffff'),2);ln(6,-54,-3,-44,col('#ffffff'),1.6);pl([[-6,-38],[-17,-45+sw*2],[-15,-33+sw*2]],col(o.ac),1.2);pl([[-6,-38],[-16,-30+sw*3],[-11,-26+sw*3]],col(o.ac),1.2);g.fillStyle=col(o.ac);g.fillRect(-6.5,-40,13,4);g.strokeStyle=K;g.lineWidth=1.2;g.strokeRect(-6.5,-40,13,4);ln(-13,-13,13,-13,col(o.ac),2.2);for(const q of[-1,1]){const fx=q*5-q*w;g.save();g.translate(0,-lf(q));pl([[fx-3.5,-1],[fx-3,-7],[fx+2.5,-7],[fx+7.5,-2.5],[fx+6.5,0],[fx-3.5,0]],col(o.fb||'#2f4f6e'),1.4);ln(fx+3,-3.6,fx+6,-2,(o.fk||'#dff0fa'),1.2);g.restore()}g.fillStyle=o.fd||'rgba(255,255,255,.95)';for(const q of[-8,-1,6]){g.beginPath();g.arc(q,-22+Math.abs(q)*.3,1.5,0,TAU);g.fill()}}
  else if(k==='f'){pl([[-8,-54],[8,-54],[10,-20],[-10,-20]],col(o.rb));ln(-8,-54,9,-33,col(o.ac),3);ln(8,-54,-9,-33,col(o.ac),2);g.fillStyle=col(o.ac);g.fillRect(-9,-32,18,4);if(o.vis==='mirage')mirageBody(o,col,pl,ln,sw)}
  else if(k==='t'&&o.vis==='venom'){pl([[-15,-56],[15,-56],[21,-8],[13,-15],[6,-5],[0,-14],[-6,-5],[-13,-15],[-21,-9]],col(o.rb));pl([[-4,-56],[4,-56],[1,-30],[-1,-30]],col('#14210f'));g.fillStyle=col('#e8dcc0');for(let i=0;i<5;i++){g.beginPath();g.arc(-8+i*4,-53+Math.sin(i/4*Math.PI)*4,2.1,0,TAU);g.fill();g.lineWidth=.9;g.strokeStyle=K;g.stroke()}ln(-16,-33,16,-29,col('#3a2a14'),3.5);g.fillStyle=col(o.ac);g.beginPath();g.ellipse(-12,-22,5,7,0,0,TAU);g.fill();g.lineWidth=1.4;g.strokeStyle=K;g.stroke();ln(-12,-29,-12,-33,K,2.5);g.fillStyle=col('#5a8a3a');g.beginPath();g.ellipse(12,-23,4,5.5,0,0,TAU);g.fill();g.stroke()}
@@ -1240,11 +1240,11 @@ function man(o){if(o.vis&&VIS[o.vis])o=Object.assign({},o,VIS[o.vis]);const{x,y,
 g.fillStyle=col('#23201f');g.beginPath();g.moveTo(8.6,-66);g.quadraticCurveTo(10,-74,0,-74);g.quadraticCurveTo(-10.5,-74,-10.4,-63);g.quadraticCurveTo(-10.2,-56,-6.5,-52.5);g.quadraticCurveTo(-6,-58,-4.5,-62);g.quadraticCurveTo(-1,-65.5,3,-66.5);g.quadraticCurveTo(6,-67.2,8.6,-66);g.closePath();g.fill();
 g.beginPath();g.moveTo(-9,-67);g.lineTo(-7.2,-62.4);g.lineTo(-5.2,-66);g.lineTo(-3.2,-62);g.lineTo(-1.2,-66.5);g.lineTo(.6,-64.6);g.lineTo(1.5,-67);g.closePath();g.fill();
 if(!fl){g.strokeStyle='rgba(255,255,255,.26)';g.lineWidth=1;g.beginPath();g.arc(0,-63,8.4,Math.PI*1.08,Math.PI*1.4);g.stroke();g.strokeStyle='rgba(255,255,255,.14)';g.beginPath();g.moveTo(-8,-62);g.quadraticCurveTo(-8.5,-58,-6.5,-55.5);g.stroke()}}
-g.fillStyle=col(o.ac);g.fillRect(-10,-71,20,4);if(o.vis!=='scar'){g.beginPath();g.moveTo(-10,-69);g.lineTo(-22,-66+sw*3);g.lineTo(-10,-65);g.fill()}if(!o.vis){/* 髮髻＋束帶＋飄散髮絲 */
+if(o.vis!=='hades'){g.fillStyle=col(o.ac);g.fillRect(-10,-71,20,4);if(o.vis!=='scar'){g.beginPath();g.moveTo(-10,-69);g.lineTo(-22,-66+sw*3);g.lineTo(-10,-65);g.fill()}}if(!o.vis){/* 髮髻＋束帶＋飄散髮絲 */
 g.strokeStyle=col('#23201f');g.lineCap='round';g.lineWidth=2.4;g.beginPath();g.moveTo(-9,-62);g.quadraticCurveTo(-17,-58+sw*2,-22,-50+sw*4);g.stroke();g.lineWidth=1.7;g.beginPath();g.moveTo(-9,-58);g.quadraticCurveTo(-15,-52+sw*2,-18,-44+sw*3);g.stroke();
 g.fillStyle=col('#23201f');g.beginPath();g.arc(-2,-76,4.6,0,TAU);g.fill();g.lineWidth=1.8;g.beginPath();g.moveTo(-3,-79.5);g.quadraticCurveTo(-4,-84,-6+sw*.8,-86);g.stroke();g.beginPath();g.moveTo(-1,-80);g.quadraticCurveTo(1,-84,3+sw*.6,-85);g.stroke();
 g.strokeStyle=col(o.ac);g.lineWidth=1.7;g.beginPath();g.moveTo(-6.4,-74.2);g.lineTo(2.4,-74.2);g.stroke();
-if(!fl){g.strokeStyle='rgba(255,255,255,.3)';g.lineWidth=.9;g.beginPath();g.arc(-2,-76,3.1,Math.PI*1.1,Math.PI*1.65);g.stroke()}}else{g.fillStyle=K;g.beginPath();g.arc(-2,-76,4.5,0,TAU);g.fill()}}
+if(!fl){g.strokeStyle='rgba(255,255,255,.3)';g.lineWidth=.9;g.beginPath();g.arc(-2,-76,3.1,Math.PI*1.1,Math.PI*1.65);g.stroke()}}else if(o.vis!=='hades'){g.fillStyle=K;g.beginPath();g.arc(-2,-76,4.5,0,TAU);g.fill()}}
  else if(o.fem){g.fillStyle=o.vis==='frost'?col('#f7fafd'):K;g.beginPath();g.moveTo(-5,-73);g.quadraticCurveTo(-21,-68+sw*2,-18,-46);g.quadraticCurveTo(-17,-33+sw*4,-9,-28);g.lineTo(-5,-33);g.quadraticCurveTo(-9,-48,-4,-58);g.closePath();g.fill();if(o.vis==='frost'){g.strokeStyle=K;g.lineWidth=1.1;g.stroke()}g.beginPath();g.arc(0,-63,10.8,Math.PI*.85,Math.PI*1.93);g.quadraticCurveTo(5,-66,-1,-65);g.quadraticCurveTo(-6,-63,-8.5,-57);g.closePath();g.fill();if(o.vis==='frost'){g.strokeStyle=K;g.lineWidth=1.1;g.stroke()}g.beginPath();g.arc(-3,-76,4.6,0,TAU);g.fill();if(o.vis==='frost'){g.strokeStyle=K;g.lineWidth=1.1;g.stroke()}if(o.vis!=='frost'){ln(-9,-79,6,-74,K,3);ln(-9,-79,6,-74,col(o.fp||'#bfe8ff'),1.5);pl([[6,-77],[9,-74],[6,-71],[3,-74]],col(o.fq||'#e8f8ff'),1.2)}ln(8,-65,8.6,-57,K,1.6);g.fillStyle='rgba(235,110,125,.45)';g.beginPath();g.arc(5.5,-59.5,2.1,0,TAU);g.fill();g.fillStyle='#fff';g.beginPath();g.ellipse(5,-63,2.3,1.7,0,0,TAU);g.fill();g.fillStyle=K;g.beginPath();g.arc(5.7,-63,1.2,0,TAU);g.fill();ln(2.6,-64.6,7.6,-65.6,K,1.4);ln(7.4,-65.4,9.2,-67,K,1.2);ln(3,-68.6,8.2,-68,K,1);ln(5.8,-57.2,8,-57.6,o.vis==='frost'?'#c9a0a0':'#c4344a',1.8);if(o.vis!=='frost'){g.fillStyle=o.fp||'#bfe8ff';g.beginPath();g.arc(-6,-58,1.1,0,TAU);g.fill()}}
  else if(k==='f'){g.fillStyle=K;g.beginPath();g.arc(0,-63,10,.05,Math.PI-.05);g.closePath();g.fill();ln(-9,-62,-24,-58+sw*4,K,2.5);ln(-4,-72,-24,-70+sw*5,K,3);g.strokeStyle=col(o.ac);g.lineWidth=4;g.beginPath();g.moveTo(-3,-54);g.quadraticCurveTo(-18,-52+sw*4,-30-(o.mv?10:0),-44+sw*5);g.stroke();ln(0,-69,9,-66,K,3)}
  else if(k==='t'&&o.vis==='venom'){g.fillStyle=col('#1b2d17');g.beginPath();g.moveTo(-14,-52);g.quadraticCurveTo(-17,-66,-4,-80);g.quadraticCurveTo(10,-70,14,-52);g.quadraticCurveTo(10,-58,6,-60);g.lineTo(-6,-60);g.quadraticCurveTo(-10,-58,-14,-52);g.fill();g.lineWidth=1.8;g.strokeStyle=K;g.stroke();g.fillStyle=col('#e8dcc0');g.beginPath();g.moveTo(-8,-62);g.lineTo(9,-62);g.lineTo(8,-55);g.lineTo(0,-52);g.lineTo(-7,-55);g.closePath();g.fill();g.lineWidth=1.3;g.stroke();for(let i=-2;i<=2;i++)ln(i*3,-58,i*3,-54,K,1);g.fillStyle=fl?'#fff':col(o.eye||'#b8ff70');g.fillRect(2,-68,4,2.6);g.fillRect(-6,-68,3,2.4)}
@@ -1384,15 +1384,17 @@ if(k0==='k'){
   for(let i=-3;i<=3;i++){const ex=BL-16-Math.abs(i)*1.2,ey=i*3.1+s3*1.6*(1+Math.abs(i)*.2);g.fillStyle=i%2?'#d4352a':'#a8281e';g.beginPath();g.moveTo(BL-5,i*.5);g.quadraticCurveTo(BL-9,i*2.4,ex,ey);g.quadraticCurveTo(BL-9,i*2.4+1.6,BL-5,i*.5+1);g.closePath();g.fill()}
   g.fillStyle='#e0b44a';g.strokeStyle=K;g.lineWidth=.9;g.beginPath();g.arc(BL-18,2+s3*1.4,1.8,0,TAU);g.fill();g.stroke()}
 }else if(k0==='n'&&o.vis==='hades'){
- /* 判官筆：烏木筆桿、金箍，筆鋒帶紫焰 */
- const BL=Math.max(L,34),sx=BL*.6;
- stk(-7,sx,3.6,fl?'#fff':'#3a2a20');
- fillP([[-9,-3.6],[-4,-3.6],[-4,3.6],[-9,3.6]],fl?'#fff':'#c99a2e');
- for(const rx of[sx*.3,sx*.62])fillP([[rx-1.6,-3.8],[rx+1.6,-3.8],[rx+1.6,3.8],[rx-1.6,3.8]],fl?'#fff':'#c99a2e');
- fillP([[sx-2,-4.4],[sx+4,-4.4],[sx+4,4.4],[sx-2,4.4]],fl?'#fff':'#d9b24a');
- g.beginPath();g.moveTo(sx+4,-4.6);g.quadraticCurveTo(sx+(BL-sx)*.55,-8.6,BL+10,0);g.quadraticCurveTo(sx+(BL-sx)*.55,8.6,sx+4,4.6);g.closePath();g.fillStyle=fl?'#fff':'#1c1626';g.fill();g.strokeStyle=K;g.lineWidth=1.5;g.stroke();
- g.strokeStyle=fl?'#fff':'rgba(200,160,255,.85)';g.lineWidth=1.1;g.beginPath();g.moveTo(sx+7,-1.6);g.quadraticCurveTo(sx+(BL-sx)*.6,-3.6,BL+6,0);g.stroke();
- g.fillStyle=fl?'#fff':'#c8a0ff';g.beginPath();g.arc(BL+10,0,2.2,0,TAU);g.fill();
+ /* 判官筆（水墨版）：黑漆筆桿、宣紙白與硃紅纏繩、飽墨筆鋒帶乾筆梢與墨滴 */
+ const BL=Math.max(L,34),sx=BL*.6,pz=.5+.5*Math.sin(T*4);
+ stk(-7,sx,3.6,fl?'#fff':'#1a1a20');
+ fillP([[-9,-3.6],[-4,-3.6],[-4,3.6],[-9,3.6]],fl?'#fff':'#b3261e');
+ for(const rx of[sx*.3,sx*.62])fillP([[rx-1.6,-3.8],[rx+1.6,-3.8],[rx+1.6,3.8],[rx-1.6,3.8]],fl?'#fff':'#efe8d4');
+ if(!fl){g.strokeStyle='rgba(236,230,214,.5)';g.lineWidth=.9;g.beginPath();g.moveTo(-3,-1.4);g.lineTo(sx*.28,-1.4);g.moveTo(sx*.34,-1.4);g.lineTo(sx*.58,-1.4);g.stroke()}
+ fillP([[sx-2,-4.4],[sx+4,-4.4],[sx+4,4.4],[sx-2,4.4]],fl?'#fff':'#b3261e');
+ g.beginPath();g.moveTo(sx+4,-4.6);g.quadraticCurveTo(sx+(BL-sx)*.55,-8.6,BL+10,0);g.quadraticCurveTo(sx+(BL-sx)*.55,8.6,sx+4,4.6);g.closePath();g.fillStyle=fl?'#fff':'#14141a';g.fill();g.strokeStyle=K;g.lineWidth=1.5;g.stroke();
+ if(!fl){g.strokeStyle='rgba(190,190,200,.7)';g.lineWidth=1;g.beginPath();g.moveTo(sx+7,-1.8);g.quadraticCurveTo(sx+(BL-sx)*.6,-3.8,BL+5,-.6);g.stroke();
+  g.strokeStyle='rgba(20,20,26,.8)';g.lineWidth=.9;for(let i=-1;i<2;i++){g.beginPath();g.moveTo(BL+8,i*.9);g.lineTo(BL+13+Math.abs(i),i*1.6);g.stroke()}
+  const ph=(T*.9)%1;g.fillStyle='rgba(236,230,214,'+(.9*(1-ph))+')';g.beginPath();g.ellipse(BL+12,2+ph*10,1.2,1.8,0,0,TAU);g.fill()}
 }else if(k0==='n'&&o.vis==='smith'){
  /* 鍛鐵大錘：木柄、鐵箍、方形錘頭帶爐火餘紅 */
  const BL=Math.max(L,40);
@@ -2680,6 +2682,98 @@ function mirageBody(o,col,pl,ln,sw){const K='#1c1c1c',F=o.fl,gd=col('#d9b24a'),t
  g.fillStyle=gd;g.strokeStyle=K;g.lineWidth=1.1;g.beginPath();g.arc(0,-43.5,3.4,0,TAU);g.fill();g.stroke();
  g.fillStyle=F?'#fff':'rgba(140,245,240,'+(.75+.25*pu)+')';g.beginPath();g.arc(0,-43.5,2,0,TAU);g.fill();if(!F){g.fillStyle='rgba(255,255,255,.9)';g.fillRect(-.6,-44.8,1.2,1.2)}
  for(const q of[-1,1]){g.fillStyle=gd;g.strokeStyle=K;g.lineWidth=1.1;g.beginPath();g.ellipse(q*7.6,-53.4,4.2,2.7,q*.35,0,TAU);g.fill();g.stroke();g.fillStyle=tq;g.beginPath();g.arc(q*7.8,-53.4,1.1,0,TAU);g.fill()}}
+
+/* 幽冥判官（水墨寫意版）：墨色濃淡長袍＋飛白筆觸、硃砂紅腰帶與印章、白髯如飛白、卷軸與葫蘆；身後白描圓相、硃日與墨霧、上浮墨痕 */
+function hadesBack(o){const F=o.fl;if(F)return;const t=T,PW='236,230,214';
+ /* 墨霧（地面） */
+ for(const m of[[0,-4,32,5,.30],[-16,-9,18,3.6,.22],[16,-10,16,3.2,.22],[2,-14,12,2.6,.16]]){g.fillStyle='rgba('+PW+','+m[4]+')';g.beginPath();g.ellipse(m[0]+Math.sin(t*.8+m[1])*2,m[1],m[2],m[3],0,0,TAU);g.fill()}
+ /* 硃日 */
+ g.fillStyle='rgba(179,38,30,.5)';g.beginPath();g.arc(19,-74,9,0,TAU);g.fill();g.fillStyle='rgba(220,80,60,.25)';g.beginPath();g.arc(19,-74,12,0,TAU);g.fill();
+ /* 白描圓相：不閉合的粗細疊筆圓環 */
+ g.lineCap='round';const a0=-2.5+Math.sin(t*.6)*.08;
+ for(let k=0;k<4;k++){g.strokeStyle='rgba('+PW+','+(.55-k*.11)+')';g.lineWidth=4.2-k*.95;g.beginPath();g.arc(-2,-54,26.5+k*.7,a0+k*.1,a0+k*.1+5.3-k*.18);g.stroke()}
+ g.fillStyle='rgba('+PW+',.5)';g.beginPath();g.arc(-2+Math.cos(a0)*26.5,-54+Math.sin(a0)*26.5,1.8,0,TAU);g.fill();
+ /* 墨點飛濺（固定） */
+ g.fillStyle='rgba('+PW+',.38)';for(const d of[[-30,-70,1.6],[-34,-60,1],[30,-50,1.4],[34,-40,.9],[-28,-34,1.2],[28,-88,1]]){g.beginPath();g.arc(d[0],d[1],d[2],0,TAU);g.fill()}
+ /* 墨痕上浮 */
+ for(let i=0;i<7;i++){const ph=(t*.3+i*.143)%1,x=-28+i*9+Math.sin(t*1.5+i*2)*3,y=-8-ph*86;g.fillStyle='rgba('+PW+','+(.4*(1-ph))+')';g.beginPath();g.ellipse(x,y,1.2+ph*1.6,2.2+ph*2.6,Math.sin(i)*.6,0,TAU);g.fill()}
+}
+function hadesBody(o,col,pl,ln,sw){const K='#1c1c1c',F=o.fl,RD='#b3261e',PP='#efe8d4';
+ /* 長袍：淡墨底，邊緣不規則如筆鋒 */
+ const rp=[[-11,-54],[11,-54],[17,-5],[11,-9],[6,-3],[0,-8],[-6,-2],[-11,-9],[-17,-5]];
+ pl(rp,col('#5a5a62'),1.9);
+ if(!F){g.fillStyle='rgba(28,28,36,.55)';g.beginPath();[[-11,-54],[-1,-54],[0,-8],[-6,-2],[-11,-9],[-17,-5]].forEach((q,i)=>i?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]));g.closePath();g.fill();
+  /* 飛白：乾筆淡線 */
+  g.lineCap='round';g.strokeStyle='rgba(236,230,214,.42)';for(const l of[[4,-52,8,-9,1.3],[7.6,-50,12.4,-12,.9],[1.6,-46,3,-14,.8]]){g.lineWidth=l[4];g.beginPath();g.moveTo(l[0],l[1]);g.quadraticCurveTo((l[0]+l[2])/2+1,(l[1]+l[3])/2,l[2],l[3]);g.stroke()}
+  g.strokeStyle='rgba(20,20,26,.55)';g.lineWidth=1;for(const l of[[-7,-40,-9,-12],[-3,-34,-4,-9]]){g.beginPath();g.moveTo(l[0],l[1]);g.lineTo(l[2],l[3]);g.stroke()}}
+ /* 交領：墨黑＋宣紙白 */
+ pl([[-7,-54],[7,-54],[1,-36]],col('#1a1a20'),1.4);
+ pl([[-3.4,-54],[3.4,-54],[0,-44]],col(PP),1.1);
+ /* 胸前硃砂印章 */
+ pl([[-3.8,-48],[3.8,-48],[3.8,-40.4],[-3.8,-40.4]],col(RD),1.2);
+ if(!F){g.strokeStyle=PP;g.lineWidth=.9;g.strokeRect(-2.6,-46.8,5.2,5.2);g.beginPath();g.moveTo(-2.6,-44.2);g.lineTo(2.6,-44.2);g.moveTo(0,-46.8);g.lineTo(0,-41.6);g.stroke()}
+ /* 肩 */
+ for(const q of[-1,1]){pl([[q*9,-57],[q*18,-54],[q*19,-46],[q*10,-47]],col('#3a3a42'),1.6);
+  if(!F){g.strokeStyle='rgba(236,230,214,.5)';g.lineWidth=1;g.beginPath();g.moveTo(q*10,-55.6);g.lineTo(q*17.4,-53);g.stroke()}}
+ /* 硃砂腰帶與垂飄帶 */
+ pl([[-13.4,-35],[13.4,-35],[13.4,-30.4],[-13.4,-30.4]],col(RD),1.5);
+ for(const t of[[-2,-31,-4+sw,-22,-3+sw*2,-12],[1,-31,3,-22,3+sw*1.5,-10]]){g.lineCap='round';g.strokeStyle=K;g.lineWidth=3.4;g.beginPath();g.moveTo(t[0],t[1]);g.quadraticCurveTo(t[2],t[3],t[4],t[5]);g.stroke();g.strokeStyle=col(RD);g.lineWidth=2;g.beginPath();g.moveTo(t[0],t[1]);g.quadraticCurveTo(t[2],t[3],t[4],t[5]);g.stroke()}
+ g.fillStyle=col('#7a1a14');g.beginPath();g.arc(0,-32.7,2.6,0,TAU);g.fill();g.lineWidth=1.1;g.strokeStyle=K;g.stroke();
+ /* 左腰：卷軸（生死簿） */
+ pl([[-17,-33],[-9.6,-33],[-9.6,-19.4],[-17,-19.4]],col(PP),1.3);
+ if(!F){g.fillStyle=K;g.fillRect(-18,-34.2,9.6,2.2);g.fillRect(-18,-21.4,9.6,2.2);
+  g.strokeStyle='rgba(20,20,26,.8)';g.lineWidth=.9;[[-15.8,-11.6,-30],[-15.8,-12.4,-27.8],[-15.8,-10.8,-25.6],[-15.8,-13.2,-23.4]].forEach(l=>{g.beginPath();g.moveTo(l[0],l[2]);g.lineTo(l[1],l[2]);g.stroke()});
+  g.fillStyle=RD;g.fillRect(-12.6,-25.4,2.2,2.2)}
+ /* 右腰：葫蘆＋紅繩 */
+ g.strokeStyle=RD;g.lineWidth=1.2;g.beginPath();g.moveTo(8.4,-31);g.lineTo(11,-25.6);g.stroke();
+ g.fillStyle=col('#1a1a20');g.beginPath();g.arc(11,-23.4,2.6,0,TAU);g.fill();g.lineWidth=1.1;g.strokeStyle=K;g.stroke();g.beginPath();g.arc(11,-17.8,4,0,TAU);g.fill();g.stroke();
+ if(!F){g.strokeStyle='rgba(236,230,214,.55)';g.lineWidth=.9;g.beginPath();g.arc(11,-17.8,2.6,2.6,3.9);g.stroke()}
+ /* 下襬乾筆與墨霧 */
+ if(!F){g.strokeStyle='rgba(20,20,26,.65)';g.lineWidth=1.1;for(let i=0;i<6;i++){g.beginPath();g.moveTo(-14+i*5.6,-5.4);g.lineTo(-14.8+i*5.6,-1.2+(i%2));g.stroke()}
+  g.fillStyle='rgba(236,230,214,.28)';g.beginPath();g.ellipse(0,-4,18,3.4,0,0,TAU);g.fill()}
+}
+function hadesFront(o){const K='#1c1c1c',F=o.fl,sw=Math.sin(T*3+(o.x||0)*.05),col=c=>F?'#fff':c,RD='#b3261e',PP='#ece6d6',INK='#14141a';
+ const pl=(pts,fc,lw)=>{g.beginPath();pts.forEach((q,i)=>i?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]));g.closePath();if(fc){g.fillStyle=fc;g.fill()}g.lineWidth=lw||1.5;g.strokeStyle=K;g.stroke()};
+ g.lineCap='round';g.lineJoin='round';
+ /* 面部淡墨皴擦 */
+ if(!F){g.strokeStyle='rgba(80,80,90,.4)';g.lineWidth=1;g.beginPath();g.moveTo(2,-61);g.quadraticCurveTo(5,-59.4,8.6,-60.8);g.moveTo(2.6,-63.4);g.quadraticCurveTo(5,-62.6,7,-63.4);g.stroke()}
+ /* 濃眉：筆鋒楔形 */
+ g.fillStyle=INK;g.beginPath();g.moveTo(.4,-70.4);g.lineTo(10.2,-67.2);g.lineTo(9.6,-66.2);g.lineTo(1.2,-68.6);g.closePath();g.fill();
+ g.beginPath();g.moveTo(-7.4,-69);g.lineTo(-1.6,-67.8);g.lineTo(-2,-67);g.lineTo(-7,-68);g.closePath();g.fill();
+ /* 眼：墨點＋硃砂瞳 */
+ g.fillStyle=F?'#fff':INK;g.beginPath();g.ellipse(6,-65,3.2,1.6,.1,0,TAU);g.fill();
+ if(!F){g.fillStyle=RD;g.beginPath();g.arc(6.4,-65,.95,0,TAU);g.fill()}
+ /* 鼻、嘴 */
+ g.strokeStyle='rgba(28,28,28,.8)';g.lineWidth=1.3;g.beginPath();g.moveTo(8.8,-62);g.lineTo(9.8,-59.8);g.stroke();
+ g.strokeStyle=INK;g.lineWidth=1.5;g.beginPath();g.moveTo(3.4,-56.8);g.lineTo(8,-57.6);g.stroke();
+ g.lineWidth=2.4;g.beginPath();g.moveTo(3,-59.2);g.quadraticCurveTo(7,-60.6,10.6,-58.6);g.stroke();
+ /* 白髯：宣紙白底＋墨線鬚絲，尖端飛白 */
+ g.fillStyle=col(PP);g.beginPath();g.moveTo(-9,-60);g.quadraticCurveTo(-14,-50,-9.6,-42+sw*.6);g.quadraticCurveTo(-6,-33+sw,-1.6,-30.4+sw*1.4);g.quadraticCurveTo(.6,-29.6+sw*1.6,2.4,-30.6+sw*1.4);g.quadraticCurveTo(8,-34+sw,10.4,-43+sw*.6);g.quadraticCurveTo(13.6,-51,10.6,-59.4);g.quadraticCurveTo(6.4,-54.2,.6,-54.4);g.quadraticCurveTo(-5.2,-54.2,-9,-60);g.closePath();g.fill();g.lineWidth=1.6;g.strokeStyle=K;g.stroke();
+ if(!F){g.strokeStyle='rgba(20,20,26,.72)';g.lineWidth=.9;
+  for(const l of[[-6.4,-54,-8.6,-46,-5,-37+sw],[-2.4,-52.6,-4,-42,-1.4,-32.4+sw],[1.8,-52.6,2.4,-42,1,-32+sw],[5.6,-53,8,-45,5.6,-36.6+sw],[8.6,-56,11,-49,8.8,-41+sw*.6],[-.4,-52,-1.4,-44,0,-35+sw]]){g.beginPath();g.moveTo(l[0],l[1]);g.quadraticCurveTo(l[2],l[3],l[4],l[5]);g.stroke()}
+  g.strokeStyle='rgba(60,60,70,.3)';g.lineWidth=2.4;g.beginPath();g.moveTo(-7,-48);g.quadraticCurveTo(-8,-42,-5,-36+sw);g.stroke();
+  g.strokeStyle='rgba(20,20,26,.5)';g.lineWidth=.8;for(let i=0;i<3;i++){g.beginPath();g.moveTo(-1+i*1.6,-31+sw*1.4);g.lineTo(-1.6+i*1.8+sw*.4,-27.6+sw*1.6);g.stroke()}}
+ /* 後髮：濃墨＋飛白 */
+ g.fillStyle=col(INK);g.lineWidth=1.3;g.strokeStyle=K;
+ g.beginPath();g.moveTo(-11.4,-73);g.quadraticCurveTo(-14.2,-64,-13.4,-56+sw*.6);g.quadraticCurveTo(-12.8,-49+sw*1.2,-10.8,-45+sw*1.8);g.quadraticCurveTo(-10.2,-52+sw,-10,-58);g.quadraticCurveTo(-9.6,-66,-9.4,-73);g.closePath();g.fill();g.stroke();
+ g.beginPath();g.moveTo(-8.6,-72);g.quadraticCurveTo(-7,-66,-7.2,-60);g.quadraticCurveTo(-7,-56.4,-5.6,-54);g.lineTo(-4.4,-54.8);g.quadraticCurveTo(-5,-60,-5.2,-66);g.quadraticCurveTo(-5.8,-70,-6.2,-72.4);g.closePath();g.fill();g.stroke();
+ if(!F){g.strokeStyle='rgba(190,190,200,.5)';g.lineWidth=.8;g.beginPath();g.moveTo(-12,-68);g.quadraticCurveTo(-12.8,-58,-11.4,-50+sw);g.stroke()}
+ /* 烏紗帽（水墨版）：濃墨帽身＋飛白高光、白描帽翼、硃砂帽圈 */
+ const wf=sw*1.2;
+ for(const q of[-1,1])pl([[q*9,-78.6],[q*30,-78.4+wf*q*.4],[q*31,-75.4+wf*q*.4],[q*9,-74.6]],col('#1c1c22'),1.5);
+ if(!F){for(const q of[-1,1]){g.strokeStyle='rgba(236,230,214,.75)';g.lineWidth=1;g.beginPath();g.moveTo(q*12,-77.2);g.lineTo(q*28,-77.2+wf*q*.35);g.stroke();
+  g.strokeStyle=K;g.lineWidth=1.7;g.beginPath();g.moveTo(q*30.6,-77+wf*q*.4);g.quadraticCurveTo(q*35,-77.6+wf*q*.4,q*34,-72.6+wf*q*.4);g.stroke()}}
+ pl([[-11.6,-72],[-11,-81],[-6,-88],[2,-89.4],[8.6,-87],[11.6,-80],[11.8,-72]],col('#1c1c22'),1.9);
+ pl([[-12,-75.2],[12.2,-75.2],[12.2,-71.8],[-12,-71.8]],col('#2c2c34'),1.4);
+ if(!F){g.fillStyle=RD;g.fillRect(-12,-74.2,24.2,1.4);
+  g.fillStyle=RD;g.beginPath();g.arc(0,-73.4,2.4,0,TAU);g.fill();g.lineWidth=.9;g.strokeStyle=K;g.stroke();g.fillStyle=PP;g.beginPath();g.arc(0,-73.4,.8,0,TAU);g.fill();
+  g.strokeStyle='rgba(236,230,214,.5)';g.lineWidth=1;g.beginPath();g.moveTo(-7,-83.6);g.quadraticCurveTo(-1,-88.4,6,-85.6);g.stroke();
+  /* 帽頂飛白墨痕 */
+  g.strokeStyle='rgba(236,230,214,.5)';g.lineWidth=1;for(let i=0;i<3;i++){const ph=Math.sin(T*1.6+i*1.4);g.beginPath();g.moveTo(-4+i*4,-89);g.quadraticCurveTo(-5+i*4+ph*2.4,-95,-3+i*4+ph*3.6,-101+i*1.6);g.stroke()}}
+ /* 帽後硃紅垂纓 */
+ g.strokeStyle=F?'#fff':RD;g.lineWidth=1.9;g.beginPath();g.moveTo(-11.4,-73);g.quadraticCurveTo(-16,-67+sw*2,-16.6,-60+sw*3);g.stroke();
+ if(!F){g.lineWidth=1.1;for(let i=-1;i<2;i++){g.beginPath();g.moveTo(-16.6,-60+sw*3);g.lineTo(-16.6+i*1.4,-55.6+sw*3.4);g.stroke()}}
+}
 function smithBody(o,col,pl,ln,sw){const K='#1c1c1c',F=o.fl,gl=.5+.5*Math.sin(T*5+(o.x||0)*.02);/* 鑄劍老匠（v358）：皮圍裙（焦痕與爐火餘紅）、鉚釘鐵肩甲、皮腰帶鐵扣、腰懸鐵鉗 */
  pl([[-8,-53],[8,-53],[9,-46],[11.4,-18],[-11.4,-18],[-9,-46]],col('#6e4a2c'),1.6);
  if(!F){g.fillStyle='rgba(30,18,10,.34)';g.beginPath();g.ellipse(2,-26,6.6,4.6,.2,0,TAU);g.fill();g.fillStyle='rgba(255,120,40,'+(.12+.1*gl)+')';g.beginPath();g.ellipse(-4.4,-22,5.6,3,0,0,TAU);g.fill();
