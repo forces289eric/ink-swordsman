@@ -9903,7 +9903,7 @@ window.MECHCG={st:()=>CQ};
 }
 
 
-/* ===== v375 第一部隱藏關「劍廬谷底」：不看生死簿＋遣散魔宮兵器 → 尾聲在劍廬門前截斷，回後山谷底救師父 =====
+/* ===== v375→v376 第一部隱藏關「劍廬谷底」：不看生死簿＋遣散魔宮兵器 → 尾聲在劍廬門前截斷，回後山谷底救師父 =====
    場景：劍廬後山崖壁下的冷霧谷底。歷代弟子的舊劍插滿地面、斷掉的藤梯與索橋垂在崖上、天光從崖縫透下；關底洞口，師父拄著半截斷劍。
    頭目：黑玉令使——兜帽、白玉半面具、黑玉令牌、背後暗器囊與長圍巾。
    技能：①飛刀（水平直線預警，可跳過或揮劍擊落）②黑玉令（地面預警，令牌壓頂）③鬼影突襲（整條地面預警，跳過或閃避）④落石（半血後，崖上落石，地面圈預警）
@@ -9934,44 +9934,116 @@ window.MECHCG={st:()=>CQ};
  const startGk=()=>{if(LEVELS.length<=22)LEVELS.push(GKLV);LV=22;P.hp=Math.min(P.mh,P.hp+40);P.mp=100;for(const k in hold)hold[k]=0;loadLevel()};
 
  /* ---------- 專屬場景 ---------- */
+ /* ===== v376 隱藏關背景優化：冷色峽谷天空、三重遠山＋劍塚巨劍、瀑布、崖壁地層、斷橋吊燈、劍冢碑、苔地積水、劍尖冷光、幽綠魂火、暗角 ===== */
+ const GKT=[],GKL=[];
+ const gkSpr=(r,col)=>mkLayer(r*2,r*2,c=>{const q=c.createRadialGradient(r,r,0,r,r,r);q.addColorStop(0,`rgba(${col},1)`);q.addColorStop(.4,`rgba(${col},.4)`);q.addColorStop(1,`rgba(${col},0)`);c.fillStyle=q;c.fillRect(0,0,r*2,r*2)});
+ let GKS=null,GKV=null;
+ const gkSprs=()=>GKS||(GKS={w:gkSpr(64,'232,244,248'),t:gkSpr(32,'110,225,185'),l:gkSpr(32,'255,196,110')});
+ const gkMist=(c,y,h,a,col)=>{const q=c.createLinearGradient(0,y-h,0,y+h*.3);q.addColorStop(0,`rgba(${col},0)`);q.addColorStop(.7,`rgba(${col},${a})`);q.addColorStop(1,`rgba(${col},0)`);c.fillStyle=q;c.fillRect(0,y-h,TW,h*1.3)};
  const gkGround=()=>{
-  const L=gnd({c:'40,44,46',c2:'88,94,94'}),c=L.getContext('2d');c.lineCap='round';
+  const L=gnd({c:'38,44,46',c2:'86,94,94'}),c=L.getContext('2d');c.lineCap='round';
+  /* 苔斑 */
+  for(let i=0;i<14;i++){const x=R(10,710),y=R(GY+8,H-12);c.fillStyle='rgba(70,104,84,'+R(.14,.26)+')';c.beginPath();c.ellipse(x,y,R(14,34),R(2.4,5),0,0,TAU);c.fill()}
+  /* 碎石 */
   for(let i=0;i<52;i++){const x=R(0,718),y=R(GY+6,H-8);c.fillStyle='rgba(30,34,36,.4)';c.beginPath();c.ellipse(x,y,R(2,5),R(1,2.4),0,0,TAU);c.fill()}
+  /* 積水：映著天光的淺窪 */
+  for(let i=0;i<4;i++){const x=R(50,670),y=R(GY+16,H-18),w=R(20,42);c.fillStyle='rgba(170,200,210,.2)';c.beginPath();c.ellipse(x,y,w,3.6,0,0,TAU);c.fill();c.strokeStyle='rgba(228,242,246,.55)';c.lineWidth=1;c.beginPath();c.ellipse(x,y,w,3.6,0,Math.PI*1.05,Math.PI*1.95);c.stroke();c.strokeStyle='rgba(228,242,246,.28)';c.beginPath();c.moveTo(x-w*.5,y+.5);c.lineTo(x+w*.3,y+.5);c.stroke()}
+  /* 地裂 */
   for(let i=0;i<9;i++){const x=R(0,700),y=R(GY+10,H-14);c.strokeStyle='rgba(20,22,24,.38)';c.lineWidth=1;c.beginPath();c.moveTo(x,y);c.lineTo(x+R(10,30),y+R(-4,4));c.lineTo(x+R(30,50),y+R(-6,6));c.stroke()}
-  for(let x=0;x<720;x+=R(12,26)){const y=ge(x);for(let q=0;q<3;q++){c.strokeStyle='rgba(78,92,70,.6)';c.lineWidth=1.2;c.beginPath();c.moveTo(x+q*2,y);c.lineTo(x+q*2+R(-4,4),y-R(5,10));c.stroke()}}
-  c.save();c.globalCompositeOperation='source-atop';{const q=c.createLinearGradient(0,GY,0,H);q.addColorStop(0,'rgba(190,210,214,.12)');q.addColorStop(1,'rgba(14,18,22,.34)');c.fillStyle=q;c.fillRect(0,GY-8,720,H-GY+8)}c.restore();
+  /* 倒臥的舊劍 */
+  for(let i=0;i<5;i++){const x=R(30,630),y=R(GY+12,H-16),l=R(30,56);c.save();c.translate(x,y);c.rotate(R(-.12,.12));c.strokeStyle='rgba(20,22,24,.55)';c.lineWidth=2.6;c.beginPath();c.moveTo(0,0);c.lineTo(l,0);c.stroke();c.strokeStyle='rgba(196,210,214,.6)';c.lineWidth=1;c.beginPath();c.moveTo(1,-1);c.lineTo(l-2,-1);c.stroke();c.strokeStyle='rgba(60,44,30,.7)';c.lineWidth=3.2;c.beginPath();c.moveTo(-9,0);c.lineTo(-1,0);c.stroke();c.strokeStyle='rgba(20,22,24,.6)';c.lineWidth=2;c.beginPath();c.moveTo(0,-5);c.lineTo(0,5);c.stroke();c.restore()}
+  /* 草 */
+  for(let x=0;x<720;x+=R(12,26)){const y=ge(x);for(let q=0;q<3;q++){c.strokeStyle=q===1?'rgba(110,146,116,.6)':'rgba(78,92,70,.6)';c.lineWidth=1.2;c.beginPath();c.moveTo(x+q*2,y);c.lineTo(x+q*2+R(-4,4),y-R(5,11));c.stroke()}}
+  /* 地平線的霧光 */
+  c.strokeStyle='rgba(204,226,232,.3)';c.lineWidth=1.4;c.beginPath();for(let x=0;x<=720;x+=8){const y=ge(x)+1;x?c.lineTo(x,y):c.moveTo(x,y)}c.stroke();
+  c.save();c.globalCompositeOperation='source-atop';{const q=c.createLinearGradient(0,GY,0,H);q.addColorStop(0,'rgba(190,210,214,.14)');q.addColorStop(1,'rgba(14,18,22,.34)');c.fillStyle=q;c.fillRect(0,GY-8,720,H-GY+8)}c.restore();
   return L};
- const gkRock=(c,x,y,w,h,a)=>{c.fillStyle=ik(a,'34,40,44');c.beginPath();c.moveTo(x-w,y);c.lineTo(x-w*.8,y-h*.6);c.lineTo(x-w*.3,y-h);c.lineTo(x+w*.4,y-h*.85);c.lineTo(x+w*.9,y-h*.4);c.lineTo(x+w,y);c.closePath();c.fill();c.strokeStyle=ik(a*.6,'200,215,218');c.lineWidth=1;c.beginPath();c.moveTo(x-w*.3,y-h);c.lineTo(x+w*.4,y-h*.85);c.stroke()};
+ const gkRock=(c,x,y,w,h,a)=>{
+  const q=c.createLinearGradient(0,y-h,0,y);q.addColorStop(0,ik(a,'66,78,84'));q.addColorStop(.5,ik(a,'38,46,52'));q.addColorStop(1,ik(a,'22,28,32'));
+  c.fillStyle=q;c.beginPath();c.moveTo(x-w,y);c.lineTo(x-w*.8,y-h*.6);c.lineTo(x-w*.3,y-h);c.lineTo(x+w*.4,y-h*.85);c.lineTo(x+w*.9,y-h*.4);c.lineTo(x+w,y);c.closePath();c.fill();
+  c.strokeStyle=ik(a*.7,'206,222,226');c.lineWidth=1.2;c.beginPath();c.moveTo(x-w*.8,y-h*.6);c.lineTo(x-w*.3,y-h);c.lineTo(x+w*.4,y-h*.85);c.lineTo(x+w*.9,y-h*.4);c.stroke();
+  c.strokeStyle=ik(a*.7,'14,18,20');c.lineWidth=1;c.beginPath();c.moveTo(x-w*.1,y-h*.9);c.lineTo(x-w*.2,y-h*.5);c.lineTo(x+w*.05,y-h*.3);c.stroke();
+  c.fillStyle=ik(a*.55,'74,112,88');c.beginPath();c.ellipse(x+w*.1,y-1,w*.75,3.4,0,0,TAU);c.fill()};
+ /* 遠山脊線（以 wavy 取樣，左右可無縫接） */
+ const gkRidge=(c,base,amp,col,al,ph,k1,k2)=>{
+  c.beginPath();c.moveTo(0,H);for(let x=0;x<=TW;x+=8)c.lineTo(x,wavy(x,base,amp,ph,k1,k2));c.lineTo(TW,H);c.closePath();
+  const q=c.createLinearGradient(0,base-amp*2,0,base+amp*1.6);q.addColorStop(0,`rgba(${col},${al})`);q.addColorStop(1,`rgba(${col},0)`);c.fillStyle=q;c.fill();
+  c.strokeStyle=`rgba(214,230,234,${al*.55})`;c.lineWidth=1.2;c.beginPath();for(let x=0;x<=TW;x+=8){const y=wavy(x,base,amp,ph,k1,k2)-1;x?c.lineTo(x,y):c.moveTo(x,y)}c.stroke()};
+ /* 劍塚巨劍：劍身插進山脊，劍柄朝天 */
+ const gkGiant=(c,x,base,amp,ph,k1,k2,h,al)=>wr(x,xx=>{
+  const yR=wavy(xx,base,amp,ph,k1,k2),gy=yR-h;
+  c.fillStyle=ik(al,'36,48,56');c.beginPath();c.moveTo(xx-5,gy+4);c.lineTo(xx+5,gy+4);c.lineTo(xx+4,yR+4);c.lineTo(xx,yR+14);c.lineTo(xx-4,yR+4);c.closePath();c.fill();
+  c.fillRect(xx-17,gy,34,5);c.fillRect(xx-2.2,gy-17,4.4,18);c.beginPath();c.arc(xx,gy-20,4,0,TAU);c.fill();
+  c.strokeStyle=ik(al*.9,'214,230,234');c.lineWidth=.9;c.beginPath();c.moveTo(xx,gy+8);c.lineTo(xx,yR-6);c.stroke()});
  const gkScene=()=>{
-  /* 遠景 a：冷色遠崖＋霧 */
-  const A=L4(c=>{c.drawImage(L1,0,0);c.fillStyle='rgba(120,150,162,.22)';c.fillRect(0,0,TW,H);mist(c,GY-70,90,.42)});
-  /* 遠景 b：兩側垂下的崖壁、藤蔓、斷掉的索橋 */
-  const B=L4(c=>{c.drawImage(L2,0,0);c.fillStyle='rgba(60,84,96,.2)';c.fillRect(0,0,TW,H);
-   for(let x=40;x<TW;x+=R(110,170))wr(x,xx=>{const w=R(70,115),h=R(80,160);c.fillStyle=ik(.58,'30,36,40');c.beginPath();c.moveTo(xx-w,-4);c.lineTo(xx+w,-4);c.lineTo(xx+w*.7,h*.45);c.lineTo(xx+w*.25,h);c.lineTo(xx-w*.1,h*.68);c.lineTo(xx-w*.5,h*.92);c.lineTo(xx-w*.9,h*.4);c.closePath();c.fill();
-    for(let k=0;k<3;k++){const vx=xx-w*.4+k*w*.45,vl=R(40,90);c.strokeStyle=ik(.4,'44,66,50');c.lineWidth=1.3;c.beginPath();c.moveTo(vx,h*.6);c.quadraticCurveTo(vx+R(-6,6),h*.6+vl*.6,vx+R(-4,4),h*.6+vl);c.stroke();blot(c,vx,h*.6+vl,2.6,.3,0)}});
-   for(const x of[260,980])wr(x,xx=>{c.strokeStyle=ik(.5,'60,44,30');c.lineWidth=1.6;c.beginPath();c.moveTo(xx,-4);c.lineTo(xx+46,150);c.stroke();c.beginPath();c.moveTo(xx+22,-4);c.lineTo(xx+66,140);c.stroke();for(let k=0;k<6;k++){const t=k/6,px=xx+10+t*50,py=10+t*140;c.fillStyle=ik(.55,'70,52,34');c.save();c.translate(px+8,py);c.rotate(.4);c.fillRect(-12,-2,24,4);c.restore()}});
-   mist(c,GY-40,64,.34)});
-  /* 中景 c：舊劍林立、殘階、劍廬殘旗 */
+  GKT.length=0;GKL.length=0;
+  /* 遠景 a：三重山脊＋劍塚巨劍＋瀑布，層層霧帶（空氣透視）；只給山形上色，不再整張罩色 */
+  const A=L4(c=>{
+   gkRidge(c,205,58,'92,116,128',.3,1.3,1,2);
+   gkMist(c,180,56,.46,'206,222,228');
+   for(const x of[470,1180])wr(x,xx=>{const q=c.createLinearGradient(0,70,0,250);q.addColorStop(0,'rgba(226,240,244,0)');q.addColorStop(.3,'rgba(226,240,244,.42)');q.addColorStop(1,'rgba(226,240,244,.12)');c.fillStyle=q;c.fillRect(xx-3.5,70,7,180);c.fillStyle='rgba(240,250,252,.3)';c.fillRect(xx-1,90,2,150);const m=c.createRadialGradient(xx,248,0,xx,248,46);m.addColorStop(0,'rgba(230,242,246,.5)');m.addColorStop(1,'rgba(230,242,246,0)');c.fillStyle=m;c.fillRect(xx-46,200,92,96)});
+   gkRidge(c,240,44,'62,84,96',.46,4.1,2,3);
+   gkMist(c,GY-72,92,.5,'208,224,230');
+   gkRidge(c,268,30,'42,60,70',.5,5.2,3,5);
+   gkMist(c,GY-56,64,.36,'206,222,228')});
+  /* 遠景 b：兩層垂下的崖壁（含地層、岩縫、藤蔓）＋斷掉的索橋與吊燈 */
+  const B=L4(c=>{
+   for(let pass=0;pass<2;pass++)for(let x=-30;x<TW+30;x+=R(88,138)){
+    const w=R(62,108)*(pass?1:1.2),h=R(70,150)*(pass?1:.78),al=pass?1:.6;
+    const pts=[[-w,-4],[w,-4],[w*.7,h*.45],[w*.25,h],[-w*.1,h*.68],[-w*.5,h*.92],[-w*.9,h*.4]];
+    wr(x,xx=>{
+     const q=c.createLinearGradient(0,0,0,h);q.addColorStop(0,ik(.94*al,'20,27,31'));q.addColorStop(.65,ik(.8*al,'40,52,58'));q.addColorStop(1,ik(.58*al,'62,78,84'));
+     c.beginPath();pts.forEach((p,i)=>i?c.lineTo(xx+p[0],p[1]):c.moveTo(xx+p[0],p[1]));c.closePath();c.fillStyle=q;c.fill();
+     c.save();c.clip();c.strokeStyle=ik(.22*al,'170,192,198');c.lineWidth=1;for(let k=0;k<3;k++){const yy=h*(.25+k*.22);c.beginPath();c.moveTo(xx-w,yy+R(-5,5));c.lineTo(xx+w*.2,yy+R(-8,8));c.lineTo(xx+w,yy+R(-5,5));c.stroke()}c.restore();
+     c.strokeStyle=ik(.34*al,'190,212,218');c.lineWidth=1.2;c.beginPath();for(let i=2;i<7;i++){const p=pts[i];i>2?c.lineTo(xx+p[0],p[1]):c.moveTo(xx+p[0],p[1])}c.stroke();
+     if(pass)for(let k=0;k<3;k++){const vx=xx-w*.4+k*w*.45,vl=R(40,90);c.strokeStyle=ik(.5,'44,70,54');c.lineWidth=1.3;c.beginPath();c.moveTo(vx,h*.6);c.quadraticCurveTo(vx+R(-6,6),h*.6+vl*.6,vx+R(-4,4),h*.6+vl);c.stroke();blot(c,vx,h*.6+vl,2.6,.3,0)}})}
+   for(const x of[260,640,1060])wr(x,xx=>{
+    c.lineCap='round';c.strokeStyle=ik(.62,'58,42,30');c.lineWidth=1.8;
+    c.beginPath();c.moveTo(xx,-4);c.quadraticCurveTo(xx+14,70,xx+48,150);c.stroke();
+    c.beginPath();c.moveTo(xx+24,-4);c.quadraticCurveTo(xx+38,64,xx+68,142);c.stroke();
+    for(let k=0;k<7;k++){const t=(k+.5)/7,px=xx+11+t*54,py=14+t*132;c.save();c.translate(px,py);c.rotate(.42+R(-.12,.12));c.fillStyle=ik(.66,'78,56,38');c.fillRect(-13,-2.4,26,4.8);c.strokeStyle=ik(.4,'20,16,12');c.lineWidth=.8;c.strokeRect(-13,-2.4,26,4.8);c.restore()}
+    c.strokeStyle=ik(.5,'58,42,30');c.lineWidth=1.4;c.beginPath();c.moveTo(xx+48,150);c.quadraticCurveTo(xx+42,170,xx+54,186);c.stroke();c.beginPath();c.moveTo(xx+68,142);c.quadraticCurveTo(xx+78,160,xx+70,178);c.stroke();
+    const lx=xx+20,ly=64;c.strokeStyle=ik(.6,'40,30,22');c.lineWidth=1;c.beginPath();c.moveTo(lx,ly);c.lineTo(lx,ly+12);c.stroke();
+    c.fillStyle=ik(.85,'150,62,38');c.beginPath();c.ellipse(lx,ly+20,6,8,0,0,TAU);c.fill();c.strokeStyle=ik(.7,'30,20,14');c.stroke();c.fillStyle='rgba(255,214,140,.9)';c.beginPath();c.ellipse(lx,ly+20,2.6,4,0,0,TAU);c.fill();
+    if(lx>=0&&lx<TW)GKL.push({x:lx,y:ly+20,p:R(0,6.28)})});
+   gkMist(c,GY-40,64,.3,'206,222,228')});
+  /* 中景 c：舊劍林立（劍尖會閃光、部分繫紅布）、劍冢碑、殘階、劍廬殘旗、山門 */
   const C=L4(c=>{
-   for(let i=0;i<30;i++)wr(R(30,TW-30),xx=>swd(c,xx,GY-2,R(46,100),R(.42,.62),R(-16,16)));
+   for(let i=0;i<6;i++)glow(c,R(60,TW-60),GY-4,R(70,120),'110,215,180',.1);
+   for(let i=0;i<42;i++)wr(R(30,TW-30),xx=>{const h=R(44,108),t=R(-18,18),al=R(.4,.64),gx=xx+t*.7,gy=GY-2-h*.65;swd(c,xx,GY-2,h,al,t);
+    if(i%6===0){c.strokeStyle=ik(.58,'150,44,36');c.lineWidth=2.6;c.lineCap='round';c.beginPath();c.moveTo(gx,gy);c.quadraticCurveTo(gx+10,gy+8,gx+R(16,26),gy+R(14,24));c.stroke();c.lineWidth=1.6;c.beginPath();c.moveTo(gx,gy+1);c.quadraticCurveTo(gx+4,gy+12,gx+R(6,12),gy+R(22,30));c.stroke()}
+    if(gx>=0&&gx<TW)GKT.push({x:gx,y:gy,p:R(0,6.28)})});
+   for(const x of[130,440,790,1200])wr(x,xx=>{c.fillStyle=ik(.58,'62,72,78');c.beginPath();c.moveTo(xx-11,GY);c.lineTo(xx-11,GY-40);c.quadraticCurveTo(xx,GY-52,xx+11,GY-40);c.lineTo(xx+11,GY);c.closePath();c.fill();c.strokeStyle=IKW(.5);c.lineWidth=1;c.stroke();c.fillStyle=IKP(.5);c.font="bold 11px KaiTi,STKaiti,'Noto Serif TC',serif";c.textAlign='center';c.textBaseline='middle';c.fillText('劍',xx,GY-29);c.fillText('冢',xx,GY-16)});
    wr(560,x=>{c.fillStyle=IKW(.12);c.beginPath();c.ellipse(x,GY-2,86,5,0,0,TAU);c.fill();for(let i=0;i<6;i++){const sx=x-80+i*26,sh=14+i*9;c.fillStyle=ik(.5,'40,44,46');c.fillRect(sx,GY-sh,26,sh);c.strokeStyle=IKP(.14);c.lineWidth=1;c.strokeRect(sx+.5,GY-sh+.5,25,sh)}});
    wr(1010,x=>{stroke(c,x,GY,x,GY-110,3,IKW(.6));c.fillStyle=ik(.62,'120,40,34');c.beginPath();c.moveTo(x,GY-108);c.quadraticCurveTo(x+26,GY-102,x+44,GY-108);c.lineTo(x+34,GY-92);c.lineTo(x+44,GY-74);c.quadraticCurveTo(x+22,GY-80,x,GY-72);c.closePath();c.fill();c.fillStyle=IKP(.85);c.font="bold 14px KaiTi,STKaiti,'Noto Serif TC',serif";c.textAlign='center';c.textBaseline='middle';c.fillText('劍',x+14,GY-97);c.fillText('廬',x+16,GY-82)});
    wr(300,x=>{stroke(c,x-20,GY,x-20,GY-50,3,IKW(.55));stroke(c,x+20,GY,x+20,GY-50,3,IKW(.55));stroke(c,x-24,GY-44,x+24,GY-44,2.6,IKW(.55));for(let k=0;k<5;k++)stroke(c,x-18+k*9,GY-44,x-16+k*9,GY-20-k*3,2,ik(.5,'80,84,88'))});
-   mist(c,GY-20,56,.34)});
-  /* 近景 d：大岩、枯樹、斷劍與碎石 */
+   gkMist(c,GY-18,56,.3,'200,220,226')});
+  /* 近景 d：大岩、枯樹、斷劍、草叢 */
   const D=L4(c=>{
-   for(const x of[150,520,860,1230])wr(x,xx=>gkRock(c,xx,GY+2,R(30,46),R(40,70),.6));
+   for(const x of[150,520,860,1230])wr(x,xx=>gkRock(c,xx,GY+2,R(30,46),R(40,70),.62));
    for(const x of[330,760,1130])dead(c,x,R(110,170),4,.4);
    for(let i=0;i<10;i++)wr(R(40,TW-40),xx=>{c.strokeStyle=ik(.62,'44,48,52');c.lineWidth=2.4;c.beginPath();c.moveTo(xx,GY);c.lineTo(xx+R(-5,5),GY-R(16,34));c.stroke();c.strokeStyle=ik(.5,'200,215,218');c.lineWidth=1;c.beginPath();c.moveTo(xx+1,GY);c.lineTo(xx+1+R(-3,3),GY-R(12,28));c.stroke()});
-   reeds(c,10,12,28,.4);mist(c,GY-20,50,.3)});
-  return{a:A,b:B,c:C,d:D,gl:gkGround(),sun:{x:560,y:76,r:34,c:'205,222,226',a:.4},sky:['rgba(150,175,190,0)','rgba(150,175,190,.22)'],leaf:0,gk:1}};
+   for(let i=0;i<36;i++)wr(R(10,TW-10),xx=>{const n=R(3,6)|0;c.lineWidth=1.3;c.lineCap='round';for(let k=0;k<n;k++){const hh=R(12,34),bx=xx+k*2.4;c.strokeStyle=k%3?ik(.55,'44,64,54'):ik(.5,'96,128,104');c.beginPath();c.moveTo(bx,GY+2);c.quadraticCurveTo(bx+R(-4,4),GY-hh*.6,bx+R(-12,12),GY-hh);c.stroke()}});
+   gkMist(c,GY-20,50,.28,'200,220,226')});
+  return{a:A,b:B,c:C,d:D,gl:gkGround(),sun:{x:560,y:58,r:30,c:'236,246,248',a:.8},sky:['rgba(40,58,68,.66)','rgba(206,224,228,.14)'],leaf:0,gk:1}};
  const _sc=scene;scene=function(i){if(i==='gk')return SCN.gk||(SCN.gk=gkScene());return _sc.apply(this,arguments)};
  /* 天光：從崖縫斜斜落下的光束與浮塵 */
  const gkSky=()=>{
-  const pu=.8+.2*Math.sin(T*.7);
-  for(const[a,b]of[[-60,40],[60,150],[170,250]]){const q=g.createLinearGradient(520,0,520+(a+b)/2,GY);q.addColorStop(0,'rgba(210,230,234,'+.2*pu+')');q.addColorStop(1,'rgba(210,230,234,0)');g.fillStyle=q;g.beginPath();g.moveTo(500,0);g.lineTo(560,0);g.lineTo(560+b,GY);g.lineTo(500+a,GY);g.closePath();g.fill()}
-  for(let i=0;i<16;i++){const x=(i*47+T*(6+i%3*3))%W,y=(i*83+T*(10+i%4*4))%GY;g.fillStyle='rgba(225,238,240,'+(.18+.12*Math.sin(T*2+i))+')';g.fillRect(x,y,1.6,1.6)}};
- {const _par=par;par=function(img,f){_par(img,f);if(SC&&SC.gk&&img===SC.a){g.save();gkSky();g.restore()}}}
+  /* 崖縫天光：光暈＋三道會輕輕擺動的光束＋浮塵 */
+  const sp=gkSprs(),pu=.8+.2*Math.sin(T*.7);
+  g.globalAlpha=.55*pu;g.drawImage(sp.w,440,-62,240,240);g.globalAlpha=1;
+  for(const[a,b,k]of[[-60,40,0],[60,150,1.7],[170,250,3.1]]){const sw=Math.sin(T*.3+k)*12,p=.8+.2*Math.sin(T*.7+k),q=g.createLinearGradient(520,0,520+(a+b)/2+sw,GY);q.addColorStop(0,'rgba(214,234,238,'+.26*p+')');q.addColorStop(1,'rgba(214,234,238,0)');g.fillStyle=q;g.beginPath();g.moveTo(500,0);g.lineTo(560,0);g.lineTo(560+b+sw,GY);g.lineTo(500+a+sw,GY);g.closePath();g.fill()}
+  for(let i=0;i<20;i++){const x=(i*47+T*(6+i%3*3))%W,y=(i*83+T*(10+i%4*4))%GY,s=1.4+i%3*.5;g.fillStyle='rgba(225,238,240,'+(.18+.14*Math.sin(T*2+i))+')';g.fillRect(x,y,s,s)}};
+ /* 燈籠暖光（隨崖壁視差移動、火苗閃爍） */
+ const gkLan=()=>{const sp=gkSprs();for(let X=-((cam*.45)%TW);X<W;X+=TW)for(const q of GKL){const x=X+q.x;if(x<-40||x>W+40)continue;const f=.72+.28*Math.sin(T*6.3+q.p)*Math.sin(T*2.7+q.p*1.7);g.globalAlpha=.7*f;g.drawImage(sp.l,x-34,q.y-34,68,68)}g.globalAlpha=1};
+ /* 劍尖冷光與幽綠魂火 */
+ const gkFx=()=>{const sp=gkSprs();g.lineCap='round';
+  for(let X=-((cam*.6)%TW);X<W;X+=TW)for(const q of GKT){const x=X+q.x;if(x<-8||x>W+8)continue;const a=Math.pow(Math.max(0,Math.sin(T*1.5+q.p)),10);if(a<.06)continue;const r=3+6*a;g.strokeStyle='rgba(238,250,252,'+.9*a+')';g.lineWidth=1.1;g.beginPath();g.moveTo(x-r,q.y);g.lineTo(x+r,q.y);g.moveTo(x,q.y-r);g.lineTo(x,q.y+r);g.stroke()}
+  const n=LQ?3:8,M=W+140;for(let i=0;i<n;i++){const x=((i*173+T*(6+i%3*2)-cam*.6)%M+M)%M-70,y=GY-34-(i%4)*30+Math.sin(T*.8+i*1.9)*12,a=.28+.22*Math.sin(T*1.7+i*2.3);g.globalAlpha=Math.max(0,a);g.drawImage(sp.t,x-16,y-16,32,32)}
+  g.globalAlpha=1};
+ /* 暗角：只壓在背景層，角色與地面不受影響 */
+ const gkVig=()=>{if(!GKV)GKV=mkLayer(W,H,c=>{let q=c.createRadialGradient(W/2,H*.58,H*.35,W/2,H*.58,W*.62);q.addColorStop(0,'rgba(8,14,18,0)');q.addColorStop(1,'rgba(8,14,18,.4)');c.fillStyle=q;c.fillRect(0,0,W,H);q=c.createLinearGradient(0,0,0,150);q.addColorStop(0,'rgba(8,14,18,.36)');q.addColorStop(1,'rgba(8,14,18,0)');c.fillStyle=q;c.fillRect(0,0,W,150)});g.drawImage(GKV,0,0)};
+ {const _par=par;par=function(img,f){_par(img,f);if(!SC||!SC.gk)return;g.save();if(img===SC.a)gkSky();else if(img===SC.b)gkLan();else if(img===SC.c)gkFx();else if(img===SC.d)gkVig();g.restore()}}
 
  /* ---------- 關底：洞口與師父 ---------- */
  const gkMaster=(x,y,stand)=>{
