@@ -10461,7 +10461,19 @@ yy:{n:'養元功',r:2,t:'pas',k:'hp',p:1,c:'#c05a5a',dm:[0,0,0],d:['培補元氣
 yf:{n:'御風訣',r:2,t:'pas',k:'sp',p:1,c:'#5a8aa0',dm:[0,0,0],d:['身隨風起、步履輕盈','移動速度常駐提升']},
 pj:{n:'破軍訣',r:4,t:'pas',k:'at',p:1,c:'#b3261e',dm:[0,0,0],d:['劍意破陣、勢不可擋','所有攻擊傷害提升']},
 gy:{n:'歸元訣',r:3,t:'pas',k:'kq',p:1,c:'#4a7a9a',dm:[0,0,0],d:['敵倒氣散，納而歸元','擊敗敵人時回復氣']},
-xy:{n:'尋緣訣',r:3,t:'pas',k:'lu',p:1,c:'#d4a62f',dm:[0,0,0],d:['心有所向、機緣自來','秘籍掉落機率提升']}};
+xy:{n:'尋緣訣',r:3,t:'pas',k:'lu',p:1,c:'#d4a62f',dm:[0,0,0],d:['心有所向、機緣自來','秘籍掉落機率提升']},
+pai:{n:'排山倒海',r:4,t:'ring',c:'#2a5a7a',dm:[40,66,104],d:['掌勁如潮、層層疊湧','震盪範圍極廣的重掌']},
+wan:{n:'萬劍歸宗',r:4,t:'rain',c:'#3a4a8a',dm:[18,24,32],d:['萬劍齊鳴、歸於一點','劍雨更密、更重']},
+yi:{n:'一葦渡江',r:2,t:'dash',c:'#4a9a8a',dm:[22,40,66],d:['足踏蘆葦、一躍過江','瞬移向前並傷及沿途敵人']},
+dz:{n:'龍象震地',r:3,t:'quake',c:'#8a5a2a',dm:[28,48,80],d:['一踏撼地、勁透四方','氣浪同時向前後兩側衝出']},
+hf:{n:'迴風舞柳',r:3,t:'whirl',c:'#5a8a5a',dm:[12,15,20],d:['身隨劍轉、如風舞柳','原地連環旋斬，蓄力越久連擊越多']},
+pt:{n:'菩提心經',r:3,t:'heal',c:'#3f8f6b',dm:[10,20,34],d:['心如菩提、淨化傷痛','立即回復一部分氣血']},
+fh:{n:'飛花摘葉',r:3,t:'chain',c:'#9a5a7a',dm:[16,24,34],d:['拈花摘葉、皆可傷人','勁力在敵人之間連環跳躍']},
+gw:{n:'觀微訣',r:3,t:'pas',k:'cr',p:1,c:'#b3261e',dm:[0,0,0],d:['洞察破綻、一擊致命','攻擊有機會會心，傷害 ×1.8']},
+tx:{n:'踏雪無痕',r:4,t:'pas',k:'ev',p:1,c:'#5a8aa0',dm:[0,0,0],d:['足不沾塵、輕若鴻毛','受擊時有機會完全閃避']},
+yx:{n:'飲血訣',r:3,t:'pas',k:'hk',p:1,c:'#a04a4a',dm:[0,0,0],d:['納敵逝去之生機','擊敗敵人時回復氣血']},
+dx:{n:'定心訣',r:3,t:'pas',k:'ds',p:1,c:'#6a6a8a',dm:[0,0,0],d:['泰山崩於前而色不變','集氣時受擊不散氣，並減傷']},
+jq:{n:'節氣訣',r:2,t:'pas',k:'mc',p:1,c:'#5a7a9a',dm:[0,0,0],d:['吐納有度、氣不外洩','集氣所耗之氣減少']}};
 const LVN=['','一重','二重','三重'],MUL=m=>1+.12*(m-1);
 const okp=()=>S==='play'&&P&&!DLG&&!(typeof CHO!=='undefined'&&CHO);
 const snd=(f,d,o)=>{try{if(SFX.ac&&SFX.ac())SFX.tone(f,d,o||{})}catch(_){}};
@@ -10470,9 +10482,9 @@ function mbLoad(){const o={bag:[],eq:null,ne:null,tab:0,open:0,sel:0,on:0,ch:0,l
 function mbSave(){try{localStorage.setItem('inkMB',JSON.stringify({bag:MB.bag.map(b=>({id:b.id,l:b.l,m:b.m})),eq:MB.eq,ne:MB.ne}))}catch(e){}}
 window.MB=mbLoad();window.MJ=[];
 const it0=()=>MB.bag.find(b=>b.id===MB.eq);
-function mbPv(d,m){return({mp:'氣上限　+'+8*m,rg:'回氣速度　+'+(.6*m).toFixed(1)+'/秒',dr:'受傷減免　'+6*m+'%',fc:'集氣縮短　'+9*m+'%',hp:'回血　+'+(.3*m).toFixed(1)+'/秒',sp:'移動速度　+'+3*m+'%',at:'攻擊傷害　+'+4*m+'%',kq:'擊敗回氣　+'+(1.5*m).toFixed(1),lu:'秘籍掉落　+'+20*m+'%'})[d.k]}
+function mbPv(d,m){return({mp:'氣上限　+'+8*m,rg:'回氣速度　+'+(.6*m).toFixed(1)+'/秒',dr:'受傷減免　'+6*m+'%',fc:'集氣縮短　'+9*m+'%',hp:'回血　+'+(.3*m).toFixed(1)+'/秒',sp:'移動速度　+'+3*m+'%',at:'攻擊傷害　+'+4*m+'%',kq:'擊敗回氣　+'+(1.5*m).toFixed(1),lu:'秘籍掉落　+'+20*m+'%',cr:'會心率　'+6*m+'%',ev:'閃避率　'+4*m+'%',hk:'擊敗回血　+'+2*m,ds:'不散氣　減傷'+10*m+'%',mc:'耗氣減少　'+8*m+'%'})[d.k]}
 function mbList(){return MB.bag.filter(b=>!!MBD[b.id].p===(MB.tab===1))}
-function mbVal(d,l,m){const dm=Math.round(d.dm[l-1]*MUL(m));return d.t==='guard'?'減傷'+Math.round((.4+.12*l)*100)+'%　'+(3+2*l)+'秒':d.t==='bolt'?(l+1)+'道　各'+dm:d.t==='rain'?(4+l*3)+'劍　各'+dm:'傷害 '+dm}
+function mbVal(d,l,m){const dm=Math.round(d.dm[l-1]*MUL(m));return d.t==='heal'?'回血 '+dm+'%':d.t==='whirl'?(2+l)+'連斬　各'+dm:d.t==='chain'?(l+2)+'連跳　各'+dm:d.t==='guard'?'減傷'+Math.round((.4+.12*l)*100)+'%　'+(3+2*l)+'秒':d.t==='bolt'?(l+1)+'道　各'+dm:d.t==='rain'?(4+l*3)+'劍　各'+dm:'傷害 '+dm}
 const burst=(x,y,n,c,sp,up,g0)=>{for(let i=0;i<n;i++){const a=R(0,TAU),v=R(.4,1)*sp;PA.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-(up||0),l:.5,m:.5,g:g0===undefined?300:g0||1,r:R(1.4,3.2),c:i%3?'#1f1d1a':'#5c5850'})}};
 function mbHit(e,dm,kb,big){const m=P.mp;hurtE(e,Math.round(dm),kb,big);P.mp=m}
 
@@ -10637,6 +10649,15 @@ function mbPanel(){const a=cl((Date.now()-(MB.t0||0))/160,0,1),B=mbList(),INK='#
   else if(d.k==='at'){g.beginPath();g.moveTo(0,-8*sc);g.lineTo(4*sc,3*sc);g.lineTo(-4*sc,3*sc);g.closePath();g.fill();g.beginPath();g.moveTo(-6*sc,5.5*sc);g.lineTo(6*sc,5.5*sc);g.stroke()}
   else if(d.k==='kq'){g.beginPath();g.arc(0,0,6.5*sc,.6,5.4);g.stroke();g.beginPath();g.arc(0,0,3*sc,3.74,8.54);g.stroke()}
   else if(d.k==='lu'){g.beginPath();g.arc(0,0,6.5*sc,0,TAU);g.stroke();g.strokeRect(-2.5*sc,-2.5*sc,5*sc,5*sc)}
+  else if(d.t==='quake'){g.beginPath();g.moveTo(-7*sc,4*sc);g.lineTo(7*sc,4*sc);g.stroke();g.beginPath();g.moveTo(0,4*sc);g.lineTo(-2*sc,-1*sc);g.lineTo(1*sc,-3*sc);g.lineTo(-1*sc,-7*sc);g.stroke();g.beginPath();g.moveTo(3*sc,4*sc);g.lineTo(5*sc,0);g.stroke()}
+  else if(d.t==='whirl'){g.beginPath();g.arc(0,0,6*sc,.3,Math.PI*1.7);g.stroke();g.beginPath();g.arc(0,0,3*sc,1.5,Math.PI*2.4);g.stroke();g.beginPath();g.moveTo(5*sc,-3*sc);g.lineTo(7*sc,0);g.lineTo(3.5*sc,.5*sc);g.fill()}
+  else if(d.t==='heal'){g.beginPath();g.moveTo(0,-7*sc);g.quadraticCurveTo(6*sc,0,0,6*sc);g.quadraticCurveTo(-6*sc,0,0,-7*sc);g.stroke();g.beginPath();g.moveTo(0,-3*sc);g.lineTo(0,3*sc);g.stroke()}
+  else if(d.t==='chain'){for(const[x,y]of[[-5,4],[0,-4],[5,3]]){g.beginPath();g.arc(x*sc,y*sc,1.7*sc,0,TAU);g.fill()}g.beginPath();g.moveTo(-5*sc,4*sc);g.lineTo(0,-4*sc);g.lineTo(5*sc,3*sc);g.stroke()}
+  else if(d.k==='cr'){for(let q=0;q<4;q++){const a=q*.7854;g.beginPath();g.moveTo(Math.cos(a)*7*sc,Math.sin(a)*7*sc);g.lineTo(-Math.cos(a)*7*sc,-Math.sin(a)*7*sc);g.stroke()}}
+  else if(d.k==='ev'){g.beginPath();g.moveTo(-6*sc,4*sc);g.quadraticCurveTo(-1*sc,-6*sc,6*sc,-4*sc);g.stroke();g.lineWidth=Math.max(1,.9*sc);g.beginPath();g.moveTo(-5*sc,7*sc);g.quadraticCurveTo(0,-1*sc,7*sc,1*sc);g.stroke()}
+  else if(d.k==='hk'){g.beginPath();g.moveTo(0,-7*sc);g.quadraticCurveTo(6*sc,1*sc,0,7*sc);g.quadraticCurveTo(-6*sc,1*sc,0,-7*sc);g.fill()}
+  else if(d.k==='ds'){g.beginPath();g.moveTo(-7*sc,5*sc);g.lineTo(-2*sc,-5*sc);g.lineTo(1*sc,0);g.lineTo(4*sc,-3*sc);g.lineTo(7*sc,5*sc);g.closePath();g.stroke()}
+  else if(d.k==='mc'){g.beginPath();g.arc(0,0,6*sc,0,TAU);g.stroke();g.beginPath();g.moveTo(-3*sc,0);g.lineTo(3*sc,0);g.stroke()}
   else{g.beginPath();g.arc(0,0,3*sc,0,TAU);g.stroke()}
   g.restore()};
  [['武學',0],['內功',1]].forEach(([nm,t])=>{const x=46+t*140,on=MB.tab===t,n=MB.bag.filter(b=>!!MBD[b.id].p===!!t).length;g.fillStyle=on?'rgba(179,38,30,.1)':'rgba(255,250,235,.35)';g.fillRect(x,52,140,20);g.strokeStyle=on?'#b3261e':'rgba(28,28,28,.45)';g.lineWidth=on?2.4:1.2;g.strokeRect(x,52,140,20);stx(nm+' '+n,x+70,62,14,on?'#b3261e':INK,on?1:.75)});
@@ -10684,9 +10705,9 @@ Object.assign(M,{KeyU:'m',KeyI:'b',KeyB:'b',Tab:'b'});
  if(jp.b&&MB.bag.length){mbOpen();for(const k in jp)jp[k]=0;return}
  const it=it0(),d=it&&it.l?MBD[it.id]:null;if(MB.cd>0)MB.cd-=dt;if(MB.guard>0)MB.guard-=dt;MB.ah=hold.a?(MB.ah||0)+dt:0;
  if(MB.on){
-  if(!d||P.hurt>0||P.hp<=0||jp.d||P.dash>0){MB.on=0;MB.ah=-99;txt('氣散',P.x,P.y-100,16,'#7a8fa8')}
+  if(!d||(P.hurt>0&&pk!=='ds')||P.hp<=0||jp.d||P.dash>0){MB.on=0;MB.ah=-99;txt('氣散',P.x,P.y-100,16,'#7a8fa8')}
   else if(MB.src==='a'?!hold.a:!hold.m){MB.on=0;if(MB.lv>=1)mbCast(MB.lv,d,it);else P.mp=Math.min(MPX(P),P.mp+MB.ch*18)}
-  else{if(MB.lv<3&&P.mp>0){MB.ch+=dt;P.mp=Math.max(0,P.mp-18*dt);const l=Math.min(3,Math.floor(MB.ch/MB.lt));if(l>MB.lv){MB.lv=l;txt(LVN[l],P.x,P.y-112,16+l*2,d.c);ink(P.x,P.y-40,6+l*3,'#1c1c1c');snd(300+l*140,.18,{ty:'triangle',v:.18})}}jp.a=0;jp.s=0}
+  else{if(MB.lv<3&&P.mp>0){MB.ch+=dt;P.mp=Math.max(0,P.mp-18*dt*(pk==='mc'?1-.08*pm:1));const l=Math.min(3,Math.floor(MB.ch/MB.lt));if(l>MB.lv){MB.lv=l;txt(LVN[l],P.x,P.y-112,16+l*2,d.c);ink(P.x,P.y-40,6+l*3,'#1c1c1c');snd(300+l*140,.18,{ty:'triangle',v:.18})}}jp.a=0;jp.s=0}
  }else if(jp.m&&!d&&MB.bag.length)txt('尚未研讀秘籍（按 I）',P.x,P.y-100,14,'#7a1c14');
  else if((hold.m||(hold.a&&MB.ah>=.3*(pk==='fc'?1-.1*pm:1)&&CH!==15))&&d&&MB.cd<=0&&P.mp>=15&&P.hurt<=0&&P.dash<=0&&P.at<=0&&!jp.d){MB.on=1;MB.src=hold.m?'m':'a';MB.ch=0;MB.lv=0;MB.lt=.5*(1-.06*(it.m-1))*(pk==='fc'?1-.09*pm:1);jp.a=0;jp.s=0}
  _u(dt);if(pk==='rg'&&!MB.on)P.mp=Math.min(MPX(P),P.mp+dt*.6*pm);if(pk==='hp'&&P.hp>0&&P.hp<P.mh)P.hp=Math.min(P.mh,P.hp+dt*.3*pm);if(pk==='sp'&&Math.abs(P.vx)>1)P.x=cl(P.x+P.vx*dt*.03*pm,cam+16,lock?cam+W-20:LEN-20);
@@ -10697,6 +10718,27 @@ Object.assign(M,{KeyU:'m',KeyI:'b',KeyB:'b',Tab:'b'});
  if(pk==='mp'&&Math.random()<dt*3)PA.push({x:P.x+R(-16,16),y:P.y-R(0,16),vx:R(-6,6),vy:-R(14,28),l:1,m:1,g:-1,r:R(1.4,2.4),c:'#2f6f8a'});
  if(S==='win'){if(!MB.sv){MB.sv=1;mbSave()}}else MB.sv=0}}
 {const _d=draw;draw=function(){_d();if(!okp())return;g.setTransform(K,0,0,K,0,0);mbHud();mbFx();if(MB.open)mbPanel()}}
+
+/* ---------- v414 新增秘籍：龍象震地／迴風舞柳／菩提心經／飛花摘葉 + 五部內功 ---------- */
+{const _mc=mbCast;mbCast=function(l,d,it){_mc(l,d,it);
+ const dm=d.dm[l-1]*MUL(it.m),f=P.f,x=P.x,c=d.c;
+ if(d.t==='quake'){const hs=new Set();for(const s of[-1,1])MJ.push({t:'wave',x:x+s*20,y:P.y-40,f:s,l:.55+.1*l,sp:520,r:26+l*12,dm,c,lv:l,hit:hs});
+  MJ.push({t:'ring',x,y:P.y,r:70+l*30,q:0,d:.5,c,n:2});shake=Math.max(shake,.12*l);burst(x,P.y-4,14+l*8,c,300,160)}
+ else if(d.t==='whirl'){MJ.push({t:'whirl',n:2+l,tk:0,iv:.16,r:90+l*25,dm,c})}
+ else if(d.t==='heal'){const h0=P.hp;P.hp=Math.min(P.mh,P.hp+Math.round(P.mh*dm/100));const gh=Math.round(P.hp-h0);if(gh>0)txt('+'+gh,x,P.y-96,18,'#3f8f6b');
+  MJ.push({t:'ring',x,y:P.y,r:80+l*20,q:0,d:.7,c,gold:1,n:2});for(let i=0;i<14+l*8;i++)PA.push({x:x+R(-22,22),y:P.y-R(0,70),vx:R(-10,10),vy:-R(40,110),l:.8,m:.8,g:-30,r:R(1.6,3),c})}
+ else if(d.t==='chain'){const pool=E.filter(e=>!e.dead&&e.x>cam-20&&e.x<cam+W+20&&Math.abs(e.y-P.y)<260),n=l+2,ord=[];let cur={x:x};
+  while(pool.length&&ord.length<n){let bi=0,bd=1e9;pool.forEach((e,i)=>{const dd=Math.abs(e.x-cur.x);if(dd<bd){bd=dd;bi=i}});const e=pool.splice(bi,1)[0];ord.push(e);cur=e}
+  let px=x;const cnt=Math.min(n,ord.length*2);for(let i=0;i<cnt;i++){const e=ord[i%ord.length];MJ.push({t:'cj',e,dl:.08+i*.11,dm,c,px,f});px=e.x}
+  if(!cnt){MJ.push({t:'streak',x0:x,x1:x+f*160,y:P.y-40,q:0,d:.3,c,f});burst(x+f*80,P.y-40,8,c,200,0)}}
+};
+const _ms=mbStep;mbStep=function(dt){_ms(dt);for(const o of MJ){
+ if(o.t==='whirl'){o.tk-=dt;if(o.tk<=0&&o.n>0){o.n--;o.tk=o.iv;for(const e of E)if(!e.dead&&Math.abs(e.x-P.x)<o.r+14*ED[e.k].s&&Math.abs(e.y-P.y)<110)mbHit(e,o.dm,(e.x>P.x?1:-1)*140,false);
+  MJ.push({t:'ring',x:P.x,y:P.y,r:o.r,q:0,d:.3,c:o.c,n:2});burst(P.x,P.y-40,6,o.c,240,40);shake=Math.max(shake,.06)}if(o.n<=0)o.dead=1}
+ else if(o.t==='cj'){o.dl-=dt;if(o.dl<=0){const e=o.e;if(e&&!e.dead){mbHit(e,o.dm,o.f*120,false);MJ.push({t:'streak',x0:o.px,x1:e.x,y:e.y-40,q:0,d:.3,c:o.c,f:e.x>=o.px?1:-1});burst(e.x,e.y-40,8,o.c,220,60)}o.dead=1}}}}}
+{const _k2=kill;kill=function(e){const was=e.dead;_k2.apply(this,arguments);if(!was&&e.dead&&MB.pk==='hk'&&S==='play'&&P&&P.hp>0&&P.hp<P.mh){const h=2*MB.pm;P.hp=Math.min(P.mh,P.hp+h);txt('+'+h,P.x,P.y-100,14,'#c05a5a')}}}
+{const _he3=hurtE;hurtE=function(e,dm,kb,big){if(MB.pk==='cr'&&S==='play'&&e&&e.x!=null&&Math.random()<.06*MB.pm){dm*=1.8;txt('會心',e.x,e.y-100,16,'#b3261e')}return _he3.call(this,e,dm,kb,big)}}
+{const _hp3=hurtP;hurtP=function(dm,fx){if(S==='play'&&P){if(MB.pk==='ev'&&P.inv<=0&&P.dash<=0&&Math.random()<.04*MB.pm){txt('閃',P.x,P.y-100,18,'#5a8aa0');MJ.push({t:'ring',x:P.x,y:P.y,r:50,q:0,d:.3,c:'#5a8aa0'});return}if(MB.pk==='ds'&&MB.on)dm=Math.max(1,Math.ceil(dm*(1-.1*MB.pm)))}return _hp3.call(this,dm,fx)}}
 })();
 
 /* ===== v408 關間商店賣「靈寵」：墨貓戰鬥時跟在身後加油，給攻擊加成、回氣、危急時回血 ===== */
