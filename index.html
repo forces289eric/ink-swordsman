@@ -506,23 +506,40 @@ function pkGearD(k){const it=k.it,c=RC[it.r],b=Math.sin(T*6+k.x)*2,pu=.55+.45*Ma
 function drawEq(){const ks='wabp';for(let i=0;i<4;i++){const q=EQ[ks[i]],x=22+i*27,y=54;g.fillStyle='rgba(239,231,210,.7)';g.fillRect(x,y,23,23);g.strokeStyle=q?RC[q.r]:'rgba(20,20,20,.3)';g.lineWidth=q?2.4:1.2;g.strokeRect(x,y,23,23);tx(GS[ks[i]].g,x+11.5,y+12,15,q?RC[q.r]:'rgba(20,20,20,.28)')}
  const a=[];if(EQB.at)a.push('攻+'+Math.round(EQB.at*100)+'%');if(EQB.df)a.push('防'+Math.round(EQB.df*100)+'%');if(EQB.sp)a.push('速+'+Math.round(EQB.sp*100)+'%');if(EQB.hp)a.push('血+'+EQB.hp);
  if(a.length){g.save();g.font='bold 11px KaiTi,STKaiti,"Noto Serif TC",serif';g.textAlign='left';g.textBaseline='middle';g.lineWidth=2.5;g.strokeStyle='rgba(239,231,210,.9)';g.lineJoin='round';const s=a.join(' ');g.strokeText(s,22,87);g.fillStyle='#1c1c1c';g.fillText(s,22,87);g.restore()}}
+var GUI={w:{n:'劍',inc:8,t:q=>'傷害+'+q.v+'%'},a:{n:'甲',inc:6,t:q=>'減傷'+q.v+'%'},p:{n:'佩',inc:15,t:q=>'血上限+'+q.v},b:{n:'靴',inc:5,t:q=>'移速+'+q.v+'%'}};
+/* 商店強化：把目前裝備的那件裝備往上衝等級（劍＋傷害、甲＋減傷、佩＋血量／氣回復）；換到更好的裝備時，強化等級會繼承 */
+function gUpApply(q,n){const inc=GUI[q.s].inc;if(q.v0==null){q.v0=q.v;q.m0=q.m}q.up=n;q.v=q.v0+inc*n;if(q.s==='p')q.m=+(q.m0*(1+.15*n)).toFixed(1)}
+function gUpD(s){const q=EQ[s];return q?[q.n,GUI[s].t(q)]:['尚未裝備',GUI[s].n+'・待取得']}
+function gUpC(s){const q=EQ[s];return q?30+6*q.r+18*(q.up|0):30}
+function gUpL(s){const q=EQ[s];return q?q.up|0:0}
+function gUpR(s){const q=EQ[s];return q?[1,1,.8,.6,.45][q.up|0]||0:0}
+function gUpM(s){return window.__gm||''}
+function gUpB(s){const q=EQ[s],oh=EQB.hp,u=q.up|0,ok=Math.random()<gUpR(s),nu=ok?u+1:Math.max(0,u-1);
+ gUpApply(q,nu);eqCalc();const dh=EQB.hp-oh;P.mh+=dh;P.hp=dh>0?Math.min(P.mh,P.hp+dh):Math.min(P.hp,P.mh);window.__dh2=0;
+ if(typeof P2on!=='undefined'&&P2on&&EQ2[s]){eqSwap();const q2=EQ[s],o2=EQB.hp,u2=q2.up|0;gUpApply(q2,ok?u2+1:Math.max(0,u2-1));eqCalc();window.__dh2=EQB.hp-o2;eqSwap()}
+ window.__gm=ok?q.n+'　強化成功 +'+nu:'強化失敗！'+q.n+'　降為 +'+nu;
+ if(!ok)try{if(SFX.ac&&SFX.ac()&&!SFX.muted)SFX.tone(240,.35,{ty:'sawtooth',to:80,v:.14})}catch(_){}}
+function gUpItem(s,nm){return{n:nm,get d(){return gUpD(s)},max:5,cost:()=>gUpC(s),lv:()=>gUpL(s),full:()=>!EQ[s],ft:'未裝備',fm:()=>'尚未裝備'+GUI[s].n+'，擊敗敵人可獲得',msg:()=>gUpM(s),buy(){gUpB(s)}}}
+var PKN=['墨貓','靈鶴','玉兔'],PKD=[['戰鬥時加攻','氣力回復'],['戰鬥時減傷','護你周全'],['戰鬥時回春','療傷回氣']];
 const SHOP=[
 {n:'療傷藥',d:['服下立刻','回滿血量'],cost:()=>20,full:()=>P.hp>=P.mh,buy(){P.hp=P.mh}},
-{n:'強身丹',d:['血量上限','+15'],max:5,cost:()=>30+10*UP.h,lv:()=>UP.h,buy(){UP.h++;P.mh+=15;P.hp=Math.min(P.mh,P.hp+15)}},
-{n:'勁力',d:['攻擊傷害','+10%'],max:5,cost:()=>40+15*UP.a,lv:()=>UP.a,buy(){UP.a++}},
-{n:'鐵衣',d:['所受傷害','-8%'],max:4,cost:()=>35+15*UP.d,lv:()=>UP.d,buy(){UP.d++}},
-{n:'聚氣',d:['氣力回復','加快'],max:4,cost:()=>25+10*UP.m,lv:()=>UP.m,buy(){UP.m++}}];
+gUpItem('p','養佩'),
+gUpItem('w','淬劍'),
+gUpItem('a','煉甲'),
+gUpItem('b','鍛靴'),
+{get n(){return PKN[UP.pk|0]},get d(){return PKD[UP.pk|0]},max:3,cost:()=>45+25*(UP.pt|0),lv:()=>UP.pt|0,msg:()=>PKN[UP.pk|0]+['','入夥！','更親近了','助威大成！'][UP.pt|0],buy(){UP.pt=(UP.pt|0)+1;if(window.__petBought)window.__petBought()}}];
 function shopBuy(i){const it=SHOP[i],c=it.cost();let m='';
- if(it.max&&it.lv()>=it.max)m='已達上限';else if(it.full&&it.full())m='血量已滿';else if(coin<c)m='銀兩不足';
+ if(it.max&&it.lv()>=it.max)m='已達上限';else if(it.full&&it.full())m=it.fm?it.fm():'血量已滿';else if(coin<c)m='銀兩不足';
  if(m){SHm={s:m,t:1.2};SFX.tick();return}
- coin-=c;it.buy();SHm={s:it.n+' 購得',t:1.2};SFX.coin();if(i===0)SFX.heal()}
+ coin-=c;it.buy();SHm={s:it.msg?it.msg():it.n+' 購得',t:1.2};SFX.coin();if(i===0)SFX.heal()}
 function shopGo(){P.mp=MPX(P);for(const k in jp)jp[k]=0;loadLevel(false);S='play';SFX.start()}
-function shopTap(x,y){const i=Math.floor((x-20)/138);
- if(y>=92&&y<=282&&x>=20&&i>=0&&i<5&&x-20-i*138<=128){SHs=i;shopBuy(i)}
- else if(y>=306&&y<=358&&Math.abs(x-W/2)<120){SHs=5;shopGo()}}
-function shopStep(dt){if(SHm.t>0)SHm.t-=dt;
- if(jp.l){SHs=(SHs+5)%6;SFX.tick()}if(jp.r){SHs=(SHs+1)%6;SFX.tick()}
- if(endT>.6){if(jp.a||jp.j){SHs===5?shopGo():shopBuy(SHs)}else if(jp.s)shopGo()}}
+function shopTap(x,y){const i=Math.floor((x-12)/116);
+ if(i===5&&y>=112&&y<=192&&x>=12&&x-12-i*116<=106){UP.pk=((UP.pk|0)+1)%3;SFX.tick();return}
+ if(y>=92&&y<=282&&x>=12&&i>=0&&i<6&&x-12-i*116<=106){SHs=i;shopBuy(i)}
+ else if(y>=306&&y<=358&&Math.abs(x-W/2)<120){SHs=6;shopGo()}}
+function shopStep(dt){if(SHm.t>0)SHm.t-=dt;if(jp.d&&endT>.6){UP.pk=((UP.pk|0)+1)%3;SFX.tick()}
+ if(jp.l){SHs=(SHs+6)%7;SFX.tick()}if(jp.r){SHs=(SHs+1)%7;SFX.tick()}
+ if(endT>.6){if(jp.a||jp.j){SHs===6?shopGo():shopBuy(SHs)}else if(jp.s)shopGo()}}
 /* 商店小圖示（水墨風，原點在圖示中心，約 40x40） */
 function shopIcon(i,cx,cy,al){const K='#1c1c1c';g.save();g.translate(cx,cy);g.globalAlpha=al;g.lineJoin='round';g.lineCap='round';g.strokeStyle=K;g.lineWidth=2;
  if(i===0){/* 療傷藥：葫蘆藥瓶 */
@@ -530,9 +547,12 @@ function shopIcon(i,cx,cy,al){const K='#1c1c1c';g.save();g.translate(cx,cy);g.gl
   g.beginPath();g.arc(0,-9,7.5,0,TAU);g.fill();g.stroke();
   g.fillStyle='#b3261e';g.fillRect(-3.4,-21,6.8,6);g.strokeRect(-3.4,-21,6.8,6);
   g.strokeStyle='#b3261e';g.lineWidth=3.4;g.beginPath();g.moveTo(0,2);g.lineTo(0,14);g.moveTo(-6,8);g.lineTo(6,8);g.stroke()}
- else if(i===1){/* 強身丹：金丹三粒 */
-  for(const[px,py,r]of[[-9,6,9],[9,6,9],[0,-8,10]]){g.fillStyle='#c99a2e';g.beginPath();g.arc(px,py,r,0,TAU);g.fill();g.lineWidth=2;g.strokeStyle=K;g.stroke();g.strokeStyle='rgba(255,246,210,.85)';g.lineWidth=1.6;g.beginPath();g.arc(px,py,r-3.2,3.6,4.7);g.stroke()}
-  g.fillStyle='#b3261e';g.beginPath();g.arc(0,-8,2.2,0,TAU);g.fill()}
+ else if(i===1){/* 養佩：玉佩 */
+  g.strokeStyle='#b3261e';g.lineWidth=2.2;g.beginPath();g.moveTo(-8,-23);g.quadraticCurveTo(0,-13,8,-23);g.stroke();
+  g.fillStyle='#4fae86';g.strokeStyle=K;g.lineWidth=2;g.beginPath();g.arc(0,2,15,0,TAU);g.fill();g.stroke();
+  g.fillStyle='#efe7d2';g.beginPath();g.arc(0,2,5.2,0,TAU);g.fill();g.stroke();
+  g.strokeStyle='rgba(255,255,255,.7)';g.lineWidth=1.8;g.beginPath();g.arc(0,2,10.4,3.5,4.9);g.stroke();
+  g.strokeStyle='#b3261e';g.lineWidth=2.4;g.beginPath();g.moveTo(0,17);g.lineTo(-2,25);g.moveTo(0,17);g.lineTo(2.5,25);g.stroke()}
  else if(i===2){/* 勁力：長劍 */
   g.rotate(-.78);g.fillStyle='#d8dce2';g.beginPath();g.moveTo(-3.6,10);g.lineTo(-3.6,-14);g.lineTo(0,-23);g.lineTo(3.6,-14);g.lineTo(3.6,10);g.closePath();g.fill();g.stroke();
   g.strokeStyle='rgba(120,126,136,.7)';g.lineWidth=1.2;g.beginPath();g.moveTo(0,8);g.lineTo(0,-16);g.stroke();
@@ -543,6 +563,22 @@ function shopIcon(i,cx,cy,al){const K='#1c1c1c';g.save();g.translate(cx,cy);g.gl
   g.fillStyle='#8a8f98';g.beginPath();g.moveTo(-17,-16);g.lineTo(-8,-21);g.lineTo(0,-16);g.lineTo(8,-21);g.lineTo(17,-16);g.lineTo(13,10);g.quadraticCurveTo(0,24,-13,10);g.closePath();g.fill();g.stroke();
   g.strokeStyle='#b3261e';g.lineWidth=3;g.beginPath();g.moveTo(0,-14);g.lineTo(0,14);g.moveTo(-9,-3);g.lineTo(9,-3);g.stroke();
   g.fillStyle='#e0b040';for(const[px,py]of[[-11,-10],[11,-10],[-8,6],[8,6]]){g.beginPath();g.arc(px,py,1.9,0,TAU);g.fill()}}
+ else if(i===4){/* 鍛靴：長靴 */
+  g.fillStyle='#6b4a2e';g.beginPath();g.moveTo(-9,-20);g.lineTo(6,-20);g.lineTo(6,2);g.quadraticCurveTo(20,4,20,13);g.lineTo(20,18);g.lineTo(-11,18);g.lineTo(-11,8);g.lineTo(-9,2);g.closePath();g.fill();g.stroke();
+  g.fillStyle='#b3261e';g.fillRect(-9,-20,15,5);g.strokeRect(-9,-20,15,5);
+  g.fillStyle='#2a2a2a';g.fillRect(-11,14,31,4.5);
+  g.strokeStyle='rgba(255,236,200,.55)';g.lineWidth=1.4;g.beginPath();g.moveTo(-5,-10);g.lineTo(-5,0);g.stroke();
+  g.strokeStyle='rgba(28,28,28,.4)';g.lineWidth=1.6;g.beginPath();g.moveTo(-23,-4);g.lineTo(-15,-4);g.moveTo(-25,5);g.lineTo(-16,5);g.stroke()}
+ else if(i===5&&(UP.pk|0)>=1){window.__petIcon(UP.pk|0)}
+ else if(i===5){/* 靈寵：戴頭帶的墨貓 */
+  g.fillStyle='#2a2a2a';g.beginPath();g.moveTo(-13,-4);g.lineTo(-11,-21);g.lineTo(-2,-11);g.closePath();g.fill();g.stroke();
+  g.beginPath();g.moveTo(13,-4);g.lineTo(11,-21);g.lineTo(2,-11);g.closePath();g.fill();g.stroke();
+  g.beginPath();g.ellipse(0,4,16,13,0,0,TAU);g.fill();g.stroke();
+  g.fillStyle='#b3261e';g.fillRect(-15,-6,30,5);g.lineWidth=1.4;g.strokeRect(-15,-6,30,5);g.lineWidth=2;
+  g.fillStyle='#e8c35a';g.beginPath();g.arc(-6,4,2.8,0,TAU);g.fill();g.beginPath();g.arc(6,4,2.8,0,TAU);g.fill();
+  g.fillStyle='#1c1c1c';g.fillRect(-1,2.6,2,3.2);g.fillStyle='#f4e8c8';g.beginPath();g.ellipse(0,11,6.5,4.4,0,0,TAU);g.fill();
+  g.fillStyle='#b3261e';g.beginPath();g.moveTo(-1.8,9);g.lineTo(1.8,9);g.lineTo(0,11.2);g.closePath();g.fill();
+  g.strokeStyle='#e9dfc4';g.lineWidth=1;g.beginPath();g.moveTo(-9,9);g.lineTo(-17,7.5);g.moveTo(-9,11);g.lineTo(-17,12);g.moveTo(9,9);g.lineTo(17,7.5);g.moveTo(9,11);g.lineTo(17,12);g.stroke()}
  else{/* 聚氣：氣旋 */
   g.strokeStyle='#2f7f6e';g.lineWidth=3.2;g.beginPath();g.arc(0,0,16,.4,5.2);g.stroke();g.lineWidth=2.8;g.beginPath();g.arc(0,0,10,2.8,7.4);g.stroke();g.lineWidth=2.4;g.beginPath();g.arc(0,0,4.6,.8,5.6);g.stroke();
   g.fillStyle='#b3261e';g.beginPath();g.arc(0,0,2,0,TAU);g.fill();g.fillStyle='#2f7f6e';g.beginPath();g.arc(15,-7,2.4,0,TAU);g.fill();g.beginPath();g.arc(-14,9,1.8,0,TAU);g.fill()}
@@ -551,15 +587,15 @@ function drawShop(){g.fillStyle='rgba(239,231,210,.8)';g.fillRect(0,0,W,H);
  tx('關間商店',W/2,34,38,'#b3261e');
  tx('即將踏入　第'+CN[LV]+'關　'+LEVELS[LV].name,W/2,70,16,'#1c1c1c',.8);
  tx('血 '+Math.round(P.hp)+'/'+P.mh,80,30,18,'#b3261e');tx('銀 '+coin,W-80,30,22,'#8a6a1c');
- for(let i=0;i<5;i++){const it=SHOP[i],x=20+i*138,y=92,w=128,h=190,sel=SHs===i,mx=it.max&&it.lv()>=it.max,fl=it.full&&it.full(),c=it.cost(),can=!mx&&!fl&&coin>=c;
+ for(let i=0;i<6;i++){const it=SHOP[i],x=12+i*116,y=92,w=106,h=190,sel=SHs===i,mx=it.max&&it.lv()>=it.max,fl=it.full&&it.full(),c=it.cost(),can=!mx&&!fl&&coin>=c;
   g.fillStyle=sel?'rgba(179,38,30,.1)':'rgba(255,250,235,.55)';g.fillRect(x,y,w,h);
   g.strokeStyle=sel?'#b3261e':'rgba(28,28,28,.55)';g.lineWidth=sel?3:1.6;g.strokeRect(x,y,w,h);
   tx(it.n,x+w/2,y+24,24,'#1c1c1c');shopIcon(i,x+w/2,y+68,mx||fl?.4:1);
   if(it.max){for(let k=0;k<it.max;k++){g.fillStyle=k<it.lv()?'#b3261e':'rgba(28,28,28,.2)';g.beginPath();g.arc(x+w/2+(k-(it.max-1)/2)*16,y+112,5,0,TAU);g.fill()}}else tx('可重複購買',x+w/2,y+112,12,'#1c1c1c',.55);
   tx(it.d[0],x+w/2,y+135,14,'#1c1c1c',.85);tx(it.d[1],x+w/2,y+154,16,'#2f7f6e');
-  tx(mx?'已滿':fl?'血量已滿':'銀 '+c,x+w/2,y+178,mx||fl?16:21,mx||fl?'rgba(28,28,28,.5)':can?'#8a6a1c':'#b3261e')}
+  tx(mx?'已滿':fl?(it.ft||'血量已滿'):'銀 '+c,x+w/2,y+178,mx||fl?16:21,mx||fl?'rgba(28,28,28,.5)':can?'#8a6a1c':'#b3261e')}
  if(SHm.t>0)tx(SHm.s,W/2,295,15,'#7a1c14',cl(SHm.t*2,0,1));
- const gs=SHs===5;g.fillStyle=gs?'rgba(179,38,30,.92)':'rgba(179,38,30,.72)';g.fillRect(W/2-120,308,240,48);
+ const gs=SHs===6;g.fillStyle=gs?'rgba(179,38,30,.92)':'rgba(179,38,30,.72)';g.fillRect(W/2-120,308,240,48);
  g.strokeStyle=gs?'#1c1c1c':'rgba(28,28,28,.5)';g.lineWidth=gs?3:1.6;g.strokeRect(W/2-120,308,240,48);
  g.font='bold 24px KaiTi,STKaiti,"Noto Serif TC",serif';g.textAlign='center';g.textBaseline='middle';g.fillStyle='#fffaf0';g.fillText('出發　第'+CN[LV]+'關',W/2,332);
  tx(matchMedia('(pointer:coarse)').matches?'點選物品購買　點「出發」前往下一關':'←→ 選擇　J／空白 購買　K 出發',W/2,382,14,'#1c1c1c',.7)}
@@ -4106,7 +4142,7 @@ g.restore()}}
 const h0=SHOP[0],b0=h0.buy,f0=h0.full,h1=SHOP[1],b1=h1.buy;
 h0.full=()=>f0()&&(!P2on||!P2||P2.hp>=P2.mh);
 h0.buy=function(){b0();if(P2on&&P2){P2.hp=P2.mh;P2.down=0}};
-h1.buy=function(){b1();if(P2on&&P2){P2.mh+=15;P2.hp=Math.min(P2.mh,P2.hp+15)}}}
+h1.buy=function(){b1();if(P2on&&P2){P2.mh+=(window.__dh2|0);P2.hp=Math.min(P2.mh,P2.hp+Math.max(0,window.__dh2|0))}}}
 
 /* ===== v104 P2 擁有獨立裝備（撿到誰身上就裝在誰身上） ===== */
 var EQ2={},EQB2={at:0,df:0,sp:0,hp:0,mp:0};
@@ -10662,5 +10698,166 @@ Object.assign(M,{KeyU:'m',KeyI:'b',KeyB:'b',Tab:'b'});
  if(S==='win'){if(!MB.sv){MB.sv=1;mbSave()}}else MB.sv=0}}
 {const _d=draw;draw=function(){_d();if(!okp())return;g.setTransform(K,0,0,K,0,0);mbHud();mbFx();if(MB.open)mbPanel()}}
 })();
+
+/* ===== v408 關間商店賣「靈寵」：墨貓戰鬥時跟在身後加油，給攻擊加成、回氣、危急時回血 ===== */
+{
+const pz={on:0,x:0,f:1,mv:0,cd:4,bt:0,mul:0,red:0,bub:0,bs:'',hop:0,low:0};
+const SAY=['加油！','喵～加油！','衝啊！','你最棒！','打得好！','看我的鼓勵！'],SAYB=['撐住！','別倒下！','喵！挺住！'];
+const PCOL=['#c99a2e','#5a9aba','#3f8f6b'],PRGB=['201,154,46','61,122,154','63,143,107'];
+const SAY2=[['別怕！','我護著你！','穩住！'],['吃口藥！','我來療傷！','加把勁！']],SAYB2=[['有我在！','我擋著！'],['快回血！','別放棄！']];
+function cheer(big){
+ const L=UP.pt|0,k=UP.pk|0;if(!L)return;
+ const mul=k===0?[0,.12,.18,.25][L]+(big?.08:0):0,red=k===1?[0,.12,.18,.25][L]+(big?.08:0):0;
+ pz.bt=big?6:4;pz.mul=mul;pz.red=red;pz.cd=[0,8,6.5,5][L];pz.hop=.6;pz.bub=1.4;
+ const a=k===0?(big?SAYB:SAY):(big?SAYB2:SAY2)[k-1];pz.bs=a[Math.random()*a.length|0];
+ P.mp=Math.min(MPX(P),P.mp+(k===2?[0,4,6,8][L]:[0,8,12,16][L]));
+ const heal=k===2?(big?12+8*L:[0,4,6,9][L]):(big?8+6*L:[0,0,2,3][L]);
+ if(heal>0&&P.hp>0){const h0=P.hp;P.hp=Math.min(P.mh,P.hp+heal);if(P.hp>h0)txt('+'+Math.round(P.hp-h0),P.x,P.y-110,16,'#3f8f6b')}
+ if(k===0)txt('攻擊 +'+Math.round(mul*100)+'%',P.x,P.y-92,14,'#c99a2e');else if(k===1)txt('減傷 -'+Math.round(red*100)+'%',P.x,P.y-92,14,'#3d7a9a');
+ for(let i=0;i<10;i++)PA.push({x:P.x+R(-16,16),y:P.y-R(5,60),vx:R(-30,30),vy:-R(30,80),l:1,m:1,g:-20,r:R(1.8,3.2),c:PCOL[k]});
+ if(SFX.ac&&SFX.ac()&&!SFX.muted)try{SFX.tone(880,.1,{ty:'triangle',to:1320,v:.12});setTimeout(()=>{try{SFX.tone(1180,.12,{ty:'triangle',to:1760,v:.1})}catch(_){}},110)}catch(_){}}
+window.__petBought=function(){pz.on=0};
+function step(dt){
+ const L=UP.pt|0;
+ if(!L||S!=='play'||!P){pz.on=0;return}
+ if(!pz.on){pz.on=1;pz.x=P.x-P.f*46;pz.f=P.f;pz.cd=Math.min(pz.cd,3)}
+ pz.bt-=dt;pz.bub-=dt;pz.hop-=dt;
+ const gx=P.x-P.f*46,dx=gx-pz.x;
+ if(Math.abs(dx)>520)pz.x=gx;else pz.x+=dx*Math.min(1,dt*5);
+ pz.mv=Math.abs(dx)>10;pz.f=Math.abs(dx)>6?(dx>0?1:-1):P.f;
+ let near=0;for(const e of E)if(!e.dead&&Math.abs(e.x-P.x)<460){near=1;break}
+ if(boss&&!boss.dead&&lock)near=1;
+ if(near)pz.cd-=dt;
+ if(near&&pz.cd<=0)cheer(false);
+ if(!pz.low&&P.hp>0&&P.hp<P.mh*.3){pz.low=1;cheer(true)}
+ if(pz.bt>0&&Math.random()<dt*10)PA.push({x:P.x+R(-14,14),y:P.y-R(5,55),vx:R(-8,8),vy:-R(18,36),l:1,m:1,g:-1,r:R(1.4,2.4),c:PCOL[UP.pk|0]})}
+{const _u=upd;upd=function(dt){_u.apply(this,arguments);try{step(dt)}catch(_){}}}
+{const _hp0=hurtP;hurtP=function(dm,fx){if(pz.bt>0&&pz.red>0&&S==='play')dm=Math.max(1,Math.ceil(dm*(1-pz.red)));return _hp0.call(this,dm,fx)}}
+{const _he=hurtE;hurtE=function(e,dm,kb,big){if(pz.bt>0&&S==='play')dm*=1+pz.mul;return _he.call(this,e,dm,kb,big)}}
+{const _ll=loadLevel;loadLevel=function(){const r=_ll.apply(this,arguments);pz.on=0;pz.low=0;pz.bt=0;pz.bub=0;pz.cd=4;return r}}
+{const _rs=reset;reset=function(){pz.on=0;pz.low=0;pz.bt=0;pz.bub=0;pz.cd=4;return _rs.apply(this,arguments)}}
+function drawCat(){
+ const L=UP.pt|0,sc=.9+.1*L,K0='#1c1c1c';
+ const hopY=pz.hop>0?Math.abs(Math.sin((.6-pz.hop)/.6*Math.PI*2))*18:0;
+ const bob=pz.mv?Math.abs(Math.sin(T*14))*3:Math.abs(Math.sin(T*2))*.6;
+ g.save();g.translate(pz.x,GY);g.fillStyle='rgba(0,0,0,.2)';g.beginPath();g.ellipse(0,1,14*sc,3.2,0,0,TAU);g.fill();g.restore();
+ g.save();g.translate(pz.x,GY-hopY-bob);g.scale(pz.f*sc,sc);g.lineJoin='round';g.lineCap='round';
+ const tw=Math.sin(T*(pz.hop>0?14:4))*5,lg=pz.mv?Math.sin(T*18)*3:0;
+ g.strokeStyle='#2a2a2a';g.lineWidth=4.5;g.beginPath();g.moveTo(-11,-12);g.quadraticCurveTo(-22,-14+tw,-19,-28+tw);g.stroke();
+ g.strokeStyle=K0;g.lineWidth=2;g.fillStyle='#2a2a2a';
+ g.beginPath();g.ellipse(0,-11,13,9,0,0,TAU);g.fill();g.stroke();
+ g.fillRect(-8+lg,-5,4,5);g.fillRect(5-lg,-5,4,5);
+ g.beginPath();g.ellipse(10,-22,9,8,0,0,TAU);g.fill();g.stroke();
+ g.beginPath();g.moveTo(4,-27);g.lineTo(5,-36);g.lineTo(11,-29);g.closePath();g.fill();g.stroke();
+ g.beginPath();g.moveTo(11,-29);g.lineTo(16,-36);g.lineTo(18,-26);g.closePath();g.fill();g.stroke();
+ g.strokeStyle='#b3261e';g.lineWidth=3;g.beginPath();g.moveTo(2.5,-24.5);g.lineTo(18,-26);g.stroke();
+ g.lineWidth=2;g.beginPath();g.moveTo(3,-24.5);g.quadraticCurveTo(-4,-24+tw*.5,-8,-19+tw*.5);g.stroke();
+ g.fillStyle='#f4e8c8';g.beginPath();g.ellipse(5,-9,5,4.5,0,0,TAU);g.fill();g.beginPath();g.ellipse(16,-19,3.4,2.5,0,0,TAU);g.fill();
+ g.fillStyle='#e8c35a';g.beginPath();g.arc(12.5,-22,1.9,0,TAU);g.fill();g.fillStyle=K0;g.fillRect(12,-23.4,1,2.8);
+ if(pz.hop>0){g.strokeStyle='#2a2a2a';g.lineWidth=4;g.beginPath();g.moveTo(8,-12);g.lineTo(16,-30+Math.sin(T*22)*3);g.stroke();g.fillStyle='#f4e8c8';g.beginPath();g.arc(16,-31+Math.sin(T*22)*3,2.4,0,TAU);g.fill()}
+ g.restore();
+ if(pz.bub>0){const a=Math.min(1,pz.bub*3),w=pz.bs.length*17+20,bx=pz.x,by=GY-74*sc-hopY;
+  g.save();g.globalAlpha=a;g.fillStyle='rgba(255,250,235,.96)';g.strokeStyle=K0;g.lineWidth=1.8;
+  g.beginPath();g.rect(bx-w/2,by-14,w,26);g.fill();g.stroke();
+  g.beginPath();g.moveTo(bx-5,by+12);g.lineTo(bx+1,by+20);g.lineTo(bx+6,by+12);g.closePath();g.fill();g.stroke();
+  g.fillStyle='rgba(255,250,235,.96)';g.fillRect(bx-4,by+10.5,9,3);g.restore();
+  tx(pz.bs,bx,by-1,16,'#b3261e',a)}}
+function bub2(by){const K0='#1c1c1c',a=Math.min(1,pz.bub*3),w=pz.bs.length*17+20,bx=pz.x;
+  g.save();g.globalAlpha=a;g.fillStyle='rgba(255,250,235,.96)';g.strokeStyle=K0;g.lineWidth=1.8;
+  g.beginPath();g.rect(bx-w/2,by-14,w,26);g.fill();g.stroke();
+  g.beginPath();g.moveTo(bx-5,by+12);g.lineTo(bx+1,by+20);g.lineTo(bx+6,by+12);g.closePath();g.fill();g.stroke();
+  g.fillStyle='rgba(255,250,235,.96)';g.fillRect(bx-4,by+10.5,9,3);g.restore();
+  tx(pz.bs,bx,by-1,16,'#b3261e',a)}
+function wingD(fl,sh){
+ const K0='#1c1c1c',up=-17-fl*10*sh;
+ g.fillStyle=sh<1?'#dde5e1':'#fbf8ee';g.strokeStyle=K0;g.lineWidth=1.7;
+ g.beginPath();g.moveTo(6,-2);g.quadraticCurveTo(2,up-9,-12,up-4);g.quadraticCurveTo(-27,up+1,-32,up+11+fl*5);
+ g.quadraticCurveTo(-26,up+10,-25,up+15+fl*3);g.quadraticCurveTo(-19,up+10,-17,up+16+fl*3);g.quadraticCurveTo(-12,up+10,-9,up+15+fl*2);g.quadraticCurveTo(-5,up+8,-2,up+11);
+ g.quadraticCurveTo(0,6,6,3);g.closePath();g.fill();g.stroke();
+ g.fillStyle=K0;
+ for(const[x0,y0]of[[-32,up+11+fl*5],[-25,up+15+fl*3],[-17,up+16+fl*3],[-9,up+15+fl*2]]){g.beginPath();g.moveTo(x0,y0);g.lineTo(x0+4.4,y0-6);g.lineTo(x0+8,y0-1.5);g.closePath();g.fill()}
+ g.strokeStyle='rgba(28,28,28,.35)';g.lineWidth=1;g.beginPath();g.moveTo(2,-3);g.quadraticCurveTo(-8,up+2,-20,up+5);g.moveTo(1,0);g.quadraticCurveTo(-8,up+8,-16,up+10);g.stroke()}
+function birdBody(fl){
+ const K0='#1c1c1c';g.lineJoin='round';g.lineCap='round';
+ g.fillStyle='rgba(28,28,28,.09)';
+ for(const[cx,cy,rx,ry]of[[-4,17,17,3.4],[9,19,10,2.6],[-19,19,8,2.2]]){g.beginPath();g.ellipse(cx,cy,rx,ry,0,0,TAU);g.fill()}
+ g.strokeStyle='#4a4a4a';g.lineWidth=1.6;g.beginPath();g.moveTo(-7,6);g.lineTo(-22,10);g.lineTo(-27,8.5);g.moveTo(-5,7);g.lineTo(-20,13);g.lineTo(-25,12.5);g.stroke();
+ g.fillStyle=K0;for(const a of[-.35,-.1,.15]){g.save();g.translate(-11,2);g.rotate(Math.PI+a);g.beginPath();g.moveTo(0,0);g.quadraticCurveTo(6,-3.2,15,-.5);g.quadraticCurveTo(7,2.4,0,0);g.fill();g.restore()}
+ wingD(fl,.8);
+ g.fillStyle='#fbf8ee';g.strokeStyle=K0;g.lineWidth=1.8;
+ g.beginPath();g.moveTo(11,-1);g.quadraticCurveTo(10,-6,2,-5);g.quadraticCurveTo(-10,-5,-14,2);g.quadraticCurveTo(-8,9,3,8);g.quadraticCurveTo(11,7,11,-1);g.closePath();g.fill();g.stroke();
+ g.strokeStyle='rgba(28,28,28,.35)';g.lineWidth=1;g.beginPath();g.moveTo(5,0);g.quadraticCurveTo(1,2,-3,2.4);g.moveTo(6,3.5);g.quadraticCurveTo(1,5.4,-4,5.2);g.stroke();
+ wingD(fl,1);
+ g.strokeStyle=K0;g.lineWidth=4.2;g.beginPath();g.moveTo(9,-3);g.quadraticCurveTo(18,-6,14,-14);g.quadraticCurveTo(11.5,-19,15.5,-23);g.stroke();
+ const sw=Math.sin(T*8);
+ g.strokeStyle='#b3261e';g.lineWidth=2.8;g.beginPath();g.moveTo(11.2,-5.6);g.lineTo(17,-7.6);g.stroke();
+ g.lineWidth=2.1;g.beginPath();g.moveTo(11.5,-5.6);g.quadraticCurveTo(5,-2+sw*1.6,-1,-4+Math.sin(T*8+1)*2.2);g.stroke();
+ g.fillStyle='#fbf8ee';g.strokeStyle=K0;g.lineWidth=1.7;g.beginPath();g.ellipse(16.5,-25,4.8,4.2,-.2,0,TAU);g.fill();g.stroke();
+ g.fillStyle='#c4281e';g.beginPath();g.ellipse(15.4,-28,2.8,1.8,-.2,0,TAU);g.fill();
+ g.fillStyle=K0;g.beginPath();g.arc(18,-25.4,1.05,0,TAU);g.fill();
+ g.fillStyle='#e8c35a';g.strokeStyle=K0;g.lineWidth=1.4;g.beginPath();g.moveTo(20.6,-26.4);g.lineTo(31,-24);g.lineTo(20.8,-23);g.closePath();g.fill();g.stroke()}
+function rabbitBody(joy){
+ const K0='#1c1c1c',W0='#fbf8ee',P0='#eba9a0';g.lineJoin='round';g.lineCap='round';g.lineWidth=1.9;g.strokeStyle=K0;
+ const ew=Math.sin(T*3)*.06;
+ // tail
+ g.fillStyle=W0;g.beginPath();g.arc(-13,-12,5,0,TAU);g.fill();g.stroke();g.strokeStyle='rgba(28,28,28,.4)';g.lineWidth=1;g.beginPath();g.arc(-13,-12,2.4,3.4,5.5);g.stroke();g.strokeStyle=K0;g.lineWidth=1.9;
+ // far ear
+ const ear=(x,y,rt,sz)=>{g.save();g.translate(x,y);g.rotate(rt);g.fillStyle=W0;g.beginPath();g.ellipse(0,-10,3.6*sz,10.5*sz,0,0,TAU);g.fill();g.stroke();g.fillStyle=P0;g.beginPath();g.ellipse(0,-9.5,1.7*sz,7*sz,0,0,TAU);g.fill();g.restore()};
+ ear(5,-28,-.38+ew,.95);
+ // body
+ g.fillStyle=W0;g.beginPath();g.ellipse(0,-10,13,10,0,0,TAU);g.fill();g.stroke();
+ // hind foot
+ g.beginPath();g.ellipse(-5,-3.4,7.5,3.6,0,0,TAU);g.fill();g.stroke();
+ g.strokeStyle='rgba(28,28,28,.4)';g.lineWidth=1;g.beginPath();g.moveTo(-9,-3.5);g.lineTo(-6,-3.5);g.moveTo(-6,-1.6);g.lineTo(-3,-1.6);g.stroke();g.strokeStyle=K0;g.lineWidth=1.9;
+ // head
+ g.beginPath();g.ellipse(9,-22,9,8.2,0,0,TAU);g.fill();g.stroke();
+ ear(12,-28,.2-ew,1);
+ // headband
+ g.strokeStyle='#b3261e';g.lineWidth=3.2;g.beginPath();g.moveTo(1.2,-26.5);g.quadraticCurveTo(9,-30,17.4,-26.8);g.stroke();
+ g.lineWidth=2;g.beginPath();g.moveTo(1.5,-26.4);g.quadraticCurveTo(-5,-26+ew*50,-9,-20+ew*60);g.moveTo(1.5,-26.4);g.quadraticCurveTo(-4,-29,-8,-27+ew*40);g.stroke();
+ // face
+ g.strokeStyle=K0;g.lineWidth=1.8;
+ if(joy){g.beginPath();g.arc(12.6,-22,1.9,3.5,5.9);g.stroke()}else{g.fillStyle=K0;g.beginPath();g.ellipse(12.6,-22,1.5,1.9,0,0,TAU);g.fill();g.fillStyle='#fff';g.beginPath();g.arc(13,-22.8,.55,0,TAU);g.fill()}
+ g.fillStyle='rgba(235,120,110,.45)';g.beginPath();g.ellipse(9.5,-18.4,2.4,1.5,0,0,TAU);g.fill();
+ g.fillStyle=P0;g.strokeStyle=K0;g.lineWidth=1;g.beginPath();g.ellipse(17.2,-20,1.5,1.2,0,0,TAU);g.fill();g.stroke();
+ g.beginPath();g.moveTo(17.2,-18.8);g.quadraticCurveTo(17,-17,15.6,-16.6);g.moveTo(17.2,-18.8);g.quadraticCurveTo(18,-17,19.4,-16.8);g.stroke();
+ g.strokeStyle='rgba(28,28,28,.5)';g.beginPath();g.moveTo(17,-19.4);g.lineTo(24,-21);g.moveTo(17,-18.6);g.lineTo(24,-17.4);g.stroke();
+ // jade pendant
+ g.strokeStyle='#b3261e';g.lineWidth=1.2;g.beginPath();g.moveTo(3,-15);g.quadraticCurveTo(6,-12,9.5,-14.5);g.stroke();
+ g.fillStyle='#4fae86';g.strokeStyle=K0;g.lineWidth=1.3;g.beginPath();g.arc(6.4,-10.8,2.6,0,TAU);g.fill();g.stroke();g.fillStyle='#fbf8ee';g.beginPath();g.arc(5.6,-11.5,.8,0,TAU);g.fill();
+ // fore paw + pestle
+ g.strokeStyle=K0;g.lineWidth=2;g.fillStyle=W0;
+ if(joy){g.beginPath();g.ellipse(14,-9,2.8,3.6,-.5,0,TAU);g.fill();g.stroke()}
+ else{g.strokeStyle='#7a5a2a';g.lineWidth=3.2;g.beginPath();g.moveTo(15,-2);g.lineTo(14.5,-12.5);g.stroke();g.strokeStyle=K0;g.lineWidth=1.4;g.fillStyle='#d8c9a6';g.beginPath();g.ellipse(14.4,-13.4,2.8,1.9,0,0,TAU);g.fill();g.stroke();
+ g.fillStyle=W0;g.lineWidth=1.9;g.beginPath();g.ellipse(14.6,-7.5,3,2.8,0,0,TAU);g.fill();g.stroke()}
+}
+
+window.__petIcon=function(k){g.save();if(k===1){g.translate(0,8);g.scale(.72,.72);birdBody(.3)}else{g.translate(-5,19);g.scale(.92,.92);rabbitBody(0)}g.restore()};
+function drawBird(){
+ const L=UP.pt|0,sc=(.9+.1*L)*.78;
+ const hopY=pz.hop>0?Math.abs(Math.sin((.6-pz.hop)/.6*Math.PI*2))*14:0;
+ const fy=GY-60+Math.sin(T*3)*5-hopY,fl=Math.sin(T*(pz.hop>0?20:9));
+ g.save();g.translate(pz.x,GY);g.fillStyle='rgba(0,0,0,.14)';g.beginPath();g.ellipse(0,1,12*sc,2.6,0,0,TAU);g.fill();g.restore();
+ g.save();g.translate(pz.x,fy);g.scale(pz.f*sc,sc);birdBody(fl);g.restore();
+ if(pz.bub>0)bub2(fy-40*sc)}
+function drawRabbit(){
+ const L=UP.pt|0,sc=(.9+.1*L)*.85;
+ const hopY=pz.hop>0?Math.abs(Math.sin((.6-pz.hop)/.6*Math.PI*2))*22:(pz.mv?Math.abs(Math.sin(T*10))*8:0);
+ g.save();g.translate(pz.x,GY);g.fillStyle='rgba(0,0,0,'+(.2-hopY*.004)+')';g.beginPath();g.ellipse(0,1,13*sc,3,0,0,TAU);g.fill();g.restore();
+ g.save();g.translate(pz.x,GY-hopY);g.scale(pz.f*sc,sc);rabbitBody(pz.hop>0);g.restore();
+ if(pz.bub>0)bub2(GY-62*sc-hopY)}
+{const _dt=drawTrail;drawTrail=function(){_dt.apply(this,arguments);
+ if(S!=='play'||!pz.on||!(UP.pt|0))return;
+ if(pz.bt>0&&P){g.save();g.strokeStyle='rgba('+PRGB[UP.pk|0]+','+(.35+.3*Math.sin(T*10))*Math.min(1,pz.bt)+')';g.lineWidth=2.4;g.beginPath();g.ellipse(P.x,GY+1,28,6,0,0,TAU);g.stroke();g.restore()}
+ const kk=UP.pk|0;kk===1?drawBird():kk===2?drawRabbit():drawCat()}}
+{const _gg=getGear;getGear=function(it,x,y){const cur=EQ[it.s],u=cur?cur.up|0:0;const r=_gg.apply(this,arguments);
+ if(u>0&&GUI[it.s]&&EQ[it.s]===it&&it!==cur&&!(it.up>0)){const oh=EQB.hp;gUpApply(it,u);eqCalc();const dh=EQB.hp-oh;P.mh+=dh;if(dh>0)P.hp=Math.min(P.mh,P.hp+dh);txt('強化 +'+u+' 繼承',x,y-66,13,'#2f7f6e')}return r}}
+{const _ds=drawShop;drawShop=function(){_ds.apply(this,arguments);
+ for(let i=1;i<=4;i++){const bx=12+i*116+88,by=92+50;g.save();g.globalAlpha=SHOP[i].full()?.35:1;g.fillStyle='#2f7f6e';g.strokeStyle='#1c1c1c';g.lineWidth=1.4;g.beginPath();g.moveTo(bx,by-9);g.lineTo(bx+8,by+1);g.lineTo(bx+3,by+1);g.lineTo(bx+3,by+9);g.lineTo(bx-3,by+9);g.lineTo(bx-3,by+1);g.lineTo(bx-8,by+1);g.closePath();g.fill();g.stroke();g.restore()}
+ for(let i=1;i<=4;i++){const it=SHOP[i];if(it.full()||it.lv()>=it.max)continue;const r=Math.round(gUpR('pwab'[i-1]==='p'?'p':'pwab'[i-1])*100);tx('成功 '+r+'%',12+i*116+53,92+99,11,r<100?'#b3261e':'#2f7f6e',.95)}
+ const x=12+5*116,y=92;
+ tx('‹',x+12,y+68,26,'#b3261e',.8);tx('›',x+94,y+68,26,'#b3261e',.8);
+ tx(matchMedia('(pointer:coarse)').matches?'點圖換寵':'L 換寵',x+53,y+97,11,'#1c1c1c',.6)}}
+}
 </script>
 </body></html>
