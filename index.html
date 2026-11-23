@@ -67,7 +67,7 @@ g[data-i]:hover{filter:drop-shadow(0 0 4px #b3261e)}
 'use strict';
 var MPXB=0;function MPX(p){return p===P?100+MPXB:100}
 
-const cv=document.getElementById('c'),g=cv.getContext('2d',{alpha:false}),W=720,H=400,GY=335,TAU=6.2832,TW=1440;let LEN=4400;let K=1;function fit(){const cw=cv.clientWidth||W,k=LQ?1:Math.max(1,Math.min(2,cw*(window.devicePixelRatio||1)/W)),kk=Math.round(k*16)/16;if(Math.abs(cv.width-W*kk)>=2){K=kk;cv.width=Math.round(W*K);cv.height=Math.round(H*K);try{draw()}catch(_){}}}
+const cv=document.getElementById('c'),g=cv.getContext('2d',{alpha:false}),W=720,H=400,GY=335,TAU=6.2832,TW=1440;let LEN=4400;let K=1,RCAP=1.5;function fit(){const cw=cv.clientWidth||W,k=Math.max(1,Math.min(LQ?RCAP:2,cw*(window.devicePixelRatio||1)/W)),kk=Math.round(k*16)/16;if(Math.abs(cv.width-W*kk)>=2){K=kk;cv.width=Math.round(W*K);cv.height=Math.round(H*K);try{draw()}catch(_){}}}
 const R=(a,b)=>a+Math.random()*(b-a),cl=(v,a,b)=>Math.max(a,Math.min(b,v)),lp=(a,b,t)=>a+(b-a)*cl(t,0,1);
 const M={ArrowLeft:'l',KeyA:'l',ArrowRight:'r',KeyD:'r',Space:'j',ArrowUp:'j',KeyW:'j',KeyJ:'a',KeyZ:'a',KeyK:'s',KeyX:'s',KeyL:'d',KeyC:'d',ShiftLeft:'d'},hold={},jp={};
 function press(a,v){if(v&&!hold[a])jp[a]=1;hold[a]=v}
@@ -2159,7 +2159,7 @@ reset();S='menu';TX=[];
 let last=performance.now();
 let fn=0,ft=0,fl=0;
 let acc=0,PZ=0;const STEP=1/60;function loop(n){const rd=Math.min(.1,(n-last)/1000);last=n;if(PZ){draw();g.setTransform(K,0,0,K,0,0);g.fillStyle='rgba(20,20,20,.45)';g.fillRect(0,0,W,H);g.fillStyle='#efe7d2';g.font='bold 40px KaiTi,STKaiti,serif';g.textAlign='center';g.textBaseline='middle';g.fillText('暫停',W/2,H/2-10);g.font='16px KaiTi,STKaiti,serif';g.fillText('點擊或按任意鍵繼續',W/2,H/2+28);requestAnimationFrame(loop);return}acc+=rd;if(acc<STEP-.002){requestAnimationFrame(loop);return}let ns=0;while(acc>=STEP-.002&&ns<3){acc-=STEP;ns++;const dt=STEP;T+=dt;if(S==='play'){if(stop>0)stop-=dt;else upd(dt)}else if(S==='shop'){endT+=dt;shopStep(dt);for(const k in jp)jp[k]=0}else{endT+=dt;if(S==='menu'){if(jp.l)CH=CH<=0?28:CH-1;if(jp.r)CH=CH>=28?0:CH+1}if((jp.a||jp.j||jp.s)&&(S==='menu'||endT>.6))reset();for(const k in jp)jp[k]=0}
- upFx(dt)}if(acc>STEP*3)acc=0;fn++;if(!ft)ft=n;if(n-ft>=1000){const f=fn*1000/(n-ft);fn=0;ft=n;if(f<40){if(++fl>=4){LQ=1;fit()}}else fl=0}draw();requestAnimationFrame(loop)}
+ upFx(dt)}if(acc>STEP*3)acc=0;fn++;if(!ft)ft=n;if(n-ft>=1000){const f=fn*1000/(n-ft);fn=0;ft=n;if(f<40){if(++fl>=4){fl=0;if(LQ)RCAP=1.25;LQ=1;fit()}}else fl=0}draw();requestAnimationFrame(loop)}
 /* ---------- 音效（WebAudio 即時合成，無外部檔案） ---------- */
 const SFX=(()=>{let ac=null,mg=null,nb=null,muted=false,last={};try{muted=localStorage.getItem('inkmute')==='1'}catch(_){}
 const PE=[262,294,330,392,440,523,587,659,784,880];
@@ -6789,6 +6789,44 @@ cv.addEventListener('pointerdown',e=>{if(S!=='play'||DLG||CHO)return;const x=e.o
  {const _ll=loadLevel;loadLevel=function(){B9=0;return _ll.apply(this,arguments)}}
 }
 
+/* ===== v416 獨自進京（結局B）的潛行路線：第二章前三關小兵先巡邏、未發現你時一擊暗殺；被發現就回到原本的硬打；不再有被放過者支援 ===== */
+{
+ var STL=0,STK=0;
+ const _c2=window.carry2;
+ window.carry2=function(c){_c2(c);let p1=null;try{p1=JSON.parse(localStorage.getItem('inkP1')||'null')}catch(e){}
+  STL=!!(p1&&p1.end==='B');STK=0;
+  /* v417 第二章關主強化：血量 x1.4、傷害 x1.25（調整這兩個數字即可） */
+  const BHP=1.4,BDM=1.25;if(c.levels)for(const lv of c.levels)if(lv&&lv.boss){if(lv.boss.hp)lv.boss.hp=Math.round(lv.boss.hp*BHP);lv.boss.dmx=Math.round((lv.boss.dmx||1)*BDM*100)/100}
+  if(STL){P2HELP=0;P2IDS=[];if(c.dlg&&c.dlg[0]&&c.dlg[0].intro)c.dlg[0].intro.splice(2,0,['青衣女子','這次你沒帶人。進城別硬闖，躲開巡邏，從背後下手。'])}};
+ const stOn=e=>STL&&PART===2&&LV<=2&&S==='play'&&!lock&&e!==boss&&!e.dead&&e.k!=='m'&&!e.al;
+ const _uE=upE;
+ upE=function(e,dt){
+  if(!stOn(e))return _uE.call(this,e,dt);
+  if(e.hx===undefined){e.hx=e.x;e.pt=R(1.5,3.5)}
+  e.fl=Math.max(0,e.fl-dt);e.cd-=dt;e.mv=0;e.ms=0;e.x+=e.vx*dt;e.vx*=Math.pow(.02,dt);
+  e.pt-=dt;if(e.pt<=0||Math.abs(e.x-e.hx)>130){e.f=e.x>e.hx?-1:1;e.pt=R(2,4)}
+  e.x+=e.f*24*dt;e.mv=1;e.ms=.5;e.wp=(e.wp||0)+e.f*24*.1*dt;
+  const fv0=e.fv==null?e.f:e.fv;e.fv=Math.abs(e.f-fv0)<.03?e.f:fv0+(e.f-fv0)*Math.min(1,dt*16);
+  const dx=P.x-e.x,ad=Math.abs(dx);
+  if(Math.abs(P.y-e.y)<100&&P.hp>0){
+   const slow=Math.abs(P.vx)<70&&!P.at,rg=(dx*e.f>0?300:70)*(slow?.55:1);
+   if(ad<rg)e.aw=(e.aw||0)+dt*(dx*e.f>0?1.1:.8)*(1.3-ad/rg);else e.aw=Math.max(0,(e.aw||0)-dt*.5)}
+  else e.aw=Math.max(0,(e.aw||0)-dt*.5);
+  if(e.aw>=1){e.al=1;txt('有人！',e.x,e.y-130,22,'#b3261e');for(const o of E)if(o!==e&&!o.dead&&o!==boss&&!o.al&&Math.abs(o.x-e.x)<380)o.al=1}
+ };
+ const _hE=hurtE;
+ hurtE=function(e,dm,kb,big){
+  if(stOn(e)){
+   if((P.x-e.x)*e.f<0){dm=9999;const r=_hE.call(this,e,dm,kb,big);if(e.dead){STK++;coin+=4;txt('暗殺',e.x,e.y-110,22,'#1c1c1c')}return r}
+   /* 正面或側面攻擊：不算暗殺，小兵直接驚覺，附近的也一起 */
+   e.al=1;txt('有人！',e.x,e.y-130,22,'#b3261e');for(const o of E)if(o!==e&&!o.dead&&o!==boss&&!o.al&&Math.abs(o.x-e.x)<380)o.al=1}
+  return _hE.call(this,e,dm,kb,big)};
+ {const _dt=drawTrail;drawTrail=function(){_dt.apply(this,arguments);
+  if(!STL||PART!==2||LV>2||S!=='play'||lock)return;
+  g.save();for(const e of E){if(e.dead||e===boss||e.al||!(e.aw>.02))continue;
+   const x=e.x-14,y=e.y-ED[e.k].s*100-18;g.fillStyle='rgba(28,28,28,.35)';g.fillRect(x,y,28,4);g.fillStyle='#b3261e';g.fillRect(x,y,28*Math.min(1,e.aw),4)}
+  g.font='bold 18px serif';g.textAlign='center';g.fillStyle='#1c1c1c';g.fillText('潛行　背後暗殺 '+STK,cam+W/2,34);g.restore()}}
+}
 /* ===== 入朝篇：放過／斬殺（五位關主）與放過後的告別台詞；放過者成為同伴 ===== */
 {const c=CHAPTERS[2];
  Object.assign(c.ally,{1:{n:'守門千戶',t:'shield',m:'城門護盾'},3:{n:'戶部侍郎',t:'wave',m:'帳冊飛頁'},5:{n:'詔獄指揮',t:'strike',m:'鎖鏈絞'},8:{n:'禁軍統領',t:'shield',m:'列陣盾牆'},9:{n:'大內總管',t:'wave',m:'聖旨震波'}});
