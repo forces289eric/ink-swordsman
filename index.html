@@ -6094,23 +6094,16 @@ const ambGirl=()=>{
  const rib=(p0,p1,p2,p3,w0,w1,fc,hl)=>{const N=12,L=[],R=[];for(let i=0;i<=N;i++){const t=i/N,u=1-t,x=u*u*u*p0[0]+3*u*u*t*p1[0]+3*u*t*t*p2[0]+t*t*t*p3[0],y=u*u*u*p0[1]+3*u*u*t*p1[1]+3*u*t*t*p2[1]+t*t*t*p3[1],dx=3*u*u*(p1[0]-p0[0])+6*u*t*(p2[0]-p1[0])+3*t*t*(p3[0]-p2[0]),dy=3*u*u*(p1[1]-p0[1])+6*u*t*(p2[1]-p1[1])+3*t*t*(p3[1]-p2[1]),l=Math.hypot(dx,dy)||1,nx=-dy/l,ny=dx/l,w=lp(w0,w1,t);L.push([x+nx*w,y+ny*w]);R.push([x-nx*w,y-ny*w])}
   pl(L.concat(R.reverse()),fc,1.4);
   g.strokeStyle=hl;g.lineWidth=.9;g.beginPath();for(let i=1;i<N-1;i++){const m=[(L[i][0]+R[N-i][0])/2,(L[i][1]+R[N-i][1])/2];i===1?g.moveTo(m[0],m[1]):g.lineTo(m[0],m[1])}g.stroke()};
- rib([-5,-38],[-18,-34+sw*4],[-29,-42-sw*5],[-43-sw*4,-30+sw*6],2.3,.6,RED,'rgba(255,170,150,.55)');
+ rib([-5,-38],[-11,-35+sw*2.5],[-17,-39-sw*3],[-24-sw*2.5,-31+sw*3.5],2.3,.6,RED,'rgba(255,170,150,.55)');
  /* 腳下影 */
  g.fillStyle='rgba(0,0,0,.2)';g.beginPath();g.ellipse(0,1,17,5,0,0,TAU);g.fill();
- /* 後髮（長髮及腰，髮帶束於背後） */
+ /* 後髮：齊肩短髮（髮尾微微內扣，隨動作輕晃） */
  g.save();g.translate(0,bob*.5);
- g.fillStyle=HAIR;g.beginPath();g.moveTo(-3,-73);
- g.bezierCurveTo(-20,-73,-23.5,-54,-18.5,-42);
- g.bezierCurveTo(-16.5,-34+sw*2,-14.5,-27+sw*4,-9,-22+sw*4);
- g.bezierCurveTo(-8.5,-31,-5,-38,-4.6,-46);
- g.bezierCurveTo(-4,-54,-3,-62,-3,-73);g.closePath();g.fill();
+ g.fillStyle=HAIR;g.beginPath();g.moveTo(-8,-72);
+ g.bezierCurveTo(-17,-69,-17.5,-56,-15.5+sw*1.5,-48.5+sw);
+ g.quadraticCurveTo(-10+sw,-46.5,-4.5,-50);g.lineTo(-3,-60);g.closePath();g.fill();
  g.strokeStyle=SHEEN;g.lineWidth=1.1;
- g.beginPath();g.moveTo(-12,-67);g.quadraticCurveTo(-18.5,-54,-15,-41);g.stroke();
- g.beginPath();g.moveTo(-8.5,-62);g.quadraticCurveTo(-12.5,-48,-11,-32+sw*3);g.stroke();
- /* 髮帶 */
- pl([[-18.2,-51.4],[-4.4,-45.4],[-4.2,-42.4],[-18,-48.4]],RED,1.1);
- pl([[-14.5,-47],[-19,-38+sw*2],[-16.6,-30.5+sw*3],[-13.6,-38+sw*2]],RED,1);
- pl([[-12.6,-46.4],[-14.8,-37+sw*2],[-11.6,-29.5+sw*3],[-10.6,-37.5+sw*2]],RED,1);
+ g.beginPath();g.moveTo(-12.2,-67);g.quadraticCurveTo(-14.8,-59,-13.4+sw,-52.5);g.stroke();
  g.restore();
  /* 後側手臂：寬袖下垂 */
  pl([[-3.2,-53],[-8.4,-52],[-13.4,-36],[-13,-30.5+sw*.5],[-5.6,-30.5],[-4.6,-40]],TEALD,1.5);
@@ -6187,6 +6180,9 @@ const ambGirl=()=>{
  /* 頭 */
  g.save();g.translate(0,bob*.5);
  g.fillStyle=SKN;g.strokeStyle=K;g.lineWidth=2;g.beginPath();g.arc(0,-63,10,0,TAU);g.fill();g.stroke();
+ /* 尖下巴：臉形更精緻 */
+ g.fillStyle=SKN;g.beginPath();g.moveTo(-5.2,-54.5);g.quadraticCurveTo(1.4,-49.2,7.4,-56.3);g.lineTo(7,-60);g.lineTo(-5,-60);g.closePath();g.fill();
+ g.strokeStyle=K;g.lineWidth=2;g.beginPath();g.moveTo(-5.2,-54.5);g.quadraticCurveTo(1.4,-49.2,7.4,-56.3);g.stroke();
  /* 髮冠＋斜瀏海 */
  g.fillStyle=HAIR;g.beginPath();g.moveTo(-10.2,-57);
  g.bezierCurveTo(-12.6,-70,-4,-76.5,3.5,-75.5);
@@ -6197,27 +6193,24 @@ const ambGirl=()=>{
  g.beginPath();g.moveTo(-1.6,-67.5);g.quadraticCurveTo(-5.6,-60,-4.8,-51.4);g.quadraticCurveTo(-2.6,-55.4,-1,-60.5);g.quadraticCurveTo(-.4,-64,-.6,-67);g.closePath();g.fill();
  g.strokeStyle=SHEEN;g.lineWidth=1.2;g.beginPath();g.arc(-1,-63,8.6,Math.PI*1.12,Math.PI*1.44);g.stroke();
  /* 眼：高光虹膜、上睫毛與眼尾上揚 */
- g.fillStyle='#fff';g.beginPath();g.ellipse(5.2,-62,2.5,2,0,0,TAU);g.fill();
- g.fillStyle='#24403f';g.beginPath();g.arc(5.9,-62,1.55,0,TAU);g.fill();
- g.fillStyle='#fff';g.beginPath();g.arc(6.5,-62.7,.55,0,TAU);g.fill();g.beginPath();g.arc(5.1,-61.2,.3,0,TAU);g.fill();
- g.strokeStyle=K;g.lineWidth=1.5;g.beginPath();g.moveTo(2.4,-62.4);g.quadraticCurveTo(5,-65.4,8.4,-63);g.lineTo(9.6,-64.2);g.stroke();
- g.lineWidth=.8;g.beginPath();g.moveTo(3.6,-60);g.quadraticCurveTo(5.6,-59.4,7.4,-60.2);g.stroke();
+ g.fillStyle='rgba(190,85,110,.38)';g.beginPath();g.ellipse(6.4,-63.7,4.2,1,-.12,0,TAU);g.fill();
+ g.fillStyle='#fff';g.beginPath();g.ellipse(5.4,-62,3.1,1.4,-.08,0,TAU);g.fill();
+ g.fillStyle='#24403f';g.beginPath();g.ellipse(5.9,-62,1.3,1.35,0,0,TAU);g.fill();
+ g.fillStyle='#fff';g.beginPath();g.arc(6.4,-62.5,.45,0,TAU);g.fill();g.beginPath();g.arc(5.1,-61.5,.25,0,TAU);g.fill();
+ g.strokeStyle=K;g.lineWidth=1.5;g.beginPath();g.moveTo(1.6,-61.7);g.quadraticCurveTo(5,-64.3,9.4,-62.6);g.lineTo(11.4,-64.9);g.stroke();
+ g.lineWidth=.8;g.beginPath();g.moveTo(3.4,-60.7);g.quadraticCurveTo(5.8,-60.1,8.2,-61.2);g.stroke();
  /* 腮紅與唇 */
- g.fillStyle='rgba(235,110,125,.42)';g.beginPath();g.ellipse(5.6,-58.7,2.3,1.4,0,0,TAU);g.fill();
- g.strokeStyle='#c4344a';g.lineWidth=1.4;g.beginPath();g.moveTo(3.7,-56.5);g.quadraticCurveTo(5.1,-55.6,6.5,-56.7);g.stroke();
+ g.fillStyle='rgba(225,105,120,.16)';g.beginPath();g.ellipse(5.6,-58.7,3,1.7,0,0,TAU);g.fill();
+ g.fillStyle='rgba(225,105,120,.14)';g.beginPath();g.ellipse(5.6,-58.7,1.7,.95,0,0,TAU);g.fill();
+ g.fillStyle='#a8233b';g.beginPath();g.moveTo(3.4,-56.6);g.quadraticCurveTo(4.3,-57.5,5.1,-56.9);g.quadraticCurveTo(5.9,-57.5,6.8,-56.6);g.quadraticCurveTo(5.1,-54.9,3.4,-56.6);g.closePath();g.fill();
+ g.strokeStyle='#8f2236';g.lineWidth=.6;g.beginPath();g.moveTo(3.4,-56.6);g.quadraticCurveTo(5.1,-56.1,6.8,-56.6);g.stroke();
+ g.fillStyle='rgba(255,255,255,.7)';g.beginPath();g.arc(4.6,-56,.3,0,TAU);g.fill();
+ g.fillStyle=K;g.beginPath();g.arc(7.7,-59.8,.38,0,TAU);g.fill();
  /* 耳墜 */
  ln(-3.9,-56.2,-3.9+sw*.4,-53.4,GOLD,1);g.fillStyle=JB;g.beginPath();g.arc(-3.9+sw*.4,-52.4,1.2,0,TAU);g.fill();g.lineWidth=.8;g.strokeStyle=K;g.stroke();
- /* 髮髻、髮帶與簪 */
- g.fillStyle=HAIR;g.beginPath();g.arc(-3,-77,4.7,0,TAU);g.fill();
- g.strokeStyle=SHEEN;g.lineWidth=1;g.beginPath();g.arc(-3,-77,3.3,Math.PI*1.1,Math.PI*1.65);g.stroke();
- ln(-6.9,-74.5,.8,-75.4,RED,1.9);
- ln(-9.2,-79.4,4.2,-74.4,K,2.8);ln(-9.2,-79.4,4.2,-74.4,GOLD,1.4);
- g.fillStyle=GOLD;g.beginPath();g.arc(-9.4,-79.5,1.4,0,TAU);g.fill();g.lineWidth=.9;g.strokeStyle=K;g.stroke();
- /* 簪尾流蘇 */
- for(const[len,c]of[[13,JB],[9.5,GOLD]]){const ex=-12.4+sw*(.8+len*.04)-(len>10?.8:-1),ey=-79.5+len;g.strokeStyle=GOLD;g.lineWidth=.9;g.beginPath();g.moveTo(-9.4,-79.5);g.quadraticCurveTo(-12.4+sw*.5,-73,ex,ey);g.stroke();g.fillStyle=c;g.beginPath();g.arc(ex,ey,1.2,0,TAU);g.fill();g.lineWidth=.7;g.strokeStyle=K;g.stroke()}
- /* 簪首：青玉小花 */
- for(let i=0;i<5;i++){const an=i/5*TAU-1.2;g.fillStyle=JB;g.beginPath();g.arc(4.6+Math.cos(an)*1.7,-74.6+Math.sin(an)*1.7,1.25,0,TAU);g.fill();g.lineWidth=.7;g.strokeStyle=K;g.stroke()}
- g.fillStyle=GOLD;g.beginPath();g.arc(4.6,-74.6,1,0,TAU);g.fill();
+/* 青玉小花髮飾（別在腦後髮際） */
+for(let i=0;i<5;i++){const an=i/5*TAU-1.2;g.fillStyle=JB;g.beginPath();g.arc(-6.6+Math.cos(an)*1.9,-70.4+Math.sin(an)*1.9,1.4,0,TAU);g.fill();g.lineWidth=.7;g.strokeStyle=K;g.stroke()}
+g.fillStyle=GOLD;g.beginPath();g.arc(-6.6,-70.4,1.1,0,TAU);g.fill();
  g.restore();
  /* 搖鈴（高舉時） */
  if(hq>=.5){
