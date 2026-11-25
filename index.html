@@ -266,7 +266,7 @@ const SCB=[
  const ferry=(c,x,y,s,al,lan)=>wr(x,x=>{c.fillStyle='rgba(210,222,226,.16)';c.beginPath();c.ellipse(x,y+9*s,46*s,3.2*s,0,0,TAU);c.fill();c.fillStyle=ik(al,'38,32,28');c.beginPath();c.moveTo(x-50*s,y-12*s);c.quadraticCurveTo(x,y+7*s,x+50*s,y-12*s);c.quadraticCurveTo(x,y-7*s,x-50*s,y-12*s);c.fill();
   c.fillStyle=ik(al*.9,'50,42,36');c.beginPath();c.moveTo(x-14*s,y-11*s);c.quadraticCurveTo(x+8*s,y-40*s,x+36*s,y-11*s);c.closePath();c.fill();c.strokeStyle=IKP(.18);c.lineWidth=1;for(let j=1;j<4;j++){const bx=x-14*s+j*12*s;c.beginPath();c.moveTo(bx-2*s,y-12*s);c.quadraticCurveTo(bx,y-28*s,bx+1*s,y-12*s);c.stroke()}
   const fx=x-36*s;c.fillStyle=ik(al+.1,'26,22,20');c.fillRect(fx-2.4*s,y-36*s,4.8*s,24*s);c.beginPath();c.arc(fx,y-40*s,3.6*s,0,TAU);c.fill();c.beginPath();c.moveTo(fx-10*s,y-42*s);c.lineTo(fx,y-53*s);c.lineTo(fx+10*s,y-42*s);c.closePath();c.fill();stroke(c,fx+2*s,y-34*s,fx+46*s,y+10*s,2*s,ik(al+.1,'48,38,28'),fx+24*s,y-12*s);
-  if(lan){stroke(c,x+44*s,y-12*s,x+44*s,y-30*s,1.6*s,ik(.55,'40,32,26'));glow(c,x+44*s,y-24*s,34*s,'255,176,88',.5);c.fillStyle='rgba(214,70,50,.92)';c.beginPath();c.ellipse(x+44*s,y-24*s,3.6*s,4.6*s,0,0,TAU);c.fill()}});
+  if(lan){stroke(c,x+44*s,y-12*s,x+44*s,y-30*s,1.6*s,ik(.55,'40,32,26'));glow(c,x+44*s,y-24*s,20*s,'240,110,50',.32);c.fillStyle='rgba(214,70,50,.95)';c.beginPath();c.ellipse(x+44*s,y-24*s,3.6*s,4.6*s,0,0,TAU);c.fill();c.strokeStyle='rgba(40,24,18,.85)';c.lineWidth=1.1*s;c.stroke();c.fillStyle='rgba(40,24,18,.9)';c.fillRect(x+44*s-2.4*s,y-30*s,4.8*s,1.8*s);c.fillRect(x+44*s-2.4*s,y-19.4*s,4.8*s,1.6*s)}});
  const pile=(c,x,h,al)=>{c.fillStyle=ik(al,'46,36,28');c.fillRect(x-3.2,GY-h,6.4,h+8);c.beginPath();c.ellipse(x,GY-h,3.2,1.8,0,0,TAU);c.fill();c.strokeStyle=ik(al*.8,'30,24,20');c.lineWidth=2;c.beginPath();c.moveTo(x-3.2,GY-h+10);c.lineTo(x+3.2,GY-h+13);c.stroke()};
  const crate=(c,x,y,w,al)=>{c.fillStyle=ik(al,'62,46,32');c.fillRect(x,y-w,w,w);c.strokeStyle=ik(al*.8,'30,22,16');c.lineWidth=1.4;c.strokeRect(x,y-w,w,w);c.beginPath();c.moveTo(x,y-w);c.lineTo(x+w,y);c.moveTo(x+w,y-w);c.lineTo(x,y);c.stroke()};
  const sack=(c,x,y,r,al)=>{c.fillStyle=ik(al,'112,96,70');c.beginPath();c.ellipse(x,y-r*.8,r,r*.9,0,0,TAU);c.fill();c.fillStyle=ik(al,'70,58,40');c.fillRect(x-r*.3,y-r*1.8,r*.6,r*.5)};
@@ -288,7 +288,7 @@ const SCB=[
  sun:{x:560,y:90,r:30,c:'120,130,140',a:.24},leaf:0}},
 /*2 荒廟（v433 優化：殘破山門與斷梁、無頭石佛前的殘燈、石燈籠暖光、破旗、斷碑、瓦礫、寒鴉、碎石苔痕地面）*/()=>{
  const crow=(c,x,y,s)=>{c.strokeStyle=ik(.5,'30,24,20');c.lineWidth=1.8;c.lineCap='round';c.beginPath();c.moveTo(x-9*s,y+1);c.quadraticCurveTo(x-4*s,y-6*s,x,y);c.quadraticCurveTo(x+4*s,y-6*s,x+9*s,y+1);c.stroke()};
- const lamp=(c,x,y,s)=>wr(x,x=>{c.fillStyle=ik(.62,'46,40,34');c.fillRect(x-11*s,y-6*s,22*s,6*s);c.fillRect(x-5*s,y-38*s,10*s,32*s);c.fillRect(x-10*s,y-60*s,20*s,22*s);c.beginPath();c.moveTo(x-17*s,y-60*s);c.lineTo(x,y-72*s);c.lineTo(x+17*s,y-60*s);c.closePath();c.fill();glow(c,x,y-49*s,80*s,'255,168,76',.5);c.fillStyle='rgba(255,196,108,.95)';c.fillRect(x-5*s,y-56*s,10*s,13*s);c.fillStyle='rgba(255,236,170,.9)';c.beginPath();c.ellipse(x,y-50*s,2*s,4*s,0,0,TAU);c.fill()});
+ const lamp=(c,x,y,s)=>wr(x,x=>{c.fillStyle=ik(.62,'46,40,34');c.fillRect(x-11*s,y-6*s,22*s,6*s);c.fillRect(x-5*s,y-38*s,10*s,32*s);c.fillRect(x-10*s,y-60*s,20*s,22*s);c.beginPath();c.moveTo(x-17*s,y-60*s);c.lineTo(x,y-72*s);c.lineTo(x+17*s,y-60*s);c.closePath();c.fill();glow(c,x,y-49*s,44*s,'240,128,48',.3);c.fillStyle='rgba(238,150,66,.95)';c.fillRect(x-5*s,y-56*s,10*s,13*s);c.fillStyle='rgba(255,214,130,.9)';c.beginPath();c.ellipse(x,y-50*s,2*s,4*s,0,0,TAU);c.fill()});
  const statue=(c,x,y,s)=>wr(x,x=>{c.fillStyle=ik(.58,'54,48,40');c.beginPath();c.ellipse(x,y-8*s,36*s,9*s,0,0,TAU);c.fill();c.beginPath();c.moveTo(x-26*s,y-10*s);c.quadraticCurveTo(x-31*s,y-46*s,x-12*s,y-62*s);c.lineTo(x-6*s,y-70*s);c.lineTo(x+1*s,y-64*s);c.lineTo(x+8*s,y-71*s);c.lineTo(x+12*s,y-62*s);c.quadraticCurveTo(x+31*s,y-46*s,x+26*s,y-10*s);c.closePath();c.fill();c.beginPath();c.ellipse(x+44*s,y-9*s,10*s,11*s,.4,0,TAU);c.fill();c.fillStyle='rgba(74,102,56,.32)';for(const[dx,dy,rw]of[[-14,-40,9],[10,-22,7],[-4,-14,8],[40,-14,5]]){c.beginPath();c.ellipse(x+dx*s,y+dy*s,rw*s,2.4*s,0,0,TAU);c.fill()}c.fillStyle=ik(.65,'40,34,28');c.fillRect(x-30*s,y-14*s,4*s,10*s);glow(c,x-28*s,y-18*s,34*s,'255,176,86',.55);c.fillStyle='rgba(255,214,136,.96)';c.beginPath();c.ellipse(x-28*s,y-18*s,2.2*s,4*s,0,0,TAU);c.fill()});
  const banner=(c,x,y,h,al)=>wr(x,x=>{stroke(c,x,y,x,y-h,2.2,ik(.55,'40,32,26'),x+1,y-h/2);c.fillStyle=`rgba(150,50,36,${al})`;c.beginPath();c.moveTo(x+1,y-h+2);c.lineTo(x+22,y-h+7);c.lineTo(x+19,y-h+20);c.lineTo(x+24,y-h+33);c.lineTo(x+15,y-h+41);c.lineTo(x+17,y-h+54);c.lineTo(x+1,y-h+47);c.closePath();c.fill()});
  const gate=(c,x,al)=>wr(x,x=>{c.fillStyle=ik(al,'50,42,34');c.fillRect(x-48,GY-96,9,96);c.fillRect(x+39,GY-62,9,62);c.fillRect(x-56,GY-102,62,7);roof(c,x-24,GY-102,70,18,al*.9);c.save();c.translate(x+22,GY-8);c.rotate(.16);c.fillRect(-32,-4,58,7);c.restore();for(let i=0;i<5;i++){c.beginPath();c.ellipse(x+R(-40,56),GY-R(1,4),R(3,7),R(1.5,3),0,0,TAU);c.fill()}});
@@ -308,9 +308,64 @@ const SCB=[
   for(let i=0;i<6;i++){c.fillStyle='rgba(30,26,22,.5)';const x=R(10,700),y=R(GY+10,H-8);c.beginPath();c.moveTo(x,y);c.lineTo(x+R(6,12),y+R(-2,2));c.lineTo(x+R(2,8),y+R(2,4));c.fill()}
   return G})(),
  sun:{x:590,y:80,r:38,c:'214,120,56',a:.34},sky:['rgba(120,70,40,0)','rgba(220,140,70,.16)'],leaf:0}},
-/*3 黑風寨*/()=>({a:L4(c=>{rdg(c,sp(220,100,3,3,6),150,.3)}),b:L4(c=>{rdg(c,sp(290,85,5,2,7),210,.5);sflag(c,300,150,.4,'rgba(179,38,30,.5)');sflag(c,1020,160,.4,'rgba(179,38,30,.5)')}),c:L4(c=>{stock(c,.45,72);tower(c,200,.55);tower(c,880,.55)}),d:L4(c=>{for(const x of[140,700,1220]){c.fillStyle=ik(.75,'44,30,22');c.fillRect(x,GY-250,12,255);flag(c,x+6,GY-210,.8,'rgba(179,38,30,.75)');glow(c,x+6,GY-262,46,'255,150,50',.5)}}),gl:gnd({k:'plank',c2:'50,36,30'}),sun:{x:560,y:90,r:34,c:'179,38,30',a:.3},leaf:0}),
-/*4 雪嶺*/()=>({a:L4(c=>{rdg(c,sp(190,140,1,2,5),120,.28,'50,60,80')}),b:L4(c=>{rdg(c,sp(285,105,4,3,6),190,.5,'40,50,70');c.strokeStyle=`rgba(252,250,244,.8)`;c.lineWidth=3;for(let i=0;i<18;i++){const x=R(0,TW),y=sh(x,285,105,4,3,6);c.beginPath();c.moveTo(x-12,y+10);c.lineTo(x,y+2);c.lineTo(x+12,y+10);c.stroke()}}),c:L4(c=>{for(let i=0;i<14;i++)pine(c,R(0,TW),R(90,150),3,.4,1);mist(c,GY-20,60,.4)}),d:L4(c=>{for(let i=0;i<5;i++)pine(c,R(0,TW),R(230,330),7,.65,1);for(let i=0;i<5;i++){const x=R(0,TW);blot(c,x,GY-6,R(18,30),.6,0);c.fillStyle='rgba(252,250,244,.9)';c.beginPath();c.ellipse(x,GY-16,18,5,0,0,TAU);c.fill()}}),gl:gnd({k:'snow',c2:'60,64,72',nt:1}),sun:{x:590,y:90,r:30,c:'120,150,190',a:.22},leaf:0}),
-/*5 烈火禪院*/()=>({a:L4(c=>{rdg(c,sm(250,60,2,2,5),190,.25)}),b:L4(c=>{rdg(c,sp(305,50,1,3,7),255,.42);glow(c,300,GY-30,120,'255,120,40',.25);glow(c,1000,GY-30,120,'255,120,40',.25)}),c:L4(c=>{pagoda(c,260,110,5,.55);pagoda(c,720,90,3,.5);pagoda(c,1150,100,4,.55);glow(c,260,GY-90,100,'255,110,30',.22)}),d:L4(c=>{for(const x of[180,620,1100]){c.fillStyle=ik(.7,'90,24,20');c.fillRect(x,GY-200,16,205);c.fillRect(x+110,GY-200,16,205);c.fillRect(x-14,GY-210,154,12);c.fillStyle=ik(.8);c.fillRect(x-24,GY-222,174,8);glow(c,x+8,GY-6,60,'255,120,30',.5)}}),gl:gnd({k:'stone',c2:'60,32,26',cc:'rgba(235,90,30,.8)'}),sun:{x:540,y:100,r:52,c:'179,38,30',a:.4},leaf:0}),
+/*3 黑風寨（v450 優化：寨門匾額與骷髏、瞭望塔火光、木柵與骷髏樁、兵器架、戰鼓、酒桶、營帳、篝火堆；動態：火炬與篝火躍動、火星升騰、黑煙、寨門內紅光）*/()=>{
+ const skull=(c,x,y,s)=>{c.fillStyle='rgba(224,214,190,.85)';c.beginPath();c.arc(x,y,5*s,0,TAU);c.fill();c.fillRect(x-3*s,y+3*s,6*s,4*s);c.fillStyle='rgba(20,12,10,.9)';for(const q of[-2,2]){c.beginPath();c.arc(x+q*s,y,1.4*s,0,TAU);c.fill()}};
+ const spike=(c,x)=>wr(x,x=>{stroke(c,x,GY,x,GY-88,3,ik(.58,'46,30,22'),x,GY-44);skull(c,x,GY-94,.9)});
+ const gate=(c,x)=>wr(x,x=>{for(const q of[-1,1]){c.fillStyle=ik(.66,'42,28,22');c.fillRect(x+q*62-13,GY-176,26,176);c.fillStyle=ik(.5,'20,12,10');for(let k=0;k<5;k++)c.fillRect(x+q*62-13,GY-160+k*34,26,3);roof(c,x+q*62,GY-176,74,30,.72)}
+  c.fillStyle=ik(.64,'42,28,22');c.fillRect(x-52,GY-136,104,18);c.fillStyle='rgba(18,10,8,.8)';c.fillRect(x-48,GY-118,96,118);glow(c,x,GY-56,100,'210,70,34',.34);
+  c.fillStyle=ik(.72,'30,20,16');c.fillRect(x-48,GY-118,12,118);c.fillRect(x+36,GY-118,12,118);
+  c.fillStyle='#2a1610';c.fillRect(x-34,GY-164,68,24);c.strokeStyle='rgba(200,150,50,.8)';c.lineWidth=1.4;c.strokeRect(x-34,GY-164,68,24);
+  c.fillStyle='rgba(224,178,70,.95)';c.font="bold 16px KaiTi,STKaiti,'Noto Serif TC',serif";c.textAlign='center';c.textBaseline='middle';c.fillText('黑風寨',x,GY-152);
+  skull(c,x-32,GY-126,.9);skull(c,x+32,GY-126,.9)});
+ const brz=(c,x)=>wr(x,x=>{stroke(c,x,GY,x,GY-78,4,ik(.72,'44,30,22'),x,GY-40);c.fillStyle=ik(.82,'30,22,18');c.beginPath();c.moveTo(x-11,GY-84);c.lineTo(x+11,GY-84);c.lineTo(x+6,GY-70);c.lineTo(x-6,GY-70);c.fill()});
+ const tent=(c,x,al)=>wr(x,x=>{c.fillStyle=ik(al,'58,40,32');c.beginPath();c.moveTo(x-52,GY);c.lineTo(x-4,GY-62);c.lineTo(x+52,GY);c.closePath();c.fill();c.fillStyle='rgba(16,10,8,.7)';c.beginPath();c.moveTo(x-12,GY);c.lineTo(x,GY-30);c.lineTo(x+12,GY);c.fill();stroke(c,x-4,GY-62,x-4,GY-80,2,ik(al,'40,28,20'))});
+ const rack=(c,x)=>wr(x,x=>{c.fillStyle=ik(.68,'48,32,24');c.fillRect(x-30,GY-34,60,5);c.fillRect(x-32,GY-50,5,50);c.fillRect(x+27,GY-50,5,50);for(let k=0;k<5;k++){const sx=x-22+k*11,tx=sx+(k-2)*1.5;stroke(c,sx,GY-4,tx,GY-96,2,ik(.64,'60,52,44'),sx,GY-50);c.fillStyle=ik(.72,'96,92,86');c.beginPath();c.moveTo(tx-3,GY-92);c.lineTo(tx,GY-106);c.lineTo(tx+3,GY-92);c.fill()}});
+ const drum=(c,x)=>wr(x,x=>{c.fillStyle=ik(.74,'96,40,30');c.beginPath();c.ellipse(x,GY-26,26,30,0,0,TAU);c.fill();c.fillStyle=ik(.62,'28,18,14');c.fillRect(x-30,GY-4,60,6);c.strokeStyle='rgba(200,150,60,.75)';c.lineWidth=2;c.beginPath();c.ellipse(x,GY-26,26,30,0,0,TAU);c.stroke();c.fillStyle='rgba(224,178,70,.8)';for(let k=0;k<7;k++){c.beginPath();c.arc(x-21+k*7,GY-26+Math.sin(k)*0,1.6,0,TAU);c.fill()}});
+ const barrel=(c,x,s)=>wr(x,x=>{c.fillStyle=ik(.72,'70,46,30');c.beginPath();c.ellipse(x,GY-14*s,12*s,16*s,0,0,TAU);c.fill();c.strokeStyle=ik(.8,'30,20,14');c.lineWidth=1.4;for(const k of[-8,0,8]){c.beginPath();c.moveTo(x-11*s,GY-14*s+k*s);c.lineTo(x+11*s,GY-14*s+k*s);c.stroke()}});
+ const pyre=(c,x)=>wr(x,x=>{for(const q of[-1,1])stroke(c,x-q*22,GY-2,x+q*8,GY-20,5,ik(.74,'40,26,18'));stroke(c,x-20,GY-16,x+22,GY-6,4,ik(.7,'40,26,18'));c.fillStyle=ik(.6,'60,50,44');for(let k=-3;k<=3;k++){c.beginPath();c.ellipse(x+k*8,GY+2,6,3.5,0,0,TAU);c.fill()}glow(c,x,GY-20,110,'255,120,40',.3)});
+ return{a:L4(c=>{rdg(c,sp(220,100,3,3,6),150,.3);glow(c,540,150,300,'200,64,36',.2);for(let i=0;i<5;i++)blot(c,R(0,TW),R(40,150),R(50,90),.05,0)}),
+ b:L4(c=>{const yf=sp(290,85,5,2,7);rdg(c,yf,210,.5);sflag(c,300,150,.4,'rgba(179,38,30,.5)');sflag(c,1020,160,.4,'rgba(179,38,30,.5)');
+  for(const x of[120,520,760,1180]){const y=yf(x)+4;c.fillStyle=ik(.5,'30,20,18');c.fillRect(x-4,y-34,8,34);c.fillRect(x-9,y-44,18,10);roof(c,x,y-44,26,12,.5);glow(c,x,y-38,26,'255,150,60',.55)}mist(c,GY-40,50,.3)}),
+ c:L4(c=>{stock(c,.45,72);tower(c,200,.55);tower(c,880,.55);gate(c,540);tent(c,1060,.5);tent(c,1260,.46);for(const x of[310,360,720,770])spike(c,x);brz(c,420);brz(c,660);mist(c,GY-14,34,.22)}),
+ d:L4(c=>{for(const x of[140,700,1220]){c.fillStyle=ik(.75,'44,30,22');c.fillRect(x,GY-250,12,255);flag(c,x+6,GY-210,.8,'rgba(179,38,30,.75)');c.fillStyle=ik(.84,'28,20,16');c.beginPath();c.moveTo(x-8,GY-266);c.lineTo(x+20,GY-266);c.lineTo(x+14,GY-250);c.lineTo(x-2,GY-250);c.fill()}
+  rack(c,400);drum(c,880);pyre(c,1000);barrel(c,300,1);barrel(c,326,.85);barrel(c,1120,1);barrel(c,1146,.8)}),
+ gl:gnd({k:'plank',c2:'50,36,30'}),sun:{x:560,y:90,r:34,c:'179,38,30',a:.3},leaf:0}},
+/*4 雪嶺寒關（v450 優化：冰川雪峰、石砌關隘與冰柱、冰晶簇、凍結瀑布、積雪松林、雪籬與斷劍、霜旗；動態：極光流動、冰晶閃光、燈籠搖曳、風雪橫掃、地表寒霧）*/()=>{
+ const peak=(c,x,w,h,al,col)=>wr(x,x=>{const y=GY-h;c.fillStyle=ik(al,col);c.beginPath();c.moveTo(x-w/2,GY+20);c.lineTo(x-w*.08,y+h*.12);c.lineTo(x,y);c.lineTo(x+w*.1,y+h*.1);c.lineTo(x+w/2,GY+20);c.closePath();c.fill();c.fillStyle=`rgba(240,246,252,${Math.min(1,al+.25)})`;c.beginPath();c.moveTo(x,y);c.lineTo(x+w*.1,y+h*.1);c.lineTo(x+w*.19,y+h*.36);c.lineTo(x+w*.1,y+h*.3);c.lineTo(x+w*.03,y+h*.4);c.lineTo(x-w*.05,y+h*.28);c.lineTo(x-w*.14,y+h*.34);c.lineTo(x-w*.08,y+h*.12);c.closePath();c.fill()});
+ const ice=(c,x,y,w,n,len)=>{for(let k=0;k<n;k++){const sx=x+k*w/n,l=len*R(.4,1);c.fillStyle='rgba(214,236,250,.85)';c.beginPath();c.moveTo(sx,y);c.lineTo(sx+w/n*.5,y+l);c.lineTo(sx+w/n,y);c.fill()}};
+ const crystal=(c,x,s)=>wr(x,x=>{for(const[dx,h,w2]of[[-12,44,7],[0,66,9],[13,36,6]]){c.fillStyle='rgba(168,214,240,.62)';c.beginPath();c.moveTo(x+dx-w2,GY);c.lineTo(x+dx-w2*.7,GY-h*s*.8);c.lineTo(x+dx,GY-h*s);c.lineTo(x+dx+w2*.7,GY-h*s*.8);c.lineTo(x+dx+w2,GY);c.fill();c.fillStyle='rgba(255,255,255,.5)';c.beginPath();c.moveTo(x+dx-w2*.4,GY);c.lineTo(x+dx-w2*.3,GY-h*s*.8);c.lineTo(x+dx,GY-h*s);c.lineTo(x+dx-w2*.1,GY);c.fill()}glow(c,x,GY-30,70,'150,210,250',.2)});
+ const gate=(c,x)=>wr(x,x=>{for(const q of[-1,1]){c.fillStyle=ik(.68,'64,70,82');c.fillRect(x+q*58-18,GY-150,36,150);c.fillStyle='rgba(244,248,252,.92)';c.fillRect(x+q*58-21,GY-155,42,8);c.fillStyle=ik(.5,'30,36,46');for(let k=0;k<5;k++)c.fillRect(x+q*58-18,GY-130+k*26,36,2)}
+  c.fillStyle=ik(.68,'64,70,82');c.fillRect(x-60,GY-136,120,40);c.fillStyle='rgba(244,248,252,.92)';c.fillRect(x-62,GY-141,124,7);
+  c.fillStyle='rgba(16,22,34,.78)';c.beginPath();c.moveTo(x-40,GY);c.lineTo(x-40,GY-56);c.arc(x,GY-56,40,Math.PI,0);c.lineTo(x+40,GY);c.fill();
+  c.fillStyle='#1c2430';c.fillRect(x-30,GY-132,60,20);c.strokeStyle='rgba(190,220,245,.8)';c.lineWidth=1.3;c.strokeRect(x-30,GY-132,60,20);
+  c.fillStyle='rgba(222,240,255,.95)';c.font="bold 15px KaiTi,STKaiti,'Noto Serif TC',serif";c.textAlign='center';c.textBaseline='middle';c.fillText('雪嶺關',x,GY-122);
+  ice(c,x-40,GY-96,80,8,20);ice(c,x-60,GY-96,20,3,14);ice(c,x+40,GY-96,20,3,14);
+  for(const q of[-1,1]){stroke(c,x+q*46,GY-110,x+q*46,GY-104,1.4,ik(.7,'30,30,34'));c.fillStyle='rgba(224,96,56,.92)';c.beginPath();c.ellipse(x+q*46,GY-98,6,8,0,0,TAU);c.fill();glow(c,x+q*46,GY-98,40,'255,150,80',.4)}});
+ const fence=(c,x)=>wr(x,x=>{c.fillStyle=ik(.72,'60,48,38');c.fillRect(x,GY-24,92,3);c.fillRect(x,GY-14,92,3);for(let k=0;k<6;k++){c.fillStyle=ik(.74,'60,48,38');c.fillRect(x+k*18,GY-30,5,34);c.fillStyle='rgba(248,250,254,.95)';c.fillRect(x+k*18-1,GY-33,7,4)}});
+ const free=(n,lo,hi,gap)=>{const o=[];while(o.length<n){const x=R(0,TW);if(x>gap[0]&&x<gap[1])continue;o.push(x)}return o};
+ return{a:L4(c=>{rdg(c,sp(190,140,1,2,5),120,.28,'50,60,80');peak(c,260,300,230,.22,'70,84,108');peak(c,720,380,260,.2,'70,84,108');peak(c,1160,320,210,.22,'70,84,108');glow(c,590,120,230,'150,190,240',.18)}),
+ b:L4(c=>{rdg(c,sp(285,105,4,3,6),190,.5,'40,50,70');c.strokeStyle='rgba(252,250,244,.8)';c.lineWidth=3;for(let i=0;i<18;i++){const x=R(0,TW),y=sh(x,285,105,4,3,6);c.beginPath();c.moveTo(x-12,y+10);c.lineTo(x,y+2);c.lineTo(x+12,y+10);c.stroke()}}),
+ c:L4(c=>{for(const x of free(14,0,0,[600,800]))pine(c,x,R(90,150),3,.4,1);
+  wr(1150,x=>{c.fillStyle=ik(.5,'44,54,72');c.beginPath();c.moveTo(x-70,GY);c.lineTo(x-56,GY-170);c.lineTo(x-30,GY-232);c.lineTo(x+20,GY-222);c.lineTo(x+52,GY-180);c.lineTo(x+68,GY);c.fill();const q=c.createLinearGradient(0,GY-220,0,GY);q.addColorStop(0,'rgba(200,228,248,.1)');q.addColorStop(.2,'rgba(200,228,248,.6)');q.addColorStop(1,'rgba(232,245,255,.8)');c.fillStyle=q;c.fillRect(x-24,GY-218,48,218);c.strokeStyle='rgba(255,255,255,.5)';c.lineWidth=1.3;for(let k=-3;k<=3;k++){c.beginPath();c.moveTo(x+k*7,GY-200);c.lineTo(x+k*7+R(-2,2),GY-4);c.stroke()}ice(c,x-24,GY-218,48,8,26)});
+  gate(c,700);crystal(c,260,1);crystal(c,1000,.9);crystal(c,1380,.7);mist(c,GY-20,60,.4)}),
+ d:L4(c=>{for(const x of free(5,0,0,[540,860]))pine(c,x,R(230,330),7,.65,1);for(let i=0;i<5;i++){const x=R(0,TW);blot(c,x,GY-6,R(18,30),.6,0);c.fillStyle='rgba(252,250,244,.9)';c.beginPath();c.ellipse(x,GY-16,18,5,0,0,TAU);c.fill()}
+  fence(c,400);fence(c,1180);flag(c,620,GY-200,.8,'rgba(150,190,230,.85)');stroke(c,620,GY,620,GY-200,4,ik(.72,'60,48,38'),620,GY-100);
+  wr(930,x=>{stroke(c,x,GY-2,x+6,GY-54,3,'rgba(190,196,206,.9)',x+3,GY-28);stroke(c,x-7,GY-40,x+15,GY-44,3,ik(.8,'60,48,38'));c.fillStyle='rgba(252,250,244,.95)';c.beginPath();c.ellipse(x,GY,16,4,0,0,TAU);c.fill()})}),
+ gl:gnd({k:'snow',c2:'60,64,72',nt:1}),sun:{x:590,y:90,r:30,c:'120,150,190',a:.22},leaf:0}},
+/*5 烈火禪院（v446 優化：燃燒的殿宇與火盆、焦黑梁柱、梵鐘樓與羅漢像、焚邊禪字幡；動態：火焰躍動、黑煙升騰、火星飛舞、幡旗飄動、鳥居底火閃爍）*/()=>{
+ const hall=(c,x,w)=>wr(x,x=>{c.fillStyle=ik(.42,'46,22,20');c.fillRect(x-w/2,GY-82,w,82);c.fillStyle='rgba(20,12,12,.5)';for(let k=0;k<5;k++)c.fillRect(x-w/2+8+k*(w-22)/4,GY-82,5,82);for(let k=0;k<3;k++){c.fillStyle='rgba(255,130,50,.65)';c.fillRect(x-w/2+22+k*(w-60)/2,GY-60,12,20)}roof(c,x,GY-82,w+34,36,.46);glow(c,x,GY-90,120,'255,110,40',.25)});
+ const pit=(c,x)=>wr(x,x=>{c.fillStyle=ik(.7,'34,20,16');c.beginPath();c.ellipse(x,GY-3,34,8,0,0,TAU);c.fill();for(const q of[-1,1])stroke(c,x-q*26,GY-3,x+q*10,GY-20,4,ik(.74,'30,18,14'));stroke(c,x-22,GY-18,x+24,GY-8,3.4,ik(.7,'30,18,14'));glow(c,x,GY-22,88,'255,110,30',.28)});
+ const pole=(c,x)=>wr(x,x=>{stroke(c,x,GY,x,GY-162,3,ik(.65,'60,30,24'));stroke(c,x-3,GY-160,x+34,GY-160,2.4,'rgba(200,150,70,.55)')});
+ return{
+ a:L4(c=>{rdg(c,sm(250,60,2,2,5),190,.25);for(let i=0;i<5;i++){const x=R(0,TW);c.fillStyle='rgba(30,20,20,.14)';c.beginPath();c.ellipse(x,GY-170-R(0,50),R(26,44),R(80,130),0,0,TAU);c.fill()}glow(c,700,GY-60,200,'255,110,40',.22)}),
+ b:L4(c=>{rdg(c,sp(305,50,1,3,7),255,.42);hall(c,300,150);hall(c,1000,170);glow(c,300,GY-30,120,'255,120,40',.25);glow(c,1000,GY-30,120,'255,120,40',.25)}),
+ c:L4(c=>{pagoda(c,260,110,5,.55);pagoda(c,720,90,3,.5);pagoda(c,1150,100,4,.55);glow(c,260,GY-90,100,'255,110,30',.22);
+  wr(480,x=>{for(const q of[-26,26])stroke(c,x+q,GY,x+q,GY-110,5,ik(.6,'50,28,24'));stroke(c,x-30,GY-100,x+30,GY-100,4,ik(.6,'50,28,24'));roof(c,x,GY-108,90,30,.6);stroke(c,x,GY-102,x,GY-92,2,ik(.6,'50,28,24'));c.fillStyle='rgba(176,128,56,.85)';c.beginPath();c.moveTo(x-12,GY-48);c.quadraticCurveTo(x-14,GY-96,x,GY-96);c.quadraticCurveTo(x+14,GY-96,x+12,GY-48);c.closePath();c.fill();c.fillStyle='rgba(120,80,30,.9)';c.fillRect(x-14,GY-50,28,4)});
+  wr(790,x=>{c.fillStyle=ik(.58,'74,52,38');c.beginPath();c.ellipse(x,GY-6,34,8,0,0,TAU);c.fill();c.beginPath();c.moveTo(x-26,GY-6);c.quadraticCurveTo(x-22,GY-52,x,GY-58);c.quadraticCurveTo(x+22,GY-52,x+26,GY-6);c.fill();c.beginPath();c.arc(x,GY-70,11,0,TAU);c.fill();glow(c,x,GY-62,64,'235,175,70',.32)});
+  for(const x of[390,1000,1330])pit(c,x);for(const x of[120,560,880])pole(c,x)}),
+ d:L4(c=>{for(const x of[180,620,1100]){c.fillStyle=ik(.7,'90,24,20');c.fillRect(x,GY-200,16,205);c.fillRect(x+110,GY-200,16,205);c.fillRect(x-14,GY-210,154,12);c.fillStyle=ik(.8);c.fillRect(x-24,GY-222,174,8);glow(c,x+8,GY-6,60,'255,120,30',.5)}}),
+ gl:gnd({k:'stone',c2:'60,32,26',cc:'rgba(235,90,30,.8)'}),sun:{x:540,y:100,r:52,c:'179,38,30',a:.4},leaf:0}},
+
 /*6 血月荒原*/()=>({a:L4(c=>{rdg(c,sm(260,30,1,2,4),200,.22,'70,30,30')}),b:L4(c=>{rdg(c,sm(305,22,3,3,6),270,.4,'60,24,24');tower(c,420,.35);for(let i=0;i<9;i++){const x=R(0,TW);c.fillStyle=ik(.5);c.beginPath();c.moveTo(x-6,GY);c.lineTo(x-6,GY-18);c.arc(x,GY-18,6,Math.PI,TAU);c.lineTo(x+6,GY);c.fill()}}),c:L4(c=>{for(let i=0;i<9;i++)dead(c,R(0,TW),R(100,180),4,.42);c.strokeStyle=ik(.6);c.lineWidth=1.6;for(let i=0;i<10;i++)regFlock(c,R(0,TW),R(40,170),1,.6);}),d:L4(c=>{dead(c,260,330,8,.65);dead(c,820,280,7,.62);dead(c,1230,320,8,.65);flag(c,540,GY,.7,'rgba(110,20,20,.6)')}),gl:gnd({c2:'52,28,26',cc:'rgba(150,20,20,.7)'}),sun:{x:520,y:110,r:68,c:'179,38,30',a:.5},sky:['rgba(179,38,30,0)','rgba(179,38,30,.13)'],leaf:0}),
 /*7 斷橋殘雨（v434 優化：看得見缺口的拱形斷橋與水中殘石、烏雲、遠處亮燈小舟、殘荷與蓮蓬、雨圈漣漪）*/()=>{
  const pt=(a,b,c2,t)=>[(1-t)*(1-t)*a[0]+2*(1-t)*t*b[0]+t*t*c2[0],(1-t)*(1-t)*a[1]+2*(1-t)*t*b[1]+t*t*c2[1]];
@@ -333,13 +388,47 @@ const SCB=[
  gl:(()=>{const G=gnd({k:'water',c2:'40,44,46'}),c=G.getContext('2d');for(let i=0;i<20;i++){const x=R(14,706),y=R(GY+10,H-10),r=R(4,9);c.strokeStyle='rgba(224,238,238,.3)';c.lineWidth=1;c.beginPath();c.ellipse(x,y,r*1.9,r*.5,0,0,TAU);c.stroke();c.beginPath();c.ellipse(x,y,r*3.2,r*.85,0,0,TAU);c.stroke()}for(let i=0;i<5;i++){c.fillStyle='rgba(190,208,212,.14)';c.beginPath();c.ellipse(R(40,680),R(GY+14,H-14),R(24,48),R(3,6),0,0,TAU);c.fill()}return G})(),
  sky:['rgba(34,46,50,.34)','rgba(150,170,168,.06)'],leaf:1,lc:'rgba(70,100,70,.5)'}},
 /*8 毒瘴幽谷*/()=>({a:L4(c=>{rdg(c,sp(230,120,2,3,7),140,.3,'30,50,30')}),b:L4(c=>{rdg(c,sp(295,70,5,2,6),225,.5,'24,44,30');mist(c,GY-30,80,.35)}),c:L4(c=>{for(let i=0;i<6;i++)dead(c,R(0,TW),R(130,200),6,.45,1);for(let i=0;i<8;i++)mush(c,R(0,TW),R(30,70),.45)}),d:L4(c=>{for(let i=0;i<10;i++){const x=R(0,TW),L=R(70,220);stroke(c,x,0,x+R(-10,10),L,2.4,ik(.6,'24,50,30'));leaf(c,x,L,R(1,2.4),22,.6)}for(let i=0;i<5;i++)mush(c,R(0,TW),R(70,120),.65);glow(c,300,GY-40,110,'120,220,80',.18);mist(c,GY-20,80,.4)}),gl:gnd({c2:'26,40,28',tc:'rgba(20,50,24,.9)'}),sun:{x:570,y:90,r:34,c:'110,160,70',a:.28},sky:['rgba(110,180,70,.12)','rgba(0,0,0,0)'],leaf:1,lc:'rgba(90,160,60,.5)'}),
-/*9 雷鳴天梯*/()=>({a:L4(c=>{for(let i=0;i<14;i++)blot(c,R(0,TW),R(200,300),R(50,90),.07,0);rdg(c,sp(220,110,3,3,5),150,.25,'40,44,80')}),b:L4(c=>{for(let i=0;i<7;i++)pillar(c,R(0,TW),R(40,70),R(170,260),.34,'40,44,70');mist(c,GY-40,90,.5)}),c:L4(c=>{stair(c,180,.5);stair(c,860,.5);pillar(c,640,60,220,.45,'30,34,60')}),d:L4(c=>{for(const x of[200,820]){c.fillStyle=ik(.7,'30,34,56');c.fillRect(x,GY-240,18,245);c.fillRect(x+130,GY-240,18,245);c.fillRect(x-14,GY-250,176,12);c.fillRect(x-4,GY-266,156,8)}pillar(c,540,34,150,.6,'28,30,50');pillar(c,1230,40,180,.6,'28,30,50')}),gl:gnd({k:'stone',c:'24,26,40',c2:'30,32,48'}),sky:['rgba(50,60,110,.2)','rgba(0,0,0,0)'],leaf:0}),
-/*10 九幽冥府*/()=>({a:L4(c=>{for(let i=0;i<16;i++)stalac(c,R(0,TW),R(40,90),R(60,160),.28);rdg(c,sp(260,90,1,3,6),180,.25,'50,36,70')}),b:L4(c=>{rdg(c,sp(300,60,4,2,7),240,.45,'40,28,60');for(let i=0;i<9;i++){const x=R(0,TW);glow(c,x,R(70,160),30,'170,110,240',.4);stroke(c,x,0,x,R(60,150),1.2,ik(.4))}}),c:L4(c=>{pagoda(c,300,110,5,.5);pagoda(c,950,120,4,.5);glow(c,300,GY-90,110,'150,90,220',.22);glow(c,950,GY-70,110,'150,90,220',.22)}),d:L4(c=>{for(let i=0;i<8;i++)stalac(c,R(0,TW),R(50,110),R(90,210),.55);for(let i=0;i<4;i++){const x=R(100,TW-100);pillar(c,x,26,R(90,170),.62,'34,22,48');glow(c,x,GY-R(100,180),42,'170,110,240',.55)}}),gl:gnd({c:'22,16,32',c2:'34,26,46',cc:'rgba(170,110,240,.75)',nt:1}),sun:{x:560,y:90,r:38,c:'150,90,200',a:.3},sky:['rgba(90,50,140,.15)','rgba(0,0,0,0)'],leaf:0}),
-/*11 魔宮絕巔*/()=>({a:L4(c=>{for(let i=0;i<8;i++){const x=R(0,TW),h=R(90,170);c.fillStyle=ik(.2,'60,40,80');c.fillRect(x-30,GY-h-60,60,h+60);for(let k=0;k<5;k++)c.fillRect(x-30+k*13,GY-h-70,8,10);roof(c,x,GY-h-60,90,34,.22)}rdg(c,sp(250,90,2,2,5),170,.22,'60,40,80')}),b:L4(c=>{pagoda(c,260,150,6,.4);pagoda(c,820,170,7,.42);pagoda(c,1250,140,5,.4);mist(c,GY-30,90,.4)}),c:L4(c=>{for(let i=0;i<9;i++)pillar(c,i*160+R(-20,20),40,R(130,200),.45,'34,24,44');for(let i=0;i<4;i++)sflag(c,R(60,TW-60),R(170,210),.6,'rgba(120,20,40,.6)')}),d:L4(c=>{for(const x of[170,640,1090]){c.fillStyle=ik(.78,'28,20,36');c.fillRect(x-16,GY-300,32,305);c.beginPath();c.moveTo(x-22,GY-300);c.lineTo(x,GY-340);c.lineTo(x+22,GY-300);c.fill();glow(c,x,GY-200,50,'200,40,70',.45)}}),gl:gnd({k:'stone',c:'22,16,28',c2:'40,28,44',cc:'rgba(210,50,70,.75)'}),sun:{x:500,y:110,r:78,c:'120,20,50',a:.38},sky:['rgba(100,60,140,.16)','rgba(179,38,30,.08)'],leaf:0}),
+/*9 雷鳴天梯（v445 優化：直入雲霄的遠天梯與天門、避雷銅柱、雷鼓、風幡、石燈青焰；動態：雷擊閃電、柱尖電弧、雷鼓震光、風幡獵獵、石燈搖曳、流雲）*/()=>{
+ const rod=(c,x)=>wr(x,x=>{stroke(c,x,GY,x,GY-150,3.2,ik(.66,'46,52,80'));stroke(c,x-14,GY-108,x+14,GY-108,2.4,ik(.62,'46,52,80'));stroke(c,x-9,GY-128,x+9,GY-128,2,ik(.6,'46,52,80'));c.fillStyle=ik(.66,'46,52,80');c.beginPath();c.moveTo(x-3,GY-150);c.lineTo(x,GY-166);c.lineTo(x+3,GY-150);c.fill();c.fillRect(x-8,GY-6,16,6)});
+ const drum=(c,x)=>wr(x,x=>{stroke(c,x-22,GY,x-12,GY-22,3,ik(.64,'44,38,40'));stroke(c,x+22,GY,x+12,GY-22,3,ik(.64,'44,38,40'));c.fillStyle=ik(.7,'60,44,40');c.beginPath();c.ellipse(x,GY-40,26,26,0,0,TAU);c.fill();c.strokeStyle='rgba(210,170,90,.7)';c.lineWidth=2;c.stroke();c.fillStyle='rgba(210,170,90,.75)';for(let k=0;k<10;k++){const a=k*TAU/10;c.beginPath();c.arc(x+Math.cos(a)*20,GY-40+Math.sin(a)*20,1.6,0,TAU);c.fill()}c.fillStyle='rgba(210,170,90,.85)';c.font="bold 18px KaiTi,STKaiti,'Noto Serif TC',serif";c.textAlign='center';c.textBaseline='middle';c.fillText('雷',x,GY-40)});
+ const pole=(c,x)=>wr(x,x=>{stroke(c,x,GY,x,GY-172,3,ik(.62,'44,48,76'));stroke(c,x-3,GY-170,x+34,GY-170,2.4,'rgba(190,200,240,.5)')});
+ const lan=(c,x)=>wr(x,x=>{c.fillStyle=ik(.72,'44,48,70');c.fillRect(x-10,GY-8,20,8);c.fillRect(x-4,GY-34,8,26);c.fillRect(x-12,GY-50,24,16);c.beginPath();c.moveTo(x-17,GY-50);c.lineTo(x,GY-64);c.lineTo(x+17,GY-50);c.fill();c.fillStyle='rgba(140,190,255,.8)';c.fillRect(x-6,GY-46,12,10);glow(c,x,GY-42,56,'110,160,255',.3)});
+ return{
+ a:L4(c=>{for(let i=0;i<14;i++)blot(c,R(0,TW),R(200,300),R(50,90),.07,0);for(let i=0;i<7;i++)blot(c,R(0,TW),R(30,120),R(80,150),.1,0);rdg(c,sp(220,110,3,3,5),150,.25,'40,44,80');wr(700,x=>{c.fillStyle=ik(.24,'60,70,120');for(let k=0;k<34;k++)c.fillRect(x-150+k*8,GY-40-k*5,20,3.6);c.fillRect(x+112,GY-230,10,60);c.fillRect(x+160,GY-230,10,60);c.fillRect(x+106,GY-236,70,8);glow(c,x+140,GY-205,130,'160,190,255',.3)})}),
+ b:L4(c=>{for(let i=0;i<7;i++)pillar(c,R(0,TW),R(40,70),R(170,260),.34,'40,44,70');for(const x of[200,600,1000,1350])glow(c,x,100,130,'110,130,230',.1);mist(c,GY-40,90,.5)}),
+ c:L4(c=>{stair(c,180,.5);stair(c,860,.5);pillar(c,640,60,220,.45,'30,34,60');for(const x of[560,1110])rod(c,x);for(const x of[440,1040,1320])drum(c,x);for(const x of[100,740,1380])pole(c,x)}),
+ d:L4(c=>{for(const x of[200,820]){c.fillStyle=ik(.7,'30,34,56');c.fillRect(x,GY-240,18,245);c.fillRect(x+130,GY-240,18,245);c.fillRect(x-14,GY-250,176,12);c.fillRect(x-4,GY-266,156,8)}pillar(c,540,34,150,.6,'28,30,50');pillar(c,1230,40,180,.6,'28,30,50');for(const x of[380,1000])lan(c,x)}),
+ gl:gnd({k:'stone',c:'24,26,40',c2:'30,32,48'}),sky:['rgba(50,60,110,.2)','rgba(0,0,0,0)'],leaf:0}},
+
+/*10 九幽冥府（v444 優化：遠方鬼門關、懸掛魂燈、忘川與奈何橋、三生石、彼岸花、引魂幡、紫焰石柱；動態：魂燈搖曳、河面漣漪、鐘乳滴水、幡旗飄動、魂火飄升）*/()=>{
+ const lily=(c,x)=>{for(let k=0;k<5;k++){const sx=x+k*4,tx=sx+R(-5,5),ty=GY-R(14,28);stroke(c,sx,GY,tx,ty,1,ik(.55,'60,40,60'));c.strokeStyle='rgba(205,40,64,.85)';c.lineWidth=1;for(let q=0;q<6;q++){const a=-Math.PI/2+(q-2.5)*.5;c.beginPath();c.moveTo(tx,ty);c.quadraticCurveTo(tx+Math.cos(a)*6,ty+Math.sin(a)*6-2,tx+Math.cos(a)*10,ty+Math.sin(a)*9);c.stroke()}}};
+ const LN=[[140,90],[330,140],[520,110],[760,150],[940,100],[1160,130],[1330,120]];
+ return{
+ a:L4(c=>{for(let i=0;i<16;i++)stalac(c,R(0,TW),R(40,90),R(60,160),.28);rdg(c,sp(260,90,1,3,6),180,.25,'50,36,70');wr(700,x=>{c.fillStyle=ik(.3,'44,30,64');c.fillRect(x-80,GY-190,26,190);c.fillRect(x+54,GY-190,26,190);c.fillRect(x-96,GY-206,192,20);roof(c,x,GY-206,230,40,.34);c.fillStyle='rgba(255,70,80,.5)';c.fillRect(x-28,GY-140,56,6);glow(c,x,GY-120,150,'150,80,220',.22);for(const q of[-1,1]){c.fillStyle='rgba(255,90,90,.7)';c.beginPath();c.arc(x+q*20,GY-176,4,0,TAU);c.fill()}})}),
+ b:L4(c=>{rdg(c,sp(300,60,4,2,7),240,.45,'40,28,60');for(const[x,y]of LN){stroke(c,x,0,x,y,1.2,ik(.42));c.fillStyle='rgba(170,110,240,.8)';c.beginPath();c.ellipse(x,y+9,6,9,0,0,TAU);c.fill();c.fillStyle=ik(.55,'40,28,60');c.fillRect(x-5,y-1,10,3);glow(c,x,y+9,30,'170,110,240',.32)}mist(c,GY-30,80,.35)}),
+ c:L4(c=>{pagoda(c,300,110,5,.5);pagoda(c,950,120,4,.5);glow(c,300,GY-90,110,'150,90,220',.22);glow(c,950,GY-70,110,'150,90,220',.22);
+  c.fillStyle='rgba(76,52,130,.55)';c.fillRect(500,GY-12,300,12);c.strokeStyle='rgba(190,150,255,.4)';c.lineWidth=1;for(let k=0;k<7;k++){const y=GY-3-k*1.5;c.beginPath();c.moveTo(500,y);for(let x=500;x<=800;x+=15)c.lineTo(x,y+Math.sin(x*.07+k)*1.4);c.stroke()}
+  c.fillStyle=ik(.62,'44,36,60');c.beginPath();c.moveTo(535,GY);c.quadraticCurveTo(650,GY-122,765,GY);c.lineTo(752,GY);c.quadraticCurveTo(650,GY-94,548,GY);c.closePath();c.fill();c.strokeStyle=ik(.62,'44,36,60');c.lineWidth=3;c.beginPath();c.moveTo(540,GY-14);c.quadraticCurveTo(650,GY-134,760,GY-14);c.stroke();for(let k=1;k<6;k++){const t=k/6,bx=540+220*t,by=(1-t)*(1-t)*(GY-14)+2*t*(1-t)*(GY-134)+t*t*(GY-14);stroke(c,bx,by,bx,by+12,2.2,ik(.6,'44,36,60'))}
+  wr(1180,x=>{c.fillStyle=ik(.6,'50,44,68');c.beginPath();c.ellipse(x,GY-40,24,44,0,0,TAU);c.fill();c.fillStyle='rgba(215,190,255,.75)';c.font="bold 18px KaiTi,STKaiti,'Noto Serif TC',serif";c.textAlign='center';c.textBaseline='middle';c.fillText('三',x,GY-54);c.fillText('生',x,GY-32);glow(c,x,GY-40,64,'160,100,240',.3)});
+  for(let i=0;i<16;i++){let x=R(0,TW);if(x>490&&x<810)x+=330;lily(c,x)}}),
+ d:L4(c=>{for(let i=0;i<8;i++)stalac(c,R(0,TW),R(50,110),R(90,210),.55);for(const[x,h]of[[180,130],[560,160],[980,110],[1300,150]]){pillar(c,x,26,h,.62,'34,22,48');glow(c,x,GY-h-4,42,'170,110,240',.5)}for(const x of[330,760,1190])stroke(c,x,0,x,118,1.6,ik(.6,'60,50,70'))}),
+ gl:gnd({c:'22,16,32',c2:'34,26,46',cc:'rgba(170,110,240,.75)',nt:1}),sun:{x:560,y:90,r:38,c:'150,90,200',a:.3},sky:['rgba(90,50,140,.15)','rgba(0,0,0,0)'],leaf:0}},
+
+/*11 魔宮絕巔（v443 優化：懸空宮闕與血月、窗燈宮牆、刻名臺階、火盆與魔字幡、鎖鏈與豪傑碑；動態：火盆烈焰、幡旗飄動、柱頭血光、閃電與魂火）*/()=>{
+ const brz=(c,x)=>wr(x,x=>{stroke(c,x-14,GY,x-6,GY-34,3,ik(.7,'30,22,36'));stroke(c,x+14,GY,x+6,GY-34,3,ik(.7,'30,22,36'));c.fillStyle=ik(.78,'30,22,36');c.beginPath();c.moveTo(x-18,GY-46);c.lineTo(x+18,GY-46);c.lineTo(x+10,GY-32);c.lineTo(x-10,GY-32);c.fill();c.fillStyle='rgba(201,154,46,.6)';c.fillRect(x-18,GY-47,36,3);glow(c,x,GY-56,74,'255,110,60',.26)});
+ const ban=(c,x)=>wr(x,x=>{stroke(c,x,GY,x,GY-190,3,ik(.65,'30,22,36'));stroke(c,x-4,GY-188,x+30,GY-188,2.4,'rgba(201,154,46,.55)');c.fillStyle='rgba(201,154,46,.7)';c.beginPath();c.arc(x,GY-194,4,0,TAU);c.fill()});
+ const hall=(c,x,w,al)=>wr(x,x=>{c.fillStyle=ik(al,'44,28,60');c.fillRect(x-w/2,GY-96,w,96);for(let k=0;k<Math.floor(w/14);k++)c.fillRect(x-w/2+k*14,GY-104,9,8);roof(c,x,GY-96,w+30,30,al+.04);c.fillStyle='rgba(255,100,80,.7)';for(let k=0;k<4;k++)c.fillRect(x-w/2+10+k*(w-30)/3,GY-64,7,15)});
+ return{
+ a:L4(c=>{for(let i=0;i<8;i++){const x=R(0,TW),h=R(90,170);c.fillStyle=ik(.2,'60,40,80');c.fillRect(x-30,GY-h-60,60,h+60);for(let k=0;k<5;k++)c.fillRect(x-30+k*13,GY-h-70,8,10);roof(c,x,GY-h-60,90,34,.22)}rdg(c,sp(250,90,2,2,5),170,.22,'60,40,80');wr(700,x=>{c.fillStyle=ik(.26,'50,32,70');c.beginPath();c.moveTo(x-6,GY-60);c.lineTo(x,GY-330);c.lineTo(x+6,GY-60);c.fill();c.fillRect(x-40,GY-170,80,110);roof(c,x,GY-170,110,36,.3);c.fillStyle='rgba(255,120,90,.55)';for(let k=0;k<3;k++)c.fillRect(x-28+k*22,GY-140,8,16);glow(c,x,GY-150,120,'200,60,90',.16)});for(let i=0;i<3;i++)mist(c,GY-50-i*26,40,.18)}),
+ b:L4(c=>{pagoda(c,260,150,6,.4);pagoda(c,820,170,7,.42);pagoda(c,1250,140,5,.4);hall(c,520,120,.34);hall(c,1030,140,.34);mist(c,GY-30,90,.4)}),
+ c:L4(c=>{for(let i=0;i<9;i++)pillar(c,i*160+R(-20,20),40,R(130,200),.45,'34,24,44');wr(660,x=>{for(let k=0;k<8;k++){c.fillStyle=ik(.56,'44,32,58');c.fillRect(x-120+k*8,GY-k*7-7,240-k*16,7);c.fillStyle=IKP(.2);for(let q=0;q<5;q++)c.fillRect(x-100+k*8+q*38+R(0,8),GY-k*7-5,R(10,22),1.4)}});for(const x of[300,1000,1400])brz(c,x);for(const x of[110,500,830,1210])ban(c,x)}),
+ d:L4(c=>{for(const x of[170,640,1090]){c.fillStyle=ik(.78,'28,20,36');c.fillRect(x-16,GY-300,32,305);c.beginPath();c.moveTo(x-22,GY-300);c.lineTo(x,GY-340);c.lineTo(x+22,GY-300);c.fill();glow(c,x,GY-200,50,'200,40,70',.45)}c.strokeStyle=ik(.7,'30,24,36');c.lineWidth=2;c.setLineDash([5,3]);for(const[x1,x2]of[[170,640],[640,1090]]){c.beginPath();c.moveTo(x1,GY-250);c.quadraticCurveTo((x1+x2)/2,GY-170,x2,GY-250);c.stroke()}c.setLineDash([]);for(const x0 of[420,880,1300])wr(x0,x=>{c.fillStyle=ik(.7,'46,40,52');c.beginPath();c.moveTo(x-14,GY);c.lineTo(x-14,GY-56);c.quadraticCurveTo(x,GY-70,x+14,GY-56);c.lineTo(x+14,GY);c.fill();c.fillStyle=IKP(.3);for(let q=0;q<5;q++)c.fillRect(x-6,GY-50+q*9,12,1.6)})}),
+ gl:gnd({k:'stone',c:'22,16,28',c2:'40,28,44',cc:'rgba(210,50,70,.75)'}),sun:{x:500,y:110,r:78,c:'120,20,50',a:.38},sky:['rgba(100,60,140,.16)','rgba(179,38,30,.08)'],leaf:0}},
+
 /*12 劍塚（v439 優化：巨劍嵌山、墓丘石碑與劍陣、招魂幡、石燈鬼火、地面橫臥斷劍；動態：劍鳴漣漪、魂火飄升、幡旗與燈火）*/()=>{
  const mound=(c,x,w,al)=>wr(x,x=>{c.fillStyle=ik(al,'44,46,42');c.beginPath();c.ellipse(x,GY+2,w/2,w*.17,0,Math.PI,TAU);c.fill();c.strokeStyle=IKP(.12);c.lineWidth=1;c.beginPath();c.ellipse(x,GY+2,w/2*.8,w*.12,0,Math.PI*1.1,Math.PI*1.8);c.stroke()});
  const stele=(c,x,h,al,t)=>wr(x,x=>{c.fillStyle=ik(al,'58,60,58');c.beginPath();c.moveTo(x-11,GY);c.lineTo(x-11,GY-h+9);c.quadraticCurveTo(x,GY-h-5,x+11,GY-h+9);c.lineTo(x+11,GY);c.fill();c.fillStyle=IKP(.42);c.font="bold 13px KaiTi,STKaiti,'Noto Serif TC',serif";c.textAlign='center';c.textBaseline='middle';for(let k=0;k<t.length;k++)c.fillText(t[k],x,GY-h+22+k*15);stroke(c,x-6,GY-h*.35,x+4,GY-h*.15,1.2,IKP(.2))});
- const lamp=(c,x,al)=>wr(x,x=>{c.fillStyle=ik(al,'60,62,60');c.fillRect(x-9,GY-8,18,8);c.fillRect(x-4,GY-34,8,26);c.fillRect(x-11,GY-50,22,16);c.beginPath();c.moveTo(x-16,GY-50);c.lineTo(x,GY-64);c.lineTo(x+16,GY-50);c.fill();c.fillStyle='rgba(130,235,195,.8)';c.fillRect(x-5,GY-46,10,9);glow(c,x,GY-42,52,'110,225,185',.3)});
+ const lamp=(c,x,al)=>wr(x,x=>{c.fillStyle=ik(al,'60,62,60');c.fillRect(x-9,GY-8,18,8);c.fillRect(x-4,GY-34,8,26);c.fillRect(x-11,GY-50,22,16);c.beginPath();c.moveTo(x-16,GY-50);c.lineTo(x,GY-64);c.lineTo(x+16,GY-50);c.fill();c.fillStyle='rgba(130,235,195,.8)';c.fillRect(x-5,GY-46,10,9);glow(c,x,GY-42,36,'90,205,165',.16)});
  const pole=(c,x,al)=>wr(x,x=>{stroke(c,x,GY,x,GY-152,2.6,ik(al,'48,40,34'));c.fillStyle=ik(al,'56,60,64');c.beginPath();c.moveTo(x-4,GY-150);c.lineTo(x,GY-166);c.lineTo(x+4,GY-150);c.fill()});
  const SW=[[260,180,-8],[700,205,6],[1140,165,-10]];
  return{
@@ -454,7 +543,7 @@ SCB.push(()=>{
  gl:(()=>{const G=gnd({k:'stone',c2:'76,60,44'}),c=G.getContext('2d');c.strokeStyle='rgba(30,22,14,.3)';c.lineWidth=1.2;for(let i=0;i<9;i++){let x=R(0,700),y=R(GY+8,H-10);c.beginPath();c.moveTo(x,y);for(let q=0;q<4;q++){x+=R(6,18);y+=R(-5,5);c.lineTo(x,y)}c.stroke()}for(let i=0;i<22;i++){c.fillStyle='rgba(40,32,26,.5)';c.beginPath();c.ellipse(R(6,714),R(GY+6,H-6),R(1.4,3.4),R(.8,1.8),0,0,TAU);c.fill()}for(let i=0;i<10;i++){c.fillStyle='rgba(236,196,120,.14)';c.beginPath();c.ellipse(R(20,700),R(GY+8,H-8),R(14,30),R(2,4),0,0,TAU);c.fill()}return G})(),
  sun:{x:600,y:110,r:44,c:'232,160,70',a:.4},sky:['rgba(150,110,60,0)','rgba(240,190,110,.14)'],leaf:0}});
 function scene(i){if(i==='ring')return SCN.ring||(SCN.ring=ringScene());if(i==='mp')return SCN.mp||(SCN.mp=mapleScene());return SCN[i]||(SCN[i]=detail(i===0?{a:L1,b:L2,c:LB,d:L3,gl:GL,sun:{x:590,y:80,r:36,c:'179,38,30',a:.34},leaf:1}:SCB[i-1](),i))}
-const TT=['bam','willow','dead','pine','pine','pine','dead',0,'dead','pine',0,0,'dead',0],HUT=[0,1,2,3,6,7];
+const TT=['bam','willow','dead','dead','pine','pine','dead',0,'dead','pine',0,0,'dead',0],HUT=[0,1,2,6,7];
 function tiny(c,x,y,t,al){const h=R(9,20);c.lineCap='round';const col=ik(al,'24,30,24');if(t==='pine'){stroke(c,x,y,x,y-h*.4,1.4,col);for(let k=0;k<3;k++){const yy=y-h*(.35+k*.25),l=h*(.42-k*.1);stroke(c,x-l,yy+l*.5,x,yy-l*.3,1.5,col);stroke(c,x+l,yy+l*.5,x,yy-l*.3,1.5,col)}}else if(t==='bam'){for(let k=0;k<3;k++){const xx=x+k*3;stroke(c,xx,y,xx+R(-2,2),y-h*R(.8,1.2),1.1,col);blot(c,xx,y-h,2.2,al*.8,0)}}else if(t==='dead'){stroke(c,x,y,x,y-h*.6,1.5,col);stroke(c,x,y-h*.4,x-h*.3,y-h*.8,1.1,col);stroke(c,x,y-h*.5,x+h*.3,y-h*.95,1.1,col)}else if(t==='willow'){stroke(c,x,y,x+2,y-h*.7,1.6,col);for(let k=-1;k<2;k++)stroke(c,x+2,y-h*.7,x+2+k*5,y-h*.1,1,ik(al*.8,'50,90,56'),x+2+k*7,y-h*.7)}else blot(c,x,y-2,R(2,4),al*.7,0)}
 function hut(c,x,y,al){c.fillStyle=ik(al,'30,26,22');c.fillRect(x-5,y-6,10,6);c.beginPath();c.moveTo(x-8,y-6);c.lineTo(x,y-13);c.lineTo(x+8,y-6);c.fill()}
 function detail(s,i){if(!i)return s;const tt=TT[i],ptc=ik;
@@ -633,13 +722,140 @@ function drawRing(){if(!LEVELS[LV].rg)return;const ox=LEN-W-60,w=W+120;if(cam+W<
   g.save();g.globalCompositeOperation='lighter';
   for(const[x,h,t]of[[260,180,-8],[700,205,6],[1140,165,-10]]){const px=wxf(x,.75);if(px==null)continue;const tx=px+t,ty=GY+2-h,u=(T*.45+x*.002)%1;
    glo(tx,ty,64,'150,215,190',.1+.09*Math.sin(T*1.8+x*.01));g.strokeStyle=`rgba(170,235,210,${.3*(1-u)})`;g.lineWidth=1.4;g.beginPath();g.arc(tx,ty,8+u*46,0,TAU);g.stroke()}
-  for(const lx of[470,1050]){const px=wxf(lx,.6);if(px==null)continue;glo(px,GY-42,40,'120,235,195',.16+.1*Math.sin(T*6+lx)+.05*Math.sin(T*13+lx))}
+  for(const lx of[470,1050]){const px=wxf(lx,.6);if(px==null)continue;glo(px,GY-42,34,'90,215,175',.1+.06*Math.sin(T*6+lx)+.03*Math.sin(T*13+lx))}
   for(let i=0;i<11;i++){const x=cam+(((i*89+T*(5+i%3*3)+Math.sin(T*.7+i)*20)%(W+80))+W+80)%(W+80)-40,u=((T*(12+i%4*5)+i*57)%190)/190,y=GY-24-u*190,a=Math.sin(u*Math.PI)*(.5+.2*Math.sin(T*5+i));glo(x+Math.sin(T*1.1+i*2)*10,y,9+i%3*3,'170,238,212',a)}
   g.restore();
   for(const x0 of[610,1180]){const px=wxf(x0,.6);if(px==null)continue;const ty=GY-148,ph=x0*.01,wv=k=>Math.sin(T*2.8+k*.9+ph)*k*.9+k*.4;
    g.fillStyle=IKP(.85);g.beginPath();g.moveTo(px,ty);for(let k=1;k<=5;k++)g.lineTo(px+k*6,ty+wv(k));for(let k=5;k>=0;k--)g.lineTo(px+k*6,ty+62+wv(k)*1.1);g.closePath();g.fill();
    g.fillStyle=IKW(.7);g.font="bold 17px KaiTi,STKaiti,'Noto Serif TC',serif";g.textAlign='center';g.textBaseline='middle';g.fillText('魂',px+14,ty+31+wv(2.5))}
  }}
+
+/* ===== v443 第二十二關・魔宮絕巔 動態優化：火盆烈焰、魔字幡飄動、柱頭血光脈動、遠雷閃光、魂火飄升 ===== */
+{const wxf=(lx,f,m)=>{let sx=(((lx-cam*f)%TW)+TW)%TW;if(sx>W+(m||140))sx-=TW;return sx<-(m||140)?null:sx+cam},
+ glo=(x,y,r,col,a)=>{const q=g.createRadialGradient(x,y,0,x,y,r);q.addColorStop(0,`rgba(${col},${a})`);q.addColorStop(1,`rgba(${col},0)`);g.fillStyle=q;g.fillRect(x-r,y-r,r*2,r*2)};
+ const _dr=drawRing;drawRing=function(){_dr();if(LEVELS[LV].name!=='魔宮絕巔')return;
+  const ft=(T*.23)%1,fl=ft<.035?(1-ft/.035):(ft>.06&&ft<.085?(1-(ft-.06)/.025)*.6:0);
+  g.save();g.globalCompositeOperation='lighter';
+  if(fl>0){g.fillStyle=`rgba(190,160,255,${.16*fl})`;g.fillRect(cam,0,W,H);const bx=cam+80+((Math.floor(T*.23)*173)%(W-160));g.strokeStyle=`rgba(230,215,255,${.8*fl})`;g.lineWidth=2;g.beginPath();let y=0,x=bx;g.moveTo(x,y);for(let k=0;k<7;k++){y+=24+k*3;x+=Math.sin(k*2.7+bx)*16;g.lineTo(x,y)}g.stroke()}
+  for(const x of[170,640,1090]){const px=wxf(x,.75);if(px==null)continue;glo(px,GY-200,70,'230,50,80',.14+.12*Math.sin(T*2+x*.01));glo(px,GY-318,34,'255,120,140',.1+.08*Math.sin(T*3.2+x))}
+  for(const x of[300,1000,1400]){const px=wxf(x,.6);if(px==null)continue;const f=.55+.2*Math.sin(T*9+x)+.12*Math.sin(T*16+x*2);glo(px,GY-60,64*(.9+.2*f),'255,110,50',.2+.22*f);glo(px,GY-54,20,'255,225,150',.2+.2*f);
+   for(let i=0;i<8;i++){const u=(T*.6+i*.125+x*.01)%1;g.fillStyle=`rgba(255,${130+i*10},70,${(1-u)*.9})`;g.beginPath();g.arc(px+Math.sin(i*4.7+x)*12+u*10*Math.sin(i*2.1),GY-54-u*(70+i%3*26),1.6*(1-u)+.5,0,TAU);g.fill()}}
+  for(let i=0;i<9;i++){const x=cam+(((i*101+T*(5+i%3*3))%(W+80))+W+80)%(W+80)-40,u=((T*(11+i%4*5)+i*61)%200)/200,a=Math.sin(u*Math.PI)*(.45+.2*Math.sin(T*5+i));glo(x+Math.sin(T*1.1+i*2)*10,GY-20-u*200,9+i%3*3,'255,90,130',a)}
+  g.restore();
+  for(const x0 of[300,1000,1400]){const px=wxf(x0,.6);if(px==null)continue;const f=.55+.2*Math.sin(T*9+x0)+.12*Math.sin(T*17+x0*2),by=GY-48,hh=44+26*f;g.fillStyle=`rgba(255,${120+60*f|0},50,.85)`;g.beginPath();g.moveTo(px-14,by);g.quadraticCurveTo(px-14+Math.sin(T*8+x0)*3,by-hh*.6,px+Math.sin(T*11+x0)*5,by-hh);g.quadraticCurveTo(px+14+Math.sin(T*9+x0)*3,by-hh*.6,px+14,by);g.closePath();g.fill();g.fillStyle='rgba(255,235,160,.8)';g.beginPath();g.moveTo(px-7,by);g.quadraticCurveTo(px+Math.sin(T*10+x0)*2,by-hh*.55,px,by-hh*.55);g.quadraticCurveTo(px+7,by-hh*.3,px+7,by);g.fill()}
+  for(const x0 of[110,500,830,1210]){const px=wxf(x0,.6);if(px==null)continue;const ty=GY-186,ph=x0*.01,wv=k=>Math.sin(T*2.8+k*.9+ph)*k*.9+k*.4;
+   g.fillStyle='rgba(60,26,70,.92)';g.beginPath();g.moveTo(px,ty);for(let k=1;k<=5;k++)g.lineTo(px+k*6,ty+wv(k));for(let k=5;k>=0;k--)g.lineTo(px+k*6,ty+66+wv(k)*1.1);g.closePath();g.fill();g.strokeStyle='rgba(201,154,46,.8)';g.lineWidth=1.2;g.stroke();
+   g.fillStyle='rgba(222,176,62,.95)';g.font="bold 22px KaiTi,STKaiti,'Noto Serif TC',serif";g.textAlign='center';g.textBaseline='middle';g.fillText('魔',px+15,ty+33+wv(2.5))}
+ }}
+
+/* ===== v444 第二十一關・九幽冥府 動態優化：魂燈搖曳、石柱紫焰、引魂幡、鐘乳滴水、忘川漣漪、魂火飄升 ===== */
+{const wxf=(lx,f,m)=>{let sx=(((lx-cam*f)%TW)+TW)%TW;if(sx>W+(m||140))sx-=TW;return sx<-(m||140)?null:sx+cam},
+ glo=(x,y,r,col,a)=>{const q=g.createRadialGradient(x,y,0,x,y,r);q.addColorStop(0,`rgba(${col},${a})`);q.addColorStop(1,`rgba(${col},0)`);g.fillStyle=q;g.fillRect(x-r,y-r,r*2,r*2)};
+ const _dr=drawRing;drawRing=function(){_dr();if(LEVELS[LV].name!=='九幽冥府')return;
+  g.save();g.globalCompositeOperation='lighter';
+  for(const[x,y]of[[140,90],[330,140],[520,110],[760,150],[940,100],[1160,130],[1330,120]]){const px=wxf(x,.45);if(px==null)continue;glo(px+Math.sin(T*1.3+x)*1.5,y+9,34,'180,120,255',.16+.12*Math.sin(T*4+x)+.05*Math.sin(T*9+x))}
+  for(const[x,h]of[[180,130],[560,160],[980,110],[1300,150]]){const px=wxf(x,.75);if(px==null)continue;const f=.55+.2*Math.sin(T*7+x)+.12*Math.sin(T*13+x);glo(px,GY-h-8,52*(.9+.2*f),'170,110,240',.18+.2*f);g.fillStyle=`rgba(190,140,255,${.45+.3*f})`;g.beginPath();g.moveTo(px-7,GY-h-3);g.quadraticCurveTo(px-6+Math.sin(T*8+x)*2,GY-h-14-8*f,px+Math.sin(T*10+x)*3,GY-h-22-14*f);g.quadraticCurveTo(px+6,GY-h-12,px+7,GY-h-3);g.fill()}
+  {const px=wxf(650,.6,300);if(px!=null)for(let k=0;k<5;k++){const u=(T*.25+k*.2)%1;g.strokeStyle=`rgba(200,170,255,${.35*(1-u)})`;g.lineWidth=1;g.beginPath();g.ellipse(px+Math.sin(k*5.3)*90,GY-5,8+u*34,2+u*3,0,0,TAU);g.stroke()}}
+  for(let i=0;i<10;i++){const x=cam+(((i*93+T*(5+i%3*3))%(W+80))+W+80)%(W+80)-40,u=((T*(11+i%4*5)+i*57)%190)/190,a=Math.sin(u*Math.PI)*(.45+.2*Math.sin(T*5+i));glo(x+Math.sin(T*1.1+i*2)*10,GY-18-u*190,9+i%3*3,'190,140,255',a)}
+  g.restore();
+  for(const[i,x]of[[0,250],[1,600],[2,1000]]){const px=wxf(x,.75);if(px==null)continue;const u=(T*.55+i*.37)%1,dy=u*u*(GY-30)+10;if(u<.08)continue;g.fillStyle='rgba(200,215,255,.8)';g.beginPath();g.ellipse(px,dy,1.4,3.2,0,0,TAU);g.fill();if(u>.93){g.strokeStyle=`rgba(200,215,255,${(1-u)*8})`;g.lineWidth=1;g.beginPath();g.ellipse(px,GY-2,(u-.93)*130,2,0,0,TAU);g.stroke()}}
+  for(const x0 of[330,760,1190]){const px=wxf(x0,.75);if(px==null)continue;const ty=118,ph=x0*.01,wv=k=>Math.sin(T*2.4+k*.9+ph)*k*1.1;
+   g.fillStyle='rgba(228,224,240,.82)';g.beginPath();g.moveTo(px-9,ty);g.lineTo(px+9,ty);for(let k=1;k<=6;k++)g.lineTo(px+9+wv(k)*.6,ty+k*11);for(let k=6;k>=0;k--)g.lineTo(px-9+wv(k)*.6,ty+k*11);g.closePath();g.fill();
+   g.fillStyle='rgba(90,40,130,.9)';g.font="bold 16px KaiTi,STKaiti,'Noto Serif TC',serif";g.textAlign='center';g.textBaseline='middle';g.fillText('冥',px+wv(2.5)*.6,ty+28);g.fillText('引',px+wv(4)*.6,ty+46)}
+ }}
+
+/* ===== v445 第二十關・雷鳴天梯 動態優化：雷擊與分岔閃電、柱尖電弧、雷鼓震光、風幡獵獵、石燈青焰、流雲 ===== */
+{const wxf=(lx,f,m)=>{let sx=(((lx-cam*f)%TW)+TW)%TW;if(sx>W+(m||140))sx-=TW;return sx<-(m||140)?null:sx+cam},
+ glo=(x,y,r,col,a)=>{const q=g.createRadialGradient(x,y,0,x,y,r);q.addColorStop(0,`rgba(${col},${a})`);q.addColorStop(1,`rgba(${col},0)`);g.fillStyle=q;g.fillRect(x-r,y-r,r*2,r*2)};
+ const bolt=(x,y,ty,seed,w,a,br)=>{let cx=x,cy=y,k=0;g.beginPath();g.moveTo(cx,cy);while(cy<ty){cy+=14+((seed*7+k*13)%11);cx+=Math.sin(seed*3.1+k*2.3)*15;g.lineTo(cx,cy);if(br&&k%3===1){const bx=cx,by=cy;g.moveTo(bx,by);g.lineTo(bx+Math.sin(seed+k)*38,by+28);g.moveTo(cx,cy)}k++}g.lineWidth=w;g.strokeStyle=`rgba(220,230,255,${a})`;g.stroke()};
+ const _dr=drawRing;drawRing=function(){_dr();if(LEVELS[LV].name!=='雷鳴天梯')return;
+  const ft=(T*.28)%1,sk=Math.floor(T*.28),fl=ft<.04?(1-ft/.04):(ft>.07&&ft<.1?(1-(ft-.07)/.03)*.55:0);
+  for(let i=0;i<5;i++){const x=cam+(((i*210+T*(9+i*3))%(W+500))+W+500)%(W+500)-250;g.fillStyle='rgba(30,34,64,.2)';g.beginPath();g.ellipse(x,38+i*22+Math.sin(T*.4+i)*4,150,16,0,0,TAU);g.fill()}
+  g.save();g.globalCompositeOperation='lighter';
+  if(fl>0){g.fillStyle=`rgba(170,190,255,${.22*fl})`;g.fillRect(cam,0,W,H);const bx=cam+90+((sk*197)%(W-180));g.lineCap='round';bolt(bx,0,GY-6,sk+1,7,.18*fl,1);bolt(bx,0,GY-6,sk+1,2.2,.95*fl,1);glo(bx,GY-6,90,'200,215,255',.5*fl)}
+  for(const x of[560,1110]){const px=wxf(x,.6);if(px==null)continue;const tx=px,ty=GY-168;glo(tx,ty,40,'150,190,255',.14+.14*Math.sin(T*9+x));if(Math.sin(T*23+x)>.55||fl>0){g.strokeStyle='rgba(190,215,255,.8)';g.lineWidth=1.2;g.beginPath();g.moveTo(tx,ty);let ax=tx,ay=ty;for(let k=0;k<4;k++){ax+=Math.sin(T*50+k*3+x)*7;ay-=5+k*2;g.lineTo(ax,ay)}g.stroke()}}
+  for(const x of[440,1040,1320]){const px=wxf(x,.6);if(px==null)continue;glo(px,GY-40,48,'220,180,100',.08+.05*Math.sin(T*3+x)+.5*fl)}
+  for(const x of[380,1000]){const px=wxf(x,.75);if(px==null)continue;const f=.55+.2*Math.sin(T*8+x)+.12*Math.sin(T*15+x);glo(px,GY-42,50*(.9+.2*f),'110,160,255',.18+.2*f)}
+  g.restore();
+  for(const x of[380,1000]){const px=wxf(x,.75);if(px==null)continue;const f=.55+.2*Math.sin(T*8+x)+.12*Math.sin(T*15+x),by=GY-36,hh=8+8*f;g.fillStyle='rgba(170,210,255,.9)';g.beginPath();g.moveTo(px-4,by);g.quadraticCurveTo(px-3+Math.sin(T*9+x)*1.5,by-hh*.6,px+Math.sin(T*12+x)*2,by-hh);g.quadraticCurveTo(px+3,by-hh*.5,px+4,by);g.fill()}
+  for(const x0 of[100,740,1380]){const px=wxf(x0,.6);if(px==null)continue;const ty=GY-168,ph=x0*.01,wv=k=>Math.sin(T*5.5+k*.9+ph)*k*1.2+k*.5;
+   g.fillStyle='rgba(40,48,100,.92)';g.beginPath();g.moveTo(px,ty);for(let k=1;k<=5;k++)g.lineTo(px+k*7,ty+wv(k));for(let k=5;k>=0;k--)g.lineTo(px+k*7,ty+58+wv(k)*1.1);g.closePath();g.fill();g.strokeStyle='rgba(190,205,255,.7)';g.lineWidth=1.2;g.stroke();
+   g.fillStyle='rgba(225,232,255,.95)';g.font="bold 22px KaiTi,STKaiti,'Noto Serif TC',serif";g.textAlign='center';g.textBaseline='middle';g.fillText('雷',px+17,ty+29+wv(2.5))}
+ }}
+
+/* ===== v446 烈火禪院 動態優化：火焰躍動、黑煙升騰、火星、焚邊禪字幡、鳥居底火 ===== */
+{const wxf=(lx,f,m)=>{let sx=(((lx-cam*f)%TW)+TW)%TW;if(sx>W+(m||140))sx-=TW;return sx<-(m||140)?null:sx+cam},
+ glo=(x,y,r,col,a)=>{const q=g.createRadialGradient(x,y,0,x,y,r);q.addColorStop(0,`rgba(${col},${a})`);q.addColorStop(1,`rgba(${col},0)`);g.fillStyle=q;g.fillRect(x-r,y-r,r*2,r*2)};
+ const flame=(x,y,w,h,ph)=>{const f=.6+.25*Math.sin(T*9+ph)+.15*Math.sin(T*16+ph*2);for(const[k,col,a]of[[1,'255,100,30',.8],[.68,'255,170,50',.85],[.38,'255,235,160',.9]])for(let n=-1;n<=1;n++){const hx=x+n*w*.32*k,hh=h*k*(n?.72:1)*(.8+.4*f)*(1+.1*Math.sin(T*11+ph+n*2));g.fillStyle=`rgba(${col},${a})`;g.beginPath();g.moveTo(hx-w*.22*k,y);g.quadraticCurveTo(hx-w*.2*k+Math.sin(T*8+ph+n)*3,y-hh*.55,hx+Math.sin(T*10+ph+n*3)*4,y-hh);g.quadraticCurveTo(hx+w*.2*k,y-hh*.5,hx+w*.22*k,y);g.fill()}return f};
+ const _dr=drawRing;drawRing=function(){_dr();if(LEVELS[LV].name!=='烈火禪院')return;
+  const pits=[390,1000,1330].map(x=>wxf(x,.6)),halls=[[300,150],[1000,170]].map(([x,w])=>[wxf(x,.45),w]);
+  g.save();g.globalCompositeOperation='lighter';
+  for(const[px,w]of halls){if(px==null)continue;const f=.55+.2*Math.sin(T*7+px*.01);glo(px,GY-100,130,'255,110,40',.16+.14*f);for(let k=0;k<3;k++)glo(px-w/2+32+k*(w-60)/2,GY-50,26,'255,150,60',.16+.12*Math.sin(T*8+k*2+px*.01))}
+  for(const px of pits){if(px==null)continue;glo(px,GY-30,100,'255,110,30',.2+.12*Math.sin(T*9+px*.01));for(let i=0;i<9;i++){const u=(T*.55+i*.111+px*.003)%1;g.fillStyle=`rgba(255,${140+i*8},60,${(1-u)*.9})`;g.beginPath();g.arc(px+Math.sin(i*4.3+px)*18+u*20*Math.sin(i*2.1),GY-24-u*(100+i%3*40),1.7*(1-u)+.5,0,TAU);g.fill()}}
+  for(const x of[180,620,1100]){const px=wxf(x,.75);if(px==null)continue;glo(px+8,GY-6,70,'255,120,30',.14+.1*Math.sin(T*6+x));glo(px+118,GY-6,56,'255,120,30',.1+.08*Math.sin(T*7+x))}
+  g.restore();
+  for(const[px,w]of halls){if(px==null)continue;const f=flame(px+w*.1,GY-92,56,64,px*.01);if(f)for(let k=0;k<3;k++)flame(px-w/2+32+k*(w-60)/2,GY-38,16,22,k*3+px*.01)}
+  for(const px of pits){if(px==null)continue;flame(px,GY-18,44,76,px*.01)}
+  for(const px of[...pits,...halls.map(h=>h[0])]){if(px==null)continue;for(let k=0;k<6;k++){const u=(T*.14+k/6+px*.002)%1;g.fillStyle=`rgba(34,26,26,${.26*(1-u)})`;g.beginPath();g.ellipse(px+u*70+Math.sin(T*.8+k)*6,GY-70-u*190,8+u*26,(8+u*26)*.8,0,0,TAU);g.fill()}}
+  for(const x0 of[120,560,880]){const px=wxf(x0,.6);if(px==null)continue;const ty=GY-156,ph=x0*.01,wv=k=>Math.sin(T*3.4+k*.9+ph)*k*1+k*.4;
+   g.fillStyle='rgba(205,110,34,.92)';g.beginPath();g.moveTo(px,ty);for(let k=1;k<=5;k++)g.lineTo(px+k*7,ty+wv(k));for(let k=5;k>=0;k--)g.lineTo(px+k*7+(k===5?-(5+3*Math.sin(ph*9)):0)*(k===5?1:0),ty+58+wv(k)*1.1+(k%2?6:0));g.closePath();g.fill();
+   g.strokeStyle=`rgba(255,200,90,${.6+.3*Math.sin(T*8+ph)})`;g.lineWidth=1.6;g.beginPath();for(let k=5;k>=0;k--){const yy=ty+58+wv(k)*1.1+(k%2?6:0),xx=px+k*7;k===5?g.moveTo(xx,yy):g.lineTo(xx,yy)}g.stroke();
+   g.fillStyle='rgba(60,18,10,.95)';g.font="bold 22px KaiTi,STKaiti,'Noto Serif TC',serif";g.textAlign='center';g.textBaseline='middle';g.fillText('禪',px+16,ty+28+wv(2.5))}
+ }}
+
+/* ===== v447 竹林初行・山賊小兵：斗笠／蒙面兩種造型、蓑衣、腰間竹筒，與頭目的狼皮山賊區分 ===== */
+{
+ const _sp=spawn;spawn=function(k,x){const e=_sp(k,x);if(LV===8&&k==='n'&&!e.vis){e.vis='bandit';e.bh=Math.random()<.5?1:0}return e};
+ const _man=man;man=function(o){if(o.vis==='bandit'&&!VIS.bandit)VIS.bandit={rb:'#55502f',ac:'#8a5a2a'};_man(o);if(o.vis!=='bandit'||o.dead)return;
+  const F=o.fl,K='#1c1c1c',hat=o.en&&o.en.bh!=null?!!o.en.bh:((o.sn||0)*97|0)%2===0,sw=Math.sin(T*8)*.6;
+  g.save();g.translate(o.x,o.y);g.scale(o.f*o.s,o.s);g.lineCap='round';g.lineJoin='round';
+  /* 蓑衣：肩頭垂下的草穗 */
+  g.strokeStyle=F?'#fff':'#8b6a3a';g.lineWidth=1.4;for(let i=0;i<10;i++){const x=-12+i*2.6;g.beginPath();g.moveTo(x,-55);g.lineTo(x-1.2+Math.sin(T*3+i)*.8,-44-(i%3)*2.4);g.stroke()}
+  g.strokeStyle=F?'#fff':'#5a4426';g.lineWidth=1;g.beginPath();g.moveTo(-12,-54.5);g.lineTo(12,-54.5);g.stroke();
+  /* 腰間竹筒酒壺 */
+  g.fillStyle=F?'#fff':'#9aa85a';g.strokeStyle=K;g.lineWidth=1.1;g.fillRect(-14,-30,4,9);g.strokeRect(-14,-30,4,9);g.fillStyle=F?'#fff':'#3a2a1c';g.fillRect(-14,-31,4,2);
+  if(hat){/* 斗笠＋下巴繫帶 */
+   g.fillStyle=F?'#fff':'#c7a762';g.beginPath();g.moveTo(-19,-67);g.quadraticCurveTo(-8,-70,0,-84);g.quadraticCurveTo(8,-70,19,-67);g.quadraticCurveTo(0,-63,-19,-67);g.closePath();g.fill();g.stroke();
+   if(!F){g.strokeStyle='rgba(110,80,30,.7)';g.lineWidth=.8;for(let i=-3;i<=3;i++){g.beginPath();g.moveTo(i*.6,-83);g.lineTo(i*5.4,-67.4);g.stroke()}}
+   g.strokeStyle=F?'#fff':'#3a2a1c';g.lineWidth=1;g.beginPath();g.moveTo(-8,-65);g.quadraticCurveTo(-7,-58,0,-57);g.quadraticCurveTo(7,-58,8,-65);g.stroke()}
+  else{/* 蒙面：黑布遮住口鼻，只露一雙兇眼 */
+   g.fillStyle=F?'#fff':'#26241f';g.beginPath();g.moveTo(-9,-63.5);g.lineTo(10,-63.5);g.lineTo(9,-55.5);g.quadraticCurveTo(0,-52,-8,-55.5);g.closePath();g.fill();g.stroke();
+   g.strokeStyle=F?'#fff':'#8a1c14';g.lineWidth=1.6;g.beginPath();g.moveTo(-8,-63);g.quadraticCurveTo(-15,-62+sw,-20,-58+sw*2);g.moveTo(-8,-62);g.quadraticCurveTo(-14,-57+sw,-17,-52+sw*2);g.stroke()}
+  g.restore()};
+}
+
+/* ===== v448 竹林初行・刀疤頭目叫手下：開場先喊兩名、之後場上手下不足就再喊，半血時一次叫四個 ===== */
+{const _u=upd;upd=function(dt){_u(dt);
+  if(S!=='play'||!P||!boss||boss.dead||!lock||LV!==8||PART===2)return;
+  if(!boss.m9){boss.m9=1;boss.mn=['n','n','n','n'];boss.rt=3.2}
+  if(boss.x>cam+W+10)return;
+  const alive=E.filter(e=>e!==boss&&!e.dead&&e.k==='n').length;
+  boss.rt-=dt;
+  if(boss.rt<=0&&alive<(boss.ph?4:2)){
+   const n=boss.ph?2:2;txt(boss.ph?'兄弟們，全上！':'兄弟們，上！',boss.x,boss.y-150,26,'#b3261e');shake=Math.max(shake,.15);ink(boss.x,boss.y-40,14,'#b3261e');
+   for(let i=0;i<n;i++)spawn('n',(i+(boss.m9++))%2?cam+20:cam+W+30);
+   boss.rt=boss.ph?7:10}
+}}
+/* ===== v450 黑風寨／雪嶺寒關 動態優化：火炬篝火與火星黑煙／極光、冰晶閃光、風雪橫掃、地表寒霧 ===== */
+{const wxf=(lx,f,m)=>{let sx=(((lx-cam*f)%TW)+TW)%TW;if(sx>W+(m||140))sx-=TW;return sx<-(m||140)?null:sx+cam},
+ glo=(x,y,r,col,a)=>{const q=g.createRadialGradient(x,y,0,x,y,r);q.addColorStop(0,`rgba(${col},${a})`);q.addColorStop(1,`rgba(${col},0)`);g.fillStyle=q;g.fillRect(x-r,y-r,r*2,r*2)},
+ fire=(x,y,w,h,ph)=>{const f=.6+.25*Math.sin(T*9+ph)+.15*Math.sin(T*16+ph*2);for(const[k,col,a]of[[1,'255,100,30',.8],[.62,'255,170,50',.85],[.34,'255,235,170',.9]]){const hh=h*k*(.8+.4*f);g.fillStyle=`rgba(${col},${a})`;g.beginPath();g.moveTo(x-w*.4*k,y);g.quadraticCurveTo(x-w*.3*k+Math.sin(T*8+ph)*3,y-hh*.55,x+Math.sin(T*10+ph)*4,y-hh);g.quadraticCurveTo(x+w*.3*k,y-hh*.5,x+w*.4*k,y);g.fill()}},
+ star=(x,y,s,a)=>{g.fillStyle=`rgba(235,248,255,${a})`;g.beginPath();g.moveTo(x,y-s);g.lineTo(x+s*.18,y-s*.18);g.lineTo(x+s,y);g.lineTo(x+s*.18,y+s*.18);g.lineTo(x,y+s);g.lineTo(x-s*.18,y+s*.18);g.lineTo(x-s,y);g.lineTo(x-s*.18,y-s*.18);g.closePath();g.fill()};
+ const bh=()=>{const F=[];for(const x of[146,706,1226]){const p=wxf(x,.75);if(p!=null)F.push([p,GY-268,24,42])}{const p=wxf(1000,.75);if(p!=null)F.push([p,GY-20,54,92])}for(const x of[420,660]){const p=wxf(x,.6);if(p!=null)F.push([p,GY-86,18,30])}
+  const gt=wxf(540,.6);g.save();g.globalCompositeOperation='lighter';
+  for(const[x,y,w,h]of F)glo(x,y-h*.4,h*1.6,'255,125,40',.14+.1*Math.sin(T*8+x*.02));
+  if(gt!=null)glo(gt,GY-56,110,'220,70,30',.1+.07*Math.sin(T*3.1));
+  for(const[x,y,w,h]of F)for(let i=0;i<6;i++){const u=(T*.5+i/6+x*.003)%1;g.fillStyle=`rgba(255,${140+i*12},60,${(1-u)*.9})`;g.beginPath();g.arc(x+Math.sin(i*4.3+x)*w*.4+u*18*Math.sin(i*2.1),y-6-u*(h*1.6+30),1.5*(1-u)+.4,0,TAU);g.fill()}
+  g.restore();for(const[x,y,w,h]of F)fire(x,y,w,h,x*.01);
+  for(const[x,y,w,h]of F)if(w>40)for(let k=0;k<6;k++){const u=(T*.14+k/6)%1;g.fillStyle=`rgba(34,26,26,${.26*(1-u)})`;g.beginPath();g.ellipse(x+u*60+Math.sin(T*.8+k)*6,y-h-u*170,8+u*24,(8+u*24)*.8,0,0,TAU);g.fill()}},
+ xl=()=>{g.save();g.globalCompositeOperation='lighter';
+  for(let b=0;b<3;b++){const y0=50+b*26,col=b===1?'150,110,240':'100,240,200',a=.05+.025*Math.sin(T*.6+b);g.fillStyle=`rgba(${col},${a})`;g.beginPath();for(let x=0;x<=W;x+=20){const yy=y0+Math.sin((x+cam*.1)*.012+T*.4+b*1.7)*16;x?g.lineTo(cam+x,yy):g.moveTo(cam,yy)}for(let x=W;x>=0;x-=20)g.lineTo(cam+x,y0+34+Math.sin((x+cam*.1)*.012+T*.4+b*1.7+.5)*16);g.closePath();g.fill()}
+  const gt=wxf(700,.6);if(gt!=null)for(const q of[-1,1])glo(gt+q*46,GY-98,46,'255,150,80',.2+.12*Math.sin(T*3+q*2));
+  for(const[x,y,s,f,ph]of[[260,GY-66,1,.6,0],[1000,GY-59,.9,.6,2],[1380,GY-46,.7,.6,4],[1150,GY-218,1.1,.6,1],[700,GY-96,1,.6,3]]){const p=wxf(x,f);if(p==null)continue;const k=Math.max(0,Math.sin(T*2.2+ph*1.3));if(k>.05)star(p,y,(4+6*k)*s,.9*k)}
+  g.restore();const gu=.55+.45*Math.sin(T*.35);g.strokeStyle=`rgba(245,250,255,${.34*gu+.1})`;g.lineWidth=1.2;g.beginPath();for(let i=0;i<34;i++){const x=cam+(((i*97-T*(170+i%5*40))%(W+60))+W+60)%(W+60)-30,y=(i*53+T*(26+i%4*10))%(GY+10);g.moveTo(x,y);g.lineTo(x+16+gu*8,y+3)}g.stroke();
+  for(let i=0;i<5;i++){const fx=cam+(((i*210+T*(14+i*4))%(W+420))+W+420)%(W+420)-210;g.fillStyle='rgba(230,240,250,.16)';g.beginPath();g.ellipse(fx,GY-4+i*6,120+i*10,7,0,0,TAU);g.fill()}};
+ const _d=drawRing;drawRing=function(){_d();const nm=LEVELS[LV].name;if(nm==='黑風寨')bh();else if(nm==='雪嶺寒關')xl()}}
+
 let SC=scene(0);
 /* ---------- 角色資料（沿用塔防：山賊/疾行盜賊/重甲武僧/毒鏢客/黑風寨主/墮落劍客/紅袖刀姬/琵琶魔女/蛇鞭毒娘） ---------- */
 const ED={k:{hp:42,sp:130,dm:10,s:.95,rb:'#c0392b',ac:'#5a1410',rg:38,wu:.3,cd:1,g:9,fem:1,fk:'#8a2a2a',fp:'#ffd070',fq:'#ffe9b0',fb:'#3a1a1a'},s:{hp:36,sp:48,dm:8,s:1,rb:'#2f6a6a',ac:'#c99a2e',rg:0,wu:.6,cd:2.4,g:10,fem:1,fk:'#c8e8d8',fp:'#ffd24a',fq:'#fff2c0',fb:'#244a4a'},v:{hp:54,sp:62,dm:11,s:1,rb:'#5a3a7a',ac:'#2a8a4a',rg:96,wu:.55,cd:1.7,g:11,fem:1,fk:'#3a2a52',fp:'#8fe060',fq:'#d8ffb0',fb:'#1f1a2e'},x:{hp:72,sp:96,dm:13,s:1.05,rb:'#2c2a44',ac:'#8a2fb0',rg:58,wu:.45,cd:1.2,g:12},n:{hp:34,sp:60,dm:9,s:1,rb:'#c9503c',ac:'#7a1c14',rg:46,wu:.5,cd:1.4,g:6},f:{hp:22,sp:150,dm:7,s:.9,rb:'#e8a23a',ac:'#8a5a10',rg:34,wu:.25,cd:.9,g:7},t:{hp:110,sp:36,dm:18,s:1.3,rb:'#6a4a8c',ac:'#2e1c46',rg:64,wu:.75,cd:2,g:14},d:{hp:24,sp:50,dm:8,s:1,rb:'#d98a2e',ac:'#4a3a10',rg:0,wu:.5,cd:2.2,g:8},B:{hp:420,sp:82,dm:22,s:1.7,rb:'#2b1d1d',ac:'#b3261e',rg:92,wu:.6,cd:1.6,g:80},a:{hp:20,sp:120,dm:11,s:.95,rb:'#2a2a3a',ac:'#7a1c14',rg:38,wu:.3,cd:1.3,g:9},w:{hp:28,sp:46,dm:9,s:1,rb:'#3f6a8c',ac:'#b3261e',rg:0,wu:.55,cd:2.4,g:10},h:{hp:60,sp:44,dm:14,s:1.1,rb:'#6a5a3a',ac:'#3a3a40',rg:104,wu:.65,cd:1.9,g:11},r:{hp:60,sp:42,dm:10,s:1.05,rb:'#4a5a6a',ac:'#2a3440',rg:44,wu:.6,cd:1.6,g:10},m:{hp:18,sp:118,dm:16,s:.95,rb:'#8a5a2a',ac:'#d4572a',rg:36,wu:.55,cd:1.2,g:9},q:{hp:26,sp:60,dm:0,s:1,rb:'#3f7f6a',ac:'#2f7f6e',rg:0,wu:.7,cd:3.2,g:12},j:{hp:24,sp:110,dm:8,s:.9,rb:'#3a3a3a',ac:'#1c1c1c',rg:30,wu:.3,cd:1.1,g:8},e:{hp:30,sp:50,dm:8,s:1,rb:'#2f5a3a',ac:'#1c1c1c',rg:0,wu:.5,cd:2.4,g:10},u:{hp:22,sp:60,dm:9,s:.95,rb:'#e8dcc0',ac:'#8a2a1a',rg:40,wu:.7,cd:1.6,g:9}};
