@@ -5,7 +5,7 @@
 *{-webkit-tap-highlight-color:transparent;box-sizing:border-box}
 html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none}
 body{position:fixed;inset:0;background:var(--bg);color:var(--ink);font-family:KaiTi,STKaiti,"Noto Serif TC",serif;display:flex;flex-direction:column;align-items:center;justify-content:center;user-select:none;-webkit-user-select:none;touch-action:none;-webkit-touch-callout:none}
-canvas{display:block;width:min(100vw,calc(100dvh*1.8));aspect-ratio:720/400;background:#efe7d2;touch-action:none}
+canvas{display:block;width:min(100vw,calc(100dvh*var(--ar,1.8)));aspect-ratio:var(--ar,1.8);background:#efe7d2;touch-action:none}
 #ct{will-change:transform;position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:flex-end;padding:0 max(14px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left));pointer-events:none}
 #ct>*{pointer-events:auto}
 #pad{display:flex;width:170px;height:76px;border-radius:38px;border:2px solid var(--ink);background:var(--pn);opacity:.6;touch-action:none}
@@ -22,7 +22,7 @@ canvas{display:block;width:min(100vw,calc(100dvh*1.8));aspect-ratio:720/400;back
 small{position:fixed;top:4px;left:0;right:0;text-align:center;opacity:.55;font-size:12px;pointer-events:none}
 @media(pointer:coarse){small.kb{display:none}}
 @media(pointer:fine){small.tip{display:none}}
-@media(pointer:coarse){canvas{width:min(85vw,calc(85dvh*1.8))}}
+@media(pointer:coarse){canvas{width:min(85vw,calc(85dvh*var(--ar,1.8)))}}
 @media(orientation:portrait){
  canvas{width:100vw;transform:translateZ(0);backface-visibility:hidden}
  #ct{position:static;width:100%;margin-top:18px;padding:0 16px}
@@ -48,6 +48,29 @@ small{position:fixed;top:4px;left:0;right:0;text-align:center;opacity:.55;font-s
  #act [data-k=s]{right:6px;bottom:122px}
 }
 @media(orientation:landscape) and (pointer:coarse) and (max-height:340px){#pad{width:190px;height:82px}#act{transform:scale(.88);transform-origin:right bottom}}
+/* v460 橫向全屏：畫面撐滿整個螢幕高度，提示文字隱藏 */
+@media(orientation:landscape){canvas{width:min(100vw,calc(100dvh*var(--ar,1.8)));height:auto}body{background:#000}small{display:none}}
+/* v460 橫向：按鍵略縮、透明，但觸控範圍加大 */
+@media(orientation:landscape) and (pointer:coarse){
+ #ct{padding:0 max(8px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}
+ #pad{width:190px;height:80px;border-radius:40px;opacity:.38}
+ #pad::after{inset:-24px -16px -20px}
+ #pad span{font-size:28px;border-radius:40px}
+ #act{width:230px;height:190px;transform:none}
+ #act button{width:66px;height:66px;font-size:22px;opacity:.4}
+ #act button::after{inset:-14px}
+ #act button.big{width:94px;height:94px;font-size:30px;opacity:.5}
+ #act button.big::after{inset:-16px}
+ #act [data-k=j]{right:108px;bottom:2px}
+ #act [data-k=d]{right:98px;bottom:92px}
+ #act [data-k=s]{right:6px;bottom:116px}
+ #pad.hot{opacity:.65}
+ #act button.on,#act button:active{opacity:.9}
+}
+/* v462 按鍵透明化：平時淡到幾乎透明，按下時才顯示 */
+#pad,#act button{opacity:.2!important;background:transparent;border-width:1.5px}
+#pad.hot{opacity:.75!important}
+#act button.on,#act button:active{opacity:.8!important}
 </style><style id="q3css">
 #q3ov{animation:q3f .5s ease both;background:radial-gradient(ellipse at 50% 35%,rgba(70,56,46,.82),rgba(10,8,7,.95))}
 @keyframes q3f{from{opacity:0}to{opacity:1}}
@@ -74,6 +97,8 @@ g[data-i]:hover{filter:drop-shadow(0 0 4px #b3261e)}
 .q3q{border-left:4px solid #b3261e;background:rgba(42,36,32,.05);padding:10px 14px;text-align:left;line-height:1.9;font-size:17px;margin:0 0 12px}
 .q3seal{display:inline-block;background:#b3261e;color:#f1e8d0;padding:2px 9px;font-size:14px;letter-spacing:.15em;border-radius:2px;transform:rotate(-4deg);animation:q3s .45s ease both}
 .q3big{font-size:56px;font-weight:bold;letter-spacing:.2em;margin:6px 0 10px;animation:q3s .6s ease both}
+body.ov #ct{display:none}
+@media(orientation:landscape) and (pointer:coarse){#mute,#fs{width:28px;height:28px;font-size:14px;top:max(3px,env(safe-area-inset-top))}#mute{right:max(4px,env(safe-area-inset-right))}#fs{right:calc(max(4px,env(safe-area-inset-right)) + 34px)}}
 </style></head><body>
 <canvas id="c" width="720" height="400"></canvas>
 <button id="mute" aria-label="音效">🔊</button><button id="fs" aria-label="全螢幕">⛶</button>
@@ -83,7 +108,7 @@ g[data-i]:hover{filter:drop-shadow(0 0 4px #b3261e)}
 'use strict';
 var MPXB=0;function MPX(p){return p===P?100+MPXB:100}
 
-const cv=document.getElementById('c'),g=cv.getContext('2d',{alpha:false}),W=720,H=400,GY=335,TAU=6.2832,TW=1440;let LEN=4400;let K=1,RCAP=1.5;function fit(){const cw=cv.clientWidth||W,k=Math.max(1,Math.min(LQ?RCAP:2,cw*(window.devicePixelRatio||1)/W)),kk=Math.round(k*16)/16;if(Math.abs(cv.width-W*kk)>=2){K=kk;cv.width=Math.round(W*K);cv.height=Math.round(H*K);try{draw()}catch(_){}}}
+const cv=document.getElementById('c'),g=cv.getContext('2d',{alpha:false}),W=(()=>{try{const a=Math.max(screen.width,screen.height)/Math.min(screen.width,screen.height);return Math.max(720,Math.min(880,Math.round(400*a/8)*8))}catch(_){return 720}})(),H=400,GY=335,TAU=6.2832,TW=1440;document.documentElement.style.setProperty('--ar',W/H);let LEN=4400;let K=1,RCAP=1.5;function fit(){const cw=cv.clientWidth||W,k=Math.max(1,Math.min(LQ?RCAP:2,cw*(window.devicePixelRatio||1)/W)),kk=Math.round(k*16)/16;if(Math.abs(cv.width-W*kk)>=2){K=kk;cv.width=Math.round(W*K);cv.height=Math.round(H*K);try{draw()}catch(_){}}}
 const R=(a,b)=>a+Math.random()*(b-a),cl=(v,a,b)=>Math.max(a,Math.min(b,v)),lp=(a,b,t)=>a+(b-a)*cl(t,0,1);
 const M={ArrowLeft:'l',KeyA:'l',ArrowRight:'r',KeyD:'r',Space:'j',ArrowUp:'j',KeyW:'j',KeyJ:'a',KeyZ:'a',KeyK:'s',KeyX:'s',KeyL:'d',KeyC:'d',ShiftLeft:'d'},hold={},jp={};
 function press(a,v){if(v&&!hold[a])jp[a]=1;hold[a]=v}
@@ -1059,14 +1084,18 @@ function shopBuy(i){const it=SHOP[i],c=it.cost();let m='';
  if(it.max&&it.lv()>=it.max)m='已達上限';else if(it.full&&it.full())m=it.fm?it.fm():'血量已滿';else if(coin<c)m='銀兩不足';
  if(m){SHm={s:m,t:1.2};SFX.tick();return}
  coin-=c;it.buy();SHm={s:it.msg?it.msg():it.n+' 購得',t:1.2};SFX.coin();if(i===0)SFX.heal()}
-function shopGo(){P.mp=MPX(P);for(const k in jp)jp[k]=0;loadLevel(false);S='play';SFX.start()}
-function shopTap(x,y){const i=Math.floor((x-12)/116);
+let GMB={t:0,bet:30};
+function shopGamble(){if(GMB.t>0)return;if(coin<GMB.bet){SHm={s:'銀兩不足',t:1.2};SFX.tick();return}coin-=GMB.bet;GMB.t=.8;SHm={s:'搖骰中…',t:1.2};SFX.tick()}
+function gambleResolve(){const r=Math.random();let w,m;if(r<.5){w=0;m='大凶！血本無歸'}else if(r<.72){w=30;m='小吉　保本'}else if(r<.89){w=60;m='吉　贏得 +30'}else if(r<.98){w=100;m='大吉　贏得 +70'}else{w=200;m='天降橫財！贏得 +170'}coin+=w;GMB.t=0;SHm={s:m,t:1.8};if(w>=60)SFX.coin();else SFX.tick()}
+function shopGo(){if(GMB.t>0)gambleResolve();P.mp=MPX(P);for(const k in jp)jp[k]=0;loadLevel(false);S='play';SFX.start()}
+function shopTap(x,y){const xo=x;x-=(W-720)/2;const i=Math.floor((x-12)/116);
  if(i===5&&y>=112&&y<=192&&x>=12&&x-12-i*116<=106){UP.pk=((UP.pk|0)+1)%3;SFX.tick();return}
  if(y>=92&&y<=282&&x>=12&&i>=0&&i<6&&x-12-i*116<=106){SHs=i;shopBuy(i)}
- else if(y>=306&&y<=358&&Math.abs(x-W/2)<120){SHs=6;shopGo()}}
-function shopStep(dt){if(SHm.t>0)SHm.t-=dt;if(jp.d&&endT>.6){UP.pk=((UP.pk|0)+1)%3;SFX.tick()}
- if(jp.l){SHs=(SHs+6)%7;SFX.tick()}if(jp.r){SHs=(SHs+1)%7;SFX.tick()}
- if(endT>.6){if(jp.a||jp.j){SHs===6?shopGo():shopBuy(SHs)}else if(jp.s)shopGo()}}
+ else if(y>=306&&y<=358&&Math.abs(xo-W/2)<120){SHs=6;shopGo()}
+ else if(y>=306&&y<=358&&xo>=W/2-250&&xo<=W/2-130){SHs=7;shopGamble()}}
+function shopStep(dt){if(SHm.t>0)SHm.t-=dt;if(GMB.t>0){GMB.t-=dt;if(GMB.t<=0)gambleResolve()}if(jp.d&&endT>.6){UP.pk=((UP.pk|0)+1)%3;SFX.tick()}
+ {const od=[0,1,2,3,4,5,7,6],oi=od.indexOf(SHs);if(jp.l){SHs=od[(oi+7)%8];SFX.tick()}if(jp.r){SHs=od[(oi+1)%8];SFX.tick()}}
+ if(endT>.6){if(jp.a||jp.j){SHs===6?shopGo():SHs===7?shopGamble():shopBuy(SHs)}else if(jp.s)shopGo()}}
 /* 商店小圖示（水墨風，原點在圖示中心，約 40x40） */
 function shopIcon(i,cx,cy,al){const K='#1c1c1c';g.save();g.translate(cx,cy);g.globalAlpha=al;g.lineJoin='round';g.lineCap='round';g.strokeStyle=K;g.lineWidth=2;
  if(i===0){/* 療傷藥：葫蘆藥瓶 */
@@ -1114,7 +1143,7 @@ function drawShop(){g.fillStyle='rgba(239,231,210,.8)';g.fillRect(0,0,W,H);
  tx('關間商店',W/2,34,38,'#b3261e');
  tx('即將踏入　第'+CN[LV]+'關　'+LEVELS[LV].name,W/2,70,16,'#1c1c1c',.8);
  tx('血 '+Math.round(P.hp)+'/'+P.mh,80,30,18,'#b3261e');tx('銀 '+coin,W-80,30,22,'#8a6a1c');
- for(let i=0;i<6;i++){const it=SHOP[i],x=12+i*116,y=92,w=106,h=190,sel=SHs===i,mx=it.max&&it.lv()>=it.max,fl=it.full&&it.full(),c=it.cost(),can=!mx&&!fl&&coin>=c;
+ for(let i=0;i<6;i++){const it=SHOP[i],x=((W-720)/2+12+i*116),y=92,w=106,h=190,sel=SHs===i,mx=it.max&&it.lv()>=it.max,fl=it.full&&it.full(),c=it.cost(),can=!mx&&!fl&&coin>=c;
   g.fillStyle=sel?'rgba(179,38,30,.1)':'rgba(255,250,235,.55)';g.fillRect(x,y,w,h);
   g.strokeStyle=sel?'#b3261e':'rgba(28,28,28,.55)';g.lineWidth=sel?3:1.6;g.strokeRect(x,y,w,h);
   tx(it.n,x+w/2,y+24,24,'#1c1c1c');shopIcon(i,x+w/2,y+68,mx||fl?.4:1);
@@ -1122,10 +1151,11 @@ function drawShop(){g.fillStyle='rgba(239,231,210,.8)';g.fillRect(0,0,W,H);
   tx(it.d[0],x+w/2,y+135,14,'#1c1c1c',.85);tx(it.d[1],x+w/2,y+154,16,'#2f7f6e');
   tx(mx?'已滿':fl?(it.ft||'血量已滿'):'銀 '+c,x+w/2,y+178,mx||fl?16:21,mx||fl?'rgba(28,28,28,.5)':can?'#8a6a1c':'#b3261e')}
  if(SHm.t>0)tx(SHm.s,W/2,295,15,'#7a1c14',cl(SHm.t*2,0,1));
+ {const gb=SHs===7,bx=W/2-250;g.fillStyle=gb?'rgba(138,106,28,.95)':'rgba(138,106,28,.75)';g.fillRect(bx,308,120,48);g.strokeStyle=gb?'#1c1c1c':'rgba(28,28,28,.5)';g.lineWidth=gb?3:1.6;g.strokeRect(bx,308,120,48);g.font='bold 22px KaiTi,STKaiti,"Noto Serif TC",serif';g.textAlign='center';g.textBaseline='middle';g.fillStyle='#fffaf0';g.fillText('🎲 賭一把',bx+60,324);g.font='bold 14px KaiTi,STKaiti,"Noto Serif TC",serif';g.fillText('押 銀 '+GMB.bet,bx+60,345)}
  const gs=SHs===6;g.fillStyle=gs?'rgba(179,38,30,.92)':'rgba(179,38,30,.72)';g.fillRect(W/2-120,308,240,48);
  g.strokeStyle=gs?'#1c1c1c':'rgba(28,28,28,.5)';g.lineWidth=gs?3:1.6;g.strokeRect(W/2-120,308,240,48);
  g.font='bold 24px KaiTi,STKaiti,"Noto Serif TC",serif';g.textAlign='center';g.textBaseline='middle';g.fillStyle='#fffaf0';g.fillText('出發　第'+CN[LV]+'關',W/2,332);
- tx(matchMedia('(pointer:coarse)').matches?'點選物品購買　點「出發」前往下一關':'←→ 選擇　J／空白 購買　K 出發',W/2,382,14,'#1c1c1c',.7)}
+ tx(matchMedia('(pointer:coarse)').matches?'點選物品購買　點「賭一把」碰運氣　點「出發」前往下一關':'←→ 選擇　J／空白 購買／賭　K 出發',W/2,382,14,'#1c1c1c',.7)}
 function bossPhase(e){e.ph=1;txt(e.sh,e.x,e.y-140,26,'#b3261e');shake=Math.max(shake,.3);SFX.intro();ink(e.x,e.y-40,30,'#b3261e');e.mn.forEach((m,i)=>spawn(m,i%2?cam+20:cam+W+30))}
 function bossAfter(e){if(e!==boss||e.chg||e.st!==2||!e.ab.includes('combo'))return;if((e.cb=(e.cb||0)+1)<(e.ph?4:3)&&Math.random()<.65){e.st=1;e.tm=.2;e.f=P.x>e.x?1:-1}else e.cb=0}
 /* 小王（k==='B'）血越少出手越快：冷卻與前搖最多縮短到約 1/2.4，走路最多加快約 40% */
@@ -5959,7 +5989,7 @@ const ALLY=[
 const SPN=()=>SPARED.filter(v=>v===1||v===3).length,SLN=()=>SPARED.filter(v=>v===2).length;
 function winLine(){const n=SPN();return n>=21?'二十一個名字，全數「已放」。魔宮的名冊，從此再無新字。':n>=14?'被放過的名字，在名冊上連成了一條路。':n>=7?'有人被放過，有人倒在路上；名冊上，仍有留白。':n>=1?'一路刀光太多，被放過的名字，只剩寥寥幾個。':'一路殺到絕巔，江湖太平了，名冊卻空了。'}
 function winCnt(){return '放過 '+SPN()+' 人　廢掉武功 '+SLN()+' 人'}
-const CHB=[{x:140,y:170,w:210,h:96},{x:370,y:170,w:210,h:96}];
+const OX=(W-720)/2;const CHB=[{x:140+OX,y:170,w:210,h:96},{x:370+OX,y:170,w:210,h:96}];
 function startChoice(){if(PART===2&&LV===11){CHO={sel:0,t0:T,g:1,G:GCH[11](),n:'',m:'',t:''};return}if(PART===1&&LV===21){CHO={sel:0,t0:T,g:1,G:GCH[21](),n:'',m:'',t:''};return}const d=ALLY[LV];if(!d)return;if(PART===1&&LV===10){CHO={sel:0,t0:T,sw:1,n:d.n,m:d.m,t:d.t};return}if(GCH[LV]){CHO={sel:0,t0:T,g:1,G:GCH[LV](),n:d.n,m:d.m,t:d.t};SPARED[LV]=1;return}if(PART===1&&LV===17&&SW.id===4){CHO={sel:0,t0:T,q:1,o:[0,1,2].sort(()=>Math.random()-.5),n:d.n,m:d.m,t:d.t};return}CHO={sel:0,t0:T,n:d.n,coin:100+LV*12,m:d.m,t:d.t}}
 function doChoice(k){if(!CHO)return;if(CHO.sw)return swChoose(k);if(CHO.q)return qChoose(k);if(CHO.g)return gChoose(k);const d=ALLY[LV],bx=boss?boss.x:P.x,by=boss?boss.y:P.y;
  if(k===0){SPARED[LV]=1;score+=200;P.hp=Math.min(P.mh,P.hp+12);txt('放過',bx,by-130,26,'#2f7f6e');
@@ -5970,7 +6000,7 @@ function doChoice(k){if(!CHO)return;if(CHO.sw)return swChoose(k);if(CHO.q)return
 function chPick(e){const r=cv.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*W,y=(e.clientY-r.top)/r.height*H;
  const BB=CHO&&CHO.sw?SWB:CHO&&CHO.q?QB:CHO&&CHO.g?QB.slice(0,CHO.G.o.length):CHB;for(let i=0;i<BB.length;i++){const b=BB[i];if(x>=b.x&&x<=b.x+b.w&&y>=b.y&&y<=b.y+b.h)return i}return -1}
 cv.addEventListener('pointerdown',e=>{if(CHO&&S==='play'&&T-CHO.t0>.3){e.preventDefault();const i=chPick(e);if(i>=0)doChoice(i)}});
-function chDraw(){if(CHO.sw)return swDraw();if(CHO.q)return qDraw();if(CHO.g)return gDraw();const F='KaiTi,STKaiti,\"Noto Serif TC\",serif',bx=110,by=70,bw=500,bh=250;
+function chDraw(){if(CHO.sw)return swDraw();if(CHO.q)return qDraw();if(CHO.g)return gDraw();const F='KaiTi,STKaiti,\"Noto Serif TC\",serif',bx=110+OX,by=70,bw=500,bh=250;
  g.save();g.setTransform(K,0,0,K,0,0);
  g.fillStyle='rgba(20,20,20,.38)';g.fillRect(0,0,W,H);
  g.fillStyle='rgba(244,237,217,.98)';g.fillRect(bx,by,bw,bh);g.strokeStyle='#1c1c1c';g.lineWidth=3;g.strokeRect(bx,by,bw,bh);
@@ -5999,7 +6029,7 @@ const SWD=[
   res:[['旁白','少年拾起那柄木劍，朽木無鋒，握在手中卻格外踏實。'],['守墓劍奴','返璞歸真，你悟得比我想的快。']]},
  {n:'不取劍',s:'敬前輩',at:.7,sp:0,df:0,d:'心中自有所悟……',c:'#2f7f6e',
   res:[['旁白','少年手按自己的劍，朝墓碑深深一拜，沒有取走碑前任何一把。'],['旁白','風吹過荒坡，草葉、枯枝、碎石，在他眼中，都成了劍。'],['守墓劍奴','……前輩留下的那句話，你聽懂了。'],['旁白','領悟「萬物皆可為劍」，獲得心劍：攻擊傷害 +70%。']]}];
-const SWB=SWD.map((_,i)=>({x:40+i*130,y:128,w:120,h:140}));
+const SWB=SWD.map((_,i)=>({x:40+OX+i*130,y:128,w:120,h:140}));
 function swChoose(k){if(k!==CHO.sel){CHO.sel=k;return}
  const w=SWD[k],bx=boss?boss.x:P.x,by=boss?boss.y:P.y;
  SW={id:k,at:w.at,sp:w.sp,df:w.df};eqCalc();SPARED[LV]=1;score+=200;
@@ -6021,7 +6051,7 @@ function swIcon(i,cx,cy){const F=(c)=>{g.fillStyle=c;g.strokeStyle='#1c1c1c';g.l
  else{g.strokeStyle='#1c1c1c';g.lineWidth=5.2;[[-16,-26],[0,-38],[16,-24]].forEach(t=>{g.beginPath();g.moveTo(cx,cy+26);g.quadraticCurveTo(cx+t[0]*.3,cy,cx+t[0],cy+t[1]);g.stroke()});
   g.strokeStyle='#5ea083';g.lineWidth=2.8;[[-16,-26],[0,-38],[16,-24]].forEach(t=>{g.beginPath();g.moveTo(cx,cy+26);g.quadraticCurveTo(cx+t[0]*.3,cy,cx+t[0],cy+t[1]);g.stroke()})}
  g.restore()}
-function swDraw(){const F='KaiTi,STKaiti,"Noto Serif TC",serif',bx=20,by=40,bw=680,bh=320;
+function swDraw(){const F='KaiTi,STKaiti,"Noto Serif TC",serif',bx=20+OX,by=40,bw=680,bh=320;
  g.save();g.setTransform(K,0,0,K,0,0);
  g.fillStyle='rgba(20,20,20,.42)';g.fillRect(0,0,W,H);
  g.fillStyle='rgba(244,237,217,.98)';g.fillRect(bx,by,bw,bh);g.strokeStyle='#1c1c1c';g.lineWidth=3;g.strokeRect(bx,by,bw,bh);
@@ -6041,7 +6071,7 @@ function swDraw(){const F='KaiTi,STKaiti,"Noto Serif TC",serif',bx=20,by=40,bw=6
 /* ===== 第十八關：師兄之問（取代「放過／斬殺」）=====
    答「放下勝負之心」為正解：永久攻擊再 +30%（SW.q，併入 eqCalc）。答對時依第十一關的選擇（取劍／不取劍）多一句呼應。師兄結局固定視為「放過」，之後仍會助戰。 */
 const QA=['學會了。劍要更快，快到無人能擋。','學會了。停，不是收劍，而是放下勝負之心。','還沒有。我只知道，不能停下來。'];
-const QB=[0,1,2].map(i=>({x:90,y:150+i*58,w:540,h:50}));
+const QB=[0,1,2].map(i=>({x:90+OX,y:150+i*58,w:540,h:50}));
 function qChoose(k){if(k!==CHO.sel){CHO.sel=k;return}
  const a=CHO.o[k],bx=boss?boss.x:P.x,by=boss?boss.y:P.y;SPARED[LV]=1;score+=200;let l;
  const tail=['旁白','少年把劍插回鞘中。他走向另一座橋。橋的盡頭，谷底瘴氣瀰漫，綠色的霧貼著地面流動。'];
@@ -6052,7 +6082,7 @@ function qChoose(k){if(k!==CHO.sel){CHO.sel=k;return}
  else l=[['雨夜修羅','停不下來……原來你我，終究是一路人。師父留的那盞燈，我們誰也沒走回去。']];
  DLG={l:l.concat([tail]).map(x=>[x[0],heroT(x[1])]),i:0,c:0,t0:T,kind:'farewell'};
  CHO=null;for(const q in jp)jp[q]=0}
-function qDraw(){const F='KaiTi,STKaiti,"Noto Serif TC",serif',bx=60,by=50,bw=600,bh=300;
+function qDraw(){const F='KaiTi,STKaiti,"Noto Serif TC",serif',bx=60+OX,by=50,bw=600,bh=300;
  g.save();g.setTransform(K,0,0,K,0,0);
  g.fillStyle='rgba(20,20,20,.42)';g.fillRect(0,0,W,H);
  g.fillStyle='rgba(244,237,217,.98)';g.fillRect(bx,by,bw,bh);g.strokeStyle='#1c1c1c';g.lineWidth=3;g.strokeRect(bx,by,bw,bh);
@@ -6092,7 +6122,7 @@ function gChoose(k){if(k!==CHO.sel){CHO.sel=k;return}
  if(r.tx)txt(r.tx,bx,by-130,22,'#2f7f6e');
  DLG={l:r.l.map(x=>[x[0],heroT(x[1])]),i:0,c:0,t0:T,kind:'farewell'};
  CHO=null;for(const q in jp)jp[q]=0}
-function gDraw(){const F='KaiTi,STKaiti,"Noto Serif TC",serif',G=CHO.G,n=G.o.length,bx=60,by=50,bw=600,bh=300;
+function gDraw(){const F='KaiTi,STKaiti,"Noto Serif TC",serif',G=CHO.G,n=G.o.length,bx=60+OX,by=50,bw=600,bh=300;
  g.save();g.setTransform(K,0,0,K,0,0);
  g.fillStyle='rgba(20,20,20,.42)';g.fillRect(0,0,W,H);
  g.fillStyle='rgba(244,237,217,.98)';g.fillRect(bx,by,bw,bh);g.strokeStyle='#1c1c1c';g.lineWidth=3;g.strokeRect(bx,by,bw,bh);
@@ -11298,7 +11328,7 @@ function mbAct(){const b=mbList()[MB.sel];if(!b)return;const d=MBD[b.id];
  else if(d.p){if(MB.ne!==b.id){MB.ne=b.id;snd(330,.15,{ty:'triangle',v:.15})}}else if(MB.eq!==b.id){MB.eq=b.id;snd(330,.15,{ty:'triangle',v:.15})}if(d.p)MJ.push({t:'ring',x:P.x,y:P.y,r:70,q:0,d:.6,c:d.c,n:2});mbSave()}
 function mbKeys(){const n=mbList().length;if(n){if(jp.l)MB.sel=(MB.sel+n-1)%n;if(jp.r)MB.sel=(MB.sel+1)%n;if(jp.a||jp.j)mbAct()}if(jp.m){MB.tab^=1;MB.sel=0}if(jp.s||jp.b||jp.d)MB.open=0}
 cv.addEventListener('pointerdown',e=>{if(!okp())return;const x=e.offsetX/cv.clientWidth*W,y=e.offsetY/cv.clientHeight*H;
- if(!MB.open){if(MB.bag.length&&x>=W-146&&x<=W-14&&y>=30&&y<=62)mbOpen();return}
+ if(!MB.open){if(MB.bag.length&&x>=W-160&&x<=W-8&&y>=36&&y<=78)mbOpen();return}
  if(x<30||x>690||y<12||y>388){MB.open=0;return}
  if(y>=52&&y<=72&&x>=46&&x<=326){MB.tab=x<186?0:1;MB.sel=0;return}
  {const L=mbList(),off=Math.max(0,Math.min(MB.sel-6,L.length-7));L.slice(off,off+7).forEach((b,r)=>{const i=off+r;if(x>=46&&x<=326&&y>=78+r*36&&y<=110+r*36){if(MB.sel===i)mbAct();else MB.sel=i}})}
@@ -11545,11 +11575,17 @@ function drawRabbit(){
 {const _gg=getGear;getGear=function(it,x,y){const cur=EQ[it.s],u=cur?cur.up|0:0;const r=_gg.apply(this,arguments);
  if(u>0&&GUI[it.s]&&EQ[it.s]===it&&it!==cur&&!(it.up>0)){const oh=EQB.hp;gUpApply(it,u);eqCalc();const dh=EQB.hp-oh;P.mh+=dh;if(dh>0)P.hp=Math.min(P.mh,P.hp+dh);txt('強化 +'+u+' 繼承',x,y-66,13,'#2f7f6e')}return r}}
 {const _ds=drawShop;drawShop=function(){_ds.apply(this,arguments);
- for(let i=1;i<=4;i++){const bx=12+i*116+88,by=92+50;g.save();g.globalAlpha=SHOP[i].full()?.35:1;g.fillStyle='#2f7f6e';g.strokeStyle='#1c1c1c';g.lineWidth=1.4;g.beginPath();g.moveTo(bx,by-9);g.lineTo(bx+8,by+1);g.lineTo(bx+3,by+1);g.lineTo(bx+3,by+9);g.lineTo(bx-3,by+9);g.lineTo(bx-3,by+1);g.lineTo(bx-8,by+1);g.closePath();g.fill();g.stroke();g.restore()}
- for(let i=1;i<=4;i++){const it=SHOP[i];if(it.full()||it.lv()>=it.max)continue;const r=Math.round(gUpR('pwab'[i-1]==='p'?'p':'pwab'[i-1])*100);tx('成功 '+r+'%',12+i*116+53,92+99,11,r<100?'#b3261e':'#2f7f6e',.95)}
- const x=12+5*116,y=92;
+ for(let i=1;i<=4;i++){const bx=((W-720)/2+12+i*116)+88,by=92+50;g.save();g.globalAlpha=SHOP[i].full()?.35:1;g.fillStyle='#2f7f6e';g.strokeStyle='#1c1c1c';g.lineWidth=1.4;g.beginPath();g.moveTo(bx,by-9);g.lineTo(bx+8,by+1);g.lineTo(bx+3,by+1);g.lineTo(bx+3,by+9);g.lineTo(bx-3,by+9);g.lineTo(bx-3,by+1);g.lineTo(bx-8,by+1);g.closePath();g.fill();g.stroke();g.restore()}
+ for(let i=1;i<=4;i++){const it=SHOP[i];if(it.full()||it.lv()>=it.max)continue;const r=Math.round(gUpR('pwab'[i-1]==='p'?'p':'pwab'[i-1])*100);tx('成功 '+r+'%',((W-720)/2+12+i*116)+53,92+99,11,r<100?'#b3261e':'#2f7f6e',.95)}
+ const x=((W-720)/2+12+5*116),y=92;
  tx('‹',x+12,y+68,26,'#b3261e',.8);tx('›',x+94,y+68,26,'#b3261e',.8);
  tx(matchMedia('(pointer:coarse)').matches?'點圖換寵':'L 換寵',x+53,y+97,11,'#1c1c1c',.6)}}
 }
 </script>
+<button id="mbtab" style="display:none;position:fixed;left:50%;bottom:max(6px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:40;padding:8px 22px;border-radius:22px;border:2px solid #2a2a2a;background:rgba(240,230,200,.92);color:#1c1c1c;font:700 17px KaiTi,STKaiti,serif;touch-action:none">換頁　秘籍／內功</button>
+<script>/* v460 商店隱藏虛擬按鍵；秘籍冊顯示換頁鈕 */
+(function(){var b=document.getElementById('mbtab');
+b.addEventListener('pointerdown',function(e){e.preventDefault();e.stopPropagation();try{MB.tab^=1;MB.sel=0}catch(_){}});
+setInterval(function(){try{var sh=(typeof S!=='undefined'&&S==='shop'),bk=!!(window.MB&&MB.open);document.body.classList.toggle('ov',sh);b.style.display=bk?'block':'none'}catch(e){}},80)})();</script>
+
 </body></html>
